@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1C1D25"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/College_card_Cv"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:alpha="0"
+                android:background="#C1C1C1"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_my_college" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon"
+                        android:gravity="center"
+                        android:text="College Card"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CR_cv"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:alpha="0"
+                android:background="#2B2F3C"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon2"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_my_classrep" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon2"
+                        android:gravity="center"
+                        android:text="CR's Card"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Question_CV"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:alpha="0"
+                android:background="#2B2F3C"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon4"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_ask_questions" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon4"
+                        android:gravity="center"
+                        android:text="Ask a question"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Societies_CV"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:alpha="0"
+                android:background="#2B2F3C"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon6"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_college_socities" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon6"
+                        android:gravity="center"
+                        android:text="View Societies"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/class_group_cv"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:alpha="0"
+                android:background="#2B2F3C"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon1"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_course_group" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon1"
+                        android:gravity="center"
+                        android:text="My Course Group"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Map_CV"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:alpha="0"
+                android:background="#2B2F3C"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon3"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_map_to_college" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon3"
+                        android:gravity="center"
+                        android:text="Go to College"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Books_CV"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:alpha="1"
+                android:background="#2B2F3C"
+                android:outlineSpotShadowColor="#C1C1C1"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon5"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_my_course_books" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon5"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="Course Books"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Website_CV"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:alpha="1"
+                android:background="#2B2F3C"
+                app:cardBackgroundColor="#2B2F3C"
+                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardElevation="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_background_cardview">
+
+                    <ImageView
+                        android:id="@+id/icon8"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_college_website" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon8"
+                        android:maxLines="1"
+                        android:textSize="12sp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="College Website"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

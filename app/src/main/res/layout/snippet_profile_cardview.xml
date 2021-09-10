@@ -1,0 +1,206 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/custom_border_cardview"
+            android:elevation="10dp"
+            android:outlineProvider="background"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_border_cardview"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/NumbersRel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/Posts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:text="         "
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="23dp"
+                        android:layout_marginTop="10dp"
+                        android:text="                "
+                        android:textAlignment="viewStart"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/followers"
+                        app:layout_constraintStart_toEndOf="@+id/Posts"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/followers"
+                        android:layout_width="62dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/TitlesRel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/PostsTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:hyphenationFrequency="none"
+                        android:text="Posts"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#B5B5B5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/followingTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Following"
+                        android:textColor="#B5B5B5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/PostsTV"
+                        app:layout_constraintStart_toStartOf="@id/followersTV"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/followersTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Followers"
+                        android:textColor="#B5B5B5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp">
+
+                    <Button
+                        android:id="@+id/EditProfileButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:background="@drawable/border_edit_profile"
+                        android:text="Edit My Profile"
+                        android:visibility="invisible"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="100">
+
+                        <RelativeLayout
+                            android:layout_weight="49.5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/FollowButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/follow_button"
+                        android:text="Follow"
+                        android:visibility="invisible"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="22sp" />
+
+                        <Button
+                            android:id="@+id/UnFollowButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:background="@drawable/border_edit_profile"
+                            android:text="Unfollow"
+                            android:textAlignment="center"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                        </RelativeLayout>
+                        <View
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            />
+                        <Button
+                        android:layout_weight="49.5"
+                        android:id="@+id/PingButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_edit_profile"
+                        android:text="Ping"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>

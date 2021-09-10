@@ -1,0 +1,655 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8AE3D9">
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView2"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:alpha="0.5"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:src="@drawable/hansraj_alumni_wall"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <LinearLayout
+        android:id="@+id/LinLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical"
+        android:weightSum="120"
+        app:layout_constraintBottom_toTopOf="@+id/RL_BOTTOM"
+        app:layout_constraintTop_toBottomOf="@+id/Header"
+        tools:layout_editor_absoluteX="-16dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="20">
+
+
+            <RelativeLayout
+                android:id="@+id/age_rl"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:alpha="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/college_year_rl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/blue_card_info" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/age_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:textStyle=""
+                    app:sizeToFit="true"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="My Age"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/AlertAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_red_error_exclamation" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/college_year_rl"
+                android:layout_width="0dp"
+                android:alpha="0"
+
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/age_rl"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/yellow_card_info" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/college_year_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:maxLines="1"
+
+                    app:sizeToFit="true"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="My College Year"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/AlertCollegeYears"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="invisible"
+
+                    android:src="@drawable/ic_red_error_exclamation" />
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/zodiac_posts_rl"
+            android:alpha="0"
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="20"
+            android:background="@drawable/green_card_info">
+
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/zodiac_posts_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:maxLines="1"
+                app:sizeToFit="true"
+                android:text="Zodiac Sign &amp; Posts/CR "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/AlertZodiacAndPosts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:visibility="invisible"
+
+                android:src="@drawable/ic_yellow_round_error" />
+        </RelativeLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="20">
+
+
+            <RelativeLayout
+                android:id="@+id/games_rl"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:alpha="0"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/gender_rl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/orange_card_info" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/games_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:text="Games I Like"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/AlertGames"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="invisible"
+
+                    android:src="@drawable/ic_yellow_round_error" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/gender_rl"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:alpha="0"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/games_rl"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pink_card_info" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/gender_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:text="My Gender"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/AlertGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="invisible"
+
+                    android:src="@drawable/ic_red_error_exclamation" />
+
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/societies_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="0"
+
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="20"
+            android:background="@drawable/blue_card_info">
+
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/societies_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:maxLines="1"
+                app:sizeToFit="true"
+                android:text="Societies that I am a part of"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/AlertSocieties"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:visibility="invisible"
+
+                android:src="@drawable/ic_yellow_round_error" />
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="20">
+
+
+            <RelativeLayout
+                android:id="@+id/interests_rl"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:alpha="0"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/music_movies_books_rl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/green_card_info" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/interests_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:maxLines="1"
+                    app:sizeToFit="true"
+                    android:text="My Interests"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/AlertInterests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="invisible"
+
+                    android:src="@drawable/ic_yellow_round_error" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/music_movies_books_rl"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:alpha="0"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/interests_rl"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/purple_card_info" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/mus_mov_boo_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:text="Music/Movies/Books"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    app:sizeToFit="true" />
+
+                <ImageView
+                    android:id="@+id/AlertMuMoBo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="invisible"
+
+                    android:src="@drawable/ic_yellow_round_error" />
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/fav_hangout_location_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_weight="20"
+            android:alpha="0"
+
+            android:background="@drawable/orange_card_info">
+
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/fav_hangout_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:maxLines="1"
+                app:sizeToFit="true"
+                android:text="Favourite Hangout Locations (In Delhi)"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/AlertFavLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:visibility="invisible"
+
+                android:src="@drawable/ic_yellow_round_error" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/Header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_130sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_130sdp"
+            android:scaleType="fitXY"
+
+            android:src="@drawable/curved_header_gradient"
+
+
+            />
+
+        <ImageView
+            android:id="@+id/private_notice"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_toEndOf="@id/title"
+            android:backgroundTint="@android:color/white"
+            android:src="@drawable/ic_info_icon" />
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/berkshire_swash"
+            android:letterSpacing="0.05"
+            android:shadowColor="#000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="10"
+            android:text="My Card Information"
+            android:textColor="@android:color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Full_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_alignStart="@id/title"
+            android:letterSpacing="0.05"
+
+            android:text="Full Name:"
+            android:textColor="#B5B2B2"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/Full_Name"
+            android:layout_alignStart="@id/Full_Name"
+            android:letterSpacing="0.05"
+
+            android:text="Username:"
+            android:textColor="#B5B2B2"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/Full_Name"
+            android:letterSpacing="0.05"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="10"
+            android:text="Sahil Jain"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/Full_Name"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toEndOf="@id/username"
+            android:letterSpacing="0.05"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="10"
+            android:text="sahil.jain"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/RL_BOTTOM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_card"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:text="&lt; Back"
+
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_card"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:text="Next &gt;"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/FrameLayoutCardInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+
+    >
+
+    <ImageView
+        android:id="@+id/Icon_IV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_age_filter"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/RL_FILTER_NAME"
+        app:layout_constraintStart_toStartOf="@id/RL_FILTER_NAME"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <RelativeLayout
+        android:id="@+id/RL_FILTER_NAME"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_corners_tl_bl_transparent"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/atv_filter_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/convergence"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:sizeToFit="true" />
+
+        <View
+            android:id="@+id/dot_no_of_filter"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:layout_toEndOf="@id/atv_filter_name"
+            android:backgroundTint="#FF6262"
+            android:visibility="gone"
+            android:layout_alignBottom="@id/atv_filter_name"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/rounded_white_background"/>
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_NoOfFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:text="6"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FF6262"
+            android:layout_toEndOf="@id/atv_filter_name"
+            android:layout_marginStart="@dimen/_9sdp"
+
+            android:layout_above="@id/dot_no_of_filter"/>
+
+
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/IV_Extension"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:paddingStart="@dimen/_minus10sdp"
+        android:paddingEnd="@dimen/_minus10sdp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/RL_FILTER_NAME"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

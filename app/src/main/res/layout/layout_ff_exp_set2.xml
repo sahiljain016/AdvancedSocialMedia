@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/ML_SET_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:clickable="false"
+        app:layoutDescription="@xml/ff_exp_set2_scene">
+
+        <RelativeLayout
+            android:id="@+id/RL_TITLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/V_BG_RIGHT_HUMAN"
+            app:layout_constraintStart_toEndOf="@id/V_BG_LEFT_HUMAN">
+
+            <TextView
+                android:id="@+id/TV_TITLE_MATCH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_medium_numbers"
+                android:text="Match Power"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_MESSAGE_PERC"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_toEndOf="@id/TV_TITLE_MATCH"
+                android:autoSizeMaxTextSize="20sp"
+                android:background="@drawable/gradient_rounded_purple_pink"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="\?"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:sizeToFit="true" />
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:id="@+id/V_BG_LEFT_HUMAN"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/rounded_rect_red_ff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_LEFT_HUMAN"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:scaleType="fitStart"
+            android:src="@drawable/avatar_women_leaning"
+            app:layout_constraintBottom_toBottomOf="@id/V_BG_LEFT_HUMAN"
+            app:layout_constraintStart_toStartOf="@id/V_BG_LEFT_HUMAN" />
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_LEFT_HUMAN_NAME"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:paddingStart="0dp"
+            android:paddingEnd="1dp"
+            android:text="Akshara"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/V_BG_LEFT_HUMAN"
+            app:layout_constraintEnd_toEndOf="@id/V_BG_LEFT_HUMAN"
+            app:layout_constraintStart_toStartOf="@id/V_BG_LEFT_HUMAN" />
+
+
+        <View
+            android:id="@+id/V_BG_RIGHT_HUMAN"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/rounded_rect_red_ff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_RIGHT_HUMAN_NAME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:paddingStart="1dp"
+            android:paddingEnd="0dp"
+            android:text="Sahil"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/V_BG_RIGHT_HUMAN"
+            app:layout_constraintEnd_toEndOf="@id/V_BG_RIGHT_HUMAN"
+            app:layout_constraintStart_toStartOf="@id/V_BG_RIGHT_HUMAN" />
+
+
+        <ImageView
+            android:id="@+id/IV_RIGHT_HUMAN"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:src="@drawable/avatar_man_hand_crossed"
+            app:layout_constraintBottom_toBottomOf="@id/V_BG_RIGHT_HUMAN"
+            app:layout_constraintEnd_toEndOf="@id/V_BG_RIGHT_HUMAN" />
+
+        <ImageView
+
+            android:id="@+id/IV_BLUR"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="@dimen/_220sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:alpha="0.2"
+            android:scaleType="fitXY"
+            android:src="@drawable/blur_circular_progress_bar_ff"
+            app:layout_constraintBottom_toBottomOf="@id/SL_PROGRESS"
+            app:layout_constraintEnd_toEndOf="@id/SL_PROGRESS"
+            app:layout_constraintStart_toStartOf="@id/SL_PROGRESS"
+            app:layout_constraintTop_toTopOf="@id/SL_PROGRESS" />
+
+        <ImageView
+
+            android:id="@+id/IV_BLOB_FF"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="@dimen/_220sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/shape_match_perc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.gic.memorableplaces.utils.ShadowLayout
+            android:id="@+id/SL_PROGRESS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/RL_TITLE"
+            app:layout_constraintEnd_toStartOf="@id/V_BG_RIGHT_HUMAN"
+            app:layout_constraintStart_toEndOf="@id/V_BG_LEFT_HUMAN"
+            app:sl_shadow_color="#9C9C9C"
+            app:sl_shadow_distance="5dp"
+            app:sl_shadow_radius="@dimen/_5sdp">
+
+
+            <ProgressBar
+                android:id="@+id/PB_MATCH_PERC_OUTER"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/ic_card_details" />
+
+
+        </com.gic.memorableplaces.utils.ShadowLayout>
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_PERCENTAGE"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/roboto_medium_numbers"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/_5sdp"
+            android:text="33%"
+            android:textAlignment="center"
+            android:textColor="#5C5C5C"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@id/SL_PROGRESS"
+            app:layout_constraintEnd_toEndOf="@id/SL_PROGRESS"
+            app:layout_constraintStart_toStartOf="@id/SL_PROGRESS"
+            app:layout_constraintTop_toTopOf="@id/SL_PROGRESS"
+            app:sizeToFit="true" />
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</RelativeLayout>

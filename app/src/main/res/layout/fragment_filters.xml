@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CL_MAIN_FF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_blue"
+    android:focusableInTouchMode="false">
+
+
+    <com.gic.memorableplaces.CustomLibs.SlideMenuDrawer.SNavigationDrawer
+        android:id="@+id/navigationDrawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
+
+        <FrameLayout
+            android:id="@+id/FrameLayoutDisplayFilters"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF" />
+
+    </com.gic.memorableplaces.CustomLibs.SlideMenuDrawer.SNavigationDrawer>
+
+    <ImageButton
+        android:id="@+id/IV_CHANGE_FILTER_BOLT"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:background="@android:color/transparent"
+        android:paddingTop="@dimen/_5sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_lightning_bolt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+    <RelativeLayout
+        android:id="@+id/RL_BOTTOM_FILTERS"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/border"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/_10sdp"
+            android:background="@color/black"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_centerInParent="true"
+            />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/TV_CLEAR_FILTER"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/border"
+            android:gravity="center"
+            android:text="Clear Filters"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/TV_APPLY_FILTER"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/border"
+            android:gravity="center"
+            android:text="Apply Filters"
+            android:textColor="#E53935"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/pentagon"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/gradient_pentagon"
+        android:padding="@dimen/_10sdp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_age_filter"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/RL_BOTTOM_FILTERS"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

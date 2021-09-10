@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hansraj_college_image">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlogo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_23sdp"
+            android:contentDescription="@string/logo_st_xaviers"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/constraintlogo"
+        android:layout_marginTop="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:gravity="center_horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:theme="@style/loginTheme"
+                app:hintTextColor="@android:color/white">
+
+                <EditText
+                    android:id="@+id/LogInEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:autofillHints="email"
+                    android:background="@drawable/rounded_background"
+                    android:hint="@string/email_address_hint_lo"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="@android:color/white"
+                    android:textColorLink="#000000"
+                    android:textCursorDrawable="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/TIL1"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:gravity="center_horizontal"
+                android:theme="@style/loginTheme"
+                app:hintTextColor="@android:color/white">
+
+                <EditText
+                    android:id="@+id/LogInPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:autofillHints="password"
+                    android:background="@drawable/rounded_background"
+                    android:hint="@string/password_hint_lo"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHighlight="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textColorLink="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <com.gic.memorableplaces.CustomLibs.TransitionButton.TransitionButton
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/custom_button_login"
+                android:text="@string/log_in_button_lo"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:defaultColor="@color/white"
+                app:loaderColor="#1E88E5" />
+
+            <TextView
+                android:id="@+id/LoadingLoginText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_login"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/loading_tv_lo"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/linkSignUpOnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/custom_signup_on_login"
+            android:text="@string/sign_up_link_lo"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>

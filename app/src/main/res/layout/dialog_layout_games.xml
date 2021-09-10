@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/abstract_background_2" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:padding="@dimen/_30sdp"
+        android:src="@drawable/ic_controller" />
+
+    <TextView
+        android:id="@+id/RL_heading"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/almendra"
+        android:gravity="center"
+        android:text="My Games/Platforms"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/RL_CENTER"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/RL_CENTER"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/LL_close_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_heading">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/GamesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ZodiacSearchBar"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+        <com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView
+            android:id="@+id/GamesResultsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ZodiacSearchBar"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone" />
+
+<!--        <com.ldoublem.loadingviewlib.view.LVCircularZoom-->
+<!--            android:id="@+id/Loading_dots"-->
+<!--            android:layout_width="@dimen/_100sdp"-->
+<!--            android:layout_height="@dimen/_70sdp"-->
+<!--            android:layout_centerInParent="true" />-->
+
+        <AutoCompleteTextView
+            android:id="@+id/ZodiacSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/white"
+            android:hint="Name of a game..."
+            android:padding="@dimen/_10sdp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/PlatformButton"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/blue_gradient_background"
+            android:text="Privacy"
+            android:textSize="16sp"
+
+            android:textStyle="bold|italic"
+
+
+            />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_close_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:weightSum="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/RemoveGame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:layout_weight="50"
+android:gravity="center"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:maxLines="1"
+            android:text="@string/remove_this_game"
+
+            android:textColor="@color/white"
+            app:sizeToFit="true" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/close_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:text="Go Back TO Card"
+            android:textColor="@color/white" />
+    </LinearLayout>
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/close_dialog"-->
+    <!--        android:layout_width="@dimen/_40sdp"-->
+    <!--        android:layout_height="@dimen/_40sdp"-->
+    <!--        android:layout_marginBottom="@dimen/_5sdp"-->
+    <!--        android:background="@drawable/custom_button_login"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:src="@drawable/ic_fail_red_cross"-->
+    <!--        android:padding="@dimen/_6sdp"-->
+    <!--        android:textSize="22sp"-->
+    <!--        android:backgroundTint="@color/black"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

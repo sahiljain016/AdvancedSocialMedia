@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:wave="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/RelLayoutTopToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/top_toolbar_publish" />
+            <!--TOP TOOLBAR-->
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RelLayoutTopToolbar"
+            android:background="@android:color/black">
+
+
+            <ImageView
+                android:id="@+id/ImageViewPublish"
+                android:layout_width="@dimen/_140sdp"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@android:color/white"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageButton
+                android:id="@+id/speak_reader"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="186dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="1dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_microphone"
+                app:layout_constraintBottom_toTopOf="@+id/edit_text_publish"
+                app:layout_constraintEnd_toStartOf="@+id/ImageViewPublish"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/previewTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="278dp"
+                android:layout_marginTop="208dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/transparent"
+                android:text="Preview"
+                android:textColor="@color/link_blue"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/edit_text_publish"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/speak_reader"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/play_publish"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_play_button"
+                app:layout_constraintBottom_toBottomOf="@+id/ImageViewPublish"
+                app:layout_constraintEnd_toEndOf="@+id/ImageViewPublish"
+                app:layout_constraintStart_toStartOf="@+id/ImageViewPublish"
+                app:layout_constraintTop_toTopOf="@+id/ImageViewPublish" />
+
+            <EditText
+                android:id="@+id/edit_text_publish"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_110sdp"
+                android:layout_below="@id/ImageViewPublish"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/custom_background_edittext_share"
+                android:focusedByDefault="false"
+                android:gravity="top"
+                android:hint="Write Something About Your Post"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/tab_indicator_text"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ImageViewPublish" />
+
+            <TextView
+                android:id="@+id/Preview"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_110sdp"
+                android:layout_below="@id/ImageViewPublish"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/custom_background_edittext_share"
+                android:focusedByDefault="false"
+                android:gravity="top"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/tab_indicator_text"
+                android:textSize="20sp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ImageViewPublish" />
+
+            <ImageButton
+                android:id="@+id/ic_lock"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="9dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_lock"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_text_publish"
+                app:layout_constraintEnd_toEndOf="@+id/edit_text_publish"
+                app:layout_constraintTop_toTopOf="@+id/edit_text_publish"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_publish" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ConstraintLayoutTop"
+            android:layout_marginTop="@dimen/_4sdp">
+
+            <com.gic.memorableplaces.CustomLibs.shinebuttonlib.ShineButton
+                android:id="@+id/Bold"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:src="@android:color/darker_gray"
+                app:allow_random_color="false"
+                app:big_shine_color="#01579B"
+                app:btn_color="#636363"
+                app:btn_fill_color="#BF7910"
+                app:enable_flashing="true"
+                app:shine_animation_duration="3000"
+                app:siShape="@raw/ic_bold"
+                app:small_shine_color="@android:color/holo_orange_light" />
+
+            <com.gic.memorableplaces.CustomLibs.shinebuttonlib.ShineButton
+                android:id="@+id/Underline"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:src="@android:color/darker_gray"
+                app:allow_random_color="false"
+                app:big_shine_color="#01579B"
+                app:btn_color="#636363"
+                app:btn_fill_color="#BF7910"
+                app:enable_flashing="true"
+                app:shine_animation_duration="3000"
+                app:siShape="@raw/ic_underline"
+                app:small_shine_color="@android:color/holo_orange_light" />
+
+            <com.gic.memorableplaces.CustomLibs.shinebuttonlib.ShineButton
+                android:id="@+id/Italics"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:src="@android:color/darker_gray"
+                app:allow_random_color="false"
+                app:big_shine_color="#01579B"
+                app:btn_color="#636363"
+                app:btn_fill_color="#BF7910"
+                app:enable_flashing="true"
+                app:shine_animation_duration="3000"
+                app:siShape="@raw/ic_italics"
+                app:small_shine_color="@android:color/holo_orange_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/spinner_publish"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:shadowColor="@android:color/holo_orange_light"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="5"
+                android:text="Select A Font"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <Spinner
+                android:id="@+id/spinner_publish"
+                style="@style/spinnerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:backgroundTint="@android:color/black"
+                android:maxLines="1"
+                android:popupBackground="@android:color/white"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/IB_COLOR_PICKER_CHAT"
+                android:layout_width="79dp"
+                android:layout_height="73dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="19dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/color_picker" />
+
+            <RelativeLayout
+                android:id="@+id/LockRelLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#CC000000">
+
+                <com.nightonke.jellytogglebutton.JellyToggleButton
+                    android:id="@+id/jellySwitch"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:scaleX="2"
+                    android:scaleY="2"
+                    app:jtbJelly="active_tremble_head_slim_jim"
+                    app:jtbLeftText="OFF"
+                    app:jtbLeftTextColor="@android:color/black"
+                    app:jtbLeftTextSize="30sp"
+                    app:jtbRightText="ON"
+                    app:jtbRightTextColor="@android:color/white"
+                    app:jtbRightTextSize="16sp"
+                    app:jtbRightThumbColor="@android:color/holo_green_dark"
+                    app:jtbThumbRadius="@dimen/_100sdp" />
+
+                <ImageView
+                    android:id="@+id/swipe"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_below="@id/jellySwitch"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:src="@drawable/swipe" />
+
+                <TextView
+                    android:id="@+id/swipeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/swipe"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="Swipe to enable edit mode"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <!--</ScrollView>-->
+</RelativeLayout>

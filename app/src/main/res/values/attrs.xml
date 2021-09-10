@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ShadowLayout">
+        <attr name="sl_shadowed" format="boolean" />
+        <attr name="sl_shadow_distance" format="dimension" />
+        <attr name="sl_shadow_angle" format="integer" />
+        <attr name="sl_shadow_radius" format="dimension" />
+        <attr name="sl_is_shadow_bottom" format="boolean" />
+        <attr name="sl_is_shadow_top" format="boolean" />
+        <attr name="sl_is_shadow_start" format="boolean" />
+        <attr name="sl_is_shadow_end" format="boolean" />
+        <attr name="sl_shadow_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ShineButton">
+        <attr name="btn_color" format="color" />
+        <attr name="btn_fill_color" format="color" />
+        <attr name="shine_count" format="integer" />
+        <attr name="shine_turn_angle" format="float" />
+        <attr name="small_shine_offset_angle" format="float" />
+        <attr name="enable_flashing" format="boolean" />
+        <attr name="allow_random_color" format="boolean" />
+        <attr name="small_shine_color" format="color" />
+        <attr name="big_shine_color" format="color" />
+        <attr name="shine_animation_duration" format="integer" />
+        <attr name="click_animation_duration" format="integer" />
+        <attr name="shine_distance_multiple" format="float" />
+        <attr name="shine_size" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="PorterImageView">
+        <attr name="siShape" format="integer|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="HTextView">
+        <attr name="isAnimate" format="boolean" />
+        <attr name="animateType" format="enum">
+            <enum name="scale" value="0" />
+            <enum name="evaporate" value="1" />
+            <enum name="fall" value="2" />
+            <enum name="sparkle" value="3" />
+            <enum name="anvil" value="4" />
+            <enum name="line" value="5" />
+            <enum name="pixelate" value="6" />
+            <enum name="typer" value="7" />
+            <enum name="rainbow" value="8" />
+        </attr>
+        <attr name="fontAsset" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="TyperTextView">
+        <attr name="typerSpeed" format="integer" />
+        <attr name="charIncrease" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="RainbowTextView">
+        <attr name="colorSpeed" format="dimension" />
+        <attr name="colorSpace" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AnimatedRecyclerView">
+        <attr name="layoutAnimation" format="reference" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="layoutManagerOrientation" format="integer">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="layoutManagerReverse" format="boolean" />
+        <attr name="layoutManagerType" format="integer">
+            <enum name="linear" value="0" />
+            <enum name="grid" value="1" />
+        </attr>
+        <attr name="gridLayoutManagerColumns" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="TransitionButton">
+        <attr name="defaultColor" format="color" />
+        <attr name="loaderColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CurvedBottomNavigationView">
+        <attr name="cbn_selectedColor" format="color" />
+        <attr name="cbn_unSelectedColor" format="color" />
+        <attr name="cbn_animDuration" format="integer" />
+        <attr name="cbn_fabElevation" format="dimension" />
+        <attr name="cbn_elevation" format="dimension" />
+        <attr name="cbn_fabBg" format="color" />
+        <attr name="cbn_bg" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SNavigationDrawer">
+        <attr name="appbarColor" format="color" />
+        <attr name="appbarTitleTextColor" format="color" />
+        <attr name="appbarTitleTextSize" format="dimension" />
+        <attr name="HamMenuIconTintColor" format="color" />
+        <attr name="HamMenuIconSize" format="dimension" />
+        <attr name="HamMenuItemSemiTransparentColor" format="color" />
+        <attr name="navigationDrawerBackgroundColor" format="color" />
+        <attr name="primaryMenuItemTextColor" format="color" />
+        <attr name="secondaryMenuItemTextColor" format="color" />
+        <attr name="primaryMenuItemTextSize" format="dimension" />
+        <attr name="secondaryMenuItemTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="GooeyMenu">
+
+        <attr name="no_of_menu" format="integer" />
+        <attr name="fab_radius" format="dimension" />
+        <attr name="menu_radius" format="dimension" />
+        <attr name="gap_between_menu_fab" format="dimension" />
+        <attr name="menu_drawable" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="radius" format="dimension"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="ringLineWidth" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textPercentSize" format="dimension"/>
+        <attr name="ringColor" format="color"/>
+        <attr name="ringLineColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textPercentColor" format="color"/>
+        <attr name="maxProgress" format="integer"/>
+        <attr name="currentProgress" format="integer"/>
+    </declare-styleable>
+</resources>

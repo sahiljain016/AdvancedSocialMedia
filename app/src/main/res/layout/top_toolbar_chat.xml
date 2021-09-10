@@ -1,0 +1,159 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rect_br_bl_white">
+
+        <ImageView
+            android:id="@+id/IV_BACK_CHAT"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_back_ff"
+            app:layout_constraintBottom_toBottomOf="@id/CL_PP_CHAT"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/CL_PP_CHAT" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_PP_CHAT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/IV_BACK_CHAT"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.gic.memorableplaces.utils.ShadowLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sl_is_shadow_bottom="true"
+                app:sl_is_shadow_end="true"
+                app:sl_is_shadow_start="true"
+                app:sl_is_shadow_top="false"
+                app:sl_shadow_angle="90"
+                app:sl_shadow_color="#B8B8B8"
+                app:sl_shadow_distance="@dimen/_5sdp"
+                app:sl_shadow_radius="@dimen/_5sdp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/IV_PP_CHAT"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/test_img_1" />
+
+            </com.gic.memorableplaces.utils.ShadowLayout>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/IV_GROUP_PP_1"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:src="@drawable/pp"
+                android:visibility="gone"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/IV_GROUP_PP_2"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/pp"
+                android:visibility="gone"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toStartOf="@id/IV_CALL"
+            app:layout_constraintStart_toEndOf="@id/CL_PP_CHAT"
+            app:layout_constraintTop_toTopOf="@id/CL_PP_CHAT"
+            app:layout_constraintBottom_toBottomOf="@id/CL_PP_CHAT">
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_FULL_NAME_CHAT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/capriola"
+                android:maxLines="1"
+                android:text="Sahil Jain"
+                android:textColor="@color/Black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_STATUS_CHAT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="online"
+                android:maxLines="1"
+                app:sizeToFit="true"
+                android:paddingStart="@dimen/_2sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:layout_below="@id/ATV_FULL_NAME_CHAT"
+                android:textColor="#707070"
+                android:textSize="16sp"
+                 />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/IV_CHAT_SETTINGS"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_VIDEO_CALL"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/ic_video_call_pinned_green_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/IV_CHAT_SETTINGS"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_CALL"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/ic_call_pinned_green_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/IV_VIDEO_CALL"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>
+

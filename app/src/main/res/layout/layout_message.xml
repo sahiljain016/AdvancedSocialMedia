@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CL_MESSAGES"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/RL_USERNAME"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toStartOf="@id/ATV_TIMESTAMP_MESSAGES"
+        app:layout_constraintStart_toEndOf="@id/CL_IMAGES_MESSAGES"
+        app:layout_constraintTop_toTopOf="@id/CL_IMAGES_MESSAGES">
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_USERNAME_MESSAGES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:ellipsize="end"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:minTextSize="22sp"
+            app:sizeToFit="true" />
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/RIV_ONLINE_DOT"
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="@dimen/_6sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_toEndOf="@id/ATV_USERNAME_MESSAGES"
+            android:scaleType="centerCrop"
+            android:src="@drawable/gradient_blue_green"
+            android:visibility="gone"
+            app:riv_corner_radius="@dimen/_40sdp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/TV_MESSAGE_ON_DISPLAY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:fontFamily="@font/capriola"
+        android:maxLines="1"
+        android:textColor="#7C7C7C"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/ATV_TIMESTAMP_MESSAGES"
+        app:layout_constraintStart_toStartOf="@id/RL_USERNAME"
+        app:layout_constraintTop_toBottomOf="@id/RL_USERNAME"
+
+        />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TIMESTAMP_MESSAGES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:textAlignment="gravity"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/RL_USERNAME"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/RL_USERNAME" />
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/RIV_NO_OF_MESSAGES"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:src="@drawable/gradient_blue_green"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/TV_MESSAGE_ON_DISPLAY"
+        app:layout_constraintEnd_toEndOf="@id/ATV_TIMESTAMP_MESSAGES"
+        app:layout_constraintStart_toStartOf="@id/ATV_TIMESTAMP_MESSAGES"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TIMESTAMP_MESSAGES"
+        app:riv_corner_radius="@dimen/_40sdp" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_No_Of_Pending_Messages"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:gravity="center_vertical|center"
+        android:maxLines="1"
+        android:text="0"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="@id/RIV_NO_OF_MESSAGES"
+        app:layout_constraintEnd_toEndOf="@id/RIV_NO_OF_MESSAGES"
+        app:layout_constraintStart_toStartOf="@id/RIV_NO_OF_MESSAGES"
+        app:layout_constraintTop_toTopOf="@id/RIV_NO_OF_MESSAGES"
+        app:sizeToFit="true" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_IMAGES_MESSAGES"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_3sdp"
+            app:layout_constraintBottom_toBottomOf="@id/RIV_PP_MESSAGES"
+            app:layout_constraintEnd_toEndOf="@id/RIV_PP_MESSAGES"
+            app:layout_constraintStart_toStartOf="@id/RIV_PP_MESSAGES"
+            app:layout_constraintTop_toTopOf="@id/RIV_PP_MESSAGES" />
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/RIV_PP_BORDER"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:elevation="@dimen/_4sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/gradient_blue_green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/RIV_PP_MESSAGES"
+            app:layout_constraintEnd_toEndOf="@id/RIV_PP_MESSAGES"
+            app:layout_constraintStart_toStartOf="@id/RIV_PP_MESSAGES"
+            app:layout_constraintTop_toTopOf="@id/RIV_PP_MESSAGES"
+            app:riv_corner_radius="@dimen/_30sdp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/RIV_PP_MESSAGES"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:elevation="@dimen/_4sdp"
+            android:src="@drawable/ic_user_default_profile"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/_30sdp" />
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/RIV_ONLINE"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:elevation="@dimen/_4sdp"
+            android:src="#F1C816"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="4dp"
+            app:riv_corner_radius="@dimen/_40sdp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

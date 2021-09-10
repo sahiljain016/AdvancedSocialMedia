@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <RelativeLayout
+        android:id="@+id/relLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/profile_photo"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:scaleType="centerCrop"
+
+            app:riv_corner_radius="@dimen/_11sdp" />
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/username_VP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toEndOf="@id/profile_photo"
+            android:fontFamily="@font/convergence"
+            android:paddingBottom="@dimen/_1sdp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/Location_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_VP"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@id/profile_photo"
+            android:paddingBottom="@dimen/_1sdp"
+            android:text=""
+            android:textColor="#B1B1B1"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+        <ImageButton
+            android:id="@+id/post_settings"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@android:color/transparent"
+            android:rotation="90"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_horizontal_ellipses" />
+
+    </RelativeLayout>
+
+
+    <!--        <com.loopeer.shadow.ShadowView-->
+    <!--            android:id="@+id/SL_POST"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_marginStart="@dimen/_10sdp"-->
+    <!--            android:layout_marginTop="@dimen/_5sdp"-->
+    <!--            android:layout_marginEnd="@dimen/_10sdp"-->
+    <!--            android:layout_weight="70"-->
+    <!--            app:cornerRadius="@dimen/_20sdp"-->
+    <!--            app:shadowMarginBottom="@dimen/_10sdp"-->
+    <!--            app:shadowRadius="@dimen/_20sdp">-->
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_10sdp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toTopOf="@id/LL_post_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relLayoutTop">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/RelLayout_Post"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+
+            <com.gic.memorableplaces.utils.SquareImageView
+                android:id="@+id/view_post_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <com.google.android.exoplayer2.ui.StyledPlayerView
+                android:id="@+id/Exo_player_view_post"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:keepScreenOn="true"
+                app:resize_mode="fit"
+                app:show_buffering="always"
+                app:use_controller="false" />
+
+            <ProgressBar
+                android:id="@+id/videoProgress"
+                style="@android:style/Widget.Holo.Light.ProgressBar"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/Play_button"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:background="@drawable/rounded_corners_share"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_play_button"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/audio_vp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:background="@drawable/rounded_corners_share"
+                android:src="@drawable/ic_volume_up"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+
+                <RelativeLayout
+                    android:id="@+id/Menu_Posts_RL"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+
+                    <com.gic.memorableplaces.CustomLibs.shinebuttonlib.ShineButton
+                        android:id="@+id/Like"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:src="#FF0007"
+                        android:visibility="invisible"
+                        app:allow_random_color="true"
+                        app:btn_color="#FF0007"
+                        app:btn_fill_color="#FF0007"
+                        app:enable_flashing="true"
+                        app:shine_animation_duration="3000"
+                        app:siShape="@raw/ic_like_filled" />
+
+                    <ImageView
+                        android:id="@+id/Like_outline"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:src="@drawable/ic_heart_like" />
+
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/Atv_NoOfLikes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/Like_outline"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/Comment"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:layout_toEndOf="@id/Atv_NoOfLikes"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_comment_round" />
+
+                    <me.grantland.widget.AutofitTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/Comment"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/Save"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:layout_marginEnd="@dimen/_14sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_share_post" />
+                </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <!--        </com.loopeer.shadow.ShadowView>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/LL_post_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/LikePP1"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="@android:color/transparent"
+            app:riv_border_width="4dp"
+            app:riv_corner_radius_bottom_left="@dimen/_10sdp"
+            app:riv_corner_radius_top_right="@dimen/_10sdp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/LikePP2"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="@android:color/transparent"
+            app:riv_border_width="4dp"
+            app:riv_corner_radius_bottom_left="@dimen/_10sdp"
+            app:riv_corner_radius_top_right="@dimen/_10sdp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/LikePP3"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="@android:color/transparent"
+            app:riv_border_width="4dp"
+            app:riv_corner_radius_bottom_left="@dimen/_10sdp"
+            app:riv_corner_radius_top_right="@dimen/_10sdp" />
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/liked_number"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="4dp"
+            android:gravity="center|start"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:sizeToFit="true" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/post_caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/actor"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text=""
+            android:textColor="@color/mediumGray"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/liked_number" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/view_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text=""
+            android:textColor="#474646"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/border" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/date_posted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text=""
+            android:textColor="@android:color/tertiary_text_dark"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_caption" />
+
+        <View
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="#B5B5B5"
+            app:layout_constraintTop_toBottomOf="@id/date_posted" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

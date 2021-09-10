@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/abstract_background_gender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--<RelativeLayout-->
+    <!--    android:layout_width="@dimen/_250sdp"-->
+    <!--    android:layout_height="@dimen/_250sdp"-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent"-->
+    <!--    android:translationY="-70dp"-->
+    <!--    >-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="@dimen/_250sdp"-->
+    <!--        android:layout_height="@dimen/_250sdp"-->
+    <!--        android:alpha="0.5"-->
+    <!--        android:layout_marginTop="@dimen/_12sdp"-->
+    <!--        android:src="@drawable/ic_gender_symbol"-->
+
+    <!--        />-->
+    <!--</RelativeLayout>-->
+
+
+    <RelativeLayout
+        android:id="@+id/RL_heading"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/RL_GENDERS_MIDDLE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/amita_bold"
+            android:gravity="center"
+            android:text="Where are you in this journey?"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/RL_GENDERS_MIDDLE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/RL_CHANGE_FILTER_TYPE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_heading">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_badge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_university"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/FY_RL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cl_badge"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/FYText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+android:textColor="@android:color/black"
+                android:text="In the beginning "
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/FYBadge"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@id/FYText"
+
+                android:src="@drawable/ic_badge" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/SY_RL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/FY_RL"
+            android:layout_alignEnd="@id/FY_RL"
+            android:layout_alignStart="@id/FY_RL"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/SecondYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Stuck in middle"
+
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/SYBadge"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_badge2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/TY_RL"
+            android:layout_below="@id/SY_RL"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignEnd="@id/SY_RL"
+            android:layout_marginTop="@dimen/_10sdp"
+android:visibility="gone"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ThirdYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Towards the End"
+                android:textColor="@android:color/black"
+                android:layout_toStartOf="@id/TYBadge"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/TYBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_badge3" />
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/RL_CHANGE_FILTER_TYPE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        app:layout_constraintBottom_toTopOf="@id/close_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_GENDERS_MIDDLE">
+
+        <TextView
+            android:id="@+id/heading_change_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="60"
+            android:background="#52FFFFFF"
+            android:fontFamily="@font/convergence"
+            android:maxLines="2"
+            android:text="Make my data private. "
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/private_notice"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_weight="10"
+            android:backgroundTint="@android:color/white"
+            android:src="@drawable/ic_info_icon" />
+
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/MakeDataPrivateSwitchMusic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:textSize="20sp"
+            app:jtbDraggable="true"
+            app:jtbLeftBackgroundColor="@android:color/holo_red_light"
+            app:jtbLeftText="OFF"
+            app:jtbLeftTextSize="25sp"
+            app:jtbRightBackgroundColor="@android:color/holo_green_light"
+            app:jtbRightText="ON"
+            app:jtbRightTextSize="15sp" />
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/close_dialog"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/custom_button_login"
+        android:textSize="22sp"
+        android:src="@drawable/ic_fail_red_cross"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_CHANGE_FILTER_TYPE" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

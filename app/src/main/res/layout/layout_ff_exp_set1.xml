@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/ML_SET_1"
+        android:layout_width="match_parent"
+
+        app:layoutDescription="@xml/ff_exp_set1_scene"
+        android:layout_height="wrap_content">
+
+        <HorizontalScrollView
+            android:id="@+id/HSV_MORE_IMAGES"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:scrollbars="none"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CL_MORE_IMAGES_FF_EXP"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CV_IMG_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/RIV_IMG_OUTER_1"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:alpha="0.4"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/RIV_IMG_INNER_1"
+                    android:layout_width="@dimen/_44sdp"
+                    android:layout_height="@dimen/_44sdp"
+                    android:elevation="@dimen/_3sdp"
+
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@id/CV_IMG_1"
+                    app:layout_constraintEnd_toEndOf="@id/CV_IMG_1"
+                    app:layout_constraintStart_toStartOf="@id/CV_IMG_1"
+                    app:layout_constraintTop_toTopOf="@id/CV_IMG_1"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="@dimen/_2sdp"
+                    app:riv_corner_radius="@dimen/_10sdp" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CV_IMG_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:layout_constraintStart_toEndOf="@id/CV_IMG_1"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/RIV_IMG_OUTER_2"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:alpha="0.4"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/RIV_IMG_INNER_2"
+                    android:layout_width="@dimen/_44sdp"
+                    android:layout_height="@dimen/_44sdp"
+                    android:elevation="@dimen/_3sdp"
+                    android:scaleType="centerCrop"
+
+                    app:layout_constraintBottom_toBottomOf="@id/CV_IMG_2"
+                    app:layout_constraintEnd_toEndOf="@id/CV_IMG_2"
+                    app:layout_constraintStart_toStartOf="@id/CV_IMG_2"
+                    app:layout_constraintTop_toTopOf="@id/CV_IMG_2"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="@dimen/_2sdp"
+                    app:riv_corner_radius="@dimen/_10sdp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CV_IMG_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:layout_constraintStart_toEndOf="@id/CV_IMG_2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/RIV_IMG_OUTER_3"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:alpha="0.4"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/RIV_IMG_INNER_3"
+                    android:layout_width="@dimen/_44sdp"
+                    android:layout_height="@dimen/_44sdp"
+
+                    android:elevation="@dimen/_3sdp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@id/CV_IMG_3"
+                    app:layout_constraintEnd_toEndOf="@id/CV_IMG_3"
+                    app:layout_constraintStart_toStartOf="@id/CV_IMG_3"
+                    app:layout_constraintTop_toTopOf="@id/CV_IMG_3"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="@dimen/_2sdp"
+                    app:riv_corner_radius="@dimen/_10sdp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CV_IMG_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:layout_constraintStart_toEndOf="@id/CV_IMG_3"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/RIV_IMG_OUTER_4"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:alpha="0.4"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/RIV_IMG_INNER_4"
+                    android:layout_width="@dimen/_44sdp"
+                    android:layout_height="@dimen/_44sdp"
+                    android:elevation="@dimen/_3sdp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@id/CV_IMG_4"
+                    app:layout_constraintEnd_toEndOf="@id/CV_IMG_4"
+                    app:layout_constraintStart_toStartOf="@id/CV_IMG_4"
+                    app:layout_constraintTop_toTopOf="@id/CV_IMG_4"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="@dimen/_2sdp"
+                    app:riv_corner_radius="@dimen/_10sdp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CV_IMG_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/CV_IMG_4"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/RIV_IMG_OUTER_5"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:alpha="0.4"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/RIV_IMG_INNER_5"
+                    android:layout_width="@dimen/_42sdp"
+                    android:layout_height="@dimen/_42sdp"
+                    android:elevation="@dimen/_3sdp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@id/CV_IMG_5"
+                    app:layout_constraintEnd_toEndOf="@id/CV_IMG_5"
+                    app:layout_constraintStart_toStartOf="@id/CV_IMG_5"
+                    app:layout_constraintTop_toTopOf="@id/CV_IMG_5"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="@dimen/_2sdp"
+                    app:riv_corner_radius="@dimen/_10sdp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_FULLNAME_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Sahil Jain, 19"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            app:layout_constraintTop_toBottomOf="@id/HSV_MORE_IMAGES"
+            app:sizeToFit="true" />
+
+        <TextView
+            android:id="@+id/TV_DESP_FF_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</RelativeLayout>

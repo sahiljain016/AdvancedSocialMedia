@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/purple_gradient_background" />
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:alpha="0.7"-->
+    <!--        android:padding="@dimen/_30sdp"-->
+    <!--        android:src="@drawable/ic_controller" />-->
+
+    <TextView
+        android:id="@+id/RL_heading"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/almendra"
+        android:gravity="center"
+        android:text="My Zodiac Sign"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/RL_CENTER"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/RL_CENTER"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="100"
+        app:layout_constraintBottom_toTopOf="@id/LL_close_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_heading">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner_share"-->
+<!--                style="@style/spinnerStyle"-->
+<!--                android:layout_toStartOf="@id/next_share_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_toEndOf="@id/close_share"-->
+<!--                android:backgroundTint="@android:color/white"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingTop="5dp"-->
+<!--                android:paddingBottom="5dp"-->
+<!--                android:popupBackground="@android:color/black"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="20sp" />-->
+            <Spinner
+                android:id="@+id/ZodiacSpinner"
+                style="@style/spinnerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/white"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@android:color/white"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/PrivacyButton"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/abstract_background_gender"
+                android:text="Privacy"
+                android:textSize="16sp"
+
+                android:textStyle="bold|italic"
+
+                />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/CENTER_BORDER"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:background="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="89">
+
+
+            <TextView
+                android:id="@+id/RL_heading_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/almendra"
+                android:gravity="center"
+                android:text="Responsibility / Posts"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/LL_CR_QUES"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RL_heading_position"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/CR_Ques"
+                    android:layout_width="0dp"
+                    android:layout_weight="96"
+                    android:maxLines="1"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/convergence"
+                    android:gravity="start"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Are you the CR of your class?"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/CR_YES"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/rounded_white_background"
+                    android:text="YES" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/CR_NO"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/custom_button_login"
+                    android:text="NO" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_CR_QUES2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/LL_CR_QUES"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:weightSum="100"
+                android:alpha="0.5"
+                android:orientation="horizontal">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/Section_Ques"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/convergence"
+                    android:layout_weight="70"
+                    android:gravity="start"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Is your course divided into sections? If yes, type No. Of Sections, else type 0."
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/Sections_CR_ET"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:layout_gravity="center"
+
+                    android:backgroundTint="@color/white"
+                    android:cursorVisible="true"
+                    android:hint="0,1,2,3..."
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/CENTER_BORDER2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/LL_CR_QUES2"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/black" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/OT_POS_QUES"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/CENTER_BORDER2"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/convergence"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Do you hold any other position of responsibility in our college/societies etc. ?"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/LL_OTHER_POSITIONS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/OT_POS_QUES"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/OT_POS_YES"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_50sdp"
+                    android:layout_weight="50"
+                    android:background="@drawable/rounded_white_background"
+                    android:text="YES" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/OT_POS_NO"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_50sdp"
+                    android:layout_weight="50"
+                    android:background="@drawable/rounded_white_background"
+                    android:text="NO" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_OTHER_HEADINGS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/LL_OTHER_POSITIONS"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:alpha="0.5"
+                android:orientation="vertical"
+                android:weightSum="99">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="33">
+
+
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/PositionTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/PositionET"
+                        android:fontFamily="@font/convergence"
+                        android:gravity="start"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Position Held By You:* "
+                        android:textAlignment="viewStart"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/PositionET"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/PositionTitle"
+                        android:cursorVisible="true"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="33">
+
+
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/OrganizationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/OrganizationET"
+                        android:fontFamily="@font/convergence"
+                        android:gravity="start"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Organization Name:* "
+                        android:textAlignment="viewStart"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/OrganizationET"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/OrganizationTitle"
+                        android:cursorVisible="true"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="33">
+
+
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/RemarkTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/RemarkET"
+                        android:fontFamily="@font/convergence"
+                        android:gravity="start"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Additional Remark: "
+                        android:textAlignment="viewStart"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/RemarkET"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/RemarkTitle"
+                        android:cursorVisible="true"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_close_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:weightSum="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/Set_NO_All"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:gravity="center"
+            android:text="Set No Zodiac Sign"
+android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/close_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_weight="50"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:text="Go Back TO menu"
+            android:textColor="@color/white" />
+    </LinearLayout>
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/close_dialog"-->
+    <!--        android:layout_width="@dimen/_40sdp"-->
+    <!--        android:layout_height="@dimen/_40sdp"-->
+    <!--        android:layout_marginBottom="@dimen/_5sdp"-->
+    <!--        android:background="@drawable/custom_button_login"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        android:src="@drawable/ic_fail_red_cross"-->
+    <!--        android:padding="@dimen/_6sdp"-->
+    <!--        android:textSize="22sp"-->
+    <!--        android:backgroundTint="@color/black"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/cloudy_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <RelativeLayout
+        android:id="@+id/RL_heading"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/_10sdp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amita_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="My Profile Picture &amp; Description "
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+
+            app:sizeToFit="true" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/RL_GENDERS_MIDDLE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_heading">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_photo_card"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:src="@drawable/ic_default_user"
+                app:civ_border_width="5dp"
+                app:civ_border_color="@color/white"
+
+                android:layout_centerInParent="true"
+                />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/FY_RL"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/RL_GENDERS_MIDDLE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/RL_BOTTOM"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/AddPP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_login"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="Add Profile Picture"
+            android:fontFamily="@font/convergence"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/RemovePP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_login"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_below="@id/AddPP"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="Remove Profile Picture"
+            android:fontFamily="@font/convergence"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/title_description"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="My Description: "
+            android:layout_below="@id/RemovePP"
+            android:gravity="top"
+            android:textAlignment="gravity"
+           android:paddingStart="@dimen/_10sdp"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/EditAutoDesp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/custom_button_login"
+            android:src="@drawable/ic_edit_pencil_black"
+            android:padding="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/title_description"
+            android:layout_alignBottom="@id/title_description"/>
+
+        <ImageView
+            android:id="@+id/ClearDesp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignBottom="@id/title_description"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/EditAutoDesp"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_trash" />
+
+        <ScrollView
+            android:id="@+id/SCROLLER_ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_description"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="1dp"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/autoDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL_BOTTOM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_card"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:text="&lt; Back"
+
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_card"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:text="Next &gt;"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

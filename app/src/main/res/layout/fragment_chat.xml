@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_CHAT_FRAGMENT"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    app:layoutDescription="@xml/chat_fragment_scene">
+
+    <RelativeLayout
+        android:id="@+id/RL_CHAT_TOOLBAR"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/top_toolbar_chat" />
+    </RelativeLayout>
+
+    <com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView
+        android:id="@+id/RV_CHAT"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:descendantFocusability="blocksDescendants"
+        android:paddingBottom="@dimen/_70sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_CHAT_TOOLBAR" />
+
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/ML_CHAT_BOTTOM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layoutDescription="@xml/chat_options_scene">
+
+
+        <com.gic.memorableplaces.utils.ShadowLayout
+            android:id="@+id/SL_CHAT_BOTTOM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:sl_is_shadow_top="true"
+            app:sl_shadow_angle="270"
+            app:sl_shadow_color="#33000000"
+            app:sl_shadow_distance="@dimen/_1sdp">
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/ML_TYPE_BOX_CHAT_BOTTOM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_rect_tl_tr_white"
+                app:layoutDescription="@xml/chat_type_box_scene"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <!--        <com.ldoublem.loadingviewlib.view.LVCircularJump-->
+                <!--            android:id="@+id/LoadingView"-->
+                <!--            android:layout_width="@dimen/_50sdp"-->
+                <!--            android:layout_height="@dimen/_50sdp"-->
+                <!--            android:layout_centerInParent="true" />-->
+
+
+                <View
+                    android:id="@+id/V_MARGIN_TYPE_BOX_CHAT"
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/_10sdp"
+                    app:layout_constraintBottom_toTopOf="@id/CL_CHAT_BOX"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CL_CHAT_BOX"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corners_chat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/IV_AUDIO_CHAT"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <!--                <ImageButton-->
+                    <!--                    android:id="@+id/IB_COLOR_PICKER_CHAT"-->
+                    <!--                    android:layout_width="@dimen/_40sdp"-->
+                    <!--                    android:layout_height="@dimen/_40sdp"-->
+                    <!--                    android:layout_centerVertical="true"-->
+                    <!--                    android:layout_marginStart="@dimen/_5sdp"-->
+                    <!--                    android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                    android:layout_marginBottom="@dimen/_5sdp"-->
+                    <!--                    android:background="@android:color/transparent"-->
+                    <!--                    android:scaleType="centerCrop"-->
+                    <!--                    android:src="@drawable/color_picker"-->
+                    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                    app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                    app:layout_constraintVertical_bias="1.0" />-->
+
+
+                    <!--                <View-->
+                    <!--                    android:id="@+id/V_LINE_CHAT_BOX"-->
+                    <!--                    android:layout_width="1dp"-->
+                    <!--                    android:layout_height="0dp"-->
+                    <!--                    android:layout_marginStart="@dimen/_5sdp"-->
+                    <!--                    android:layout_marginTop="@dimen/_5sdp"-->
+                    <!--                    android:layout_marginBottom="@dimen/_5sdp"-->
+                    <!--                    android:background="@color/black"-->
+                    <!--                    app:layout_constraintBottom_toBottomOf="@id/IV_ANCHOR_CHAT"-->
+                    <!--                    app:layout_constraintStart_toEndOf="@id/IV_ANCHOR_CHAT"-->
+                    <!--                    app:layout_constraintTop_toTopOf="@id/IV_ANCHOR_CHAT" />-->
+
+                    <EditText
+                        android:id="@+id/ET_TYPE_MESSAGE_CHAT"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@null"
+                        android:fontFamily="@font/capriola"
+                        android:hint="Type here...."
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="#323232"
+                        android:textColorHint="#919191"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!--            -->
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/IV_AUDIO_CHAT"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_microphone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/IV_ANCHOR_CHAT" />
+
+                <ImageButton
+                    android:id="@+id/IV_ANCHOR_CHAT"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_alert_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/IV_SEND_MESSAGE_CHAT"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_send_message_chat_green_blue"
+                    app:layout_constraintBottom_toBottomOf="@id/CL_CHAT_BOX"
+                    app:layout_constraintStart_toEndOf="parent" />
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        </com.gic.memorableplaces.utils.ShadowLayout>
+
+        <ImageView
+            android:id="@+id/IV_CHAT_OPTIONS"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_back_arrow"
+            app:layout_constraintTop_toTopOf="@id/SL_CHAT_BOTTOM"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_GALLERY_CHAT"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintBottom_toTopOf="@id/IV_CHAT_OPTIONS"
+            android:src="@drawable/ic_picture_chat"
+            android:padding="@dimen/_10sdp"
+            android:alpha="0"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="#ECECEC"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintEnd_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/IV_BUBBLE_COLOR"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="#ECECEC"
+            android:padding="@dimen/_5sdp"
+            android:alpha="0"
+            android:src="@drawable/ic_color_circle"
+            app:layout_constraintBottom_toTopOf="@id/IV_GALLERY_CHAT"
+            app:layout_constraintEnd_toStartOf="parent" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+    <View
+        android:id="@+id/V_DIM_BACKGROUND_CHAT"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B3000000"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/IV_HIGHLIGHTED_CHAT"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_CHAT_OPTIONS"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/rounded_rect_tl_tr_gradient_green_blue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_UNSEND_CHAT"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:text="Unsend"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/V_DIVIDER_CHAT_OPTIONS"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/V_DIVIDER_CHAT_OPTIONS"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_CLOSE_CHAT_OPTIONS"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:text="Cancel"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/V_DIVIDER_CHAT_OPTIONS" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

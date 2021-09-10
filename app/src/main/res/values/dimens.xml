@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2017 Zhihu Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<resources>
+    <dimen name="switch_padding">-5dp</dimen>
+    <dimen name="switch_radius">20dp</dimen>
+    <dimen name="switch_size">30dp</dimen>
+    <dimen name="switch_width">100dp</dimen>
+
+    <dimen name="cbn_fab_size">56dp</dimen>
+    <dimen name="cbn_height">56dp</dimen>
+    <dimen name="cbn_layout_height">84dp</dimen>
+    <dimen name="cbn_bottom_curve_offset">12dp</dimen>
+    <dimen name="cbn_fab_top_offset">8dp</dimen>
+
+    <dimen name="radius_corner">20dp</dimen>
+
+    <dimen name="elevation">10dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="min_height">160dp</dimen>
+    <dimen name="big_circle_radius">40dp</dimen>
+    <dimen name="small_circle_radius">20dp</dimen>
+
+    <dimen name="min_gap">80dp</dimen>
+</resources>

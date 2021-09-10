@@ -1,0 +1,189 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hansraj_alumni_wall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:background="@android:color/transparent"
+        android:elevation="@dimen/_10sdp"
+        android:padding="@dimen/_10sdp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="@dimen/_40sdp"
+        app:cardElevation="@dimen/_30sdp">
+
+        <RelativeLayout
+            android:id="@+id/RL_CardView_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C6000000"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CL_top_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_border_bottom_transparent"
+                android:paddingBottom="@dimen/_6sdp">
+
+
+                <EditText
+                    android:id="@+id/card_full_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:hint="Enter Full Name"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textColorLink="@android:color/white"
+                    android:backgroundTint="@color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/Card_colorPicker"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+
+                <TextView
+                    android:id="@+id/card_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/card_full_name"
+                    app:layout_constraintEnd_toStartOf="@id/Card_colorPicker"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteX="78dp" />
+
+                <ImageButton
+                    android:id="@+id/Card_colorPicker"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/color_picker"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/CL_top_card"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp">
+
+
+                <com.gic.memorableplaces.CustomLibs.HTextView.TyperTextView
+                    android:id="@+id/college_title_Card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hansraj College"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_20sdp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/college_title_Card">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+<!--                        <com.ldoublem.loadingviewlib.view.LVCircularJump-->
+<!--                            android:id="@+id/Loading_Courses"-->
+<!--                            android:layout_width="@dimen/_70sdp"-->
+<!--                            android:layout_height="@dimen/_30sdp"-->
+<!--                            android:layout_centerInParent="true" />-->
+
+                        <com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView
+                            android:id="@+id/course_recycler_view_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:animationDuration="1500"
+                            app:layoutAnimation="@anim/layout_animation_from_bottom"
+                            app:layoutManagerOrientation="vertical"
+                            app:layoutManagerReverse="false"
+                            app:layoutManagerType="linear" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_card"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:text="&lt; Back"
+           android:visibility="gone"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_card"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:text="Next &gt;"
+            android:textColor="#000000"
+
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

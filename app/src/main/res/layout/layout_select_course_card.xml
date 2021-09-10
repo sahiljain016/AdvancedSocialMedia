@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CL_select_course"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp">
+
+
+    <!--    <HorizontalScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:scrollbars="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:layout_editor_absoluteY="5dp">-->
+
+    <!--        <ScrollView-->
+    <!--            android:id="@+id/scroll_view"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+
+    <!--            android:scrollbars="none">-->
+
+    <TextView
+        android:id="@+id/ItemName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:ellipsize="end"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/galindo"
+        android:gravity="center_vertical"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:scrollHorizontally="true"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_Tick_Courses"/>
+
+    <ImageView
+        android:id="@+id/iv_Tick_Courses"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_green_tick_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        />
+    <!--        </ScrollView>-->
+    <!--    </HorizontalScrollView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

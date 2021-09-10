@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:htext="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/background_society_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/purple_gradient_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--<RelativeLayout-->
+    <!--    android:layout_width="@dimen/_250sdp"-->
+    <!--    android:layout_height="@dimen/_250sdp"-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent"-->
+    <!--    android:translationY="-70dp"-->
+    <!--    >-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="@dimen/_250sdp"-->
+    <!--        android:layout_height="@dimen/_250sdp"-->
+    <!--        android:alpha="0.5"-->
+    <!--        android:layout_marginTop="@dimen/_12sdp"-->
+    <!--        android:src="@drawable/ic_gender_symbol"-->
+
+    <!--        />-->
+    <!--</RelativeLayout>-->
+
+
+    <RelativeLayout
+        android:id="@+id/RL_heading"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/RL_GENDERS_MIDDLE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/amita_bold"
+            android:gravity="center"
+            android:text="What Societies are you a part of?"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/RL_GENDERS_MIDDLE"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_330sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/OptionsSociety"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/RL_SEARCH">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewSocieties"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/RL_SEARCH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_heading">
+
+        <AutoCompleteTextView
+            android:id="@+id/society_search_bar"
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toStartOf="@id/view_Items"
+            android:layout_alignTop="@id/view_Items"
+            android:layout_alignBottom="@id/view_Items"
+            android:elevation="10dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/pacman_eye_color"
+            android:hint="Society Name"
+            android:textSize="16sp"
+            android:padding="@dimen/_5sdp"
+            android:background="@android:color/white"
+            android:outlineProvider="bounds"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/view_Items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/custom_button_login"
+            android:padding="@dimen/_5sdp"
+            android:text="My Societies" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/OptionsSociety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_35sdp"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_p"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            >
+            <ImageView
+                android:id="@+id/private_lock"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:padding="@dimen/_6sdp"
+                android:background="@drawable/round_upload"
+                android:src="@drawable/ic_unlocked"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/private_notice"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+
+                android:backgroundTint="@android:color/white"
+                android:src="@drawable/ic_black_info"
+
+                app:layout_constraintStart_toStartOf="@id/cv_p"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <ImageView
+                    android:id="@+id/cross_society"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_alignBottom="@id/cv_p"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_toStartOf="@id/cv_p"
+                    android:background="@drawable/round_upload"
+                    android:padding="@dimen/_6sdp"
+                    android:src="@drawable/ic_fail_red_cross" />
+
+
+        <!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/correct_society"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignBottom="@id/cv_lock"-->
+<!--            android:layout_marginStart="@dimen/_25sdp"-->
+<!--            android:layout_toEndOf="@id/cv_lock"-->
+<!--            android:elevation="10dp"-->
+<!--            app:cardCornerRadius="@dimen/_50sdp"-->
+<!--            app:cardElevation="15dp">-->
+
+            <ImageView
+                android:id="@+id/correct_society"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignBottom="@id/cv_p"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_toEndOf="@id/cv_p"
+                android:padding="@dimen/_4sdp"
+                android:background="@drawable/round_upload"
+                android:src="@drawable/ic_correct" />
+<!--        </androidx.cardview.widget.CardView>-->
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

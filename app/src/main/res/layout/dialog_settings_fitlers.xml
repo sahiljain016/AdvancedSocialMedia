@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/RL_SEEKBAR"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="25"-->
+<!--        android:visibility="visible"-->
+<!--        >-->
+<!--        <EditText-->
+<!--            android:id="@+id/SearchBar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/_50sdp"-->
+<!--            android:layout_marginTop="@dimen/_10sdp"-->
+<!--            android:layout_marginEnd="@dimen/_50sdp"-->
+<!--            android:layout_marginBottom="@dimen/_10sdp"-->
+<!--            android:fontFamily="@font/convergence"-->
+<!--            android:hint="Search a particular age"-->
+<!--            android:inputType="number"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/MinValue"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignStart="@id/LeftTv"-->
+<!--            android:layout_alignEnd="@id/LeftTv"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_30sdp"-->
+<!--            android:layout_marginEnd="@dimen/_30sdp"-->
+<!--            android:background="@drawable/filled_white_blue_all_sides"-->
+<!--            android:hint="0"-->
+<!--            android:padding="@dimen/_10sdp"-->
+<!--            android:text=""-->
+<!--            android:textAlignment="center"-->
+
+<!--            android:textSize="20sp" />-->
+
+<!--        <me.grantland.widget.AutofitTextView-->
+<!--            android:id="@+id/LeftTv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/MinValue"-->
+<!--            android:layout_marginStart="@dimen/_10sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginEnd="@dimen/_10sdp"-->
+<!--            android:text="Minimum Value"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp"-->
+<!--            app:sizeToFit="true" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/MaxValue"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignStart="@id/RightTV"-->
+<!--            android:layout_alignEnd="@id/RightTV"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_30sdp"-->
+<!--            android:layout_marginEnd="@dimen/_30sdp"-->
+<!--            android:background="@drawable/filled_white_blue_all_sides"-->
+<!--            android:hint="99"-->
+<!--            android:padding="@dimen/_10sdp"-->
+<!--            android:text=""-->
+<!--            android:textAlignment="center"-->
+
+<!--            android:textSize="20sp" />-->
+
+<!--        <me.grantland.widget.AutofitTextView-->
+<!--            android:id="@+id/RightTV"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/MinValue"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginStart="@dimen/_10sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginEnd="@dimen/_10sdp"-->
+<!--            android:text="Maximum Value"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp"-->
+<!--            app:sizeToFit="true" />-->
+
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/ResetSeekBar"-->
+<!--            android:layout_width="@dimen/_100sdp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/MinValue"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="@dimen/_30sdp"-->
+<!--            android:background="@drawable/rounded_white_background"-->
+<!--            android:text="Set limits" />-->
+
+<!--    </RelativeLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

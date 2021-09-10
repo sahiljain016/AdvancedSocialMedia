@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/RL_CHAT_TOOLBAR"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/top_toolbar_comments" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/CL_CENTER_CHAT"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/CL_CHAT_BOX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_CHAT_TOOLBAR"
+        >
+
+        <ListView
+            android:id="@+id/CommentsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/CL_CHAT_BOX"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@drawable/custom_border_black_both"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CL_CENTER_CHAT">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/UserProfileComments"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/pp"
+            app:civ_border_color="#A5800D"
+            app:civ_border_width="1dp" />
+
+        <EditText
+            android:id="@+id/ET_TYPE_MESSAGE_CHAT"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_toStartOf="@id/IV_SEND_MESSAGE_CHAT"
+            android:layout_toEndOf="@id/UserProfileComments"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            android:hint="Add a comment as sahil.jain..."
+            android:textColorHint="@android:color/tertiary_text_dark"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/IV_SEND_MESSAGE_CHAT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Post"
+            android:textColor="@color/link_blue"
+            android:textSize="19sp" />
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

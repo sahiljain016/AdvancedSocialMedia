@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    >
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#039BE5"
+            android:elevation="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="5"
+                android:text="Uploading Your Post!"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/desp_missing_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialogTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Tip: Type SXC# before words to make it a tag"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/pacman_loading"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_below="@id/desp_missing_items"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:scaleType="center"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@raw/rock_bunny"
+                android:visibility="visible" />
+
+
+
+
+            <ImageView
+                android:id="@+id/icon_upload"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_below="@id/pacman_loading"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:src="@drawable/ic_upload" />
+
+            <TextView
+                android:id="@+id/UploadProgressTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pacman_loading"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_marginEnd="1dp"
+                android:layout_toEndOf="@+id/icon_upload"
+                android:hint=""
+                android:paddingStart="10dp"
+                android:paddingEnd="5dp"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.mackhartley.roundedprogressbar.RoundedProgressBar
+                android:id="@+id/UploadProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_below="@id/icon_upload"
+                app:rpbBackgroundColor="#FDD835"
+                app:rpbProgressColor="#1E88E5"
+                app:rpbShowProgressText="false" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

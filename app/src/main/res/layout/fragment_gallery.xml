@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rellayout1Gallery">
+
+        <!--Gallery Top Toolbar-->
+        <include layout="@layout/top_toolbar_share"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:weightSum="100"
+        android:orientation="vertical"
+        android:layout_below="@id/rellayout1Gallery">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/RLGallery"
+            android:layout_height="0dp"
+            android:layout_weight="60">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/GalleryImageView"
+                android:scaleType="centerCrop"
+                android:contentDescription="Choosen Image" />
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:visibility="gone" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_play_button"
+                android:visibility="gone"
+                android:id="@+id/PlayButton"/>
+            <ImageButton
+                android:layout_height="45dp"
+                android:layout_width="45dp"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/ChangeAspectRatio"
+                android:background="@drawable/rounded_corners_share"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/ic_aspect_ratio"/>
+            <ProgressBar
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/ProgressBarGallery"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@android:color/black"
+            />
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="39.75"
+            android:numColumns="3"
+            android:verticalSpacing="1dp"
+            android:horizontalSpacing="1dp"
+            android:gravity="center"
+            android:id="@+id/GridViewGallery"
+            android:background="@android:color/black"
+            >
+
+        </GridView>
+    </LinearLayout>
+
+</RelativeLayout>

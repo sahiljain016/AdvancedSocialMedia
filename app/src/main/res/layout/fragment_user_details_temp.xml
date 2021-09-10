@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_FF_EXP"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/samp"
+    android:scaleType="centerCrop"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <View-->
+<!--        android:id="@+id/V_WHITE_BACKGROUND"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:alpha="0"-->
+<!--        android:background="#FFFFFF" />-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/CV_MAIN_FF_EXP"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_300sdp"-->
+
+<!--        app:cardElevation="@dimen/_10sdp"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+
+<!--        <com.makeramen.roundedimageview.RoundedImageView-->
+<!--            android:id="@+id/IV_USER_IMAGES_FF"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/test_img_1" />-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--&lt;!&ndash;    <View&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/V_BLACK_GRADIENT_NAMES"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:alpha="0"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:background="@drawable/gradient_black"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:elevation="@dimen/_10sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintTop_toBottomOf="@id/CV_MAIN_FF_EXP" />&ndash;&gt;-->
+
+
+
+<!--    &lt;!&ndash;    </androidx.cardview.widget.CardView>&ndash;&gt;-->
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/IV_BACK_exp"-->
+<!--        android:layout_width="@dimen/_35sdp"-->
+<!--        android:layout_height="@dimen/_35sdp"-->
+<!--        android:layout_margin="@dimen/_10sdp"-->
+<!--        android:alpha="1"-->
+<!--        android:elevation="@dimen/_10sdp"-->
+<!--        android:src="@drawable/ic_back_ff"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/RL_BACK"-->
+<!--        android:layout_width="@dimen/_60sdp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/_50sdp"-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:layout_marginEnd="@dimen/_50sdp"-->
+<!--        android:alpha="1"-->
+<!--        android:elevation="@dimen/_10sdp"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"-->
+<!--        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"-->
+<!--        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP">-->
+
+<!--        <io.alterac.blurkit.BlurLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_17sdp"-->
+<!--            app:blk_cornerRadius="@dimen/_30sdp"-->
+<!--            app:blk_fps="10" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/IV_DOT_1_FF"-->
+<!--            android:layout_width="@dimen/_5sdp"-->
+<!--            android:layout_height="@dimen/_5sdp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_5sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginBottom="@dimen/_5sdp"-->
+<!--            android:background="@drawable/rounded_white_background" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/IV_DOT_2_FF"-->
+<!--            android:layout_width="@dimen/_5sdp"-->
+<!--            android:layout_height="@dimen/_5sdp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_5sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginBottom="@dimen/_5sdp"-->
+<!--            android:layout_toEndOf="@id/IV_DOT_1_FF"-->
+<!--            android:background="@drawable/rounded_white_background"-->
+<!--            android:backgroundTint="@color/image_dot_unselected" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/IV_DOT_3_FF"-->
+<!--            android:layout_width="@dimen/_5sdp"-->
+<!--            android:layout_height="@dimen/_5sdp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_5sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginBottom="@dimen/_5sdp"-->
+<!--            android:layout_toEndOf="@id/IV_DOT_2_FF"-->
+<!--            android:background="@drawable/rounded_white_background"-->
+<!--            android:backgroundTint="@color/image_dot_unselected" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/IV_DOT_4_FF"-->
+<!--            android:layout_width="@dimen/_5sdp"-->
+<!--            android:layout_height="@dimen/_5sdp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_5sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginBottom="@dimen/_5sdp"-->
+<!--            android:layout_toEndOf="@id/IV_DOT_3_FF"-->
+<!--            android:background="@drawable/rounded_white_background"-->
+<!--            android:backgroundTint="@color/image_dot_unselected" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/IV_DOT_5_FF"-->
+<!--            android:layout_width="@dimen/_5sdp"-->
+<!--            android:layout_height="@dimen/_5sdp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginStart="@dimen/_5sdp"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:layout_marginEnd="@dimen/_5sdp"-->
+<!--            android:layout_marginBottom="@dimen/_5sdp"-->
+<!--            android:layout_toEndOf="@id/IV_DOT_4_FF"-->
+<!--            android:background="@drawable/rounded_white_background"-->
+<!--            android:backgroundTint="@color/image_dot_unselected" />-->
+
+
+<!--    </RelativeLayout>-->
+
+
+
+
+
+
+<!--    <ScrollView-->
+<!--        android:id="@+id/SV_DETAILS_exp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:clickable="true"-->
+<!--        android:scrollbars="none"-->
+<!--        android:elevation="@dimen/_10sdp"-->
+<!--        android:layout_marginTop="@dimen/_265sdp"-->
+<!--        android:background="@drawable/tl_tr_rounded_rectangle_white"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/ML_DETAILS_FF_EXP"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            >-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_FULLNAME_expanded"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_15sdp"-->
+<!--                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                android:elevation="@dimen/_10sdp"-->
+<!--                android:fontFamily="@font/capriola"-->
+<!--                android:maxLines="2"-->
+<!--                android:text="Sahil Jain, 19"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="32sp"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:sizeToFit="true" />-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_DESP_expanded"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_15sdp"-->
+<!--                android:layout_marginEnd="@dimen/_50sdp"-->
+<!--                android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                android:elevation="@dimen/_10sdp"-->
+<!--                android:ellipsize="end"-->
+<!--                android:fontFamily="@font/capriola"-->
+<!--                android:maxLines="3"-->
+<!--                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna "-->
+<!--                android:textColor="#B8B8B8"-->
+<!--                android:textSize="18sp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_expanded"-->
+<!--                app:sizeToFit="false" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/TV_TITLE_MATCH"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_10sdp"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                android:fontFamily="@font/roboto_medium_numbers"-->
+<!--                android:text="Match Power"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="26sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_DESP_expanded" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/V_BG_LEFT_HUMAN"-->
+<!--                android:layout_width="@dimen/_60sdp"-->
+<!--                android:layout_height="@dimen/_140sdp"-->
+<!--                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                android:background="@drawable/gradient_red"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/TV_TITLE_MATCH" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/IV_LEFT_HUMAN"-->
+<!--                android:layout_width="@dimen/_70sdp"-->
+<!--                android:layout_height="@dimen/_120sdp"-->
+<!--                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                android:scaleType="fitStart"-->
+<!--                android:src="@drawable/avatar_women_leaning"-->
+<!--                app:layout_constraintStart_toStartOf="@id/V_BG_LEFT_HUMAN"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_LEFT_HUMAN_NAME" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/V_WHITE_LINE_LEFT"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="@dimen/_5sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/V_BG_LEFT_HUMAN"-->
+<!--                app:layout_constraintStart_toStartOf="@id/V_BG_LEFT_HUMAN"-->
+<!--                android:background="@color/white"-->
+<!--                android:layout_marginTop="@dimen/_2sdp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_LEFT_HUMAN_NAME"/>-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_LEFT_HUMAN_NAME"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:fontFamily="@font/capriola"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingEnd="1dp"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:text="Akshara"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/TV_TITLE_MATCH"-->
+<!--                app:layout_constraintStart_toStartOf="@id/V_BG_LEFT_HUMAN"-->
+<!--                app:layout_constraintTop_toTopOf="@id/V_BG_LEFT_HUMAN" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/V_BG_RIGHT_HUMAN"-->
+<!--                android:layout_width="@dimen/_60sdp"-->
+<!--                android:layout_height="@dimen/_140sdp"-->
+<!--                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                android:background="@drawable/gradient_red"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/TV_TITLE_MATCH" />-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_RIGHT_HUMAN_NAME"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                android:fontFamily="@font/capriola"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingStart="1dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                android:text="Sahil"-->
+<!--                android:textAlignment="viewEnd"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/V_BG_RIGHT_HUMAN"-->
+<!--                app:layout_constraintStart_toEndOf="@id/TV_TITLE_MATCH"-->
+<!--                app:layout_constraintTop_toTopOf="@id/V_BG_RIGHT_HUMAN" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/V_WHITE_LINE_RIGHT"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="@dimen/_5sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/V_BG_RIGHT_HUMAN"-->
+<!--                app:layout_constraintStart_toStartOf="@id/V_BG_RIGHT_HUMAN"-->
+<!--                android:background="@color/white"-->
+<!--                android:layout_marginTop="@dimen/_2sdp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_RIGHT_HUMAN_NAME"/>-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/IV_RIGHT_HUMAN"-->
+<!--                android:layout_width="@dimen/_70sdp"-->
+<!--                android:layout_height="@dimen/_120sdp"-->
+<!--                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                android:src="@drawable/avatar_man_hand_crossed"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/V_BG_RIGHT_HUMAN"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_RIGHT_HUMAN_NAME" />-->
+
+
+<!--            &lt;!&ndash;            <com.skydoves.progressview.ProgressView&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:id="@+id/CLPB_RIGHT_PROGRESS"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_width="@dimen/_10sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_height="@dimen/_140sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginEnd="@dimen/_10sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/TV_TITLE_MATCH"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_autoAnimate="true"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_colorBackground="@color/progress_bg_color"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_colorGradientEnd="@color/red"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_colorGradientStart="@color/red"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_max="100"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_orientation="vertical"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_padding="1dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_progress="50" />&ndash;&gt;-->
+
+
+<!--            &lt;!&ndash;            <com.skydoves.progressview.ProgressView&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:id="@+id/CLPB_LEFT_PROGRESS"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_width="@dimen/_10sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_height="@dimen/_140sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginStart="@dimen/_10sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginTop="@dimen/_10sdp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/TV_TITLE_MATCH"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_autoAnimate="true"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_colorBackground="@color/progress_bg_color"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_colorGradientEnd="@color/red"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_colorGradientStart="@color/red"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_max="100"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_orientation="vertical"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_padding="1dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:progressView_progress="50" />&ndash;&gt;-->
+
+
+<!--            <View-->
+<!--                android:id="@+id/V_CENTER_EXP"-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/PB_MATCH_PERC_OUTER" />-->
+
+<!--            <ImageView-->
+
+<!--                android:id="@+id/IV_BLUR_PERC_EXP"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:alpha="0.9"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/blur_circular_progress_bar_ff"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/ATV_PERC_MESSAGE"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/V_BG_RIGHT_HUMAN"-->
+<!--                app:layout_constraintStart_toEndOf="@id/V_BG_LEFT_HUMAN"-->
+<!--                app:layout_constraintTop_toTopOf="@id/TV_TITLE_MATCH" />-->
+<!--&lt;!&ndash;            <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="#99FFFFFF"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:riv_corner_radius="@dimen/_60sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginEnd="@dimen/_5sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="@dimen/_2sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginStart="@dimen/_2sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                />&ndash;&gt;-->
+<!--&lt;!&ndash;            <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="#99000000"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:riv_corner_radius="@dimen/_60sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginEnd="@dimen/_5sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="@dimen/_2sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginStart="@dimen/_2sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                />&ndash;&gt;-->
+<!--            <ProgressBar-->
+<!--                android:id="@+id/PB_MATCH_PERC_OUTER"-->
+<!--                style="?android:attr/progressBarStyleHorizontal"-->
+<!--                android:layout_width="@dimen/_100sdp"-->
+<!--                android:layout_height="@dimen/_100sdp"-->
+
+<!--                android:indeterminate="false"-->
+<!--                android:max="100"-->
+<!--                android:progress="33"-->
+<!--                android:progressDrawable="@drawable/ic_card_details"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/ATV_PERC_MESSAGE"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/TV_TITLE_MATCH" />-->
+
+
+<!--&lt;!&ndash;            <ProgressBar&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/PB_INNER_MATCH_PERC"&ndash;&gt;-->
+<!--&lt;!&ndash;                style="?android:attr/progressBarStyleHorizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_margin="@dimen/_7sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:indeterminate="false"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:max="100"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:progress="33"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:progressDrawable="@drawable/progress_bar_blue"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/PB_MATCH_PERC_OUTER"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/PB_MATCH_PERC_OUTER" />&ndash;&gt;-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_PERCENTAGE"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:fontFamily="@font/roboto_medium_numbers"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLines="1"-->
+<!--                android:padding="@dimen/_5sdp"-->
+<!--                android:layout_margin="@dimen/_15sdp"-->
+<!--                android:text="33%"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="32sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/PB_MATCH_PERC_OUTER"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/PB_MATCH_PERC_OUTER"-->
+<!--                app:layout_constraintStart_toStartOf="@id/PB_MATCH_PERC_OUTER"-->
+<!--                app:layout_constraintTop_toTopOf="@id/PB_MATCH_PERC_OUTER"-->
+<!--                app:sizeToFit="true" />-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_PERC_MESSAGE"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLines="2"-->
+<!--                android:text="Hmm...seems quite low, but they say that opposites attract!"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="#5C5C5C"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/IV_LEFT_HUMAN"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/IV_RIGHT_HUMAN"-->
+<!--                app:layout_constraintStart_toEndOf="@id/IV_LEFT_HUMAN"-->
+<!--                app:sizeToFit="true" />-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/CL_OPTIONS_EXP"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/V_BG_LEFT_HUMAN">-->
+
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/CV_CARD_EXP"-->
+<!--                    android:layout_width="@dimen/_50sdp"-->
+<!--                    android:layout_height="@dimen/_50sdp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    app:cardCornerRadius="@dimen/_10sdp"-->
+<!--                    app:cardElevation="@dimen/_3sdp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_CARD_EXP"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:paddingBottom="@dimen/_5sdp"-->
+<!--                        android:src="@drawable/ic_card_details_cloud" />-->
+<!--                </androidx.cardview.widget.CardView>-->
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/CV_FOLLOW_EXP"-->
+<!--                    android:layout_width="@dimen/_50sdp"-->
+<!--                    android:layout_height="@dimen/_50sdp"-->
+<!--                    android:layout_marginStart="@dimen/_20sdp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    app:cardCornerRadius="@dimen/_10sdp"-->
+<!--                    app:cardElevation="@dimen/_3sdp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/CV_CARD_EXP"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FOLLOW_EXP"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:paddingBottom="@dimen/_5sdp"-->
+<!--                        android:src="@drawable/ic_follow_without_bubble" />-->
+<!--                </androidx.cardview.widget.CardView>-->
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/CV_LIKE_EXP"-->
+<!--                    android:layout_width="@dimen/_50sdp"-->
+<!--                    android:layout_height="@dimen/_50sdp"-->
+<!--                    android:layout_marginStart="@dimen/_20sdp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    app:cardCornerRadius="@dimen/_10sdp"-->
+<!--                    app:cardElevation="@dimen/_3sdp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/CV_FOLLOW_EXP"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_LIKE_EXP"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/ic_like_without_bubble" />-->
+<!--                </androidx.cardview.widget.CardView>-->
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/CV_SEND_HI_EXP"-->
+<!--                    android:layout_width="@dimen/_50sdp"-->
+<!--                    android:layout_height="@dimen/_50sdp"-->
+<!--                    android:layout_marginStart="@dimen/_20sdp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    app:cardCornerRadius="@dimen/_10sdp"-->
+<!--                    app:cardElevation="@dimen/_3sdp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/CV_LIKE_EXP"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_SEND_HI_EXP"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/ic_send_bubble" />-->
+<!--                </androidx.cardview.widget.CardView>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_FILTERS_TITLE"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_10sdp"-->
+<!--                android:layout_marginTop="@dimen/_25sdp"-->
+<!--                android:fontFamily="@font/capriola"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="@string/title_filters"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="26sp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/CL_OPTIONS_EXP"-->
+<!--                app:sizeToFit="true" />-->
+
+<!--            <me.grantland.widget.AutofitTextView-->
+<!--                android:id="@+id/ATV_COMMON"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_10sdp"-->
+<!--                android:layout_marginEnd="@dimen/_20sdp"-->
+<!--                android:fontFamily="@font/roboto_medium_numbers"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="You have 3 interests in common!"-->
+<!--                android:textColor="#717171"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_FILTERS_TITLE"-->
+<!--                app:sizeToFit="true" />-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/LL_FILTER_LAYER_1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:padding="@dimen/_5sdp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/ATV_COMMON">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/RL_FILTER_1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/background_rounded_grey_stroke"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/TV_FILTER_1_exp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:maxWidth="@dimen/_80sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:text="19"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#3A3A3A"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/V_DIVIDER_exp"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_alignTop="@id/TV_FILTER_1_exp"-->
+<!--                        android:layout_alignBottom="@id/TV_FILTER_1_exp"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_marginTop="@dimen/_1sdp"-->
+
+<!--                        android:layout_marginBottom="@dimen/_1sdp"-->
+<!--                        android:layout_toEndOf="@id/TV_FILTER_1_exp"-->
+<!--                        android:background="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FILTER_ICON_1"-->
+<!--                        android:layout_width="49dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_toEndOf="@id/V_DIVIDER_exp"-->
+<!--                        android:src="@drawable/ic_zodiac_filter" />-->
+<!--                </RelativeLayout>-->
+
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/RL_FILTER_2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+
+<!--                    android:background="@drawable/background_rounded_grey_stroke"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_1"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/TV_FILTER_2_exp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:maxWidth="@dimen/_80sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:text="Scorpion"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#3A3A3A"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/V_DIVIDER_2_exp"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_alignTop="@id/TV_FILTER_2_exp"-->
+<!--                        android:layout_alignBottom="@id/TV_FILTER_2_exp"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_marginTop="@dimen/_1sdp"-->
+<!--                        android:layout_marginBottom="@dimen/_1sdp"-->
+<!--                        android:layout_toEndOf="@id/TV_FILTER_2_exp"-->
+<!--                        android:background="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FILTER_ICON_2"-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_20sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_toEndOf="@id/V_DIVIDER_2_exp"-->
+<!--                        android:src="@drawable/ic_zodiac_filter" />-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/RL_FILTER_3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    android:background="@drawable/background_rounded_grey_stroke"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_2"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/TV_FILTER_3_exp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:maxWidth="@dimen/_80sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:text="Ariana Grande"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#3A3A3A"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/V_DIVIDER_3_exp"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_alignTop="@id/TV_FILTER_3_exp"-->
+<!--                        android:layout_alignBottom="@id/TV_FILTER_3_exp"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_marginTop="@dimen/_1sdp"-->
+<!--                        android:layout_marginBottom="@dimen/_1sdp"-->
+<!--                        android:layout_toEndOf="@id/TV_FILTER_3_exp"-->
+<!--                        android:background="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FILTER_ICON_3"-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_20sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_toEndOf="@id/V_DIVIDER_3_exp"-->
+<!--                        android:src="@drawable/ic_music" />-->
+<!--                </RelativeLayout>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/LL_FILTER_LAYER_2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/_5sdp"-->
+<!--                android:paddingBottom="@dimen/_10sdp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/LL_FILTER_LAYER_1">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/RL_FILTER_4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/background_rounded_grey_stroke"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/TV_FILTER_4_exp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:maxWidth="@dimen/_80sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:text="Ariana Grande"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#3A3A3A"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/V_DIVIDER_4_exp"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_alignTop="@id/TV_FILTER_4_exp"-->
+<!--                        android:layout_alignBottom="@id/TV_FILTER_4_exp"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_marginTop="@dimen/_1sdp"-->
+<!--                        android:layout_marginBottom="@dimen/_1sdp"-->
+<!--                        android:layout_toEndOf="@id/TV_FILTER_4_exp"-->
+<!--                        android:background="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FILTER_ICON_4"-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_20sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_toEndOf="@id/V_DIVIDER_4_exp"-->
+<!--                        android:src="@drawable/ic_music" />-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/RL_FILTER_5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    android:background="@drawable/background_ff_matched_filter"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_4"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/TV_FILTER_5_exp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:maxWidth="@dimen/_80sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:text="Ariana Grande"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/matched_filter_text"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/V_DIVIDER_5_exp"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_alignTop="@id/TV_FILTER_5_exp"-->
+<!--                        android:layout_alignBottom="@id/TV_FILTER_5_exp"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_marginTop="@dimen/_1sdp"-->
+<!--                        android:layout_marginBottom="@dimen/_1sdp"-->
+<!--                        android:layout_toEndOf="@id/TV_FILTER_5_exp"-->
+<!--                        android:background="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FILTER_ICON_5"-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_20sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_toEndOf="@id/V_DIVIDER_5_exp"-->
+<!--                        android:src="@drawable/ic_music" />-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/RL_FILTER_6"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    android:background="@drawable/background_rounded_grey_stroke"-->
+<!--                    android:padding="@dimen/_5sdp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_5"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/TV_FILTER_6_exp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_5sdp"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:maxWidth="@dimen/_80sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:text="Ariana Grande"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/unmatched_filter_text"-->
+<!--                        android:textSize="20sp" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/V_DIVIDER_6_exp"-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_alignTop="@id/TV_FILTER_6_exp"-->
+<!--                        android:layout_alignBottom="@id/TV_FILTER_6_exp"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_marginTop="@dimen/_1sdp"-->
+<!--                        android:layout_marginBottom="@dimen/_1sdp"-->
+<!--                        android:layout_toEndOf="@id/TV_FILTER_6_exp"-->
+<!--                        android:background="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/IV_FILTER_ICON_6"-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_20sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_toEndOf="@id/V_DIVIDER_6_exp"-->
+<!--                        android:src="@drawable/ic_music" />-->
+<!--                </RelativeLayout>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--    </ScrollView>-->
+
+<!--    <View-->
+<!--        android:id="@+id/V_WHITE_BLUR"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_50sdp"-->
+<!--        android:layout_marginStart="@dimen/_minus25sdp"-->
+<!--        android:layout_marginTop="@dimen/_280sdp"-->
+<!--        android:layout_marginEnd="@dimen/_minus25sdp"-->
+<!--        android:layout_marginBottom="@dimen/_minus10sdp"-->
+<!--        android:background="@drawable/blur_white"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    &lt;!&ndash;    <View&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:id="@+id/V_BOTTOM_WHITE_exp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:background="@drawable/gradient_white"&ndash;&gt;-->
+<!--    &lt;!&ndash;        app:layout_constraintBottom_toBottomOf="parent" />&ndash;&gt;-->
+<!--</androidx.constraintlayout.widget.ConstraintLayout>&lt;!&ndash;            <HorizontalScrollView&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/HSV_MORE_IMAGES"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="@dimen/_60sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toTopOf="parent">&ndash;&gt;-->
+
+
+<!--    &lt;!&ndash;                <androidx.constraintlayout.widget.ConstraintLayout&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:layout_width="@dimen/_60sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:layout_height="match_parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    app:layout_constraintTop_toTopOf="parent">&ndash;&gt;-->
+
+
+<!--    &lt;!&ndash;                    <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:id="@+id/RIV_IMG_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_width="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginStart="@dimen/_10sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginTop="@dimen/_55sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:src="@drawable/test_img_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_color="@color/white"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_width="1dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_corner_radius="@dimen/_10sdp" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;                    <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:id="@+id/RIV_IMG_2"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_width="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginStart="@dimen/_10sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginTop="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:src="@drawable/test_img_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintTop_toBottomOf="@id/RIV_IMG_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_color="@color/white"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_width="1dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_corner_radius="@dimen/_10sdp" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;                    <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:id="@+id/RIV_IMG_3"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_width="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginStart="@dimen/_10sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginTop="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:src="@drawable/test_img_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintTop_toBottomOf="@id/RIV_IMG_2"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_color="@color/white"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_width="1dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_corner_radius="@dimen/_10sdp" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;                    <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:id="@+id/RIV_IMG_4"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_width="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginStart="@dimen/_10sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginTop="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:src="@drawable/test_img_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintTop_toBottomOf="@id/RIV_IMG_3"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_color="@color/white"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_width="1dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_corner_radius="@dimen/_10sdp"/>&ndash;&gt;-->
+
+<!--    &lt;!&ndash;                    <com.makeramen.roundedimageview.RoundedImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:id="@+id/RIV_IMG_5"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_width="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginStart="@dimen/_10sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginTop="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:layout_marginBottom="@dimen/_5sdp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        android:src="@drawable/test_img_1"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:layout_constraintTop_toBottomOf="@id/RIV_IMG_4"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_color="@color/white"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_border_width="1dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                        app:riv_corner_radius="@dimen/_10sdp" />&ndash;&gt;-->
+<!--    &lt;!&ndash;                </androidx.constraintlayout.widget.ConstraintLayout>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </HorizontalScrollView>&ndash;&gt;-->

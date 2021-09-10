@@ -1,0 +1,424 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+
+            android:id="@+id/halfpage">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="263dp"
+                android:background="@android:color/black"
+                android:contentDescription="@string/circle_image_view_edit_profile" />
+            <!--SECTION FOR PROFILE PHOTO-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/editProfilePhoto"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+
+                android:layout_marginBottom="10dp"
+                app:civ_border_color="@android:color/white"
+
+                app:civ_border_width="2dp" />
+            <!--SECTION FOR CHANGE PROFILE PHOTO TEXT VIEW-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editProfilePhoto"
+                android:text="@string/change_profile_photo"
+                android:id="@+id/ChangeProfilePhoto"
+                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:textColor="#04BAFD"/>
+
+            <!--SECTION FOR ADDING NAME-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/ChangeProfilePhoto"
+                android:layout_marginTop="10dp"
+                android:id="@+id/EnterName"
+                android:background="@drawable/custom_border_white_transparent_both"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/name"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/black"
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:background="@drawable/custom_border_white_transparent_thin"
+                    android:layout_marginEnd="10dp">
+                    <EditText
+                        android:id="@+id/FullNameEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_name"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"
+                        android:gravity="start"
+                        android:inputType="textNoSuggestions"
+                        android:background="@null"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="name" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING USERNAME-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/EnterName"
+                android:id="@+id/enterUsername">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/username_ep"
+                    android:textSize="20sp"
+                    android:paddingEnd="0dp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/UsernameEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_username"
+                        android:textSize="18sp"
+                        android:maxLength="30"
+                        android:textColor="@android:color/black"
+                        android:gravity="start"
+                        android:inputType="textNoSuggestions"
+                        android:background="@null"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="username" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING USERNAME-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/enterUsername"
+                android:id="@+id/enterWebsite">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/website_ep"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/WebsiteEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_website_url"
+                        android:textColor="@android:color/black"
+                        android:gravity="start"
+                        android:textSize="18sp"
+                        android:inputType="textNoSuggestions"
+                        android:background="@null"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="website" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING DESCRIPTION-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/enterWebsite"
+                android:id="@+id/enterBio">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/description_ep"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="10dp"
+                    android:background="@drawable/custom_border_white_transparent_bio">
+                    <EditText
+                        android:id="@+id/DescriptionEP"
+                        android:paddingTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:hint="@string/enter_something_about_you"
+                        android:gravity="start"
+                        android:maxLines="4"
+                        android:textSize="18sp"
+                        android:inputType="textMultiLine"
+                        android:background="@null"
+                        android:textColor="@android:color/black"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="description" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR PRIVATE INFORMATION TEXT VIEW-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingStart="@null"
+                android:layout_height="50dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/privateinfo"
+                android:layout_below="@id/enterBio"
+                android:background="@drawable/custom_border_black_both"
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/private_information"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING EMAIL ADDRESS-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/privateinfo"
+
+                android:id="@+id/enterEmail">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/email_address_ep"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/EmailEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_email_address_ep"
+                        android:gravity="start"
+                        android:textSize="18sp"
+                        android:inputType="textEmailAddress"
+                        android:background="@null"
+                        android:textColor="@android:color/black"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="email" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING PHONE-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/enterEmail"
+                android:id="@+id/enterPhoneNumber">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/phone_ep"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/PhoneEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_phone_number"
+                        android:gravity="start"
+                        android:inputType="phone"
+                        android:textSize="18sp"
+                        android:background="@null"
+                        android:textColor="@android:color/black"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="Phone" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING COLLEGE UID-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/enterPhoneNumber"
+                android:id="@+id/enterUID">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/college_uid_ep"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/UIDEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_your_college_uid_number"
+                        android:gravity="start"
+                        android:inputType="number"
+                        android:textSize="18sp"
+                        android:background="@null"
+                        android:textColor="@android:color/black"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="number" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING COLLEGE UID-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/enterUID"
+                android:id="@+id/enterCourse">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/course_ep"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/CourseEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_the_course_you_are_pursuing"
+                        android:gravity="start"
+                        android:inputType="textNoSuggestions"
+                        android:background="@null"
+                        android:textColor="@android:color/black"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="text" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--SECTION FOR ADDING GENDER-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/enterCourse"
+                android:id="@+id/enterGender">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/gender_ep"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@android:color/black"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_border_white_transparent_thin">
+                    <EditText
+                        android:id="@+id/GenderEP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/click_to_enter_your_gender"
+                        android:gravity="start"
+                        android:inputType="textNoSuggestions"
+                        android:background="@null"
+                        android:textColor="@android:color/black"
+                        android:layout_centerVertical="true"
+                        android:autofillHints="gender" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+
+
+</merge>

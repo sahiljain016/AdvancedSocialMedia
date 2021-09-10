@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_40sdp">
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+      android:layout_marginEnd="@dimen/_minus5sdp"
+        android:alpha="0.6"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/rounded_dash_border_gray"
+        android:elevation="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/CV_FILTER_NAME"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_FILTER_NAME"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/RL_FILTER_IN_RESULT_BG"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#80E0AEFB">
+
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_FILTER_NAME"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/righteous"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:maxLines="1"
+
+                android:text="Scorpion"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:sizeToFit="true" />
+
+            <View
+                android:id="@+id/V_DIVIDER"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_alignTop="@id/ATV_FILTER_NAME"
+                android:layout_alignBottom="@id/ATV_FILTER_NAME"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_toEndOf="@id/ATV_FILTER_NAME"
+                android:background="@color/black" />
+
+            <ImageView
+                android:id="@+id/IV_FILTER_ICON"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_toEndOf="@id/V_DIVIDER"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_zodiac_filter" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

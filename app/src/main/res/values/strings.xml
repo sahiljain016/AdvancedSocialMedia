@@ -1,0 +1,387 @@
+<resources>
+    <string name="app_name">St Xavier\'s Social Club</string>
+    <!--Fragment Titles-->
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+
+    <!--Intent Extras-->
+    <string name="selected_image">selected_image</string>
+    <string name="scale_type">Scale_Type</string>
+    <string name="speak_to_type">Say Something About Your Post.</string>
+    <string name="Update_profile">Update Profile Photo</string>
+    <string name="Media_Data">Media_data</string>
+    <string name="IsViewProfile">is_view_profile</string>
+
+
+    <!-- Fragment Names -->
+    <string name="edit_profile_fragment">Edit Profile</string>
+    <string name="log_out_fragment">Log Out</string>
+    <string name="report_bug_fragment">Report A Bug</string>
+    <string name="friends_filter_fragment">friends_filter</string>
+    <string name="social_feed_fragment">Social_Feed</string>
+    <string name="fragment_messages">Comments</string>
+    <string name="student_dashboard_fragment">Student_Dashboard</string>
+    <string name="filter_1_fragment">filter_1</string>
+    <string name="new_chat_user_fragment">New_user_chat</string>
+    <string name="chat_fragment">Chat_fragment</string>
+    <string name="prepare_card_fragment">Prepare_card</string>
+    <string name="sign_up_fragment">Sign_up</string>
+    <string name="course_and_full_name_Card_fragment">course_and_full_name_Card_fragment</string>
+    <string name="profile_photo_fragment_card">profile_photo_fragment_card</string>
+    <string name="Card_information_fragment">Card_Information_Fragment</string>
+    <string name="likes_messages_filter_fragment">likes_messages_filter_fragment</string>
+    <string name="music_movies_books_fragment">music_movies_books_fragment</string>
+    <string name="games_fragment">music_movies_books_fragment</string>
+    <string name="favourite_places_map_fragment">favourite_places_map_fragment</string>
+
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+
+    <!--Main Fragments Names For Bottom Nav-->
+    <string name="profile_fragment">Profile</string>
+    <string name="home_fragment">Home</string>
+    <string name="share_fragment">Share</string>
+    <string name="like_frgament">Like</string>
+    <string name="search_fragment">Search</string>
+    <string name="fragment_comments">Comments</string>
+
+
+    <!-- Dialog Names -->
+    <string name="confirm_password_dialog_fragment">ConfirmPasswordDialog</string>
+
+    <!--Firebase Messages -->
+    <string name="auth_failed_login">Something is wrong! Check Credentials Again.</string>
+    <string name="auth_success_login">Log In Successful!</string>
+    <string name="auth_failed_signup">Something is wrong! Sign Up Failed.</string>
+    <string name="auth_success_singup">Sign Up success! Sending Verification Email.</string>
+
+    <!-- Firebase Databases-->
+    <string name="dbname_users">users</string>
+    <string name="dbname_user_account_settings">user_account_settings</string>
+    <string name="dbname_user_common_details">user_common_details</string>
+    <string name="dbname_photos">photos</string>
+    <string name="dbname_user_photos">user_photos</string>
+    <string name="dbname_videos">videos</string>
+    <string name="dbname_user_videos">user_videos</string>
+    <string name="dbname_following">following</string>
+    <string name="dbname_followers">followers</string>
+    <string name="dbname_chats">chats</string>
+    <string name="dbname_chats_removed">chats_removed</string>
+    <string name="dbname_chat_meta_data">chat_meta_data</string>
+    <string name="dbname_chat_users">chat_users</string>
+    <string name="dbname_misc">Miscellaneous</string>
+    <string name="not_available">N/A</string>
+
+    <!--Chat Node-->
+    <string name="field_chat_details">chat_details</string>
+    <string name="field_chat_removed">chat_removed</string>
+    <string name="field_chat_uid">chat_uid</string>
+    <string name="field_public_key">public_key</string>
+    <string name="field_private_key_backup">private_key_backup</string>
+    <string name="field_my_public_key">my_public_key</string>
+    <string name="field_other_public_key">other_public_key</string>
+
+    <string name="field_username">username</string>
+    <string name="field_filters_matched">filters_matched</string>
+    <string name="field_message_sent">message_sent</string>
+    <string name="field_animation_type_filter_message">animation_type_filter_message</string>
+    <string name="field_random_match">Random Match</string>
+    <string name="field_birth_date">birth_date</string>
+    <string name="field_email">email</string>
+    <string name="field_phoneNumber">phone_number</string>
+    <string name="field_is_email_verified">is_email_verified</string>
+    <string name="field_is_online">is_online</string>
+    <string name="field_page_number">page_number</string>
+    <string name="field_collegeUID">college_uid</string>
+    <string name="field_description">description</string>
+    <string name="field_card_bio">card_bio</string>
+    <string name="field_card_bg_color">card_color_bg</string>
+    <string name="field_website">website</string>
+    <string name="field_profile_photo">profile_photo</string>
+    <string name="field_course">course</string>
+    <string name="field_posts">posts</string>
+    <string name="field_following">following</string>
+    <string name="field_followers">friendly_xavierites</string>
+    <string name="field_follow_list_for_notifications">follow_list_for_notifications</string>
+    <string name="field_message_list_for_notifications">message_list_for_notifications</string>
+    <string name="field_received">received</string>
+    <string name="field_received_count">received_count</string>
+    <string name="field_sent">sent</string>
+    <string name="field_sent_count">sent_count</string>
+    <string name="field_gender">gender</string>
+    <string name="field_likes">likes</string>
+    <string name="field_user_id">user_id</string>
+    <string name="field_mediaID">mediaID</string>
+    <string name="field_caption">caption</string>
+    <string name="field_date_added">date_added</string>
+    <string name="field_font">CaptionFont</string>
+    <string name="field_color_caption">CaptionColor</string>
+    <string name="field_comments">comments</string>
+    <string name="field_chats">chats</string>
+    <string name="field_receivers">receivers</string>
+    <string name="field_display_name">display_name</string>
+    <string name="scale_type_center_crop">CENTER_CROP</string>
+    <string name="scale_type_center_inside">CENTER_INSIDE</string>
+
+    <!--Filters-->
+    <string name="No_filter_results_available">No Results Available</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="college_year">College Year</string>
+    <string name="course">Courses In College</string>
+    <string name="zodiac_sign">Zodiac Sign</string>
+    <string name="hobbies">Hobbies/Interests</string>
+    <string name="games">Games</string>
+    <string name="music">Music</string>
+    <string name="movie">Movies/ Tv Shows</string>
+    <string name="pronouns">Pronouns</string>
+    <string name="books">Books</string>
+    <string name="societies">Societies In College</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="LEFT_TV_COLOR">LEFT_TV_COLOR</string>
+    <string name="RIGHT_TV_COLOR">RIGHT_TV_COLOR</string>
+    <string name="RL_COLOR">RL_COLOR</string>
+    <string name="drawer_close">Close Drawer</string>
+
+    <!--User Card String-->
+    <string name="dbname_user_card">user_card</string>
+    <string name="dbname_filter_data">filter_data</string>
+    <string name="card_completed">completed</string>
+    <string name="courses_hansraj">courses_hansraj</string>
+    <string name="society_hansraj">society_hansraj</string>
+    <string name="society_name">society_name</string>
+    <string name="society_cover_url">society_cover_url</string>
+    <string name="society_desp">society_desp</string>
+    <string name="field_hobbies">hobbies</string>
+    <string name="field_society">my_societies</string>
+    <string name="field_filter">filter_name</string>
+    <string name="field_full_name">full_name</string>
+    <string name="field_age">age</string>
+    <string name="field_zodiac_sign">zodiac_sign</string>
+    <string name="field_class_representative">class_representative</string>
+    <string name="field_other_posts">other_posts</string>
+    <string name="field_sections_in_course">sections_in_course</string>
+    <string name="field_position_name_in_other_post">position_name</string>
+    <string name="field_organization_name_in_other_post">organization_name</string>
+    <string name="field_remark_in_other_post">remark</string>
+    <string name="field_to_be_checked_cr_list">to_be_checked_CR_list</string>
+    <string name="field_to_be_checked_other_pos_list">to_be_checked_other_pos_list</string>
+    <string name="field_is_private">is_private</string>
+    <string name="field">fields</string>
+    <string name="field_private">private</string>
+    <string name="field_public">public</string>
+    <string name="field_music">music</string>
+    <string name="field_no_gender">Prefer not to say gender</string>
+    <string name="field_male">Male</string>
+    <string name="field_Female">Female</string>
+    <string name="field_pronouns">pronoun_preferred</string>
+    <string name="no_selection">no_selection</string>
+    <string name="music_privacy_status">music_status</string>
+    <string name="movie_privacy_status">movie_status</string>
+    <string name="field_track_name">track_name</string>
+    <string name="field_singer_name">singer_name</string>
+    <string name="field_cover_url">cover_url</string>
+    <string name="field_movie">movie</string>
+    <string name="field_movie_name">movie_name</string>
+    <string name="field_movie_overview">movie_overview</string>
+    <string name="field_books">books</string>
+    <string name="field_book_name">book_name</string>
+    <string name="field_book_authors">book_authors</string>
+    <string name="field_college_year">college_year</string>
+    <string name="field_first_year">First Year</string>
+    <string name="field_second_year">Second Year</string>
+    <string name="field_third_year">Third Year</string>
+
+    <string name="field_game_name">game_name</string>
+    <string name="field_game_rating">game_rating</string>
+    <string name="field_game_platform">game_platform</string>
+    <string name="field_game_cover_url">game_cover_url</string>
+    <string name="Top5Platform">top_5_platforms</string>
+    <string name="field_games">games</string>
+
+    <string name="field_private_data_notice">* Please Note, if you make this data private then you will not appear in the Find Friends search when someone searches based upon this Criteria.</string>
+
+    <!--API Keys & URLS-->
+    <string name="The_Movie_DB_API_KEY">a1d0f215f24d27bd7165e9e9a55bfb18</string>
+    <string name="The_GOOGLE_BOOKS_API_KEY">AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA</string>
+    <string name="The_GOOGLE_MAPS_API_KEY">AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA</string>
+    <string name="Rapid_MUSIC_API_DEEZER">2ce5bbd84amsh1b536400504bab9p18b7b5jsne6afd869c399</string>
+    <string name="rawg_games_api_key">52bb1536e6574d2ca3fbb7b8b1834768</string>
+    <string name="MOVIE_COVER_CONSTANT_URL">https://image.tmdb.org/t/p/w500</string>
+    <!--Firebase Storage-->
+    <string name="new_photo">new photo</string>
+    <string name="new_profile_photo">new profile photo</string>
+    <!--Firebase Storage Society Names, Cover URl, Description-->
+    <string name="enactus_hasnraj">Enactus Hansraj</string>
+    <string name="enactus_hansraj_desp">To create an impact and change lives, Enactus opens doors for you to explore immense possibilities, channel the true entrepreneur in you and make your vision a reality.\n\nEnactus Hansraj warmly invites the batch of ‘23 to Orientation 2020.\n\nDo join us to embark on this transformational journey and witness what it feels like to be at Enactus!</string>
+    <string name="the_dramatics_society">Dramatics Society Hansraj</string>
+    <string name="the_dramatics_society_desp">Since its official inception in the year 1987, the Hansraj Dramatics Society has held a prominent name in the Delhi University theatre circuit. Initially christened HANDS in its early years, today it is simply known as the HANSRAJ DRAMATICS SOCIETY, which speaks for itself. It has nurtured many talented actors and directors like SRK, Shiney Ahuja, Anurag Kashyap, Parvin Dabas and till date continues to house great talent with exceptional potential.</string>
+    <string name="nss_hansraj">NSS: National Service Scheme</string>
+    <string name="nss_hansraj_desp">"One person can make a difference and everybody should try."\n\nNSS Hansraj is a society that works as a helping hand for the underprivileged sections of our society. It not only gives one the opportunity to put a smile on the faces of needy, but also to work for the betterment of the environment and many other things through drives, competitions and what not.</string>
+    <string name="ncc_hansraj">NCC: National Cadet Corps</string>
+    <string name="ncc_hansraj_desp">The National Cadet Corps is a Indian military cadet corps. In India it is a voluntary organization which recruits cadets from high schools, colleges and Universities. The Cadets are given basic military training in small arms and parades. The officers and cadets have no liability for active military service once they complete their course but are given preference over normal candidates during selections based on their achievements in the corps.\nNational Cadet Corps has shaped the lives of millions of people. It remains committed in producing vibrant disciplined citizens who are capable of taking our Nation to great heights.\nNCC has adopted community development activities with the aim of imbibing amongst the cadets, qualities of selfless service to the community, dignity of labour, importance of self help, need to protect the environment and to assist weaker sections of the society in their upliftment.\nJoin Us and Be a part of NCC!</string>
+    <string name="spic_macay">Spic - Macay</string>
+    <string name="spic_macay_desp">SPICMACAY’s intention is to enrich the quality of formal education by increasing awareness about different aspects of Indian heritage and inspiring the young mind to imbibe the values embedded in it. It seeks to inspire youth through experiencing the mysticism embodied in the rich and heterogeneous cultural tapestry of Indian and World Heritage, with a hope that the beauty, grace, values, and wisdom embodied in these arts will influence their way of life and thinking and inspire one to become a better human being. For this, the most accomplished artistes of the country render programs of Indian classical music and dance, folk, poetry, theatre, traditional paintings, crafts &amp; yoga primarily in schools and colleges. In 2011, SPIC MACAY was awarded the Rajiv Gandhi Sadbhavana award in recognition of its contribution to youth development.</string>
+    <string name="haritima">Haritima</string>
+    <string name="haritima_desp">We are the last generation whose efforts towards saving the planet will count. The environmental movement is stronger now than ever and Haritima is a part of that wave.\n\n• Duly recognized as one of the few registered societies of Hans Raj College, Haritima is a non-profitable club which has been spreading awareness among the youth about the most neglected issue of the century- the need for environmental conservation.\n\n• Committed to enlightening the masses, Haritima has set its mark by organizing a range of successful events since its inception in 2006.\n\n• To name a few of them- panel discussions, school sessions, naturewalks, plantation drives, the annual flagship event- Cylothon, Prakriti Kumbh- the annual fest of Haritima and the regular cleanliness and conservation drives, and thus, Haritima proudly celebrates its 14 years long stretches of natural preservation.\n\n• We will be organising an orientation session for all the first year students of Hansraj College.</string>
+    <string name="kavyanjali">Kavyanjali: The Poetry Society</string>
+    <string name="kavyanjali_desp">मैं सिलवटें संवारता था धुंध साए में,⁣\nसजाता एक निराला सा ख्वाब था,⁣\nआँखें मूंद लेता अक्सर सवेरे की छाँव में,⁣\nसाँझ जो मेरा आफ़ताब था।\n\nWith the past session coming to a fruitful conclusion, we take utmost gratification in the commencement of a new journey, a journey of words, syllables and symbolism and to begin with, we introduce the core team for the session 2020–2021!⁣\n\nThe previous term has dissolved with a cloud of apprehension sleeving humanity but as we make headway into this new journey, we aspire to diffuse hope, engender feeling of compassion and promulgate prosperity and love.</string>
+    <string name="pixels">Pixels - The Photography Society</string>
+    <string name="pixels_desp">What merely kicked off as quest to put together all the Hansarian photographers has now become a much grand platform inculcating Mobilegraphers, Semi-DSLR users and people with skills in post-processing. The initiative was taken in January ’13 with a group of 10 people, mostly being non-DSLR users but ready to work for the growth of society. It is their dedication towards the society that the platform was made ready for the fresher that were to come in the next session.\nA group of 10 which never went beyond mere photowalks, was raised to 25 and figured about a lot of other things that could be achieved and the session begun. Starting off the session with a great orientation programme, stepping upon the success ladder one-by-one, putting in a great deal of energy and time, going through all the difficulties in the way, trying out various genres in photography, from meetings to workshops to photowalks to capturing the events to national level trips to ending the year with a Grand Fest – PLICKTURE ’14, everything is part of this beautiful memory lane that we have built up here and are still here to create even more in the coming years expecting some great responses from the fresher’s crowd, the following session. A lot has been achieved and a bigger lot is yet to be achieved, come and take on this journey with us and explore the photographer within you meanwhile.</string>
+    <string name="swaranjali">Swaranjali</string>
+    <string name="swaranjali_desp">Swaranjali, is the music society of Hansraj College. It comprises of an Indian Choir, Western Choir, Fusion band and Western band. Over the years Swaranjali has become one of the most respected music societies of the College circuit. All of us are emotionally driven and believe in creating honest music and not compromising on a single note that we produce. Coming from different cultural backgrounds, the final product is always an amalgamation of all of our influences and ideas.</string>
+    <string name="entrepreneurial_cell">Entrepreneurial Cell</string>
+    <string name="entrepreneurial_cell_desp">This is an endeavor to initiate and develop the entrepreneurial spirit among the youth, the leaders of tomorrow. The cell also organizes workshops, panel discussions, and training sessions on entrepreneurship and start-ups from time to time. In a nutshell, we prepare the youth for the transition from classrooms to workplace.\nAll that we look for is the Enthusiasm to make your existence of worth in the society, the sparkle in your eyes and the irresistible surge of will and energy to execute your ideas</string>
+    <string name="illuminati">Illuminati: The Quizzing Society</string>
+    <string name="illuminati_desp">Don’t let the name fool you. Illuminati is the college’s quizzing society. Quizzing is a well recognized extra-curricular activity and the society aims to bring together quizzers in the college and hone their skills further. Also, a major aim of the society is to encourage people to take up quizzing and increase general awareness about the things happening around us.\nOur Objective.\nThere is a common misconception that quizzing is only for people who can memorize and mug up random facts. We want to do away with it and show that anybody can quiz, and that there is no need to possess a repertoire of detailed factual knowledge to be a good quizzer. All one needs is a hunger to learn and general awareness of on-goings around them. A quizzer also needs patience, logical thinking and the ability to put two and two together. The more a person quizzes, the more he acquires these skills and this is what the society is for, to provide exposure to budding quizzers and help them improve.\nWhat all does the society do?\nQuizzing not only includes participating, but also means making questions. Making a good quiz requires hours of research and is a skill one masters over time. A good question is one which is workable from the facts given in the question itself and the answer is generally something you have heard about. We guide members on how to make quizzes and share everybody’s work with one another through regular sessions. This way, everybody learns from one another and increases their knowledge base and learns how to make a good quiz as well.\nThe selection criteria.\nWe conduct a written entrance test to select people. Questions cover all the fields, right from current affairs to sports to music to business. We induct members not only on the basis of their scores, but also after assessing the strengths of the person. We look to measure how wide a person’s knowledge base is and how he is able to apply it on a sheet of paper. Even if a person doesn’t know the answer to a question, we can judge the thinking process and knowledge by the answer given.\nWhat is expected of the members?\nMembers are expected to have a decent knowledge base and should be willing to learn new stuff. It is a great opportunity to broaden one’s horizons and members are expected to make the most of it. Members are also expected to participate in quizzes in other colleges and compete with quizzers from all over the quizzing circuit and see where they stand.\nWhat can one expect as a member of the society?\nThe best thing one can expect as a member is a chance to widen one’s horizons and learn so much new stuff you had no idea about earlier. You have an opportunity to represent your college and add feathers to the college’s cap. Making and hosting quizzes is a great chance to improve your presentation skills and certainly boosts your confidence. There is no better feeling than receiving appreciation for a quiz you hosted. And last but not the least - the spoils. All quizzes have prizes on offer, and if you’re good, quizzing can earn you a good amount of money.\nWhat all events does the society attend? Any event that the society organizes?\nSociety members take part in quizzes all over Delhi and even outside the city. Right from full-fledged quiz fests to college department quizzes, we look to make the most of every chance we get. We travel to colleges all over Delhi, and it is a great opportunity for first year students to get a look around and visit colleges other than our own.\nThe society organizes an annual Quizfest - Con Qurso. The 2014 edition featured six quizzes - General, Sports, India, Biz-Tech, Bollywood and MELA (Music Entertainment Literature Art), with over 200 participants combined.\nThe Society’s Achievements.\nWithin North Campus, there is no college where we haven’t made our mark. Hindu, SRCC, KMC, Ramjas, Daulat Ram, St. Stephen’s, D-School, IP College, SGTB Khalsa, Miranda House, you name it and we’ve won there. We have won quizzes in other DU colleges as well such as Sri Venkateswara College (Venky), Kamla Nehru College, and DCAC. IIIT (Govindpuri), NSIT (Dwarka), MSIT (Janakpuri), BVCOE (Pashchim Vihar), PEC (Chandigarh) are some other colleges where members won last year, thus taking the college name to newer heights.\nAny tips for those who want to join the society?\nThe most important tip would be to stay aware of your surroundings. Read anything you lay your hands on. Gobble up any article you see and find interesting, and try to expand your knowledge base by reading and viewing new stuff. You never know when something you read before might help you. One cannot expect to become a quizzer overnight and therefore it is important to gradually improve upon your base day after day!</string>
+    <string name="fic_hansraj">Finance &amp; Investment Cell</string>
+    <string name="fic_hansraj_desp">The Finance and Investment Cell, Hansraj College embarked upon its journey to promulgate financial literacy in the year 2014.\n\nSince then, FIC has been prominent in organising multifarious events, that have garnered a wide array of audience from all over the University of Delhi. The Cell has managed to build a stature for itself by organising some of the finest FinFests in DU which witness an overwhelming footfall and huge participation in it’s competitions.\n\nTo help people gain first-hand experience from some of the expertise, the cell organises speaker sessions that are graced by some esteemed personalities.\n\nThe Cell also ensures the overall development of its members by organising regular sessions and discussions on various financial concepts and their application</string>
+    <string name="ferc_hansraj">Finance &amp; Economics Research Cell (FERC)</string>
+    <string name="ferc_hansraj_desp">The Finance and Economics Research Cell, Hansraj College is a body dedicated to the fostering of undergraduate research in Economics, Finance and related disciplines. The cell is committed to the promotion and facilitation of research at the college level, as the ultimate objective of education, by bridging the gap between teachers and students, various research enthusiasts and organisations.</string>
+    <string name="osctraca">Ostraca: The creative writing society</string>
+    <string name="osctraca_desp">This is the official blog of Ostraca, the creative writing society of Hans Raj College of Delhi University. The society was founded in 2014 by Nawnika Upadhyay and Ajay Kumar. Members of the society are people that exude a particular penchant for writing and produce a new piece of work each week. Based on randomization, a certain amount of their total work will be posted on the blog regularly.\nThe nature of these pieces of literature will vary in terms of Genre, Form and obviously Style.\nWe hope you will enjoy reading our work, just as much as we did while writing it.</string>
+    <string name="sga_hansraj">Society for General Awareness</string>
+    <string name="sga_hansraj_desp">By now you must have been introduced to various societies of our college and would have got an idea about our own, *Society of General Awareness*.\nSGA is full of hard working and diligent students who work towards a collective goal: to spread information and social awareness. Ever since its inception, it has been one of the most vibrant societies of Hansraj College providing you with a broad exposure and a myriad of experience.\nYour contribution towards the society is not only restricted to imparting awareness to the student community on various topics, but it also lies in your own personality development and individual growth. Being a part of a society like our own, you will become better at dealing with people, solving problems, and shedding your personal hesitations. We promote individual growth and have seen many people flourish and change for the better by the end of the year.</string>
+    <string name="tedx_hansraj">TEDx Hansraj</string>
+    <string name="tedx_hansraj_desp">Our theme for the year 2020 is, “Dare To Dream”- a "daring" that has the power to take you where you "dream" to be once you arouse it in the right direction as in the daring there is defiance to live beyond your circumstances. We all can dare to dream big once we start keeping faith and TEDx hansraj is all about that voyage that will take you closer to your dream and will dare you to accomplish it.</string>
+    <string name="eco_soc">Hans Raj Economics Society</string>
+    <string name="eco_soc_desp">Welcome to the Hans Raj Economics Society! We are a student-run body comprising of economics students from one of the finest institutions in the country, Hans Raj College. Our aim is to foster a holistic understanding of Economics as a discipline through organisation of events that stimulate practical knowledge, conducting academic seminars to develop theoretical knowledge, and gaining practical experience though field visits.\nOur flagship events, Inceptum and The Economics Championship, garner acclaim across the circuit thanks to both; their fun and organic use of economic concepts and the unmatched exciting prizes on offer! We also have two publications - Okonomos, an academic research-based economic magazine, and Yearbook, a comprehensive compilation of the activities of the Economics society and department.\n\nWe look forward to building upon this legacy and you can be assured that good things are cooking</string>
+    <string name="internship_cell">Internship Cell</string>
+    <string name="internship_cell_desp">The Internship Cell, Hans Raj College is a student run body headed by teacher convenors appointed by the college administration, working towards the common goal of providing students with a wide range of internship opportunities, thereby acting as a building block in enhancing their corporate proficiency and training them to step into the vast corporate world.\n\nThe Internship Cell is consistent with its commitment to discover new prospects and opportunities hence catering to the most imperative demand of college students.\n\nCarrying the initiative forward, the cell also organises Annual Internship Fair wherein acclaimed recruiters from every domain and sector such as The Indian Express, Child Rights &amp; You, The Centre of Applied Politics, Humanity Welfare Council, Taxmann, Josh Talks, Khadi Essentials, Bajaj Capital, SandMartin, UrbanClap, Smile Foundation, CPRG, Decathlon, Rising Bharat etc. visit the fair for hiring interns who are filled with a zest for professionalism.\n\nMore than 3,000 students across the length and breadth of the University of Delhi and other colleges apply for the awaited Hans Raj Internship Fair. The Internship Fair endeavors to connect students from all majors, seeking internships and professional practice experience with potential recruiters and industries.</string>
+    <string name="vision">Vision Hansraj: The Media &amp; Publication Society</string>
+    <string name="vision_desp">Do you feel a germ inside you who wishes to report news, meet and know new people, and keep exploring every single day?\n\nThen consider yourself lucky because 𝐕𝐢𝐬𝐢𝐨𝐧 - 𝐓𝐡𝐞 𝐌𝐞𝐝𝐢𝐚 𝐚𝐧𝐝 𝐏𝐮𝐛𝐥𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬 𝐒𝐨𝐜𝐢𝐞𝐭𝐲 𝐨𝐟 𝐇𝐚𝐧𝐬𝐫𝐚𝐣 𝐂𝐨𝐥𝐥𝐞𝐠𝐞 is just the right place for you!</string>
+    <string name="neenv">Neenv: The HRD Cell</string>
+    <string name="neenv_desp">NEENV, the Human Resource Development Cell of HansRaj college aims to launch and nurture activities &amp; programs in pursuance of objective of knowledge generation,propagation and capacity building for making Human Resource Development a vital part of a wide-ranging management approach.</string>
+    <string name="markus">Global Youth Markus</string>
+    <string name="markus_desp">MarkUs is the official Marketing Society of Hansraj College, New Delhi. It was established in 2015 and has been operational since 2016. It is one of the most popular marketing societies in the DU Circuit. We act as facilitators to enhance functional and contemporary knowledge of marketing in young enthusiasts and as a link between corporates and students. We aim at creating avenues to foster interests of students in the field of Marketing and expand their horizon through innumerable opportunities.</string>
+    <string name="sparc">SPARC (For CA aspirants)</string>
+    <string name="sparc_desp">SPARC society is an initiative taken by a group of some passionate and enthusiastic students, and various professional courses aspirants who commenced it as an endeavor to help students like them to accomplish their goals.\nWe have, over the time, developed into a centre of earnest efforts, aimed at assisting the students pursuing numerous famed professional courses to achieve their targets and become competent professionals.\nUnder the ambit of SPARC, we aim to nurture students into academically and professionally sound individuals by "Shaping Personalities And Realising Careers".\nWith an eye to achieve this objective, we prudently organise seminars and competitions propounding educative and pragmatic insights. SPARC, having been founded in 2018 has so far three flagship events- Synergy, Epiphany and Apocalypse, where some eminent personalities share their life journey and useful insights into the professional world.\nWith the intent to strive for excellence, we look forward to learn and grow into prominent professionals.</string>
+    <string name="kalakriti">Kalakriti</string>
+    <string name="kalakriti_desp">A piece of art can tell a thousand theories with an aesthetic emotion. The Art Society, Hans Raj College, is a sincere effort to capture this emotion that subtly nurtures itself as a sapling in each creative fertile mind.\nVisual arts have been in a mode of expression since the existence of mankind; from pre-historic to contemporary art. The Art Society is a new venture at Hans Raj College that believes in that veiled artist that is secretly at work within all of us.\nThe Society is a step towards promotion of art and creativity in college. We look to have a group of dedicated people who help in bringing an aesthetic sense in the college.\nAwareness about different forms of creative art and enhancing knowledge by holding classes for calligraphy training, origami, paper quilling, charcoal painting, coffee painting, and crafting etc.We shall actively participate in inter-college competitions, providing recognition to our esteemed institution in this still less journeyed field.\nIt could be anything-painting, sculpture, calligraphy, printmaking , photography , decorative handicrafts ,if you have the skill or just a natural flair and penchant, think you can help us with something totally innovative, you belong here.So just dip your paintbrushes in your favourite hues, effortlessly moving across the canvas with abstract thoughts and be ready to begin a new voyage of a being a more creative you.</string>
+    <string name="gec">Gender Equality Cell (GEC)</string>
+    <string name="gec_desp">"The best way to not feel hopeless is to get up and do something"- Barack Obama\n\nGreetings!\nHansraj brings to you it\'s very own Gender Equality Cell!\n\nOur Vision - ‘A better understanding of gender, equality and social cohesion’ Our Mandate - ‘To empower the students to harness their potential through skill development and cultural growth for sustainable and gender responsive development’ Our Mission - ‘To promote gender equality, social protection and transformation of communities’</string>
+    <string name="wdc">Women Development Cell (WDC)</string>
+    <string name="wdc_desp">Greetings from Women Development Cell, Hansraj College! 🌼\nOur society is committed towards fighting evils such as patriarchy, sexism, homophobia, prejudice, and other inequalities. We encourage having open conversations about mental health. We seek to make society an inclusive and safer space, where people can be their true selves. </string>
+    <string name="cdf">Connecting Dreams Foundation (CDF)</string>
+    <string name="cdf_desp">Connecting Dreams Foundation (CDF) is a non-profit organisation registered and licensed under section 25 of the Companies Act, 1956, Government of India. CDF provides the youth with an opportunity to bring about a sustainable and scalable change by working along the lines of 17 Sustainable Development Goals (SDGs) as defined by the United Nations. Through its changemaker network, CDF uses entrepreneurial action to empower people to improve their livelihoods in an economically, socially and environmentally sustainable way, thus converting their dreams into reality.\n\nConnecting Dreams Foundation aims to address the problems of the rural-urban divide in the country, as well as the deficit in percolation of employment and entrepreneurship opportunities to the bottom of the pyramid. CDF is working largely to utilise the potential of the youth and directing it towards activities that will lead to inclusive social development and enable the achievement of SDGs. It works to resolve a diverse set of challenges which align with the global narrative of Sustainable Development Goals, focusing on the multidimensionality of development ranging from job creation to health to environment. It has created urban and rural models for solving the key SDG challenges through systemic models of entrepreneurship.</string>
+    <string name="fashion_soc">The Fashion Society Hansraj</string>
+    <string name="fashion_soc_desp">Greetings,\n*“FASHIONISTA FASHION SOCIETY”*\nHansraj College☄️\n\n"Don't be into trends. Don't make fashion own you, but you decide what you are, what you want to express by the way you dress and the way to live." —Gianni Versace\n\n*Many people connect with fashion spiritually! All the aspiring models, fashion designers, makeup artists &amp; photographers.....Stop dreaming and make it happen!*</string>
+    <string name="one_eighty_degree">180 Degrees Consulting Hansraj</string>
+    <string name="one_eighty_degree_desp">here is no shortage of organizations that desire to improve the state of the world. Thousands of non-profits and social enterprises aim to improve education, health, economic and environmental outcomes. However, most organizations have not reached their full potential. Many are constrained. Many have limited resources, limited time, limited staff, and limited money.\n\nThe challenge is…\n\nHow can we improve the effectiveness of worthwhile organizations around the world? How can we help non-profits and social enterprises to overcome challenges they’re facing and have the greatest possible social impact?\n\nMost traditional consulting services are prohibitively expensive, and the few services that are affordable do not operate on a large scale. Most non-profits and social enterprises miss out.\n\nnThe answer is…\n\n180 Degrees provides socially conscious organizations around the world with very high quality, extremely affordable consulting services. We work with organizations to develop innovative, practical and sustainable solutions to whatever challenges they’re facing.</string>
+    <string name="rotaract">Rotaract Club Of Hansraj College</string>
+    <string name="rotaract_desp">Warm Rotaract Greetings!🌸\nCongratulations to everyone who made it to one of the top colleges of Delhi University!\nThe Rotaract Club Of Hansraj College is a non profit organisation working on the principle service through fellowship.🌸\nDon\'t miss out on the opportunity to be a part of this INTERNATIONAL organisation!\nRotaract clubs bring together people of ages 18 to 30 to exchange ideas with leaders in the community, develop leadership and professional skills, and have fun through service.</string>
+    <string name="gwc">Green Warriors Club</string>
+    <string name="gwc_desp">Green Warriors Club is an environmental society🌳 carved out to bring in warriors who could fight environmental holocaust by protection and conservation of the greens. Hands-on efforts like the reclamation of wastelands by plantation drives🌱, spreading of environmental awareness, collaboration projects with various NGOs and societies, plant adoption campaign🌷 and Our annual fest Midori, informative webinars, online Eco-friendly competitions🍃 etc. are some of the projects involved.</string>
+    <string name="culinary">Culinary Arts Hansraj</string>
+    <string name="culinary_desp">With the advent of technology and rapid industrialization, there has been growth of all sectors be it IT, trade or manufacturing. With this, the hospitality industry has sparked a boom as there is an increase in the number of job and economic opportunities in export of people and services and it’s the hospitality industry which forms the base of felicitating high profile meetings and agendas all around the world.\nDo you crave to mix match ingredients and prepare out-of-the-box mouth watering specialities? If yes, a career in the culinary arts space is the place for you. In the vast field of hotel management, which deals with the business of hospitality, culinary arts is a niche profession that deals with preparing gourmet dishes and presenting them in a manner that is not only appetising but also aestheticaly inviting.\nTherefore Hansraj College has come up with the unique idea to formulate one of its kind society in DU: CAS Hansraj with the main objective to lay emphasis on something which we love the most: FOOD and how this term has the potential to open up so many new branches for you to have a career or increase your horizon beyond just Chinese, Indian and Italian.\nOur society will aim to give a direction to the hidden chef in you, encourage the food enthusiast in you or simply get you all the unique and delicious dishes from the world of culinary arts to leave your taste buds wanting for more.\nSo unleash the food critic or foodie in you, give impetus to your dream of making a career in culinary arts or hotel management or boost your health with regular nutrition sessions by joining CAS Hansraj!</string>
+    <string name="markit">Mark-It Hansraj</string>
+    <string name="markit_desp">With our vision to provide effective strategic solutions and marketing plans, we, at Mark-It, assist our clients with prime consulting to offer the best and cross our potentials without hesitation.\nAlong with enhancing the Consulting skills of our members, here at Mark-it, we take additional initiative to cultivate a healthy learning environment among the students.\nWe embark on this new journey hoping to learn, grow and achieve the unachievable.</string>
+    <string name="north_east_cell">North-East Cell, Hansraj</string>
+    <string name="north_east_cell_desp">It is a platform in which all the students from 8 states of North-East India come together.\nThe basic purpose is to bring unity among us and to get the feeling of oneness in the college as well as in Delhi!</string>
+    <string name="placement_cell">Placement Cell Hansraj College</string>
+    <string name="placement_cell_desp">The Placement Cell, Hansraj College is a student run body headed by teacher convenors appointed by the college administration working towards the common goal of getting all the students placed in various companies. It is a team of 40 diligent individuals striving towards calling the maximum possible companies to the campus for placements.</string>
+    <string name="comm_soc">The Commerce Society, Hansraj</string>
+    <string name="comm_soc_desp"><![CDATA[Hans Raj College is a much-coveted name for its academic and co-curricular excellence and is among the top ten institutions of the country. A similar image is shared by its largest department of over 600 students and faculty members. Hans Raj College every year attracts the best commerce minds from all over the nation into the prestigious B.Com (Hons.) course. The faculty here is a close-knit community of reputed authors and dedicated and experienced teachers. The commerce department of the college has made remarkable progress over the years and has earned the distinction of being one of the best departments in Delhi University.\nThe department every year, through a rigorous interview procedure and with the involvement of the senior teachers, extracts the most efficient students forming the well renowned Commerce Society. Presently the Society is a constitution of 51 dedicated members, headed by our convener Dr Sonal Sharma and the head of the department Dr Krishan Sachdeva. The Commerce Society and its editorial board blend the academic and cultural pursuit of the commerce students by organising different events in the likes of seminars, lectures, trips, annual departmental fest, fresher&#39;s and farewell, along with the publication of the department&#39;s annual magazine - De Facto. The work of the society reflects the genius and skills possessed by the commerce students of Hans Raj College.]]></string>
+    <string name="nishtha">NISHTHA: The Civil Services Society</string>
+    <string name="nishtha_desp">Warm Greetings to all the freshers!🌸🌸🌸\n\nNishtha – The Civil Services Society of Hansraj College wholeheartedly welcomes all the freshers to our college.\n\n📕 Nishtha is one of the prestigious societies in the Delhi University circuit, an innovative initiative of the Hansraj College to create an ecosystem of passionate and enthusiastic civil services aspirants to converge and converse.\n\n✅ Our primary objective at Nishtha is to create an environment of growth and learning for the student community, which would later provide an edge over other aspirants during the preparation of the UPSC Examination.</string>
+    <string name="debsoc">Debsoc: English Debating Society</string>
+    <string name="debsoc_desp">The Society is a group of around 50–60 students, who collectively train and participate in Parliamentary Debates all around the country. Debating being the primary activity, the plurality of academic background leads to the coming together of ideas from various fields, and discussions on various topics of current social, political and economic relevance, leading to positive discourse. The society helps gain a trans-disciplinary approach to issues in life, and always adds positively to the members college experience.</string>
+    <string name="sports_soc">The Hansraj Sports Society</string>
+    <string name="sports_soc_desp">The Sports Council of Hansraj is a committee of members from different departments coming together to organise and regulate several sports related events.\nThe council was formed with the motive to conduct both traditional and new forms of sports and promote a balance between academic and physical activities. We believe in promoting fitness and organising various tournaments and events in and outside college.\nThe council not only aims at introducing the various sports to the students but also provides an eminent platform for them to play at Inter-college and Inter-university level.</string>
+    <string name="terpsichorean">Terpsichorean - The Choreography Society</string>
+    <string name="terpsichorean_desp">Choreography Society Since its inception in 2002, Terpsichorean: The Hansraj College Choreography Society has constantly achieved new heights. Dance is an art a lot of people know but only a handful understand. Its potential as an expressive art is seldom utilised and this is where Terpsichorean stands apart. With an aim of striking that delicate balance between intricacy of movement and lucidity of expression, the society has bagged top honours at various colleges.</string>
+
+    <!-- edit profile strings layout-->
+    <string name="enter_your_phone_number">Enter Your Phone Number</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_username">Enter Your Username</string>
+    <string name="enter_your_website_url">Enter Your Website URL</string>
+    <string name="circle_image_view_edit_profile">circle Image View Edit Profile</string>
+    <string name="change_profile_photo">Change Profile Photo</string>
+    <string name="name">Name</string>
+    <string name="username_ep">Username</string>
+    <string name="website_ep">Website</string>
+    <string name="description_ep">Description</string>
+    <string name="enter_something_about_you">Enter Something About You</string>
+    <string name="private_information">Private Information</string>
+    <string name="email_address_ep">Email Address</string>
+    <string name="enter_your_email_address_ep">Enter Your Email Address</string>
+    <string name="phone_ep">Phone</string>
+    <string name="college_uid_ep">College UID</string>
+    <string name="enter_your_college_uid_number">Enter Your College UID Number</string>
+    <string name="course_ep">Course</string>
+    <string name="enter_the_course_you_are_pursuing">Enter The Course You Are Pursuing</string>
+    <string name="gender_ep">Gender</string>
+    <string name="click_to_enter_your_gender">Enter Your Gender</string>
+
+    <!--Settings pop up Menu Profile-->
+    <string name="settings_icon">settings Icon</string>
+    <string name="account_settings_tv">Account Settings</string>
+    <string name="edit_profile_icon">edit profile</string>
+    <string name="edit_profile_button">Edit Profile</string>
+    <string name="bug_icon">bug_icon</string>
+    <string name="report_a_bug_found_button">Report A Bug Found</string>
+    <string name="log_out_icon">Log out icon</string>
+    <string name="log_out_button">Log Out</string>
+    <string name="close_icon">close icon</string>
+    <string name="close_settings">Close Settings</string>
+
+    <!--Log In Page-->
+    <string name="logo_st_xaviers">Logo St Xaviers</string>
+    <string name="app_title_ic">App Title</string>
+    <string name="email_address_hint_lo">Email address</string>
+    <string name="password_hint_lo">Password</string>
+    <string name="log_in_button_lo">Log In</string>
+    <string name="sign_up_link_lo">Not a member of this club? Sign Up</string>
+    <string name="loading_tv_lo">Entering the social club……</string>
+
+    <!--Sign Up Page-->
+    <string name="app_title_su">app title</string>
+    <string name="full_name_et_su">Full Name</string>
+    <string name="email_address_hint_su">Email Address</string>
+    <string name="username_hint_su">Username</string>
+    <string name="phone_number_optional_hint_su">Phone number (Optional)</string>
+    <string name="college_uid_roll_no_optional_hint_su">College UID/ Roll No (Optional)</string>
+    <string name="password_hint_su">Password</string>
+    <string name="confirm_password_hint_su">Confirm Password</string>
+    <string name="sign_up_button_su">Sign Up</string>
+    <string name="laoding_tv_su">Registering. Fill out the college card next!</string>
+    <string name="log_in_link_su">Already a Member? Log In</string>
+
+    <!--Confirm Password Dialog Edit Profile-->
+    <string name="confirm_password_titela_dialog">Confirm Password</string>
+    <string name="enter_your_password_hint_dialog">Enter your password.</string>
+    <string name="cancel_button_dialog">Cancel</string>
+    <string name="change_email_button_dialog">Change Email</string>
+
+    <!--Sign Out Fragment layout texts-->
+    <string name="sign_out_title_so">Sign Out</string>
+    <string name="confirmation_tv_so">Are you sure you want to sign out?</string>
+    <string name="cancel_button_so">Cancel</string>
+    <string name="sign_out_button_so">Sign Out</string>
+    <string name="loading_tv_so">Singing Out. Byeeee!</string>
+
+    <!--Navigation View drawer-->
+    <string name="open_navigation_drawer">Open navigation drawer</string>
+    <string name="close_navigation_drawer">Close navigation drawer</string>
+
+    <!--Share Activity-->
+    <string name="next_share">Next</string>
+    <string name="remove_this_game">REMOVE THIS GAME</string>
+    <!--FIND FRIENDS-->
+    <string name="ff_user_details">FFUserDetails</string>
+    <string name="preview_text_pt_1">Would like to know more about</string>
+    <string name="preview_text_pt2">/? Swipe up the arrow below!</string>
+    <string name="title_filters">Filters</string>
+    <!--Message Activity-->
+    <string name="field_date_messaged">date_messaged</string>
+    <string name="field_latest_date_messaged">latest_date_messaged</string>
+    <string name="field_epoch_gmt_milliseconds">epoch_gmt_milliseconds</string>
+    <string name="field_latest_message">latest_message</string>
+    <string name="field_latest_message_id">latest_message_id</string>
+    <string name="field_latest_sender_id">latest_sender_id</string>
+    <string name="field_is_seen">isSeen</string>
+    <string name="field_is_message_pinned">is_message_pinned</string>
+    <string name="field_pending_unseen_messages">pending_unseen_messages</string>
+    <string name="field_previous_message_id">previous_message_id</string>
+
+</resources>

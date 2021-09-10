@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/LL_TOP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:weightSum="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_LEFT_NUC"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_170sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_weight="50"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:cardElevation="@dimen/_3sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CL_NUC_LEFT"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/CIV__PP_NUC_LEFT"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:civ_border_color="@color/black"
+                    app:civ_border_width="0.5dp"
+                    app:layout_constraintBottom_toTopOf="@id/RL_NUC_DETAILS_LEFT"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/RL_NUC_DETAILS_LEFT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/ATV_USERNAME_NUC_LEFT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/capriola"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/TV_FULL_NAME_NUC_LEFT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ATV_USERNAME_NUC_LEFT"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_2sdp"
+                        android:paddingEnd="@dimen/_2sdp"
+                        android:paddingBottom="5dp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/IV_SELECT_USER_NUC_LEFT"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@id/TV_FULL_NAME_NUC_LEFT"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corners_checkbox_unchecked"
+                        android:tag="unselected" />
+
+
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_RIGHT_NUC"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_170sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_weight="50"
+
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:cardElevation="@dimen/_3sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CL_NUC_RIGHT"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/CIV__PP_NUC_RIGHT"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    app:civ_border_color="@color/black"
+                    app:civ_border_width="0.5dp"
+                    app:layout_constraintBottom_toTopOf="@id/RL_NUC_DETAILS_RIGHT"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/RL_NUC_DETAILS_RIGHT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+
+                    <me.grantland.widget.AutofitTextView
+                        android:id="@+id/ATV_USERNAME_NUC_RIGHT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/capriola"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/TV_FULL_NAME_NUC_RIGHT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ATV_USERNAME_NUC_RIGHT"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/_2sdp"
+                        android:paddingEnd="@dimen/_2sdp"
+                        android:paddingBottom="5dp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/IV_SELECT_USER_NUC_RIGHT"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@id/TV_FULL_NAME_NUC_RIGHT"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:tag="unselected"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_corners_checkbox_unchecked" />
+
+
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/base_RL_search_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <RelativeLayout
+            android:id="@+id/RelLAyout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/CoverImageView">
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

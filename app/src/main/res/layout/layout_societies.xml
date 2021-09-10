@@ -1,0 +1,76 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="@dimen/_220sdp"
+    android:layout_marginStart="@dimen/_15sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView
+    android:id="@+id/CardView_Male"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="@dimen/_30sdp"
+    app:cardElevation="9dp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    >
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_background_filters"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/SocietyImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:riv_corner_radius_top_left="@dimen/_30sdp"
+            app:riv_corner_radius_top_right="@dimen/_30sdp"
+            android:layout_weight="70"
+            android:scaleType="fitXY"
+       />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30">
+
+            <TextView
+                android:id="@+id/GameName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:maxLines="1"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <com.csguys.viewmoretextview.ViewMoreTextView
+                android:id="@+id/GamePlatform"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/GameName"
+                android:background="#2C000000"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                app:tv_expand_text="view more"
+                app:tv_collapse_text="close"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

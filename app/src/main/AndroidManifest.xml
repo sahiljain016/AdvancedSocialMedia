@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gic.memorableplaces">
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA"/>
+        <activity
+            android:name="com.gic.memorableplaces.SignUp.LocationPickerActivity"
+            android:label="leku_title_activity_location_picker"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name="com.gic.memorableplaces.Profile.TimelineActivity" />
+        <activity
+            android:name="com.gic.memorableplaces.Share.ShareActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.gic.memorableplaces.Search.SearchActivity" />
+        <activity android:name="com.gic.memorableplaces.Profile.ViewProfileActivity" />
+        <activity android:name="com.gic.memorableplaces.LogIn.LogInActivity" />
+        <activity android:name="com.gic.memorableplaces.SignUp.SignUpActivity" />
+        <activity android:name="com.gic.memorableplaces.Profile.ViewPostActivity" />
+        <activity android:name="com.gic.memorableplaces.Profile.CommentsActivity" />
+        <activity android:name="com.gic.memorableplaces.FilterFriends.FriendsFilterActivity" />
+        <activity android:name="com.gic.memorableplaces.Home.NavigatingCardActivity" />
+        <activity
+            android:name="com.gic.memorableplaces.Messages.MessageActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.gic.memorableplaces.Messages.NewMessageActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.gic.memorableplaces.Share.PublishActivity"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="com.gic.memorableplaces.Home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.gic.memorableplaces.Home.NavigatingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/Transition_Notif"
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:autoTransition="animateToEnd"
+        motion:duration="1000">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/CV_NOTIF_LEFT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:alpha="0"
+            android:scaleX="0.25"
+            android:scaleY="0.25"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/relativeLayout3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_120sdp"
+            android:alpha="0"
+            android:elevation="@dimen/_16sdp"
+            android:scaleX="0.25"
+            android:scaleY="0.25"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="@id/CV_NOTIF_LEFT"
+            motion:layout_constraintStart_toStartOf="@id/CV_NOTIF_LEFT" />
+        <Constraint
+            android:id="@+id/CV_NOTIF_RIGHT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_65sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:alpha="0"
+            android:scaleX="0.25"
+            android:scaleY="0.25"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/RL_PP"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:alpha="0"
+            android:elevation="@dimen/_16sdp"
+            android:scaleX="0.25"
+            android:scaleY="0.25"
+            motion:layout_constraintEnd_toEndOf="@id/CV_NOTIF_RIGHT"
+            motion:layout_constraintStart_toStartOf="@id/CV_NOTIF_RIGHT"
+            motion:layout_constraintBottom_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/CV_NOTIF_LEFT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:alpha="1"
+            android:layout_marginBottom="@dimen/_20sdp"
+            motion:layout_constraintEnd_toStartOf="@id/V_CENTER"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/relativeLayout3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_120sdp"
+            android:alpha="1"
+            android:elevation="@dimen/_16sdp"
+            motion:layout_constraintEnd_toEndOf="@id/CV_NOTIF_LEFT"
+            motion:layout_constraintStart_toStartOf="@id/CV_NOTIF_LEFT"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/CV_NOTIF_RIGHT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_85sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/V_CENTER"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/RL_PP"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:alpha="1"
+            android:elevation="@dimen/_16sdp"
+            motion:layout_constraintEnd_toEndOf="@id/CV_NOTIF_RIGHT"
+            motion:layout_constraintStart_toStartOf="@id/CV_NOTIF_RIGHT"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+</MotionScene>

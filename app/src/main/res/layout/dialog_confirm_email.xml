@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:wave="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_border_top">
+
+        <TextView
+            android:id="@+id/title_missing_details"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="5"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/desp_missing_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_missing_details"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="@dimen/_15sdp"
+
+            android:layout_marginEnd="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.gic.memorableplaces.CustomLibs.LoadingViewLib.LVGhost
+            android:id="@+id/ghost_verify"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/desp_missing_items"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp" />
+
+        <View
+            android:id="@+id/Border"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/ghost_verify"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="#636363" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Border"
+            android:background="@drawable/custom_border_for_top_toolbar"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:weightSum="100">
+
+            <Button
+                android:id="@+id/negative"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@android:color/transparent"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="5"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/Separator"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="#636363" />
+
+            <Button
+                android:id="@+id/positive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@android:color/transparent"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="5"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

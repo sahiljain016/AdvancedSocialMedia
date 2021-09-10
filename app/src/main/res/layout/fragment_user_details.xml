@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_FF_EXP"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    app:layoutDescription="@xml/activity_find_friends_scene">
+
+
+    <View
+        android:id="@+id/V_WHITE_BACKGROUND"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF" />
+
+    <View
+        android:id="@+id/V_BOTTOM_MARGIN"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_MAIN_FF_EXP"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardElevation="@dimen/_7sdp"
+        app:layout_constraintBottom_toBottomOf="@id/V_IMAGE_BOTTOM"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.cardview.widget.CardView>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/IV_USER_IMAGES_FF"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:elevation="@dimen/_7sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_img_1"
+        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
+        app:riv_corner_radius="@dimen/_25sdp" />
+
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/_60sdp"-->
+    <!--        android:background="@drawable/gradient_black"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"-->
+    <!--        android:elevation="@dimen/_7sdp"/>-->
+    <!--    <View-->
+    <!--        android:id="@+id/V_BLACK_GRADIENT_NAMES"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:alpha="0"-->
+    <!--        android:background="@drawable/gradient_black"-->
+    <!--        android:elevation="@dimen/_10sdp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/CV_MAIN_FF_EXP" />-->
+
+    <!--    <View-->
+    <!--        android:id="@+id/V_MARGIN_TOP"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/_10sdp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/ATV_FULLNAME_expanded" />-->
+
+
+    <!--    </androidx.cardview.widget.CardView>-->
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/IV_BACK_exp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:alpha="1"
+        android:background="@drawable/rounded_rect_tl_br_trans_white"
+        android:elevation="@dimen/_7sdp"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
+        app:riv_corner_radius_bottom_right="@dimen/_20sdp"
+        app:riv_corner_radius_top_left="@dimen/_20sdp" />
+
+
+    <RelativeLayout
+        android:id="@+id/RL_BACK"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_50sdp"
+        android:elevation="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP">
+
+        <!--        <io.alterac.blurkit.BlurLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/_17sdp"-->
+        <!--            app:blk_cornerRadius="@dimen/_30sdp"-->
+        <!--            app:blk_fps="10" />-->
+
+        <ImageView
+            android:id="@+id/IV_DOT_1_FF"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/rounded_white_background" />
+
+        <ImageView
+            android:id="@+id/IV_DOT_2_FF"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toEndOf="@id/IV_DOT_1_FF"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="@color/image_dot_unselected" />
+
+        <ImageView
+            android:id="@+id/IV_DOT_3_FF"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toEndOf="@id/IV_DOT_2_FF"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="@color/image_dot_unselected" />
+
+        <ImageView
+            android:id="@+id/IV_DOT_4_FF"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toEndOf="@id/IV_DOT_3_FF"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="@color/image_dot_unselected" />
+
+        <ImageView
+            android:id="@+id/IV_DOT_5_FF"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toEndOf="@id/IV_DOT_4_FF"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="@color/image_dot_unselected" />
+
+
+    </RelativeLayout>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/V_BLACK_GRADIENT_FULL"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="@dimen/_7sdp"
+        android:scaleType="fitXY"
+        android:src="#80000000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
+        app:riv_corner_radius="@dimen/_25sdp" />
+
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_PREVIEW_TEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:elevation="@dimen/_10sdp"
+        android:fontFamily="@font/capriola"
+        android:gravity="center"
+        android:maxLines="3"
+        android:text="Want to know more about Sahil? Swipe up the arrow below!"
+        android:textAlignment="center"
+        android:textColor="@color/preview_text_color"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
+        app:sizeToFit="true" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/IV_SWIPE_ME"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:elevation="@dimen/_10sdp"
+        android:src="@raw/gif_swipe_up"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toBottomOf="@id/ATV_PREVIEW_TEXT" />
+
+    <ImageView
+        android:id="@+id/IV_MEGAPHONE"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/rounded_white_background"
+        android:backgroundTint="#66FFFFFF"
+        android:elevation="@dimen/_7sdp"
+        android:padding="@dimen/_5sdp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_megaphone"
+        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/CL_ABOUT_ME"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+
+        android:layout_marginStart="@dimen/_20sdp"
+        android:elevation="@dimen/_8sdp"
+        app:layoutDescription="@xml/ff_exp_about_me_scene"
+        app:layout_constraintBottom_toBottomOf="@id/V_BUTTONS_BOTTOM"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_ABOUT_ME"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/ic_about_me" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/CL_CONNECTED_PEOPLE"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:elevation="@dimen/_8sdp"
+        app:layoutDescription="@xml/ff_exp_connected_people_scene"
+        app:layout_constraintBottom_toBottomOf="@id/V_BUTTONS_BOTTOM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_CONNECTED_PEOPLE"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="#E6FFFFFF"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/ic_connected_people" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/CL_OPTIONS_FF_EXP"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:elevation="@dimen/_8sdp"
+        app:layoutDescription="@xml/ff_exp_options_scene"
+        app:layout_constraintBottom_toBottomOf="@id/V_BUTTONS_BOTTOM"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_OPTIONS_FF_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="#E6FFFFFF"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:src="@drawable/ic_filter_opt" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+    <View
+        android:id="@+id/V_BUTTONS_BOTTOM"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintTop_toTopOf="@id/ML_DETAILS_FF_EXP" />
+
+    <View
+        android:id="@+id/V_IMAGE_BOTTOM"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_50sdp"
+        app:layout_constraintTop_toTopOf="@id/ML_DETAILS_FF_EXP" />
+    <!--        <com.gic.memorableplaces.LibSahil.BlurKit.BlurLayout-->
+    <!--            android:id="@+id/BL_BG"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:elevation="@dimen/_5sdp"-->
+    <!--            app:blk_cornerRadius="@dimen/_20sdp"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/ML_DETAILS_FF_EXP"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/ML_DETAILS_FF_EXP"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/ML_DETAILS_FF_EXP"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/ML_DETAILS_FF_EXP"/>-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ML_DETAILS_FF_EXP"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rect_tl_tr_white"
+        android:elevation="@dimen/_7sdp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/gradient_black"
+            android:backgroundTint="#CDCDCD"
+            android:rotation="180"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/ML_BOTTOM_INDICATORS_FF_EXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layoutDescription="@xml/ff_exp_bottom_indicators_scene"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <View
+                android:id="@+id/V_INDICATOR_LONG_FF_EXP"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/gradient_rounded_purple_pink_dark"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/V_DOT_1_BOTTOM_FF_EXP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/V_DOT_1_BOTTOM_FF_EXP" />
+
+            <View
+                android:id="@+id/V_DOT_1_BOTTOM_FF_EXP"
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_white_background"
+                android:backgroundTint="#D5D5D5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/V_INDICATOR_LONG_FF_EXP" />
+
+            <View
+                android:id="@+id/V_DOT_2_BOTTOM_FF_EXP"
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_white_background"
+                android:backgroundTint="#D5D5D5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/V_DOT_1_BOTTOM_FF_EXP" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/RL_CENTER_LAYOUT_FF_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_230sdp"
+
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:tag="1"
+            app:layout_constraintBottom_toTopOf="@id/ML_BOTTOM_INDICATORS_FF_EXP">
+
+
+            <ViewStub
+                android:id="@+id/VS_FF_EXP_SET_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inflatedId="@+id/VS_SET_1"
+                android:layout="@layout/layout_ff_exp_set1"
+                tools:visibility="visible" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL_CENTER_LAYOUT_FF_EXP2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_230sdp"
+
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:tag="1"
+            app:layout_constraintBottom_toTopOf="@id/ML_BOTTOM_INDICATORS_FF_EXP">
+
+            <ViewStub
+                android:id="@+id/VS_FF_EXP_SET_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inflatedId="@+id/VS_SET_2"
+                android:layout="@layout/layout_ff_exp_set2"
+                tools:visibility="visible" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL_CENTER_LAYOUT_FF_EXP3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_230sdp"
+
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:tag="1"
+            app:layout_constraintBottom_toTopOf="@id/ML_BOTTOM_INDICATORS_FF_EXP">
+
+            <ViewStub
+                android:id="@+id/VS_FF_EXP_SET_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inflatedId="@+id/VS_SET_3"
+                android:layout="@layout/layout_ff_exp_set3"
+                tools:visibility="visible" />
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

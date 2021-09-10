@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--        <RelativeLayout-->
+    <!--            android:id="@+id/TopToolbar"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="@dimen/_40sdp">-->
+    <!--            <include layout="@layout/top_toolbar_messages" />-->
+
+    <!--        </RelativeLayout>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/blur_bg_messages"
+        app:layout_constraintBottom_toBottomOf="@id/IV_MESSAGES_ILS"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ML_CENTER_MESSAGES"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_70sdp">
+
+        <com.gic.memorableplaces.utils.ShadowLayout
+            android:id="@+id/SL_CENTER_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:sl_is_shadow_top="true"
+            app:sl_shadow_angle="270"
+            app:sl_shadow_color="#33737373"
+            app:sl_shadow_distance="@dimen/_5sdp"
+            app:sl_shadow_radius="@dimen/_5sdp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@drawable/rounded_rect_tl_tr_white" />
+
+        </com.gic.memorableplaces.utils.ShadowLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/RL_SEARCH_MESSAGES"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="#F8F8F8"
+            app:layout_constraintEnd_toStartOf="@id/IV_NEW_CHAT"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/IV_SEARCH_M"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:src="@drawable/ic_search_grey" />
+
+
+            <EditText
+                android:id="@+id/ET_MESSAGE_NEW_USERS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/IV_SEARCH_M"
+                android:layout_alignBottom="@id/IV_SEARCH_M"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_toEndOf="@id/IV_SEARCH_M"
+                android:background="@null"
+                android:fontFamily="@font/capriola"
+                android:hint="Search new users......"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/IV_NEW_CHAT"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/ic_edit_pencil_black"
+            android:backgroundTint="@color/black"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@id/RL_SEARCH_MESSAGES"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/RL_SEARCH_MESSAGES" />
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_TITLE_PINNED_CHATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Recent Chats"
+            android:textColor="#CC636363"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/RL_SEARCH_MESSAGES"
+            app:layout_constraintTop_toBottomOf="@id/RL_SEARCH_MESSAGES"
+            app:sizeToFit="true" />
+
+        <ImageView
+            android:id="@+id/IV_STAR_PINNED"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:src="@drawable/ic_star_recent_chats"
+            app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_PINNED_CHATS"
+            app:layout_constraintStart_toEndOf="@id/ATV_TITLE_PINNED_CHATS"
+            app:layout_constraintTop_toTopOf="@id/ATV_TITLE_PINNED_CHATS" />
+
+        <View
+            android:id="@+id/V_LINE_PINNED_CHATS"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="#E6E6E6"
+            app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_PINNED_CHATS" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_PINNED_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/V_LINE_PINNED_CHATS" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_TITLE_RECENT_CHATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Recent Chats"
+            android:textColor="#CC636363"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/RL_SEARCH_MESSAGES"
+            app:layout_constraintTop_toBottomOf="@id/RV_PINNED_MESSAGES"
+            app:sizeToFit="true" />
+
+        <ImageView
+            android:id="@+id/IV_STAR_RECENT"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:src="@drawable/ic_star_recent_chats"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_RECENT_CHATS"
+            app:layout_constraintStart_toEndOf="@id/ATV_TITLE_RECENT_CHATS"
+            app:layout_constraintTop_toTopOf="@id/ATV_TITLE_RECENT_CHATS" />
+
+        <View
+            android:id="@+id/V_LINE_RECENT_CHATS"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:visibility="gone"
+            android:background="#E6E6E6"
+            app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_RECENT_CHATS" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_RECENT_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/V_LINE_RECENT_CHATS" />
+        <!--            <com.ldoublem.loadingviewlib.view.LVCircularZoom-->
+        <!--                android:id="@+id/LoadingDotsMessage"-->
+        <!--                android:layout_width="@dimen/_50sdp"-->
+        <!--                android:layout_height="@dimen/_50sdp"-->
+        <!--                android:layout_centerInParent="true"/>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <me.grantland.widget.AutofitTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:fontFamily="@font/capriola"
+        android:maxLines="1"
+        android:text="Messages"
+        android:textColor="#636363"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@id/ML_CENTER_MESSAGES"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <ImageView
+        android:id="@+id/IV_MESSAGES_ILS"
+        android:layout_width="@dimen/_115sdp"
+        android:layout_height="@dimen/_115sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.gic.memorableplaces.utils.ShadowLayout
+        android:id="@+id/SL_MESSAGES_OPTIONS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:sl_is_shadow_top="true"
+        app:sl_shadow_angle="270"
+        app:sl_shadow_color="#33737373"
+        app:sl_shadow_distance="@dimen/_5sdp"
+
+        app:sl_shadow_radius="@dimen/_5sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/IV_MAIN_CHATS"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_comment_round" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_MAIN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/IV_MAIN_CHATS"
+                android:layout_alignBottom="@id/IV_MAIN_CHATS"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toEndOf="@id/IV_MAIN_CHATS"
+                android:fontFamily="@font/capriola"
+                android:text="Main"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/IV_MATCH_CHATS"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_toEndOf="@id/ATV_MAIN"
+                android:src="@drawable/ic_connected_people" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_MATCH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/IV_MATCH_CHATS"
+                android:layout_alignBottom="@id/IV_MATCH_CHATS"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toEndOf="@id/IV_MATCH_CHATS"
+                android:fontFamily="@font/capriola"
+                android:text="Matched"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </com.gic.memorableplaces.utils.ShadowLayout>
+
+    <FrameLayout
+        android:id="@+id/FL_messages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

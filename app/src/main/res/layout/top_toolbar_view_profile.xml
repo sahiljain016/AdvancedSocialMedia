@@ -1,0 +1,73 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<RelativeLayout
+
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_border_bottom">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileToolbar"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                >
+                <ImageButton
+                    android:id="@+id/Back_arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@android:color/transparent"
+                    android:onClick="ImageButtonMenuOnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_back_arrow"/>
+
+                <TextView
+                    android:id="@+id/username_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text=""
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:inputType=""
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:textAlignment="gravity"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_22sdp"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp">
+
+
+                </TextView>
+
+
+
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</RelativeLayout>
+
+</merge>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "458342666198",
+    "firebase_url": "https://st-xavier-s-social-club-sahil.firebaseio.com",
+    "project_id": "st-xavier-s-social-club-sahil",
+    "storage_bucket": "st-xavier-s-social-club-sahil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458342666198:android:14fd490b89d4c6c45f9e77",
+        "android_client_info": {
+          "package_name": "com.gic.memorableplaces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458342666198-lsu420j2h4o8jkpuub1s0luo3m3s153u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gic.memorableplaces",
+            "certificate_hash": "5a53895072504f65009767c35993a2ae9a9e9f27"
+          }
+        },
+        {
+          "client_id": "458342666198-2qaq9v9rsi0pcj4o0cs1l7agkja6baqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458342666198-2qaq9v9rsi0pcj4o0cs1l7agkja6baqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

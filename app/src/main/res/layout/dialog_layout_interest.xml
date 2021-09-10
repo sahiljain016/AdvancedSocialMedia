@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+
+        android:src="@drawable/abstract_background_gender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/Image_heading"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:alpha="1"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_120sdp"
+        android:src="@drawable/ic_hobbies"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--<RelativeLayout-->
+    <!--    android:layout_width="@dimen/_250sdp"-->
+    <!--    android:layout_height="@dimen/_250sdp"-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent"-->
+    <!--    android:translationY="-70dp"-->
+    <!--    >-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="@dimen/_250sdp"-->
+    <!--        android:layout_height="@dimen/_250sdp"-->
+    <!--        android:alpha="0.5"-->
+    <!--        android:layout_marginTop="@dimen/_12sdp"-->
+    <!--        android:src="@drawable/ic_gender_symbol"-->
+
+    <!--        />-->
+    <!--</RelativeLayout>-->
+
+
+    <RelativeLayout
+        android:id="@+id/RL_heading"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:alpha="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/amita_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="What are you into in your free time?"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/RL_CENTER"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+android:alpha="0"
+        app:layout_constraintBottom_toTopOf="@id/RL_CHANGE_FILTER_TYPE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_heading">
+
+
+        <TextView
+            android:id="@+id/first_hobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hobbies_search_bar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:alpha="0"
+            android:background="@color/white"
+            android:maxLength="40"
+            android:padding="@dimen/_10sdp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            android:visibility="invisible"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/first_hobby"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/second_hobby"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="50"
+                android:alpha="0"
+                android:background="@color/white"
+                android:maxLength="40"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                android:visibility="invisible"
+
+
+                />
+
+            <TextView
+                android:id="@+id/third_hobby"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="50"
+                android:alpha="0"
+                android:background="@color/white"
+                android:maxLength="40"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                android:visibility="invisible"
+
+
+                />
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/custom_hobby"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:padding="@dimen/_10sdp"
+            android:text="Enter Custom hobby"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+
+        <LinearLayout
+            android:id="@+id/LL_Bottom_Hobbies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/custom_hobby"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/fourth_hobby"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="50"
+                android:alpha="0"
+                android:background="@color/white"
+                android:maxLength="40"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                android:visibility="invisible"
+
+
+                />
+
+
+            <TextView
+                android:id="@+id/fifth_hobby"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="50"
+                android:alpha="0"
+                android:background="@color/white"
+                android:maxLength="40"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                android:visibility="invisible"
+
+
+                />
+        </LinearLayout>
+
+
+        <AutoCompleteTextView
+            android:id="@+id/hobbies_search_bar"
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            android:hint="Enter a Hobbie"
+            android:outlineProvider="bounds"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/pacman_eye_color"
+            android:textSize="16sp" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL_CHANGE_FILTER_TYPE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        app:layout_constraintBottom_toTopOf="@id/close_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/heading_change_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="#52FFFFFF"
+            android:fontFamily="@font/convergence"
+            android:maxLines="2"
+            android:text="Make my data private. "
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/private_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/heading_change_filter"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toEndOf="@id/heading_change_filter"
+            android:backgroundTint="@android:color/white"
+            android:src="@drawable/ic_info_icon" />
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/MakeDataPrivateSwitchMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/heading_change_filter"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textSize="20sp"
+            app:jtbDraggable="true"
+            app:jtbLeftBackgroundColor="@android:color/holo_red_light"
+            app:jtbLeftText="OFF"
+            app:jtbLeftTextSize="25sp"
+            app:jtbRightBackgroundColor="@android:color/holo_green_light"
+            app:jtbRightText="ON"
+            app:jtbRightTextSize="15sp" />
+
+    </RelativeLayout>
+
+
+    <ImageButton
+        android:id="@+id/close_dialog"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:alpha="0"
+        android:background="@drawable/custom_button_login"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_fail_red_cross"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

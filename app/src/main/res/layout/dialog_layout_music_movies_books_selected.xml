@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_20sdp"
+    android:background="#000000">
+
+
+    <RelativeLayout
+        android:id="@+id/RL_SELECTED"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/close_dialog"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/SelectedOptionTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="Selected Tracks"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+        <!--one side right-->
+        <com.tsuryo.swipeablerv.SwipeableRecyclerView
+            android:id="@+id/FINAL_MOVIES_BOOKS_MUSIC_RV"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180sdp"
+            android:layout_below="@id/SelectedOptionTV"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:rightBgColor="#C61B1B"
+            app:rightImage="@drawable/ic_trash"
+            app:rightText="Delete"
+            app:textColor="@android:color/white"
+            app:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/close_dialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_weight="45"
+        android:background="@drawable/custom_button_login"
+        android:padding="@dimen/_10sdp"
+        android:text="Confirm Selected Items"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RL_SELECTED"
+        app:layout_constraintVertical_bias="0.449" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

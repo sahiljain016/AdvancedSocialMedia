@@ -1,0 +1,60 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_border_for_top_toolbar_editprofile">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/close_share"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_profile_popup_close" />
+
+                <Spinner
+                    android:id="@+id/spinner_share"
+                    style="@style/spinnerStyle"
+                    android:layout_toStartOf="@id/next_share_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/close_share"
+                    android:backgroundTint="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:popupBackground="@android:color/black"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/next_share_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/next_share"
+                    android:textColor="@color/link_blue"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </RelativeLayout>
+</merge>

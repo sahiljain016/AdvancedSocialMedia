@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+        <item android:title="Settings">
+            <menu>
+                <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/edit_profile_item"
+                    android:icon="@drawable/ic_edit_profile"
+                    android:title="Edit Profile" />
+                <item
+                    android:id="@+id/report_a_bug_item"
+                    android:icon="@drawable/ic_bug_report"
+                    android:title="Report A Bug Found" />
+                </group>
+            </menu>
+        </item>
+
+
+
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profile_item"
+                    android:icon="@drawable/ic_timeline"
+                    android:title="" />
+                <item
+                    android:id="@+id/log_out_item"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Log Out" />
+            </group>
+        </menu>
+    </item>
+
+
+</menu>

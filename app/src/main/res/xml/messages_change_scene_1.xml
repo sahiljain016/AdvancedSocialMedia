@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated" />
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/ATV_TITLE_PINNED_CHATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintStart_toStartOf="@id/RL_SEARCH_MESSAGES"
+            motion:layout_constraintTop_toBottomOf="@id/RL_SEARCH_MESSAGES" />
+
+        <Constraint
+            android:id="@+id/IV_STAR_PINNED"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_3sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_PINNED_CHATS"
+            motion:layout_constraintStart_toEndOf="@id/ATV_TITLE_PINNED_CHATS"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_PINNED_CHATS" />
+
+        <Constraint
+            android:id="@+id/V_LINE_PINNED_CHATS"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_TITLE_PINNED_CHATS" />
+
+        <Constraint
+            android:id="@+id/RV_PINNED_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_PINNED_CHATS" />
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_RECENT_CHATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintStart_toStartOf="@id/RL_SEARCH_MESSAGES"
+            motion:layout_constraintTop_toBottomOf="@id/RV_PINNED_MESSAGES" />
+
+        <Constraint
+            android:id="@+id/IV_STAR_RECENT"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_3sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_RECENT_CHATS"
+            motion:layout_constraintStart_toEndOf="@id/ATV_TITLE_RECENT_CHATS"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_RECENT_CHATS" />
+
+        <Constraint
+            android:id="@+id/V_LINE_RECENT_CHATS"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_TITLE_RECENT_CHATS" />
+
+
+        <Constraint
+            android:id="@+id/RV_RECENT_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_RECENT_CHATS" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_PINNED_CHATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintStart_toStartOf="@id/RL_SEARCH_MESSAGES"
+            motion:layout_constraintTop_toBottomOf="@id/RL_SEARCH_MESSAGES" >
+            <CustomAttribute motion:attributeName="Text"
+                motion:customStringValue="Suggested Users"/>
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_STAR_PINNED"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_PINNED_CHATS"
+            motion:layout_constraintStart_toEndOf="@id/ATV_TITLE_PINNED_CHATS"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_PINNED_CHATS" />
+
+        <Constraint
+            android:id="@+id/V_LINE_PINNED_CHATS"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_TITLE_PINNED_CHATS" />
+
+        <Constraint
+            android:id="@+id/RV_PINNED_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_PINNED_CHATS" />
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_RECENT_CHATS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/RV_PINNED_MESSAGES" />
+
+        <Constraint
+            android:id="@+id/IV_STAR_RECENT"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_RECENT_CHATS"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_RECENT_CHATS" />
+
+        <Constraint
+            android:id="@+id/V_LINE_RECENT_CHATS"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:alpha="0"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_TITLE_RECENT_CHATS" />
+
+
+        <Constraint
+            android:id="@+id/RV_RECENT_MESSAGES"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_PINNED_CHATS" />
+    </ConstraintSet>
+
+
+</MotionScene>

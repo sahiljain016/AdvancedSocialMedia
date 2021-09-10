@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CL_MESSAGES_FILTER"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    app:layoutDescription="@xml/layout_messages_filter_scene2">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_MESSAGE_BOX"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_40sdp"
+        app:cardElevation="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@id/RIV_PP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/RIV_PP">
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_77sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layoutDescription="@xml/layout_messages_filter_scene">
+
+
+            <RelativeLayout
+                android:id="@+id/RL_USERNAME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_USERNAME"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/convergence"
+                    android:maxLines="1"
+                    android:text="Sahil.Jain"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+
+                <ImageView
+                    android:id="@+id/IV_New_Message_Dot"
+                    android:layout_width="@dimen/_6sdp"
+                    android:layout_height="@dimen/_6sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_toEndOf="@id/ATV_USERNAME"
+                    android:background="@drawable/rounded_white_background"
+                    android:backgroundTint="#007FFF"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/TV_MESSAGE_ON_DISPLAY"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Hey, I really liked your profile! dsdsdsd dsds dsdsd dsdsd 😊 Would you be willing to meet to soon?❤"
+                android:textColor="#686868"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ATV_TIMESTAMP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RL_USERNAME"
+
+                />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_TIMESTAMP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="23 min"
+                android:textAlignment="gravity"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/TV_MESSAGE_ON_DISPLAY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/IV_No_Of_Messages"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/gradient_rounded_blue_green"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/TV_MESSAGE_ON_DISPLAY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ATV_TIMESTAMP" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_No_Of_Messages"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="center_vertical|center"
+                android:maxLines="1"
+                android:text="3"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+
+                app:layout_constraintBottom_toBottomOf="@id/IV_No_Of_Messages"
+                app:layout_constraintEnd_toEndOf="@id/IV_No_Of_Messages"
+                app:layout_constraintStart_toStartOf="@id/IV_No_Of_Messages"
+                app:layout_constraintTop_toTopOf="@id/IV_No_Of_Messages"
+                app:sizeToFit="true" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/RIV_PP"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:elevation="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/pp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/_30sdp" />
+
+    <ImageView
+        android:id="@+id/IV_BORDER"
+        android:layout_width="@dimen/_67sdp"
+        android:layout_height="@dimen/_67sdp"
+        android:background="@drawable/rounded_dash_border_gray"
+        android:elevation="@dimen/_10sdp"
+
+        app:layout_constraintBottom_toBottomOf="@id/RIV_PP"
+        app:layout_constraintEnd_toEndOf="@id/RIV_PP"
+        app:layout_constraintStart_toStartOf="@id/RIV_PP"
+        app:layout_constraintTop_toTopOf="@id/RIV_PP" />
+
+    <View
+        android:id="@+id/V_BOTTOM_LINE"
+        android:layout_width="4dp"
+        android:layout_height="@dimen/_15sdp"
+        android:background="#616161"
+
+        app:layout_constraintEnd_toEndOf="@id/RIV_PP"
+        app:layout_constraintStart_toStartOf="@id/RIV_PP"
+        app:layout_constraintTop_toBottomOf="@id/RIV_PP" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

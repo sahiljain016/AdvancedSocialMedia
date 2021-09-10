@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1500"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/ATV_OPTIONS_TITLE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@id/CL_OPTIONS_EXP" />
+
+        <Constraint
+            android:id="@+id/CL_OPTIONS_EXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:alpha="0"
+            android:scaleY="0.8"
+            android:layout_marginStart="@dimen/_50sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"/>
+
+        <Constraint
+            android:id="@+id/ATV_FILTERS_TITLE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:layout_marginTop="@dimen/_40sdp"
+            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_1"
+            motion:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Constraint
+            android:id="@+id/LL_FILTER_LAYER_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleY="0.8"
+            android:alpha="0"
+            android:scaleX="0.8"
+            android:layout_marginStart="@dimen/_50sdp"
+            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_2"/>
+
+        <Constraint
+            android:id="@+id/LL_FILTER_LAYER_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleY="0.8"
+            android:alpha="0"
+            android:scaleX="0.8"
+            android:layout_marginStart="@dimen/_50sdp"
+            motion:layout_constraintBottom_toTopOf="@id/ATV_OPTIONS_TITLE"/>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+<Constraint
+    android:id="@+id/ATV_OPTIONS_TITLE"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_10sdp"
+    motion:layout_constraintBottom_toTopOf="@id/CL_OPTIONS_EXP"
+    motion:sizeToFit="true" />
+
+        <Constraint
+            android:id="@+id/CL_OPTIONS_EXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"/>
+
+        <Constraint
+            android:id="@+id/ATV_FILTERS_TITLE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_1"
+            motion:layout_constraintTop_toTopOf="parent"
+           />
+
+        <Constraint
+            android:id="@+id/LL_FILTER_LAYER_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_2"/>
+
+        <Constraint
+            android:id="@+id/LL_FILTER_LAYER_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            motion:layout_constraintBottom_toTopOf="@id/ATV_OPTIONS_TITLE"/>
+
+    </ConstraintSet>
+</MotionScene>

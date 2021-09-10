@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:fitsSystemWindows="false">
+
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:openDrawer="end"
+
+        >
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/NavigationViewLeft"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            app:headerLayout="@layout/header"
+
+            app:menu="@menu/drawer_nav_menu" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/firstRelLayoutProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/mainRelLayoutProfile"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/top_toolbar_profile" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/profileRelLayout2"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mainRelLayoutProfile">
+
+                <include layout="@layout/layout_center_profile" />
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_layout_profile1"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>

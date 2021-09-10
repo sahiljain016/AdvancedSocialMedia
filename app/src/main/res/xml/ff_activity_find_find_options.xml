@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!--    <Transition-->
+    <!--        motion:autoTransition="animateToEnd"-->
+    <!--        motion:constraintSetEnd="@+id/end"-->
+    <!--        motion:constraintSetStart="@id/start"-->
+    <!--        motion:duration="1000">-->
+
+    <!--        <KeyFrameSet></KeyFrameSet>-->
+
+    <!--    </Transition>-->
+
+    <Transition
+        motion:constraintSetEnd="@+id/CS_CARD_FF_END"
+        motion:constraintSetStart="@+id/CS_CARD_FF_START"
+        motion:duration="1500">
+<!--        <OnClick motion:targetId="@id/IV_OPEN_OPTIONS"-->
+<!--            motion:clickAction="transitionToEnd"/>-->
+        <KeyFrameSet>
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/CS_CARD_FF_START"
+
+        >
+
+        <Constraint
+            android:id="@+id/IV_OPEN_OPTIONS"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+
+            android:padding="@dimen/_10sdp"
+            android:rotation="0"
+
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_USERNAME_FFR"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_CARD_DETAILS"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_LIKE_FF"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_FOLLOW_FF"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_SAY_HI_FF"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/CS_CARD_FF_END"
+
+        >
+        <Constraint
+            android:id="@+id/IV_OPEN_OPTIONS"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+
+            android:padding="@dimen/_10sdp"
+            android:rotation="180"
+
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_USERNAME_FFR"
+            motion:layout_constraintEnd_toEndOf="parent"  />
+
+        <Constraint
+            android:id="@+id/IV_CARD_DETAILS"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toTopOf="@id/IV_OPEN_OPTIONS"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_LIKE_FF"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toTopOf="@id/IV_CARD_DETAILS"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_FOLLOW_FF"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toTopOf="@id/IV_LIKE_FF"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@+id/IV_SAY_HI_FF"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toTopOf="@id/IV_FOLLOW_FF"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+    </ConstraintSet>
+   </MotionScene>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Search.SearchActivity">
+
+    <RelativeLayout
+        android:id="@+id/RL_SEARCH_NEW_CHAT_USERS"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/custom_background_edittext_search"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_search_grey" />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/search_icon"
+            android:background="@null"
+            android:hint="Search..."
+            android:imeOptions="actionSearch"
+            android:inputType="textNoSuggestions"
+            android:padding="10dp"
+            android:textColor="@color/black" />
+
+        <com.gic.memorableplaces.CustomLibs.LoadingViewLib.LVGhost
+            android:id="@+id/progress_ghost"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp" />
+
+        <TextView
+            android:id="@+id/cancel_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="19dp"
+            android:text="Cancel"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RL_SEARCH_NEW_CHAT_USERS">
+
+        <ListView
+            android:id="@+id/searchList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:visibility="invisible" />
+
+<!--        <com.iammert.library.AnimatedTabLayout-->
+<!--            android:id="@+id/TabLayout"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_30sdp"-->
+<!--            android:background="@android:color/black"-->
+<!--            app:atl_tabs="@xml/tabs" />-->
+
+<!--        <androidx.viewpager.widget.ViewPager-->
+<!--            android:id="@+id/ViewContainer"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@id/TabLayout" />-->
+
+                <GridView
+                    android:id="@+id/grid_view_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
