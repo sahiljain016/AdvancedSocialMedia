@@ -26,8 +26,8 @@ interface ChatDao {
     @Query("DELETE FROM chats WHERE chat_uid = :ChatUID")
     void DeleteChatTable(String ChatUID);
 
-    @Query("SELECT * FROM chats WHERE chat_uid = :ChatUID")
-    List<Chat> GetAllChats(String ChatUID);
+    @Query("SELECT * FROM chats")
+    List<Chat> GetAllChats();
 
     @Query("DELETE FROM chats WHERE chat_uid = :ChatUID AND chat_id = :ChatID")
     void DeleteSingleEntry(String ChatUID,String ChatID);

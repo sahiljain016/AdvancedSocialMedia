@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.grantland.widget.AutofitTextView;
@@ -157,22 +157,16 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull final MainFeedViewHolder holder, final int position) {
+
         int widthPixels = mContext.getResources().getDisplayMetrics().widthPixels;
-//
-//        //holder.itemView.animate().alpha(0);
-//        //  holder.itemView.animate().alpha(1).setDuration(1000).setStartDelay(2000);
         holder.CL_CHAT.setMaxWidth((int) (widthPixels / 1.5));
         holder.TV_MESSAGE.setMaxWidth((int) (widthPixels / 1.5));
 
         isLeftChat = !sMyUID.equals(mChatList.get(position).getSender());
 
-
         int pos = holder.getBindingAdapterPosition();
-
         final Chat chat = mChatList.get(pos);
-        //Log.d(TAG, String.format("onBindViewHolder: chat adapter: %s", chat));
-        // Log.d(TAG, "onBindViewHolder: message: " + chat.getMessage());
-        // Log.d(TAG, "onBindViewHolder: position: " + holder.getAbsoluteAdapterPosition());
+
         holder.TV_MESSAGE.setText(chat.getMessage());
 
         //Log.d(TAG, "onBindViewHolder: pp url: " + profileImgUrl);
@@ -183,16 +177,40 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                     holder.CIV_PP);
         }
 
-        try {
-//            Log.d(TAG, "onBindViewHolder: pos: " + pos);
-//            Log.d(TAG, "onBindViewHolder: size: " + mChatList.size());
-//            Log.d(TAG, "onBindViewHolder: 0,10 " + chat.getString_date().substring(0, 10));
-////            Log.d(TAG, "onBindViewHolder: prev day: " + mChatList.get(pos - 1).getString_date());
-//            Log.d(TAG, "onBindViewHolder: curr day: " + mChatList.get(pos).getString_date());
-            //          Log.d(TAG, "onBindViewHolder: next day: " + mChatList.get(pos + 1).getString_date());
-        } catch (Exception e) {
-            e.printStackTrace();
+        Log.d(TAG, "onBindViewHolder: bubble color: " + chat);
+        if (!chat.getBubbleColor().equals("0")) {
+            Log.d(TAG, "onBindViewHolder: bubble color: " + chat);
+
+            SetBubbleDrawable(holder, pos, chat);
+            //  Log.d(TAG, "onBindViewHolder: sBubbleColor: " + chat.getBubbleColor());
+
+//            drawable = (GradientDrawable) holder.CL_CHAT.getBackground();
+            int[] colors;
+            if (chat.isGradient()) {
+                colors = new int[]{manipulateColor(Integer.parseInt(chat.getBubbleColor()), 2.8f),
+                        Integer.parseInt(chat.getBubbleColor())
+                        , manipulateColor(Integer.parseInt(chat.getBubbleColor()), 0.8f)};
+            } else {
+                colors = new int[]{Integer.parseInt(chat.getBubbleColor()), Integer.parseInt(chat.getBubbleColor()), Integer.parseInt(chat.getBubbleColor())};
+            }
+            GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+            GradientDrawable get = (GradientDrawable) holder.CL_CHAT.getBackground();
+
+            drawable.setCornerRadii(get.getCornerRadii());
+            drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+            holder.CL_CHAT.setBackground(drawable);
+
+        } else {
+            holder.CL_CHAT.setBackground(null);
+            holder.CL_CHAT.setBackgroundResource(0);
+            SetBubbleDrawable(holder, pos, chat);
         }
+
+        GetTimeStamp(chat.getString_date(), holder.TV_TIMESTAMP);
+
+    }
+
+    private void SetBubbleDrawable(MainFeedViewHolder holder, int pos, Chat chat) {
         if ((pos + 1) == mChatList.size()) {
             holder.TV_MESSAGE_STATUS.setVisibility(View.VISIBLE);
             setMessageStatus(holder.TV_MESSAGE_STATUS, false);
@@ -291,13 +309,13 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 } else {
                     holder.ATV_DAY_STAMP.setVisibility(View.GONE);
                     if (isLeftChat) {
+
+                        holder.CIV_PP.onVisibilityAggregated(true);
+                        GlideImageLoader.loadImageWithOutTransition(mContext, profileImgUrl, holder.CIV_PP);
                         if (mChatList.get(pos - 1).getSender().equals(sMyUID)) {
-                            holder.CIV_PP.onVisibilityAggregated(true);
-                            GlideImageLoader.loadImageWithOutTransition(mContext, profileImgUrl, holder.CIV_PP);
                             holder.CL_CHAT.setBackgroundResource(bIsPinned ? R.drawable.rounded_rect_chat_bottom_pink_orange : R.drawable.rounded_rect_chat_bottom_blue_green);
 
                         } else {
-                            holder.CIV_PP.setVisibility(View.GONE);
                             holder.CL_CHAT.setBackgroundResource(bIsPinned ? R.drawable.rounded_rect_chat_top_pink_orange : R.drawable.rounded_rect_chat_top_green_blue);
 
                         }
@@ -353,8 +371,10 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
                     if (isLeftChat) {
                         if (mChatList.get(pos - 1).getSender().equals(sMyUID) && mChatList.get(pos + 1).getSender().equals(sUserID)) {
+                           holder.CIV_PP.setVisibility(View.GONE);
                             holder.CL_CHAT.setBackgroundResource(bIsPinned ? R.drawable.rounded_rect_chat_bottom_pink_orange : R.drawable.rounded_rect_chat_bottom_blue_green);
                         } else if (mChatList.get(pos - 1).getSender().equals(sUserID) && mChatList.get(pos + 1).getSender().equals(sUserID)) {
+                            holder.CIV_PP.setVisibility(View.GONE);
                             holder.CL_CHAT.setBackgroundResource(bIsPinned ? R.drawable.rounded_rect_chat_middle_pink_orange : R.drawable.rounded_rect_chat_middle_green_blue);
                         } else if (mChatList.get(pos - 1).getSender().equals(sMyUID) && mChatList.get(pos + 1).getSender().equals(sMyUID)) {
                             holder.CL_CHAT.setBackgroundResource(bIsPinned ? R.drawable.rounded_rect_chat_bottom_pink_orange : R.drawable.rounded_rect_chat_bottom_blue_green);
@@ -375,111 +395,6 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 }
             }
 
-        }
-        if (chat.getBubbleColor() != null) {
-            GradientDrawable drawable = (GradientDrawable) holder.CL_CHAT.getBackground();
-            int[] colors;
-            if (chat.isGradient()) {
-                colors = new int[]{manipulateColor(Integer.parseInt(chat.getBubbleColor()), 1.6f),
-                        Integer.parseInt(chat.getBubbleColor())
-                        , manipulateColor(Integer.parseInt(chat.getBubbleColor()), 0.6f)};
-            } else {
-                colors = new int[]{Integer.parseInt(chat.getBubbleColor()), Integer.parseInt(chat.getBubbleColor()), Integer.parseInt(chat.getBubbleColor())};
-            }
-            drawable.setColors(colors);
-            holder.CL_CHAT.setBackground(drawable);
-        }
-        // Log.d(TAG, "onBindViewHolder: day " + chat.getString_date().substring(0, 10));
-        // Log.d(TAG, "onBindViewHolder: isLeftChat Binder: " + isLeftChat);
-        //Log.d(TAG, "onBindViewHolder: message Binder: " + chat.getMessage());
-        //Log.d(TAG, "onBindViewHolder: message timeStamp: " + chat.getString_date());
-
-        GetTimeStamp(chat.getString_date(), holder.TV_TIMESTAMP);
-//        if (!isLeftChat && pos == (mChatList.size() - 1)) {
-//            //Log.d(TAG, "onBindViewHolder: entered right last chat");
-//            Query query = myRef.child(mContext.getString(R.string.dbname_chat_meta_data))
-//                    .child(requireNonNull(mAuth.getCurrentUser()).getUid())
-//                    .child(sUserID);
-//
-//            query.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        //Log.d(TAG, "onDataChange: enetered for loop first");
-//                        if (Objects.equals(dataSnapshot.getKey(), "latest_message_ID")) {
-//                            //Log.d(TAG, "onDataChange: enetered for loop first if " + holder.getAbsoluteAdapterPosition());
-//                            String sMessageID = requireNonNull(dataSnapshot.getValue()).toString();
-//                            setMessageStatus(pos, holder.mMessageStatus, sMessageID, mIsGroup);
-//
-//                        }
-//                    }
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
-//        }
-        //Log.d(TAG, "onBindViewHolder: isGroup " + mIsGroup);
-        //Log.d(TAG, "onDataChange: isLeftChat outisde" + isLeftChat);
-        if (!mIsGroup) {
-            if (isLeftChat) {
-                //Log.d(TAG, "onBindViewHolder: not group");
-                // if ((holder.getAbsoluteAdapterPosition() + 1) == mChatList.size())
-                // GlideImageLoader.loadImageWithOutTransition(mContext, profileImgUrl, holder.mProfilePhoto);
-                // if ((holder.getAbsoluteAdapterPosition() + 1) != mChatList.size() && mChatList.get(holder.getAbsoluteAdapterPosition() + 1).getSender().equals(requireNonNull(mAuth.getCurrentUser()).getUid()));
-                // GlideImageLoader.loadImageWithOutTransition(mContext, profileImgUrl, holder.mProfilePhoto);
-            }
-        } else {
-            //Log.d(TAG, String.format("onBindViewHolder: mChatList %s", mChatList));
-            //Log.d(TAG, "onBindViewHolder:mChatList size  " + mChatList.size());
-            if (isLeftChat) {
-                if (pos == 0) {
-                    //holder.mSenderUsername.setVisibility(View.VISIBLE);
-                    //Log.d(TAG, String.format("onBindViewHolder: mUsernameliSt %s", mUsernameList));
-                    //Log.d(TAG, "onBindViewHolder: chat sender " + chat.getSender());
-                    // holder.mSenderUsername.setText(mUsernameList.get(chat.getSender()));
-                } else {
-                    if (!mChatList.get(pos - 1).getSender().equals(mChatList.get(pos).getSender())) {
-                        // holder.mSenderUsername.setVisibility(View.VISIBLE);
-//Log.d(TAG, String.format("onBindViewHolder: mUsernameliSt %s", mUsernameList));
-//Log.d(TAG, "onBindViewHolder: chat sender " + chat.getSender());
-                        //     holder.mSenderUsername.setText(mUsernameList.get(chat.getSender()));
-                    }
-                }
-                // Log.d(TAG, "onBindViewHolder: sender " + chat.getSender());
-                Query query = myRef.child(mContext.getString(R.string.dbname_user_account_settings))
-                        .child(chat.getSender());
-                //Log.d(TAG, "onDataChange: isLeftChat 2" + isLeftChat);
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        // Log.d(TAG, "onDataChange: isLeftChat 3" + isLeftChat);
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            // /.d(TAG, "onDataChange: isLeftChat 4" + isLeftChat);
-                            if (Objects.equals(ds.getKey(), mContext.getString(R.string.field_profile_photo))) {
-                                if ((pos + 1) == mChatList.size()) {
-                                    // Log.d(TAG, "onDataChange: profile photo " + ds.getValue().toString());
-                                    GlideImageLoader.loadImageWithOutTransition(mContext, requireNonNull(ds.getValue()).toString(), holder.CIV_PP);
-                                }
-                                if ((pos + 1) != mChatList.size() && !mChatList.get(pos + 1).getSender().equals(mChatList.get(pos).getSender())) {
-                                    // Log.d(TAG, "onDataChange: profile photo " + ds.getValue().toString());
-                                    GlideImageLoader.loadImageWithOutTransition(mContext, requireNonNull(ds.getValue()).toString(), holder.CIV_PP);
-
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
         }
     }
 
@@ -639,6 +554,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
     public int getItemCount() {
         return mChatList.size();
     }
+
 
     private void AddDayStamp(String PrevDate, AutofitTextView ATV_DAY_STAMP) {
 

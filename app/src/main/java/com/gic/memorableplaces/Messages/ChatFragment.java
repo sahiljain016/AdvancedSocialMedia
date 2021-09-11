@@ -85,7 +85,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
     private String sMyUID;
     private String sChatUID;
     private String sProfilePhoto;
-    private String sBubbleColor;
+    private String sBubbleColor = "0";
     private String sMessage;
     private String sOtherPublicKey;
     private String sMyPublicKey;
@@ -170,6 +170,8 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
             sChatUID = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_chat_uid)));
 
         }
+
+        Log.d(TAG, "onCreateView: sChatUID: "+ sChatUID);
 
         if (!TextUtils.isEmpty(sProfilePhoto))
             GlideImageLoader.loadImageWithOutTransition(mContext, sProfilePhoto, CIV_PP);
@@ -426,7 +428,10 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
             break;
             case "get_messages": {
                 mChatList.add(chat);
-                databaseWriteExecutor.execute(() -> chatDao.InsertNewChat(chat));
+                databaseWriteExecutor.execute(() -> {
+                    chat.setChat_id(sChatUID);
+                    chatDao.InsertNewChat(chat);
+                });
                 if (count == ChildrenCount) {
                     //  Log.d(TAG, "DecryptChat: count: " + count);
                     //  Log.d(TAG, String.format("DecryptChat: mChatList before sorting: %s", mChatList));
@@ -472,7 +477,10 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
             case "load_more": {
                 //  Log.d(TAG, "onSuccess: unsend inserted pos: " + (mChatList.size() - 1));
                 mChatList.add((count - 1), chat);
-                databaseWriteExecutor.execute(() -> chatDao.InsertNewChat(chat));
+                databaseWriteExecutor.execute(() -> {
+                    chat.setChat_id(sChatUID);
+                    chatDao.InsertNewChat(chat);
+                });
                 //  Log.d(TAG, "onSuccess: unsend chat list: " + mChatList);
                 RA_CHATS.notifyItemInserted(0);
                 RA_CHATS.notifyItemChanged(1);
@@ -532,7 +540,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                                 databaseWriteExecutor.execute(() -> {
                                     Log.d(TAG, "onDataChange: unsend mChatList pos: " + mChatList.get(pos).toString());
                                     chatDao.DeleteSingleEntry(sChatUID, mChatList.get(pos).getChat_id());
-                                    Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
+                                    //Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
                                     handler.post(() -> {
                                         mChatList.remove(pos);
                                         RA_CHATS.notifyItemRemoved(pos);
@@ -558,7 +566,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                             databaseWriteExecutor.execute(() -> {
                                 Log.d(TAG, "onDataChange: unsend mChatList pos: " + mChatList.get(pos).toString());
                                 chatDao.DeleteSingleEntry(sChatUID, mChatList.get(pos).getChat_id());
-                                Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
+                               // Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -714,7 +722,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                 databaseWriteExecutor.execute(() -> {
                     Log.d(TAG, "onDataChange: unsend mChatList pos: " + mChatList.get(pos).toString());
                     chatDao.DeleteSingleEntry(sChatUID, mChatList.get(pos).getChat_id());
-                    Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
+                    //Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
                     handler.post(() -> {
                         mChatList.remove(pos);
                         RA_CHATS.notifyItemRemoved(pos);
@@ -753,7 +761,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
     private void GetChats() {
         // Log.d(TAG, "GetChats: sChatUID; " + sChatUID);
         databaseWriteExecutor.execute(() -> {
-            Log.d(TAG, "GetChats: executor 20 messages: " + chatDao.Get20LatestChats(sChatUID).toString());
+            Log.d(TAG, "GetChats: executor 20 messages: " + chatDao.GetAllChats().toString());
             for (Chat ch : chatDao.Get20LatestChats(sChatUID)) {
                 ch.setString_date(MiscTools.GetTimeStamp(ch.getEpoch()));
                 mChatList.add(0, ch);
@@ -801,7 +809,12 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                                         dataSnapshot.child("receivers").getValue().toString(),
                                         dataSnapshot.child("chat_id").getValue().toString(),
                                         dataSnapshot.child("isSeen").getValue().toString(),
-                                        dataSnapshot.child("bubbleColor").getValue().toString());
+                                        null);
+                                if (dataSnapshot.hasChild("bubbleColor")) {
+                                    chat.setBubbleColor(dataSnapshot.child("bubbleColor").getValue().toString());
+                                } else {
+                                    chat.setBubbleColor("0");
+                                }
                                 chat.setEpoch(dataSnapshot.child(mContext.getString(R.string.field_date_messaged)).getValue(Long.class));
                                 if (count == 1) {
                                     lFirstMessageEpoch = dataSnapshot.child(mContext.getString(R.string.field_date_messaged)).getValue(Long.class);
@@ -885,8 +898,12 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                                                         dataSnapshot.child("receivers").getValue().toString(),
                                                         dataSnapshot.child("chat_id").getValue().toString(),
                                                         dataSnapshot.child("isSeen").getValue().toString(),
-                                                        dataSnapshot.child("bubbleColor").getValue().toString());
-
+                                                        null);
+                                                if (dataSnapshot.hasChild("bubbleColor")) {
+                                                    chat.setBubbleColor(dataSnapshot.child("bubbleColor").getValue().toString());
+                                                } else {
+                                                    chat.setBubbleColor("0");
+                                                }
                                                 chat.setEpoch(dataSnapshot.child(mContext.getString(R.string.field_date_messaged)).getValue(Long.class));
                                                 if (count == 1) {
                                                     lFirstMessageEpoch = dataSnapshot.child(mContext.getString(R.string.field_date_messaged)).getValue(Long.class);
@@ -950,6 +967,8 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                             null);
                     if (snapshot.hasChild("bubbleColor")) {
                         chat.setBubbleColor(snapshot.child("bubbleColor").getValue().toString());
+                    } else {
+                        chat.setBubbleColor("0");
                     }
                     long epoch = snapshot.child(mContext.getString(R.string.field_date_messaged)).getValue(Long.class);
                     myRef.child(mContext.getString(R.string.dbname_chats))
@@ -1024,7 +1043,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
             }
             ET_TYPE_MESSAGE_CHAT.setText("");
             isGradient = false;
-            sBubbleColor = null;
+            sBubbleColor = "0";
 
 
         });

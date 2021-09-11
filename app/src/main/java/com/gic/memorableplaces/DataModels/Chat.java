@@ -205,7 +205,16 @@ public class Chat {
     public String toString() {
         return "Chat{" +
                 "message='" + message + '\'' +
+                ", sender='" + sender + '\'' +
+                ", isGradient=" + isGradient +
+                ", receivers='" + receivers + '\'' +
+                ", string_date='" + string_date + '\'' +
                 ", epoch=" + epoch +
+                ", chat_id='" + chat_id + '\'' +
+                ", chat_uid='" + chat_uid + '\'' +
+                ", isSeen='" + isSeen + '\'' +
+                ", BubbleColor='" + BubbleColor + '\'' +
+                ", date_messaged=" + date_messaged +
                 '}';
     }
 
