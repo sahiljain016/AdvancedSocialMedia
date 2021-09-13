@@ -3,16 +3,53 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
+        android:id="@+id/TRANS_START_TO_UNSENT"
+        motion:constraintSetEnd="@+id/set_unsent_end"
+        motion:constraintSetStart="@id/set_unsent_start"
         motion:duration="800"
         motion:motionInterpolator="@string/material_motion_easing_decelerated">
         <KeyFrameSet></KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <Transition
+        android:id="@+id/TRANS_UNSENT_TO_ANCHOR"
+        motion:constraintSetEnd="@+id/set_anchor_end"
+        motion:constraintSetStart="@id/set_unsent_end"
+        motion:duration="800"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_ANCHOR_TO_UNSENT"
+        motion:constraintSetEnd="@+id/set_unsent_end"
+        motion:constraintSetStart="@id/set_anchor_end"
+        motion:duration="800"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_ANCHOR_TO_START"
+        motion:constraintSetEnd="@+id/set_unsent_start"
+        motion:constraintSetStart="@id/set_anchor_end"
+        motion:duration="800"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_START_TO_ANCHOR"
+        motion:constraintSetEnd="@+id/set_anchor_only"
+        motion:constraintSetStart="@id/set_unsent_start"
+        motion:duration="800"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/set_unsent_start">
         <Constraint
-            android:id="@+id/SL_CHAT_BOTTOM"
+            android:id="@+id/ML_CHAT_BOTTOM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent" />
@@ -21,8 +58,20 @@
             android:id="@+id/V_DIM_BACKGROUND_CHAT"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0" >
-        </Constraint>
+            android:alpha="0" />
+
+        <Constraint
+            android:id="@+id/CV_ANCHOR_CARD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:alpha="0"
+            android:visibility="invisible"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintTop_toBottomOf="@id/RL_CHAT_TOOLBAR"
+            motion:layout_constraintBottom_toTopOf="@id/ML_CHAT_BOTTOM"/>
 
         <Constraint
             android:id="@+id/IV_HIGHLIGHTED_CHAT"
@@ -32,6 +81,7 @@
             android:layout_marginTop="@dimen/_100sdp"
             android:layout_marginEnd="@dimen/_30sdp"
             android:alpha="0"
+            android:visibility="invisible"
             android:scaleX="0"
             android:scaleY="0"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -39,17 +89,60 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/CL_CHAT_OPTIONS"
+            android:id="@+id/RL_OPTIONS_BAR_CHAT"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="parent" />
 
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/set_anchor_only">
         <Constraint
-            android:id="@+id/SL_CHAT_BOTTOM"
+            android:id="@+id/ML_CHAT_BOTTOM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+
+        <Constraint
+            android:id="@+id/V_DIM_BACKGROUND_CHAT"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Constraint
+            android:id="@+id/CV_ANCHOR_CARD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            motion:layout_constraintTop_toBottomOf="@id/RL_CHAT_TOOLBAR"
+            motion:layout_constraintBottom_toTopOf="@id/ML_CHAT_BOTTOM"/>
+
+        <Constraint
+            android:id="@+id/IV_HIGHLIGHTED_CHAT"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:alpha="0"
+            android:visibility="invisible"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/RL_OPTIONS_BAR_CHAT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/set_unsent_end">
+        <Constraint
+            android:id="@+id/ML_CHAT_BOTTOM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -62,6 +155,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="1" />
+
+        <Constraint
+            android:id="@+id/CV_ANCHOR_CARD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:alpha="0"
+            android:visibility="invisible"
+            android:scaleX="0"
+            android:scaleY="0"
+            motion:layout_constraintTop_toBottomOf="@id/RL_CHAT_TOOLBAR"
+            motion:layout_constraintBottom_toTopOf="@id/ML_CHAT_BOTTOM"/>
 
         <Constraint
             android:id="@+id/IV_HIGHLIGHTED_CHAT"
@@ -78,12 +184,59 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/CL_CHAT_OPTIONS"
+            android:id="@+id/RL_OPTIONS_BAR_CHAT"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            motion:layout_constraintBottom_toBottomOf="parent" />
-
-
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
     </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/set_anchor_end">
+
+        <Constraint
+            android:id="@+id/ML_CHAT_BOTTOM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintTop_toBottomOf="parent"
+
+            />
+
+        <Constraint
+            android:id="@+id/V_DIM_BACKGROUND_CHAT"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1" />
+
+        <Constraint
+            android:id="@+id/CV_ANCHOR_CARD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            motion:layout_constraintTop_toBottomOf="@id/RL_CHAT_TOOLBAR"
+            motion:layout_constraintBottom_toTopOf="@id/ML_CHAT_BOTTOM"/>
+
+        <Constraint
+            android:id="@+id/IV_HIGHLIGHTED_CHAT"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:alpha="0"
+            android:scaleX="0"
+            android:scaleY="0"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/RL_OPTIONS_BAR_CHAT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
+    </ConstraintSet>
+
+
 </MotionScene>

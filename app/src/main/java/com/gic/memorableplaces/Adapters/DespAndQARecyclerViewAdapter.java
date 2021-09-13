@@ -55,7 +55,7 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
             Desp_TV = itemView.findViewById(R.id.Desp_TV);
             ET_LINE = itemView.findViewById(R.id.ET_ML1);
             ATV_SERIAL_NO = itemView.findViewById(R.id.ATV_SERIAL_NO);
-            ATV_SEND = itemView.findViewById(R.id.ATV_SEND);
+            ATV_SEND = itemView.findViewById(R.id.IV_GO_TO_ANCHOR);
 
 
         }

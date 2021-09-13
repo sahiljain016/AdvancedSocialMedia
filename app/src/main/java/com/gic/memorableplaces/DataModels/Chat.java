@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Map;
 
-@Entity(tableName = "chats")
+@Entity(tableName = "chats", indices = {@Index(value = {"anchor_id"}, unique = true)})
 public class Chat {
 
     /*public static final String BASETABLE_NAME = "chats_";
@@ -40,6 +41,9 @@ public class Chat {
     @NonNull
     @ColumnInfo(name = "chat_id")
     private String chat_id;
+
+    @ColumnInfo(name = "anchor_id")
+    private String anchor_id;
 
     @ColumnInfo(name = "chat_uid")
     private String chat_uid;
@@ -188,6 +192,14 @@ public class Chat {
         this.date_messaged = date_messaged;
     }
 
+    public String getAnchor_id() {
+        return anchor_id;
+    }
+
+    public void setAnchor_id(String anchor_id) {
+        this.anchor_id = anchor_id;
+    }
+
     public Long getEpoch() {
         return epoch;
     }
@@ -211,6 +223,7 @@ public class Chat {
                 ", string_date='" + string_date + '\'' +
                 ", epoch=" + epoch +
                 ", chat_id='" + chat_id + '\'' +
+                ", anchor_id='" + anchor_id + '\'' +
                 ", chat_uid='" + chat_uid + '\'' +
                 ", isSeen='" + isSeen + '\'' +
                 ", BubbleColor='" + BubbleColor + '\'' +

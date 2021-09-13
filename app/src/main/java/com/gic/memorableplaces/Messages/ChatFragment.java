@@ -1,5 +1,7 @@
 package com.gic.memorableplaces.Messages;
 
+import static android.view.View.GONE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,10 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -32,6 +37,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gic.memorableplaces.Adapters.DynamicLinesRecyclerViewAdapter;
 import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView;
 import com.gic.memorableplaces.CustomLibs.EndToEnd.EndToEndEncrypt;
 import com.gic.memorableplaces.DataModels.Chat;
@@ -55,7 +61,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.grantland.widget.AutofitTextView;
@@ -65,6 +73,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
     private static final String TAG = "ChatFragment";
 
     private ChatRecyclerViewAdapter RA_CHATS;
+    private DynamicLinesRecyclerViewAdapter RA_ANCHORS;
 
     private EndToEndEncrypt MyE2E, OtherE2E;
     private ChatDatabase CD_CHATS;
@@ -80,6 +89,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
     private ChildEventListener CEL_Get_New_Messages;
     private Query Q_Load_More_Messages, Q_Get_New_Messages, Q_Remove_Unsent_Message, Q_Pending_Unseen_Messages,
             Q_Get_Current_Chats, Q_Insert_First_Chat;
+    private Runnable runAnchor, runUnsent, runCancel;
 
     private String sUserID;
     private String sMyUID;
@@ -103,11 +113,13 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
 
     private ImageView IV_BACK, IV_CHAT_OPTIONS, IV_SETTINGS, IV_VIDEO_CALL, IV_CALL, IV_ANCHOR,
             IV_AUDIO, IV_GALLERY, IV_SEND_MESSAGE, IV_HIGHLIGHTED_CHAT, IV_BUBBLE_COLOR;
-    private AnimatedRecyclerView RV_CHATS;
+    private AnimatedRecyclerView RV_CHATS, RV_ANCHORS;
     private CircleImageView CIV_PP, CIV_GROUP_PP_1, CIV_GROUP_PP_2;
-    private AutofitTextView ATV_FULL_NAME, ATV_STATUS, ATV_UNSEND, ATV_CANCEL_OPTIONS;
+    private AutofitTextView ATV_FULL_NAME, ATV_STATUS, ATV_UNSEND, ATV_CANCEL_OPTIONS, ATV_ANCHOR;
+    private CardView CV_ANCHOR_CARD;
     //    private ImageButton IB_COLOR_PICKER_CHAT;
-    private EditText ET_TYPE_MESSAGE_CHAT;
+    private EditText ET_TYPE_MESSAGE_CHAT, ET_ANCHOR;
+    private AppCompatImageButton ACIB_ADD_ANCHOR;
     private View V_DIM;
     private MotionLayout ML_MAIN, ML_TYPE_BOX, ML_OPTIONS;
     private ConstraintLayout CL_CHAT_OPTIONS;
@@ -136,7 +148,13 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
         IV_BUBBLE_COLOR = view.findViewById(R.id.IV_BUBBLE_COLOR);
         ML_MAIN = view.findViewById(R.id.ML_CHAT_FRAGMENT);
         ML_OPTIONS = view.findViewById(R.id.ML_CHAT_BOTTOM);
+        CV_ANCHOR_CARD = view.findViewById(R.id.CV_ANCHOR_CARD);
+        RV_ANCHORS = view.findViewById(R.id.ARV_ANCHORS);
+        ET_ANCHOR = view.findViewById(R.id.ET_ANCHOR);
+        ACIB_ADD_ANCHOR = view.findViewById(R.id.ACIB_ADD_ANCHOR);
         ATV_UNSEND = view.findViewById(R.id.ATV_UNSEND_CHAT);
+        ATV_ANCHOR = view.findViewById(R.id.ATV_ANCHOR_CHAT);
+        IV_ANCHOR = view.findViewById(R.id.IV_ANCHOR_CHAT);
         ATV_CANCEL_OPTIONS = view.findViewById(R.id.ATV_CLOSE_CHAT_OPTIONS);
         ML_TYPE_BOX = view.findViewById(R.id.ML_TYPE_BOX_CHAT_BOTTOM);
         CL_CHAT_OPTIONS = view.findViewById(R.id.CL_CHAT_OPTIONS);
@@ -171,7 +189,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
 
         }
 
-        Log.d(TAG, "onCreateView: sChatUID: "+ sChatUID);
+        Log.d(TAG, "onCreateView: sChatUID: " + sChatUID);
 
         if (!TextUtils.isEmpty(sProfilePhoto))
             GlideImageLoader.loadImageWithOutTransition(mContext, sProfilePhoto, CIV_PP);
@@ -215,7 +233,10 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                 sBubbleColor = String.valueOf(color);
             });
 
-            MakeGradient.setOnClickListener(v1 -> isGradient = MakeGradient.getTag().equals("Unselected"));
+            MakeGradient.setOnClickListener(v1 -> {
+                isGradient = MakeGradient.getTag().equals("Unselected");
+                customDialog.cancel();
+            });
 
         });
 
@@ -230,63 +251,73 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                 ML_OPTIONS.transitionToStart();
         });
 
-//        mBackToSettings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mGradient.setVisibility(View.VISIBLE);
-//                mAudioToText.setVisibility(View.VISIBLE);
-//                mAdminAlert.setVisibility(View.VISIBLE);
-//                mSendMessage.setVisibility(View.GONE);
-//                mBackToSettings.setVisibility(View.GONE);
-//
-//                ConstraintSet constraintSet = new ConstraintSet();
-//                constraintSet.clone(constraintLayout);
-//                constraintSet.connect(R.id.ET_TYPE_MESSAGE_CHAT, ConstraintSet.END, R.id.Gradient, ConstraintSet.START, 0);
-//                constraintSet.applyTo(constraintLayout);
-//            }
-//        });
-//        mAudioToText.setOnClickListener(v -> {
-//            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-//            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-//                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-//            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-//            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speak_to_type));
-//            intent.putExtra("android.speech.extra.DICTATION_MODE", true);
-//            try {
-//                startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
-//
-//            } catch (ActivityNotFoundException a) {
-//                Toast.makeText(mContext, "Unable to Hear", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
-//        mGradient.setOnClickListener(v -> {
-//            final Dialog Dialog = new Dialog(requireActivity());
-//            requireNonNull(Dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-//            final TextView GradientApplied = new TextView(getActivity());
-//            GradientApplied.setTextColor(Color.WHITE);
-//            GradientApplied.setBackgroundColor(Color.parseColor("#66000000"));
-//            if (!isGradient) {
-//                isGradient = true;
-//                GradientApplied.setText("Gradient Chat Color Applied!");
-//            } else {
-//                isGradient = false;
-//                GradientApplied.setText("Gradient Chat Color Removed!");
-//            }
-//            Dialog.setContentView(GradientApplied);
-//            Dialog.show();
-//
-//            Handler handler = new Handler(Looper.getMainLooper());
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Dialog.dismiss();
-//                }
-//            }, 2500);
-//
-//
-//        });
+        ATV_ANCHOR.setOnClickListener(v -> runAnchor.run());
+        ATV_UNSEND.setOnClickListener(v -> runUnsent.run());
+        ATV_CANCEL_OPTIONS.setOnClickListener(v -> runCancel.run());
+        IV_ANCHOR.setOnClickListener(v -> {
+            ML_MAIN.setTransition(R.id.TRANS_START_TO_ANCHOR);
+            ML_MAIN.transitionToEnd();
+            RV_ANCHORS.setVisibility(View.VISIBLE);
+            ET_ANCHOR.setVisibility(GONE);
+            ACIB_ADD_ANCHOR.setVisibility(GONE);
+            databaseWriteExecutor.execute(() -> {
 
+                Log.d(TAG, "run: anchors chat: " + chatDao.GetAnchors(sChatUID));
+                List<Chat> Temp = new ArrayList<>(chatDao.GetAnchors(sChatUID));
+
+                Log.d(TAG, "run: called adapter Temp: " + Temp);
+                RA_ANCHORS = new DynamicLinesRecyclerViewAdapter(Temp, chat -> {
+                    Log.d(TAG, "onItemClick: anchor chat_id: " + chat.getEpoch());
+
+                    databaseWriteExecutor.execute(() -> {
+
+                        handler.post(() -> {
+
+//                            ET_ANCHOR.setVisibility(View.VISIBLE);
+//                            ACIB_ADD_ANCHOR.setVisibility(View.VISIBLE);
+//                            RV_ANCHORS.setVisibility(View.GONE);
+                            ML_MAIN.setTransition(R.id.TRANS_START_TO_ANCHOR);
+                            ML_MAIN.transitionToStart();
+                        });
+                        mChatList.clear();
+                        for (Chat chat1 : chatDao.Load10MoreChats(sChatUID, chat.getEpoch())) {
+                            chat1.setString_date(MiscTools.GetTimeStamp(chat1.getEpoch()));
+                            mChatList.add(0, chat1);
+                        }
+                        int pos = mChatList.size();
+                        chat.setString_date(MiscTools.GetTimeStamp(chat.getEpoch()));
+                        mChatList.add(chat);
+                        for (Chat chat1 : chatDao.GetNext10Chats(sChatUID, chat.getEpoch())) {
+                            chat1.setString_date(MiscTools.GetTimeStamp(chat1.getEpoch()));
+                            mChatList.add(chat1);
+                        }
+                        handler.post(() -> {
+                            Log.d(TAG, "run: mChatList: " + mChatList);
+                            RA_CHATS = new ChatRecyclerViewAdapter(getActivity(), mChatList, sProfilePhoto, sUserID, isGroup, isPinned, mUsernameList, onChatClicked);
+                            RV_CHATS.setItemAnimator(null);
+                            RV_CHATS.setAdapter(RA_CHATS);
+                            RA_CHATS.notifyItemRangeInserted(0, mChatList.size());
+                            RV_CHATS.scheduleLayoutAnimation();
+                            RV_CHATS.smoothScrollToPosition(pos);
+
+                        });
+
+                    });
+                }, mContext);
+
+                handler.post(() -> {
+                    Log.d(TAG, "onCreateView: temp handler post: " + Temp);
+                    RV_ANCHORS.setAdapter(RA_ANCHORS);
+                    RV_ANCHORS.setItemAnimator(new DefaultItemAnimator());
+                    RA_ANCHORS.notifyDataSetChanged();
+                    RV_ANCHORS.scheduleLayoutAnimation();
+                });
+
+            });
+
+
+        });
         ET_TYPE_MESSAGE_CHAT.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -327,6 +358,11 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         mLayoutManager.setStackFromEnd(true);
         RV_CHATS.setLayoutManager(mLayoutManager);
+
+        RV_ANCHORS.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager2 = new LinearLayoutManager(mContext);
+        mLayoutManager2.setStackFromEnd(false);
+        RV_ANCHORS.setLayoutManager(mLayoutManager2);
 
     }
 
@@ -429,7 +465,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
             case "get_messages": {
                 mChatList.add(chat);
                 databaseWriteExecutor.execute(() -> {
-                    chat.setChat_id(sChatUID);
+                    chat.setChat_uid(sChatUID);
                     chatDao.InsertNewChat(chat);
                 });
                 if (count == ChildrenCount) {
@@ -478,7 +514,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                 //  Log.d(TAG, "onSuccess: unsend inserted pos: " + (mChatList.size() - 1));
                 mChatList.add((count - 1), chat);
                 databaseWriteExecutor.execute(() -> {
-                    chat.setChat_id(sChatUID);
+                    chat.setChat_uid(sChatUID);
                     chatDao.InsertNewChat(chat);
                 });
                 //  Log.d(TAG, "onSuccess: unsend chat list: " + mChatList);
@@ -496,7 +532,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
      * It is being called by 2 methods -
      * {@link #DecryptChat(Chat, long, String)}  it is being initiated after the get messages is completed.}
      * {@link #SendMessage()} (Chat, long, String) it is being initiated after first ever message has been sent.}
-     * Initiated through {@link #onItemClick(int, ConstraintLayout)}
+     * Initiated through {@link #onItemClick(int, ConstraintLayout, ImageView)}
      */
     private void RemoveUnsentMessage() {
 
@@ -566,7 +602,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                             databaseWriteExecutor.execute(() -> {
                                 Log.d(TAG, "onDataChange: unsend mChatList pos: " + mChatList.get(pos).toString());
                                 chatDao.DeleteSingleEntry(sChatUID, mChatList.get(pos).getChat_id());
-                               // Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
+                                // Log.d(TAG, "onDataChange: all chats: " + chatDao.GetAllChats(sChatUID).toString());
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -841,6 +877,7 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
      */
     private void LoadMoreMessages() {
 
+        AtomicBoolean isDatabaseNull = new AtomicBoolean(true);
         RV_CHATS.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -852,15 +889,19 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                     isLoadMoreMessages = true;
                     Log.d(TAG, "onScrolled: sFirstMessageID: " + sFirstMessageID);
                     databaseWriteExecutor.execute(() -> {
+
                         count = 1;
-                        Log.d(TAG, "onScrolled: Load 10 More Chats: " + chatDao.Load10MoreChats(sChatUID, lFirstMessageEpoch));
-                        for (Chat ch : chatDao.Load10MoreChats(sChatUID, lFirstMessageEpoch)) {
+                        Log.d(TAG, "onScrolled: Load 10 More Chats: " + chatDao.Load10MoreChats(sChatUID, mChatList.get(0).getEpoch()));
+                        int RowCount = chatDao.Load10MoreChats(sChatUID, mChatList.get(0).getEpoch()).size();
+                        for (Chat ch : chatDao.Load10MoreChats(sChatUID, mChatList.get(0).getEpoch())) {
+
                             ch.setString_date(MiscTools.GetTimeStamp(ch.getEpoch()));
                             Log.d(TAG, "onScrolled: ch: " + ch.toString());
                             mChatList.add(0, ch);
                             count++;
                         }
                         if (count > 1) {
+                            isDatabaseNull.set(false);
                             handler.post(() -> {
                                 RA_CHATS.notifyItemRangeInserted(0, count - 1);
                                 Log.d(TAG, "onScrolled: count: " + mChatList.get(count - 1).toString());
@@ -868,13 +909,13 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                             });
                             lFirstMessageEpoch = mChatList.get(0).getEpoch();
                         }
-                        Log.d(TAG, "onScrolled: lFirstMessageEpoch load: " + lFirstMessageEpoch);
+                        Log.d(TAG, "onScrolled: RowCount load: " + RowCount);
 
-                        if (count == 1 && !TextUtils.isEmpty(sFirstMessageID)) {
+                        if (isDatabaseNull.get() && !TextUtils.isEmpty(mChatList.get(0).getChat_id())) {
                             Q_Load_More_Messages = myRef.child(mContext.getString(R.string.dbname_chats))
                                     .child(sChatUID)
                                     .orderByChild(mContext.getString(R.string.field_date_messaged))
-                                    .endBefore(lFirstMessageEpoch, sFirstMessageID)
+                                    .endBefore(mChatList.get(0).getEpoch(), mChatList.get(0).getChat_id())
                                     .limitToLast(10);
 
                             VEL_Load_More_Messages = new ValueEventListener() {
@@ -930,6 +971,31 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
                         }
                     });
 
+                } else if (!recyclerView.canScrollVertically(1) && dy > 0) {
+                    Log.d(TAG, "onScrolled: bottom scroll: ");
+
+                    databaseWriteExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            count = 1;
+                            Log.d(TAG, "onScrolled: Load 10 More Chats: " + chatDao.GetNext10Chats(sChatUID, mChatList.get(mChatList.size() - 1).getEpoch()));
+                            int size = mChatList.size();
+                            for (Chat ch : chatDao.GetNext10Chats(sChatUID, mChatList.get(mChatList.size() - 1).getEpoch())) {
+                                ch.setString_date(MiscTools.GetTimeStamp(ch.getEpoch()));
+                                Log.d(TAG, "onScrolled: ch: " + ch.toString());
+                                mChatList.add(ch);
+                                count++;
+                            }
+                            if (count > 1) {
+                                handler.post(() -> {
+                                    RA_CHATS.notifyItemRangeInserted(size - 1, count);
+                                    Log.d(TAG, "onScrolled: count: " + mChatList.get(count - 1).toString());
+                                    RA_CHATS.notifyItemChanged(size - 1);
+                                });
+                                lFirstMessageEpoch = mChatList.get(0).getEpoch();
+                            }
+                        }
+                    });
                 }
 
             }
@@ -1122,14 +1188,17 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
      */
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onItemClick(int position, ConstraintLayout CL_CHAT) {
+    public void onItemClick(int position, ConstraintLayout CL_CHAT, ImageView IV_ANCHOR) {
         //Log.d(TAG, "onItemClick: mChatList pos: " + mChatList.get(position));
 //        int width = CL_CHAT.getWidth();
 //        int height = CL_CHAT.getHeight();
 //
 //        int measuredWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
 //        int measuredHeight = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
+
+
 //        isUnsend = true;
+        ML_MAIN.setTransition(R.id.TRANS_START_TO_UNSENT);
         ML_MAIN.transitionToEnd();
         CL_CHAT.setDrawingCacheEnabled(true);
 
@@ -1140,35 +1209,88 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
         //Create a bitmap backed Canvas to draw the view into
         Bitmap b = Bitmap.createBitmap(CL_CHAT.getDrawingCache());
         Drawable drawable = new BitmapDrawable(getResources(), b);
-        V_DIM.setVisibility(View.VISIBLE);
-        IV_HIGHLIGHTED_CHAT.setVisibility(View.VISIBLE);
         IV_HIGHLIGHTED_CHAT.setImageDrawable(drawable);
 
-        ATV_UNSEND.setOnClickListener(v -> {
-            ML_MAIN.transitionToStart();
+        runAnchor = () -> {
+            Log.d(TAG, "run: item clicked: pos: " + position);
+
+            RV_ANCHORS.setVisibility(GONE);
+            ET_ANCHOR.setVisibility(View.VISIBLE);
+            ACIB_ADD_ANCHOR.setVisibility(View.VISIBLE);
+            ML_MAIN.setTransition(R.id.TRANS_UNSENT_TO_ANCHOR);
+            ML_MAIN.transitionToEnd();
+            ML_MAIN.setTag("anchor");
+            ATV_UNSEND.setTag("not_clicked");
+            ACIB_ADD_ANCHOR.setOnClickListener(v -> {
+                databaseWriteExecutor.execute(() -> {
+                    if (!TextUtils.isEmpty(ET_ANCHOR.getText().toString())) {
+                        try {
+                            chatDao.updateAnchor(ET_ANCHOR.getText().toString(), sChatUID, mChatList.get(position).getChat_id());
+                            handler.post(() -> {
+                                IV_ANCHOR.setVisibility(View.VISIBLE);
+                                Toast.makeText(mContext, "Anchor: " + ET_ANCHOR.getText().toString() + " Saved!", Toast.LENGTH_SHORT).show();
+                                CL_CHAT.setDrawingCacheEnabled(false);
+                                ML_MAIN.setTransition(R.id.TRANS_ANCHOR_TO_START);
+                                ET_ANCHOR.setText("");
+                                ML_MAIN.transitionToEnd();
+                                V_DIM.setClickable(false);
+                                V_DIM.setFocusable(false);
+                            });
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            handler.post(() -> {
+                                ET_ANCHOR.setError("ID already exists!");
+                                IV_ANCHOR.setVisibility(GONE);
+                            });
+                        }
+                    } else {
+                        ET_ANCHOR.setError("Please give a unique anchor ID.");
+                    }
+
+                });
+            });
+        };
+
+        runUnsent = () -> {
+            ML_MAIN.setTag("unsent");
+            if (ATV_UNSEND.getTag().equals("not_clicked")) {
+                ML_MAIN.setTransition(R.id.TRANS_ANCHOR_TO_UNSENT);
+                ML_MAIN.transitionToEnd();
+                ATV_UNSEND.setTag("clicked");
+            } else {
+                ML_MAIN.setTransition(R.id.TRANS_START_TO_UNSENT);
+                ML_MAIN.transitionToStart();
+                CL_CHAT.setDrawingCacheEnabled(false);
+                V_DIM.setClickable(false);
+                V_DIM.setFocusable(false);
+                isMyUnsend = true;
+                myRef.child(mContext.getString(R.string.dbname_chats))
+                        .child(sChatUID)
+                        .child(mChatList.get(position).getChat_id())
+                        .removeValue();
+
+                myRef.child(mContext.getString(R.string.dbname_chats_removed))
+                        .child(sChatUID)
+                        .child(mContext.getString(R.string.field_chat_removed))
+                        .setValue(position);
+            }
+        };
+
+
+        runCancel = () -> {
+            if (ML_MAIN.getTag().equals("anchor")) {
+                ML_MAIN.setTransition(R.id.TRANS_ANCHOR_TO_START);
+                ML_MAIN.transitionToEnd();
+            } else {
+                ML_MAIN.setTransition(R.id.TRANS_START_TO_UNSENT);
+                ML_MAIN.transitionToStart();
+            }
             CL_CHAT.setDrawingCacheEnabled(false);
+
             V_DIM.setClickable(false);
             V_DIM.setFocusable(false);
-            isMyUnsend = true;
-            myRef.child(mContext.getString(R.string.dbname_chats))
-                    .child(sChatUID)
-                    .child(mChatList.get(position).getChat_id())
-                    .removeValue();
-
-            myRef.child(mContext.getString(R.string.dbname_chats_removed))
-                    .child(sChatUID)
-                    .child(mContext.getString(R.string.field_chat_removed))
-                    .setValue(position);
-
-            //RemoveUnsentMessage();
-        });
-        ATV_CANCEL_OPTIONS.setOnClickListener(v -> {
-            ML_MAIN.transitionToStart();
-            CL_CHAT.setDrawingCacheEnabled(false);
-
-            V_DIM.setClickable(false);
-            V_DIM.setFocusable(false);
-        });
-
+        };
     }
 }

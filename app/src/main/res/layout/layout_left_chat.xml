@@ -37,6 +37,16 @@
         android:gravity="bottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ATV_DAY_STAMP">
+        <ImageView
+            android:id="@+id/IV_ANCHOR_MARK"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/CL_CHAT_MESSAGE"
+            android:src="@drawable/ic_anchor"
+            app:layout_constraintTop_toTopOf="@id/CL_CHAT_MESSAGE"
+            app:layout_constraintBottom_toBottomOf="@id/CL_CHAT_MESSAGE"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/CIV_PP_LEFT_CHAT"

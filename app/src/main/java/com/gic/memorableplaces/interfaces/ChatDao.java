@@ -30,7 +30,16 @@ interface ChatDao {
     List<Chat> GetAllChats();
 
     @Query("DELETE FROM chats WHERE chat_uid = :ChatUID AND chat_id = :ChatID")
-    void DeleteSingleEntry(String ChatUID,String ChatID);
+    void DeleteSingleEntry(String ChatUID, String ChatID);
+
+    @Query("UPDATE chats SET anchor_id = :anchorID WHERE chat_uid =:chatUID AND chat_id = :MessageID")
+    void updateAnchor(String anchorID, String chatUID, String MessageID);
+
+    @Query("SELECT * FROM chats WHERE chat_uid = :chatUID AND anchor_id IS NOT NULL AND anchor_id != \"\"")
+    List<Chat> GetAnchors( String chatUID);
+
+    @Query("SELECT * FROM chats WHERE chat_uid = (:chatUID) AND date_messaged > (:LastMessageEpoch) ORDER BY date_messaged LIMIT 10")
+    List<Chat> GetNext10Chats(String chatUID, long LastMessageEpoch);
 
     @Query("SELECT * FROM chats WHERE chat_uid = (:ChatUID) AND date_messaged < (:LastMessageEpoch) ORDER BY date_messaged DESC LIMIT 10")
     List<Chat> Load10MoreChats(String ChatUID, long LastMessageEpoch);

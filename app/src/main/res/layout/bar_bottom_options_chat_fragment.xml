@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_CHAT_OPTIONS"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/rounded_rect_tl_tr_gradient_green_blue"
+
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_ANCHOR_CHAT"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:text="Anchor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:tag="not_clicked"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_UNSEND_CHAT"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:text="Unsend"
+            android:tag="clicked"
+            android:textAlignment="center"
+            android:textColor="#F88683"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/V_DIVIDER_CHAT_OPTIONS"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/ATV_UNSEND_CHAT"
+            app:layout_constraintStart_toEndOf="@id/ATV_ANCHOR_CHAT" />
+
+        <View
+            android:id="@+id/V_DIVIDER_2_CHAT_OPTIONS"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white"
+
+            app:layout_constraintEnd_toStartOf="@id/ATV_CLOSE_CHAT_OPTIONS"
+            app:layout_constraintStart_toEndOf="@id/ATV_UNSEND_CHAT" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_CLOSE_CHAT_OPTIONS"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:text="Cancel"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

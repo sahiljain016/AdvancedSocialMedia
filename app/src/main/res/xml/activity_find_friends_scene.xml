@@ -4,8 +4,8 @@
 
     <Transition
         android:id="@+id/TRANS_SHOW_MORE_DETAILS"
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/set_unsent_end"
+        motion:constraintSetStart="@id/set_unsent_start"
         motion:duration="1500">
         <KeyFrameSet></KeyFrameSet>
 
@@ -14,7 +14,7 @@
             motion:targetId="@id/IV_SWIPE_ME"/>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/set_unsent_start">
 
         <Constraint
             android:id="@+id/V_WHITE_BACKGROUND"
@@ -163,7 +163,7 @@
 
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/set_unsent_end">
 
 
         <Constraint

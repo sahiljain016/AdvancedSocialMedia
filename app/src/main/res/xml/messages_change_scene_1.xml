@@ -3,12 +3,12 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/set_unsent_end"
+        motion:constraintSetStart="@id/set_unsent_start"
         motion:duration="1000"
         motion:motionInterpolator="@string/material_motion_easing_decelerated" />
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/set_unsent_start">
         <Constraint
             android:id="@+id/ATV_TITLE_PINNED_CHATS"
             android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
             motion:layout_constraintTop_toBottomOf="@id/V_LINE_RECENT_CHATS" />
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/set_unsent_end">
 
         <Constraint
             android:id="@+id/ATV_TITLE_PINNED_CHATS"

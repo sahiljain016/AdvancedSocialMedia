@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,6 +69,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
         OnChatClicked mOnChatClicked;
         public CircleImageView CIV_PP;
+        public ImageView IV_ANCHOR;
         public TextView TV_MESSAGE;
         public AutofitTextView ATV_DAY_STAMP;
         public TextView /*mMessageStatus, mSenderUsername,*/ TV_TIMESTAMP, TV_MESSAGE_STATUS/*, mDateMessaged*/;
@@ -97,6 +99,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 ATV_DAY_STAMP = itemView.findViewById(R.id.ATV_DAY_STAMP);
                 TV_MESSAGE_STATUS = itemView.findViewById(R.id.TV_MESSAGE_STATUS);
                 CL_CHAT = itemView.findViewById(R.id.CL_CHAT_MESSAGE);
+                IV_ANCHOR = itemView.findViewById(R.id.IV_ANCHOR_MARK);
                 // mMessageStatus = itemView.findViewById(R.id.deliveredOrSeen);
                 // V_BG = itemView.findViewById(R.id.V_BG_CHAT);
 
@@ -111,14 +114,14 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
         @Override
         public boolean onLongClick(View v) {
-            mOnChatClicked.onItemClick(getBindingAdapterPosition(), CL_CHAT);
+            mOnChatClicked.onItemClick(getBindingAdapterPosition(), CL_CHAT, IV_ANCHOR);
             return false;
         }
     }
 
     public interface OnChatClicked {
 
-        void onItemClick(int position, ConstraintLayout constraintLayout);
+        void onItemClick(int position, ConstraintLayout constraintLayout, ImageView imageView);
     }
 
     public ChatRecyclerViewAdapter(Context context, ArrayList<Chat> ChatList, String ProfilePhotoURL, String rUserID, boolean isGroup,
@@ -177,6 +180,11 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                     holder.CIV_PP);
         }
 
+        if (chat.getAnchor_id() != null) {
+            holder.IV_ANCHOR.setVisibility(View.VISIBLE);
+        } else {
+            holder.IV_ANCHOR.setVisibility(View.GONE);
+        }
         Log.d(TAG, "onBindViewHolder: bubble color: " + chat);
         if (!chat.getBubbleColor().equals("0")) {
             Log.d(TAG, "onBindViewHolder: bubble color: " + chat);
@@ -187,9 +195,9 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 //            drawable = (GradientDrawable) holder.CL_CHAT.getBackground();
             int[] colors;
             if (chat.isGradient()) {
-                colors = new int[]{manipulateColor(Integer.parseInt(chat.getBubbleColor()), 2.8f),
-                        Integer.parseInt(chat.getBubbleColor())
-                        , manipulateColor(Integer.parseInt(chat.getBubbleColor()), 0.8f)};
+                colors = new int[]{Lighten(Integer.parseInt(chat.getBubbleColor()))
+                        , Integer.parseInt(chat.getBubbleColor())
+                        , Darken(Integer.parseInt(chat.getBubbleColor()), 0.2)};
             } else {
                 colors = new int[]{Integer.parseInt(chat.getBubbleColor()), Integer.parseInt(chat.getBubbleColor()), Integer.parseInt(chat.getBubbleColor())};
             }
@@ -371,7 +379,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
                     if (isLeftChat) {
                         if (mChatList.get(pos - 1).getSender().equals(sMyUID) && mChatList.get(pos + 1).getSender().equals(sUserID)) {
-                           holder.CIV_PP.setVisibility(View.GONE);
+                            holder.CIV_PP.setVisibility(View.GONE);
                             holder.CL_CHAT.setBackgroundResource(bIsPinned ? R.drawable.rounded_rect_chat_bottom_pink_orange : R.drawable.rounded_rect_chat_bottom_blue_green);
                         } else if (mChatList.get(pos - 1).getSender().equals(sUserID) && mChatList.get(pos + 1).getSender().equals(sUserID)) {
                             holder.CIV_PP.setVisibility(View.GONE);
@@ -398,15 +406,36 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         }
     }
 
-    private int manipulateColor(int color, float factor) {
-        int a = Color.alpha(color);
-        int r = Math.round(Color.red(color) * factor);
-        int g = Math.round(Color.green(color) * factor);
-        int b = Math.round(Color.blue(color) * factor);
-        return Color.argb(a,
-                Math.min(r, 255),
-                Math.min(g, 255),
-                Math.min(b, 255));
+    private int Darken(int color, double fraction) {
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        red = darkenColor(red, fraction);
+        green = darkenColor(green, fraction);
+        blue = darkenColor(blue, fraction);
+        int alpha = Color.alpha(color);
+
+        return Color.argb(alpha, red, green, blue);
+    }
+
+    private int Lighten(int color){
+
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        red = lightenColor(red);
+        green = lightenColor(green);
+        blue = lightenColor(blue);
+        int alpha = Color.alpha(color);
+        return Color.argb(alpha, red, green, blue);
+    }
+
+    private  int darkenColor(int color, double fraction) {
+        return (int)Math.max(color - (color * fraction), 0);
+    }
+
+    private  int lightenColor(int color) {
+        return (int) Math.min(color + (color * 1.5), 255);
     }
 
     private void GetTimeStamp(String TimeStamp, TextView TV_TIMESTAMP) {

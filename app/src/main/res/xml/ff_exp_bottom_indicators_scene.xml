@@ -5,15 +5,15 @@
 
     <Transition
         android:id="@+id/TRANS_BI_FF_EXP_1"
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/set_unsent_end"
+        motion:constraintSetStart="@id/set_unsent_start"
         motion:motionInterpolator="@string/material_motion_easing_decelerated"
         motion:duration="1000">
     </Transition>
 
     <Transition
         android:id="@+id/TRANS_BI_FF_EXP_3_1"
-        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetEnd="@+id/set_unsent_end"
         motion:constraintSetStart="@id/end3"
         motion:motionInterpolator="@string/material_motion_easing_decelerated"
         motion:duration="1000">
@@ -21,7 +21,7 @@
 
     <Transition
         android:id="@+id/TRANS_BI_FF_EXP_2_1"
-        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetEnd="@+id/set_unsent_end"
         motion:constraintSetStart="@id/end2"
         motion:motionInterpolator="@string/material_motion_easing_decelerated"
         motion:duration="1000">
@@ -30,7 +30,7 @@
     <Transition
         android:id="@+id/TRANS_BI_FF_EXP_1_2"
         motion:constraintSetEnd="@+id/end2"
-        motion:constraintSetStart="@id/end"
+        motion:constraintSetStart="@id/set_unsent_end"
         motion:motionInterpolator="@string/material_motion_easing_decelerated"
         motion:duration="1000">
     </Transition>
@@ -39,7 +39,7 @@
         android:id="@+id/TRANS_BI_FF_EXP_1_3"
         motion:constraintSetEnd="@+id/end3"
         motion:motionInterpolator="@string/material_motion_easing_decelerated"
-        motion:constraintSetStart="@id/end"
+        motion:constraintSetStart="@id/set_unsent_end"
         motion:duration="1000">
     </Transition>
 
@@ -59,7 +59,7 @@
         motion:duration="1000">
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/set_unsent_start">
         <Constraint
             android:id="@+id/V_INDICATOR_LONG_FF_EXP"
             android:layout_width="@dimen/_100sdp"
@@ -88,7 +88,7 @@
             motion:layout_constraintStart_toEndOf="@id/V_DOT_1_BOTTOM_FF_EXP"/>
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/set_unsent_end">
 
         <Constraint
             android:id="@+id/V_INDICATOR_LONG_FF_EXP"

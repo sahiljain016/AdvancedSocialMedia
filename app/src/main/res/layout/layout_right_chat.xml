@@ -50,14 +50,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/IV_ANCHOR_MARK"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            android:src="@drawable/ic_anchor"
+            app:layout_constraintTop_toTopOf="@id/CL_CHAT_MESSAGE"
+            app:layout_constraintBottom_toBottomOf="@id/CL_CHAT_MESSAGE"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CL_CHAT_MESSAGE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
             android:background="@drawable/rounded_rect_chat_bottom_grey"
             android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/IV_ANCHOR_MARK"
             app:layout_constraintTop_toTopOf="parent">
 
 
@@ -80,6 +91,7 @@
                 android:paddingStart="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_5sdp"
                 android:textColor="@android:color/black"
+                android:text="guig gui giu"
                 android:textSize="18sp"
                 app:flow_horizontalBias="1.0"
                 app:layout_constraintBottom_toTopOf="@id/TV_TIMESTAMP_CHAT"

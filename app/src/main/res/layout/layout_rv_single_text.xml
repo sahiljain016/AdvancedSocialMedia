@@ -41,7 +41,7 @@
 
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_toStartOf="@id/ATV_SEND"
+                android:layout_toStartOf="@id/IV_GO_TO_ANCHOR"
                 android:layout_toEndOf="@id/ATV_SERIAL_NO"
                 android:hint="Type custom message here!"
 
@@ -51,7 +51,7 @@
 
 
             <me.grantland.widget.AutofitTextView
-                android:id="@+id/ATV_SEND"
+                android:id="@+id/IV_GO_TO_ANCHOR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
