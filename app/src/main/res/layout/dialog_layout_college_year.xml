@@ -51,7 +51,6 @@
         app:layout_constraintVertical_bias="0.032">
 
         <TextView
-            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -129,7 +128,6 @@ android:textColor="@android:color/black"
             android:layout_centerHorizontal="true">
 
             <TextView
-                android:id="@+id/SecondYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
@@ -155,7 +153,6 @@ android:textColor="@android:color/black"
 android:visibility="gone"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/ThirdYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Towards the End"

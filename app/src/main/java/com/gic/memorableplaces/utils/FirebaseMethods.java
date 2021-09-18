@@ -1613,7 +1613,7 @@ public class FirebaseMethods {
                 .setValue("false");
 
         UserAccountSettings userAccountSettings = new UserAccountSettings();
-        userAccountSettings.setDescription(description);
+        userAccountSettings.setCard_bio(description);
         userAccountSettings.setDisplay_name(display_name);
         userAccountSettings.setFollowing(0);
         userAccountSettings.setFriendly_xavierites(0);
@@ -1758,10 +1758,10 @@ public class FirebaseMethods {
                 Log.d(TAG, "getUserAccountSettings: data snapshot" + ds);
 
                 try {
-                    settings.setDescription(
+                    settings.setCard_bio(
                             Objects.requireNonNull(ds.child(UserID)
                                     .getValue(UserAccountSettings.class))
-                                    .getDescription()
+                                    .getCard_bio()
                     );
                     settings.setDisplay_name(
                             Objects.requireNonNull(ds.child(UserID)

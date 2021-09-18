@@ -10,16 +10,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:id="@+id/relLayout1share">
+            android:layout_marginBottom="50dp">
             <include layout="@layout/layout_middle_body"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/relLayout2share">
+            android:layout_alignParentBottom="true">
 
           <include layout="@layout/layout_bottom_tabs_share"/>
 

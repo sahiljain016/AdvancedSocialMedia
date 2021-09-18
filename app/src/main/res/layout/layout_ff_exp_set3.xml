@@ -52,7 +52,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/IV_CARD_EXP"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingBottom="@dimen/_5sdp"
@@ -96,7 +95,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/IV_LIKE_EXP"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_like_without_bubble" />
@@ -118,7 +116,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/IV_SEND_HI_EXP"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_send_bubble" />
@@ -127,7 +124,6 @@
 
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/ATV_FILTERS_TITLE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_40sdp"

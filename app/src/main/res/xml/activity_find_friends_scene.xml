@@ -3,7 +3,6 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        android:id="@+id/TRANS_SHOW_MORE_DETAILS"
         motion:constraintSetEnd="@+id/set_unsent_end"
         motion:constraintSetStart="@id/set_unsent_start"
         motion:duration="1500">
@@ -17,7 +16,6 @@
     <ConstraintSet android:id="@+id/set_unsent_start">
 
         <Constraint
-            android:id="@+id/V_WHITE_BACKGROUND"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0" />
@@ -61,7 +59,6 @@
             motion:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP" />
 
         <Constraint
-            android:id="@+id/RL_BACK"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_50sdp"
@@ -96,7 +93,6 @@
             motion:layout_constraintTop_toBottomOf="@id/ATV_PREVIEW_TEXT" />
 
         <Constraint
-            android:id="@+id/IV_MEGAPHONE"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_margin="@dimen/_5sdp"
@@ -152,7 +148,6 @@
             motion:layout_constraintBottom_toBottomOf="parent" />
 
         <Constraint
-            android:id="@+id/V_BLACK_GRADIENT_FULL"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="@dimen/_7sdp"
@@ -167,7 +162,6 @@
 
 
         <Constraint
-            android:id="@+id/V_WHITE_BACKGROUND"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -200,7 +194,6 @@
             motion:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP" />
 
         <Constraint
-            android:id="@+id/RL_BACK"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_50sdp"
@@ -237,7 +230,6 @@
             motion:layout_constraintTop_toBottomOf="@id/ATV_PREVIEW_TEXT" />
 
         <Constraint
-            android:id="@+id/IV_MEGAPHONE"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_margin="@dimen/_5sdp"
@@ -280,7 +272,6 @@
             motion:layout_constraintBottom_toBottomOf="parent" />
 
         <Constraint
-            android:id="@+id/V_BLACK_GRADIENT_FULL"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="@dimen/_7sdp"

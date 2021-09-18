@@ -19,12 +19,11 @@
     <string name="report_bug_fragment">Report A Bug</string>
     <string name="friends_filter_fragment">friends_filter</string>
     <string name="social_feed_fragment">Social_Feed</string>
-    <string name="fragment_messages">Comments</string>
-    <string name="student_dashboard_fragment">Student_Dashboard</string>
     <string name="filter_1_fragment">filter_1</string>
     <string name="new_chat_user_fragment">New_user_chat</string>
     <string name="chat_fragment">Chat_fragment</string>
     <string name="prepare_card_fragment">Prepare_card</string>
+    <string name="get_started_fragment">Get_Started</string>
     <string name="sign_up_fragment">Sign_up</string>
     <string name="course_and_full_name_Card_fragment">course_and_full_name_Card_fragment</string>
     <string name="profile_photo_fragment_card">profile_photo_fragment_card</string>
@@ -32,26 +31,15 @@
     <string name="likes_messages_filter_fragment">likes_messages_filter_fragment</string>
     <string name="music_movies_books_fragment">music_movies_books_fragment</string>
     <string name="games_fragment">music_movies_books_fragment</string>
-    <string name="favourite_places_map_fragment">favourite_places_map_fragment</string>
-
-    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
 
     <!--Main Fragments Names For Bottom Nav-->
     <string name="profile_fragment">Profile</string>
-    <string name="home_fragment">Home</string>
-    <string name="share_fragment">Share</string>
-    <string name="like_frgament">Like</string>
-    <string name="search_fragment">Search</string>
-    <string name="fragment_comments">Comments</string>
 
 
     <!-- Dialog Names -->
     <string name="confirm_password_dialog_fragment">ConfirmPasswordDialog</string>
 
     <!--Firebase Messages -->
-    <string name="auth_failed_login">Something is wrong! Check Credentials Again.</string>
-    <string name="auth_success_login">Log In Successful!</string>
-    <string name="auth_failed_signup">Something is wrong! Sign Up Failed.</string>
     <string name="auth_success_singup">Sign Up success! Sending Verification Email.</string>
 
     <!-- Firebase Databases-->
@@ -67,7 +55,6 @@
     <string name="dbname_chats">chats</string>
     <string name="dbname_chats_removed">chats_removed</string>
     <string name="dbname_chat_meta_data">chat_meta_data</string>
-    <string name="dbname_chat_users">chat_users</string>
     <string name="dbname_misc">Miscellaneous</string>
     <string name="not_available">N/A</string>
 
@@ -117,7 +104,6 @@
     <string name="field_color_caption">CaptionColor</string>
     <string name="field_comments">comments</string>
     <string name="field_chats">chats</string>
-    <string name="field_receivers">receivers</string>
     <string name="field_display_name">display_name</string>
     <string name="scale_type_center_crop">CENTER_CROP</string>
     <string name="scale_type_center_inside">CENTER_INSIDE</string>
@@ -146,7 +132,6 @@
     <string name="dbname_user_card">user_card</string>
     <string name="dbname_filter_data">filter_data</string>
     <string name="card_completed">completed</string>
-    <string name="courses_hansraj">courses_hansraj</string>
     <string name="society_hansraj">society_hansraj</string>
     <string name="society_name">society_name</string>
     <string name="society_cover_url">society_cover_url</string>
@@ -154,7 +139,6 @@
     <string name="field_hobbies">hobbies</string>
     <string name="field_society">my_societies</string>
     <string name="field_filter">filter_name</string>
-    <string name="field_full_name">full_name</string>
     <string name="field_age">age</string>
     <string name="field_zodiac_sign">zodiac_sign</string>
     <string name="field_class_representative">class_representative</string>
@@ -175,8 +159,6 @@
     <string name="field_Female">Female</string>
     <string name="field_pronouns">pronoun_preferred</string>
     <string name="no_selection">no_selection</string>
-    <string name="music_privacy_status">music_status</string>
-    <string name="movie_privacy_status">movie_status</string>
     <string name="field_track_name">track_name</string>
     <string name="field_singer_name">singer_name</string>
     <string name="field_cover_url">cover_url</string>
@@ -203,7 +185,6 @@
     <!--API Keys & URLS-->
     <string name="The_Movie_DB_API_KEY">a1d0f215f24d27bd7165e9e9a55bfb18</string>
     <string name="The_GOOGLE_BOOKS_API_KEY">AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA</string>
-    <string name="The_GOOGLE_MAPS_API_KEY">AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA</string>
     <string name="Rapid_MUSIC_API_DEEZER">2ce5bbd84amsh1b536400504bab9p18b7b5jsne6afd869c399</string>
     <string name="rawg_games_api_key">52bb1536e6574d2ca3fbb7b8b1834768</string>
     <string name="MOVIE_COVER_CONSTANT_URL">https://image.tmdb.org/t/p/w500</string>
@@ -314,20 +295,9 @@
     <string name="click_to_enter_your_gender">Enter Your Gender</string>
 
     <!--Settings pop up Menu Profile-->
-    <string name="settings_icon">settings Icon</string>
-    <string name="account_settings_tv">Account Settings</string>
-    <string name="edit_profile_icon">edit profile</string>
-    <string name="edit_profile_button">Edit Profile</string>
-    <string name="bug_icon">bug_icon</string>
-    <string name="report_a_bug_found_button">Report A Bug Found</string>
-    <string name="log_out_icon">Log out icon</string>
-    <string name="log_out_button">Log Out</string>
-    <string name="close_icon">close icon</string>
-    <string name="close_settings">Close Settings</string>
 
     <!--Log In Page-->
     <string name="logo_st_xaviers">Logo St Xaviers</string>
-    <string name="app_title_ic">App Title</string>
     <string name="email_address_hint_lo">Email address</string>
     <string name="password_hint_lo">Password</string>
     <string name="log_in_button_lo">Log In</string>
@@ -336,11 +306,8 @@
 
     <!--Sign Up Page-->
     <string name="app_title_su">app title</string>
-    <string name="full_name_et_su">Full Name</string>
     <string name="email_address_hint_su">Email Address</string>
     <string name="username_hint_su">Username</string>
-    <string name="phone_number_optional_hint_su">Phone number (Optional)</string>
-    <string name="college_uid_roll_no_optional_hint_su">College UID/ Roll No (Optional)</string>
     <string name="password_hint_su">Password</string>
     <string name="confirm_password_hint_su">Confirm Password</string>
     <string name="sign_up_button_su">Sign Up</string>
@@ -354,9 +321,7 @@
     <string name="change_email_button_dialog">Change Email</string>
 
     <!--Sign Out Fragment layout texts-->
-    <string name="sign_out_title_so">Sign Out</string>
     <string name="confirmation_tv_so">Are you sure you want to sign out?</string>
-    <string name="cancel_button_so">Cancel</string>
     <string name="sign_out_button_so">Sign Out</string>
     <string name="loading_tv_so">Singing Out. Byeeee!</string>
 
@@ -369,17 +334,13 @@
     <string name="remove_this_game">REMOVE THIS GAME</string>
     <!--FIND FRIENDS-->
     <string name="ff_user_details">FFUserDetails</string>
-    <string name="preview_text_pt_1">Would like to know more about</string>
-    <string name="preview_text_pt2">/? Swipe up the arrow below!</string>
     <string name="title_filters">Filters</string>
     <!--Message Activity-->
     <string name="field_date_messaged">date_messaged</string>
     <string name="field_latest_date_messaged">latest_date_messaged</string>
-    <string name="field_epoch_gmt_milliseconds">epoch_gmt_milliseconds</string>
     <string name="field_latest_message">latest_message</string>
     <string name="field_latest_message_id">latest_message_id</string>
     <string name="field_latest_sender_id">latest_sender_id</string>
-    <string name="field_is_seen">isSeen</string>
     <string name="field_is_message_pinned">is_message_pinned</string>
     <string name="field_pending_unseen_messages">pending_unseen_messages</string>
     <string name="field_previous_message_id">previous_message_id</string>

@@ -1,0 +1,401 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hansraj_img1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/V_BG_GS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:background="@drawable/rounded_rect_tl_tr_white" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_GS"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:text="Getting Started"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="42sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/V_BG_GS"
+        app:sizeToFit="true"
+        tools:layout_editor_absoluteX="28dp" />
+
+    <View
+        android:id="@+id/V_LINE_1_GS"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#4A4A4A"
+        app:layout_constraintEnd_toEndOf="@id/ATV_TITLE_GS"
+        app:layout_constraintStart_toStartOf="@id/ATV_TITLE_GS"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_GS" />
+
+    <ScrollView
+        android:id="@+id/SV_GS"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_GS">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_30sdp">
+
+            <RelativeLayout
+                android:id="@+id/RL_1_CENTER_TEXT_GS"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SERIAL_NO_1_GS"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/rounded_white_background"
+                    android:backgroundTint="#ABE365"
+                    android:fontFamily="@font/capriola"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingTop="@dimen/_1sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:alpha="0"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    app:sizeToFit="true" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_TITLE_1_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:alpha="0"
+                    android:layout_toEndOf="@id/ATV_SERIAL_NO_1_GS"
+                    android:fontFamily="@font/capriola"
+                    android:text="Let us know some basic details about you"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SUB_TITLE_1_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ATV_TITLE_1_GS"
+                    android:layout_alignStart="@id/ATV_TITLE_1_GS"
+                    android:layout_alignEnd="@id/ATV_TITLE_1_GS"
+                    android:alpha="0"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/capriola"
+                    android:text="Select the course that you are pursuing in Hansraj College from the list given on the next page."
+                    android:textColor="#878787"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_2_CENTER_TEXT_GS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@id/RL_1_CENTER_TEXT_GS">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SERIAL_NO_2_GS"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/rounded_white_background"
+                    android:backgroundTint="#ABE365"
+                    android:fontFamily="@font/capriola"
+                    android:gravity="center"
+
+                    android:alpha="0"
+                    android:maxLines="1"
+                    android:paddingTop="@dimen/_1sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="2"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    app:sizeToFit="true" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_TITLE_2_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/ATV_SERIAL_NO_2_GS"
+                    android:fontFamily="@font/capriola"
+
+                    android:alpha="0"
+                    android:text="Details are the key to finding relevant people in our app"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SUB_TITLE_2_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ATV_TITLE_2_GS"
+                    android:layout_alignStart="@id/ATV_TITLE_2_GS"
+                    android:layout_alignEnd="@id/ATV_TITLE_2_GS"
+                    android:layout_marginTop="@dimen/_2sdp"
+
+                    android:alpha="0"
+                    android:fontFamily="@font/capriola"
+                    android:text="Enter details under various topics that a person might generally base their liking on. Set details for what you are looking and what you want others to search you by. "
+                    android:textColor="#878787"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_3_CENTER_TEXT_GS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RL_2_CENTER_TEXT_GS">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SERIAL_NO_3_GS"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/rounded_white_background"
+                    android:backgroundTint="#ABE365"
+                    android:fontFamily="@font/capriola"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/_2sdp"
+
+                    android:alpha="0"
+                    android:text="3"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    app:sizeToFit="true" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_TITLE_3_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/ATV_SERIAL_NO_3_GS"
+                    android:alpha="0"
+                    android:fontFamily="@font/capriola"
+                    android:text="Questions are the way of life"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SUB_TITLE_3_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ATV_TITLE_3_GS"
+                    android:layout_alignStart="@id/ATV_TITLE_3_GS"
+
+                    android:alpha="0"
+                    android:layout_alignEnd="@id/ATV_TITLE_3_GS"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/capriola"
+                    android:text="Enter  answers from a range of questions that help you describe your best self. "
+                    android:textColor="#878787"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_4_CENTER_TEXT_GS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RL_3_CENTER_TEXT_GS">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SERIAL_NO_4_GS"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/rounded_white_background"
+                    android:backgroundTint="#ABE365"
+                    android:fontFamily="@font/capriola"
+                    android:gravity="center"
+                    android:maxLines="1"
+
+                    android:alpha="0"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:text="4"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    app:sizeToFit="true" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_TITLE_4_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+
+                    android:alpha="0"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/ATV_SERIAL_NO_4_GS"
+                    android:fontFamily="@font/capriola"
+                    android:text="Looks might not matter but we'd still love to see you."
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SUB_TITLE_4_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ATV_TITLE_4_GS"
+                    android:layout_alignStart="@id/ATV_TITLE_4_GS"
+                    android:layout_alignEnd="@id/ATV_TITLE_4_GS"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/capriola"
+                    android:alpha="0"
+                    android:text="Enter up to 5 different photos of yourself and also a voice note for visitors on your profile."
+                    android:textColor="#878787"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_5_CENTER_TEXT_GS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RL_4_CENTER_TEXT_GS">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SERIAL_NO_5_GS"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/rounded_white_background"
+                    android:backgroundTint="#ABE365"
+                    android:fontFamily="@font/capriola"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:alpha="0"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:text="5"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    app:sizeToFit="true" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_TITLE_5_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toEndOf="@id/ATV_SERIAL_NO_5_GS"
+                    android:fontFamily="@font/capriola"
+                    android:alpha="0"
+                    android:text="Lastly, a perfect description"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_SUB_TITLE_5_GS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ATV_TITLE_5_GS"
+                    android:layout_alignStart="@id/ATV_TITLE_5_GS"
+                    android:layout_alignEnd="@id/ATV_TITLE_5_GS"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/capriola"
+                    android:alpha="0"
+                    android:text="We will generate an automatic description based upon your inputs. You have the option to choose whether you want to add a detail to your description or not."
+                    android:textColor="#878787"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_BUTTON_GS"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/glow_bg_neon_green"
+                android:padding="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RL_5_CENTER_TEXT_GS">
+
+                <me.grantland.widget.AutofitTextView
+                    android:id="@+id/ATV_BACK_CFN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/capriola"
+                    android:text="Get Started"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_toEndOf="@id/ATV_BACK_CFN"
+                    android:rotation="180"
+                    android:src="@drawable/ic_back_arrow"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/gradient_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/SV_GS"
+        app:layout_constraintStart_toStartOf="@id/SV_GS" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

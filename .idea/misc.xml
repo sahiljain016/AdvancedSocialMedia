@@ -10,6 +10,7 @@
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/debug/res/drawable-ldpi/gradient_rounded_blue_green.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/debug/res/drawable-ldpi/rounded_rect_tl_br_trans_white.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/debug/res/drawable-xhdpi/gradient_rounded_blue_green_2.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/debug/res/drawable-xhdpi/gradient_white.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/debug/res/drawable-xxhdpi/ic_default_user.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/gradient_black.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/gradient_blue_green.xml" value="0.17037037037037037" />
@@ -19,6 +20,7 @@
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/ic_default_prpfile_photo.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/ic_microphone.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/ic_plus_sign.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/ic_search.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/rounded_corners_chat.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-anydpi/rounded_white_background.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-hdpi/rounded_corners_checkbox_unchecked.xml" value="0.17037037037037037" />
@@ -33,34 +35,59 @@
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-hdpi/rounded_rect_chat_top_pink_orange.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-hdpi/rounded_rect_tl_tr_gradient_green_blue.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-mdpi/rounded_background.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-mdpi/rounded_corners_imageview.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-mdpi/tl_tr_rounded_rectangle_white.xml" value="0.15648148148148147" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-xhdpi/background_rounded_grey_stroke.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable-xhdpi/gradient_rounded_purple_pink_dark.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/badge_bg.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/custom_background_cardview.xml" value="0.1680365296803653" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/custom_background_edittext_share.xml" value="0.1680365296803653" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/custom_button_login.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/gradient_pink_orange.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/gradient_red.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_about_me.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_anchor.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_back_ff.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_blob_ff_1.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_book.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_call_pinned.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_call_pinned_green_blue.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_connected_people.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_controller.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_default_user.xml" value="0.4309133489461358" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_gender_symbol.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_hobbies.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_movie.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_music.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_university.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_video_call.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/ic_video_call_pinned.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/rounded_rect_br_bl_white.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/drawable/rounded_rect_tl_tr_gradient_pink_orange.xml" value="0.17037037037037037" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/font/abril_fatface.xml" value="0.18036529680365296" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/font/architects_daughter.xml" value="0.18036529680365296" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/font/goudy_bookletter_1911.xml" value="0.18036529680365296" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/acitvity_login.xml" value="0.1" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/activity_find_friends.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/activity_home.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/bar_bottom_chat_fragment.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/bar_bottom_options_chat_fragment.xml" value="0.1" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/bar_bottom_text_chat_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/dialog_filter_search.xml" value="0.15388127853881278" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/dialog_layout_games.xml" value="0.1" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/dialog_upload_progress.xml" value="0.15601851851851853" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_camera.xml" value="0.15388127853881278" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_card_details.xml" value="0.1" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_card_pt_2.xml" value="0.1" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_chat.xml" value="0.13025210084033614" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_classroom_dashboard.xml" value="0.15388127853881278" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_course_full_name.xml" value="0.22" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_courses_fullname_card.xml" value="0.1" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_fill_details.xml" value="0.22" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_get_started.xml" value="0.22" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_messages.xml" value="0.17647058823529413" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_search_new_chat.xml" value="0.22" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_sign_up.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_social_feed.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/fragment_user_details.xml" value="0.22" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_2_line_text.xml" value="0.16666666666666666" />
@@ -70,7 +97,11 @@
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_ff_exp_set1.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_ff_exp_set2.xml" value="0.13903985507246377" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_ff_exp_set3.xml" value="0.1" />
-        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_find_friends_results.xml" value="0.15388127853881278" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_fill_details.xml" value="0.22" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_filter_1_values.xml" value="0.38122171945701355" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_filter_box_in_result.xml" value="0.15388127853881278" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_filters.xml" value="0.15388127853881278" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_find_friends_results.xml" value="0.22" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_find_friends_results_shrinked_2.xml" value="0.15388127853881278" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_left_chat.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_main_feed_recycler_view.xml" value="0.15601851851851853" />
@@ -79,6 +110,7 @@
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_right_chat.xml" value="0.22" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_rv_single_text.xml" value="0.15388127853881278" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_search_new_chat_list.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_select_course_card.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/layout_top_home_page.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/other_user_card.xml" value="0.15601851851851853" />
         <entry key="..\:/Users/sahil/AndroidStudioProjects/MEMORABLEPLACES/app/src/main/res/layout/snippet_center_view_post.xml" value="0.15601851851851853" />

@@ -24,7 +24,7 @@
     <!--            android:scrollbars="none">-->
 
     <TextView
-        android:id="@+id/ItemName"
+        android:id="@+id/TV_COURSE_NAME"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:ellipsize="end"
@@ -42,10 +42,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_Tick_Courses"/>
+        app:layout_constraintEnd_toStartOf="@id/IV_SELECTED_COURSE_ICON"/>
 
     <ImageView
-        android:id="@+id/iv_Tick_Courses"
+        android:id="@+id/IV_SELECTED_COURSE_ICON"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:src="@drawable/ic_green_tick_round"

@@ -15,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/Hansraj_signUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_app_title_on_login"

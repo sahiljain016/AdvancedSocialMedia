@@ -29,7 +29,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amita_bold"
@@ -146,7 +145,6 @@
             android:src="@drawable/ic_trash" />
 
         <ScrollView
-            android:id="@+id/SCROLLER_ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_description"

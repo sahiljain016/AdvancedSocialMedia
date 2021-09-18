@@ -31,7 +31,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ML_CHAT_MESSAGE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="7dp"
@@ -41,7 +40,6 @@
 
 
         <View
-            android:id="@+id/V_MAX_CHAT_LENGTH"
             android:layout_width="1dp"
             android:layout_height="1dp"
             android:layout_marginEnd="@dimen/_60sdp"

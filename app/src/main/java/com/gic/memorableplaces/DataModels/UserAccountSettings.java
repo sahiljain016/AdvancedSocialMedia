@@ -2,12 +2,13 @@ package com.gic.memorableplaces.DataModels;
 
 public class UserAccountSettings {
 
-    private String description;
+    private String card_bio;
     private String display_name;
     private long following;
     private long friendly_xavierites;
     private long posts;
     private String uid;
+    private String course;
     private String profile_photo;
     private String username;
     private String website;
@@ -17,25 +18,26 @@ public class UserAccountSettings {
 
     }
 
-    public UserAccountSettings(String description, String display_name, long following, long friendly_xavierites,
-                               long posts, String uid, String profile_photo, String username, String website) {
-        this.description = description;
+    public UserAccountSettings(String card_bio, String display_name, long following, long friendly_xavierites,
+                               long posts, String uid, String profile_photo, String username, String website, String course) {
+        this.card_bio = card_bio;
         this.display_name = display_name;
         this.following = following;
         this.friendly_xavierites = friendly_xavierites;
         this.posts = posts;
         this.uid = uid;
+        this.course = course;
         this.profile_photo = profile_photo;
         this.username = username;
         this.website = website;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCard_bio() {
+        return card_bio;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCard_bio(String card_bio) {
+        this.card_bio = card_bio;
     }
 
     public String getDisplay_name() {
@@ -102,10 +104,18 @@ public class UserAccountSettings {
         this.website = website;
     }
 
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
     @Override
     public String toString() {
         return "UserAccountSettings{" +
-                "description='" + description + '\'' +
+                "description='" + card_bio + '\'' +
                 ", display_name='" + display_name + '\'' +
                 ", following=" + following +
                 ", friendly_xavierites=" + friendly_xavierites +

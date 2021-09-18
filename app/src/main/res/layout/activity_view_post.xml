@@ -16,14 +16,12 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/RelLayout_center_view_post"
         android:layout_below="@id/RelLayout_toolbar">
 
         <include layout="@layout/snippet_center_view_post"/>
 
     </RelativeLayout>
     <FrameLayout
-        android:id="@+id/FrameLayoutComments"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_border_top">
@@ -93,7 +92,6 @@
                 android:textSize="16sp" />
 
             <View
-                android:id="@+id/Separator"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_8sdp"

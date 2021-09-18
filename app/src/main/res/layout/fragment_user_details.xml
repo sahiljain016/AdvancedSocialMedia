@@ -13,7 +13,6 @@
 
 
     <View
-        android:id="@+id/V_WHITE_BACKGROUND"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF" />
@@ -96,7 +95,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/RL_BACK"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_50sdp"
@@ -176,7 +174,6 @@
     </RelativeLayout>
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/V_BLACK_GRADIENT_FULL"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="@dimen/_7sdp"
@@ -224,7 +221,6 @@
         app:layout_constraintTop_toBottomOf="@id/ATV_PREVIEW_TEXT" />
 
     <ImageView
-        android:id="@+id/IV_MEGAPHONE"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:layout_margin="@dimen/_5sdp"
@@ -446,7 +442,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/RL_CENTER_LAYOUT_FF_EXP2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_230sdp"
 
@@ -464,7 +459,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/RL_CENTER_LAYOUT_FF_EXP3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_230sdp"
 

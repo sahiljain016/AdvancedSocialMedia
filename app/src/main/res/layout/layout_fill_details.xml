@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_35sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_special_bg_ab_fill_details"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/ic_age_filter"
+                app:layout_constraintBottom_toTopOf="@id/ATV_DETAIL_TITLE_FD"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_DETAIL_TITLE_FD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="Age &amp; Birthdate"
+                android:textColor="#000000"
+                android:textSize="36sp"
+                app:layout_constraintBottom_toTopOf="@id/RL_BOTTOM_RV_FD"
+                tools:layout_editor_absoluteX="14dp" />
+
+            <RelativeLayout
+                android:id="@+id/RL_BOTTOM_RV_FD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/rounded_corners_checkbox_unchecked"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/TV_FILL_IN_FD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/capriola"
+                    android:text="Fill In"
+                    android:textColor="@color/black"
+                    android:textSize="36sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/TV_FILL_IN_FD"
+                    android:rotation="180"
+                    android:src="@drawable/ic_back_arrow" />
+            </RelativeLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

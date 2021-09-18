@@ -7,7 +7,6 @@
 
 
     <ImageView
-        android:id="@+id/BG_FILTER"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
         android:paddingStart="-20dp"

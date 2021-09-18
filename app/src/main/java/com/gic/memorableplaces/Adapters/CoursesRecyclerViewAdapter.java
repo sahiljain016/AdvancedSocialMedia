@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,47 +13,40 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gic.memorableplaces.CustomLibs.HTextView.TyperTextView;
 import com.gic.memorableplaces.R;
 
 import java.util.ArrayList;
 
 public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecyclerViewAdapter.MainFeedViewHolder> {
     private static final String TAG = "CoursesRecyclerViewAdapter";
-    private final String mCourseSelected;
-    private int ITEM_POSITION_TITLE = 1;
-    private int ITEM_POSITION_CONTENTS = 2;
 
     //Variables
-    private ArrayList<String> mCourseList;
-    public static ArrayList<String> CourseNameList;
-    private ArrayList<Integer> CourseNumbers = new ArrayList<>();
     private Context mContext;
-    private String mSelectedColor = String.valueOf(Color.WHITE), CourseName;
-    private boolean isCourseSelected;
-    private TyperTextView mCollegeHeading;
-    private EditText mFullName;
+    private final String sCourseSelected;
+
+    private ArrayList<String> alsCourseList;
+
     private OnCoursesClickListener MyOnCoursesClickListener;
 
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         OnCoursesClickListener mOnCoursesClickListener;
-        public TextView mCourseName;
-        public ConstraintLayout constraintLayout;
-        public ImageView TickMe;
+        public TextView TV_COURSE;
+        public ConstraintLayout CL_SC;
+        public ImageView IV_SELECT_ICON;
 
         public MainFeedViewHolder(@NonNull View itemView, OnCoursesClickListener onCoursesClickListener) {
             super(itemView);
             mOnCoursesClickListener = onCoursesClickListener;
-            mCourseName = itemView.findViewById(R.id.ItemName);
-            constraintLayout = itemView.findViewById(R.id.CL_select_course);
-            TickMe = itemView.findViewById(R.id.iv_Tick_Courses);
+            TV_COURSE = itemView.findViewById(R.id.TV_COURSE_NAME);
+            CL_SC = itemView.findViewById(R.id.CL_select_course);
+            IV_SELECT_ICON = itemView.findViewById(R.id.IV_SELECTED_COURSE_ICON);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mOnCoursesClickListener.onItemClick(getAdapterPosition(), TickMe);
+            mOnCoursesClickListener.onItemClick(getAdapterPosition(), IV_SELECT_ICON);
         }
     }
 
@@ -63,14 +55,10 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
     }
 
     public CoursesRecyclerViewAdapter(String CourseSelect, ArrayList<String> CourseList, Context context,
-                                      String SelectedColor, TyperTextView typerTextView, EditText FullName, OnCoursesClickListener onCoursesClickListener) {
-        mCourseList = CourseList;
+                                      OnCoursesClickListener onCoursesClickListener) {
+        alsCourseList = CourseList;
         mContext = context;
-        mCollegeHeading = typerTextView;
-        mFullName = FullName;
-        mCourseSelected = CourseSelect;
-        mSelectedColor = SelectedColor;
-        CourseNameList = new ArrayList<>();
+        sCourseSelected = CourseSelect;
         MyOnCoursesClickListener = onCoursesClickListener;
     }
 
@@ -83,23 +71,25 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
 
     @Override
     public void onBindViewHolder(@NonNull final MainFeedViewHolder holder, final int position) {
-        holder.setIsRecyclable(false);
-
-        if (holder.getItemViewType() == ITEM_POSITION_TITLE) {
-            holder.mCourseName.setText("Select your Course..");
-            holder.mCourseName.setTextSize(24);
-            holder.constraintLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            holder.mCourseName.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+        int pos = holder.getBindingAdapterPosition();
+        if (pos == 0) {
+            holder.TV_COURSE.setText("Select your Course..");
+            holder.TV_COURSE.setTextSize(24);
+            holder.CL_SC.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.TV_COURSE.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
         } else {
+            holder.TV_COURSE.setTextSize(18);
             if ((position % 2) == 0) {
-                holder.constraintLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                holder.CL_SC.setBackgroundColor(Color.parseColor("#FFFFFF"));
             } else {
-                holder.constraintLayout.setBackgroundColor(Color.parseColor("#75D5CFCF"));
+                holder.CL_SC.setBackgroundColor(Color.parseColor("#CBCBCB"));
             }
-            holder.mCourseName.setText(position + ".  " + mCourseList.get(position - 1));
-            if (!TextUtils.isEmpty(mCourseSelected)) {
-                if (mCourseList.get(position - 1).equals(mCourseSelected)) {
-                    holder.TickMe.setVisibility(View.VISIBLE);
+            holder.TV_COURSE.setText(position + ".  " + alsCourseList.get(position - 1));
+            if (!TextUtils.isEmpty(sCourseSelected)) {
+                if (alsCourseList.get(position - 1).equals(sCourseSelected)) {
+                    holder.IV_SELECT_ICON.setVisibility(View.VISIBLE);
+                }else{
+                    holder.IV_SELECT_ICON.setVisibility(View.GONE);
                 }
             }
         }
@@ -109,17 +99,9 @@ public class CoursesRecyclerViewAdapter extends RecyclerView.Adapter<CoursesRecy
 
     @Override
     public int getItemCount() {
-        return (mCourseList.size() + 1);
+        return (alsCourseList.size() + 1);
     }
 
-    @Override
-    public int getItemViewType(int position) {
 
-        if (position == 0) {
-            return ITEM_POSITION_TITLE;
-        } else {
-            return ITEM_POSITION_CONTENTS;
-        }
-    }
 }
 

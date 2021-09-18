@@ -1,0 +1,234 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hansraj_img2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/V_BG_GS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:background="@drawable/rounded_rect_tl_tr_white" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_GS"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:text="Full Name &amp; Courses"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="42sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/V_BG_GS"
+        app:sizeToFit="true"
+        tools:layout_editor_absoluteX="28dp" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_FULLNAME_CFN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/capriola"
+        android:text="Full Name:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/V__DIVIDER_1_CFN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_GS" />
+
+    <View
+        android:id="@+id/V__DIVIDER_1_CFN"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_GS" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_USERNAME_TITLE_CFN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/capriola"
+        android:text="Username:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/V__DIVIDER_1_CFN"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_GS" />
+
+    <EditText
+        android:id="@+id/ET_FULLNAME_CFN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:background="@drawable/rounded_corners_chat"
+        android:fontFamily="@font/capriola"
+        android:hint="john doe"
+        android:padding="@dimen/_10sdp"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/ATV_FULLNAME_CFN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_CFN" />
+
+    <TextView
+        android:id="@+id/ATV_USERNAME_CFN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/rounded_corners_chat"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/capriola"
+        android:hint="john.doe016"
+        android:padding="@dimen/_10sdp"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/V__DIVIDER_1_CFN"
+        app:layout_constraintTop_toBottomOf="@id/ATV_USERNAME_TITLE_CFN" />
+
+    <com.gic.memorableplaces.CustomLibs.HTextView.TyperTextView
+        android:id="@+id/TTV_AUTO_DESP_CFN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/capriola"
+        android:maxLines="2"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/ATV_USERNAME_CFN" />
+
+
+    <View
+        android:id="@+id/V_LINE_1_GS"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#4A4A4A"
+        app:layout_constraintEnd_toEndOf="@id/ATV_TITLE_GS"
+        app:layout_constraintStart_toStartOf="@id/ATV_TITLE_GS"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_GS" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/RL_BACK_BUTTON_CFN"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        app:cardElevation="5dp"
+        app:layout_constraintTop_toBottomOf="@id/TTV_AUTO_DESP_CFN">
+
+        <com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView
+          android:id="@+id/ARV_COURSES_CFN"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/RL_BACK_BUTTON_CFN"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/glow_bg_neon_green"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_BACK_CFN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@id/IV_BACK_ARROW_CFN"
+            android:fontFamily="@font/capriola"
+            android:gravity="start|center_vertical"
+            android:maxLines="1"
+
+            android:text="Back"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:sizeToFit="true" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/IV_BACK_ARROW_CFN"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL_NEXT_BUTTON_CFN"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/glow_bg_neon_green"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toStartOf="@id/IV_NEXT_ARROW_CFN"
+            android:fontFamily="@font/capriola"
+            android:gravity="start|center_vertical"
+            android:maxLines="1"
+
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:sizeToFit="true" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/IV_NEXT_ARROW_CFN"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:rotation="180"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

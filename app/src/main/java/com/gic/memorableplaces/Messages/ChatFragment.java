@@ -63,6 +63,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -216,6 +219,11 @@ public class ChatFragment extends Fragment implements ChatRecyclerViewAdapter.On
             IV_SEND_MESSAGE.setBackgroundResource(R.drawable.ic_send_message_chat);
         }
 
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+
+        scheduledExecutorService.schedule(() -> {
+            Log.d(TAG, "run: KAMIYAB HUA MAI !");
+        },10,TimeUnit.SECONDS);
         // Log.d(TAG, "onCreateView: UserID " + sUserID);
 
         IV_BUBBLE_COLOR.setOnClickListener(v -> {

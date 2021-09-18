@@ -52,7 +52,6 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_toStartOf="@id/cut_view"
                 android:layout_toEndOf="@id/IV_filter_value_unchecked"
-                android:text="19"
                 android:textColor="@color/black"
                 android:textSize="26sp"
                 android:textStyle="bold" />

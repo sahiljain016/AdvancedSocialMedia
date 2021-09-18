@@ -7,7 +7,6 @@
     android:fitsSystemWindows="false"
     tools:context=".Home.HomeActivity">
     <ScrollView
-        android:id="@+id/SCROLLER_ID"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
@@ -86,7 +85,6 @@
     </RelativeLayout>
     </ScrollView>
     <FrameLayout
-        android:id="@+id/FrameLayoutHomeFrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

@@ -69,7 +69,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -187,7 +186,6 @@ android:alpha="0"
 
 
         <LinearLayout
-            android:id="@+id/LL_Bottom_Hobbies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/custom_hobby"

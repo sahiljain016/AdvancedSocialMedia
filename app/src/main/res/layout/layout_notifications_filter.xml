@@ -235,7 +235,6 @@
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout3"
         android:layout_width="0dp"
         android:layout_height="@dimen/_120sdp"
         android:elevation="@dimen/_16sdp"
@@ -269,7 +268,6 @@
             app:civ_border_width="3dp" />
 
         <ImageView
-            android:id="@+id/IV_HANDSHAKE_LEFT"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentBottom="true"
@@ -513,7 +511,6 @@
             app:civ_border_width="3dp" />
 
         <ImageView
-            android:id="@+id/IV_HANDSHAKE_RIGHT"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentBottom="true"
@@ -522,7 +519,6 @@
     </RelativeLayout>
 
     <View
-        android:id="@+id/view"
         android:layout_width="1dp"
         android:layout_height="5dp"
         app:layout_constraintEnd_toEndOf="@id/CV_NOTIF_RIGHT"

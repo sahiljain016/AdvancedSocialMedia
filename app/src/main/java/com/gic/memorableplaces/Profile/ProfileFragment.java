@@ -37,7 +37,6 @@ import com.gic.memorableplaces.Home.HomeActivity;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.gic.memorableplaces.utils.UniversalImageLoader;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -99,7 +98,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView mProfilePhoto;
     private GridView gridView;
     private Toolbar toolbar;
-    private BottomNavigationView bottomNavigationView;
+   // private BottomNavigationView bottomNavigationView;
     private Skeleton skeleton1;
     private RelativeLayout relativeLayout;
     private GridViewAdapter gridViewAdapter;
@@ -127,7 +126,7 @@ public class ProfileFragment extends Fragment {
 
         //General Widgets
         gridView = view.findViewById(R.id.grid_view);
-        bottomNavigationView = view.findViewById(R.id.BottomNavigationMenu);
+        //bottomNavigationView = view.findViewById(R.id.BottomNavigationMenu);
         toolbar = view.findViewById(R.id.profileToolbar);
         AutofitHelper.create(mUsername);
         navigationView = view.findViewById(R.id.NavigationViewLeft);
@@ -197,7 +196,7 @@ public class ProfileFragment extends Fragment {
         menuItem.setTitle(settings.getUsername());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());
-        mDescription.setText(settings.getDescription());
+        mDescription.setText(settings.getCard_bio());
         mFirebaseMethods.SetPostCount(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), mPosts);
         mFirebaseMethods.setFollowersCount(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), mFollowers);
         mFirebaseMethods.setFollowingCount(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), mFollowing);

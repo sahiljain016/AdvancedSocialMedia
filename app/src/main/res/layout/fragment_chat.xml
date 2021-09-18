@@ -187,7 +187,6 @@
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
-        android:id="@+id/RL_OPTIONS_BAR_CHAT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="parent">

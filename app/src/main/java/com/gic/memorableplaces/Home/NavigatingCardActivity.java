@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gic.memorableplaces.DataModels.User;
+import com.gic.memorableplaces.DataModels.UserAccountSettings;
 import com.gic.memorableplaces.LogIn.LogInActivity;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.SignUp.SignUpActivity;
@@ -41,8 +42,28 @@ public class NavigatingCardActivity extends AppCompatActivity {
 
 
         setupFirebaseAuth();
-        DecideNavigation();
+        //DecideNavigation();
+        Query query = myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                .child(mAuth.getCurrentUser().getUid());
 
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserAccountSettings userAccountSettings = snapshot.getValue(UserAccountSettings.class);
+                Intent intent = new Intent(NavigatingCardActivity.this, SignUpActivity.class);
+                intent.putExtra("status", "not_done");
+                intent.putExtra(mContext.getString(R.string.field_username), userAccountSettings.getUsername());
+                intent.putExtra(mContext.getString(R.string.field_course), userAccountSettings.getCourse());
+                intent.putExtra(mContext.getString(R.string.field_description), userAccountSettings.getCard_bio());
+                intent.putExtra(mContext.getString(R.string.field_display_name), userAccountSettings.getDisplay_name());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

@@ -3,7 +3,6 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        android:id="@+id/Transition_BORDER"
         motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/end_border"
         motion:constraintSetStart="@id/start_border"

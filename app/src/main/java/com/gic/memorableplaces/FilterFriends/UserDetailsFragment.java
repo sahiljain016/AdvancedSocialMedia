@@ -132,8 +132,8 @@ public class UserDetailsFragment extends Fragment {
 //        CV_FOLLOW = view.findViewById(R.id.CV_FOLLOW_EXP);
 //        CV_LIKE = view.findViewById(R.id.CV_LIKE_EXP);
 //        CV_HI = view.findViewById(R.id.CV_SEND_HI_EXP);
-        CV_MATCH_FF_EXP = view.findViewById(R.id.CV_MATCH_FF_EXP);
-        IV_SWITCH_IMAGE = view.findViewById(R.id.IV_MATCH_FF_EXP);
+        //CV_MATCH_FF_EXP = view.findViewById(R.id.CV_MATCH_FF_EXP);
+      //  IV_SWITCH_IMAGE = view.findViewById(R.id.IV_MATCH_FF_EXP);
 
         ATV_PREVIEW = view.findViewById(R.id.ATV_PREVIEW_TEXT);
 

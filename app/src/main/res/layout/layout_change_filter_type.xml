@@ -83,7 +83,6 @@
 
 
             <LinearLayout
-                android:id="@+id/LL_DIALOG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/RL_BOTTOM_WARNING"
@@ -213,7 +212,6 @@ android:layout_alignParentBottom="true"
                     />
 
                 <TextView
-                    android:id="@+id/warning"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/Notice"

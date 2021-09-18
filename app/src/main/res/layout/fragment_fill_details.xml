@@ -1,0 +1,484 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_BACK_BUTTON_FD"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/glow_circle_light_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_NEXT_BUTTON_FD"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/glow_circle_light_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:padding="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/IFV_BACK_BUTTON_FD"
+        app:layout_constraintEnd_toEndOf="@id/IFV_BACK_BUTTON_FD"
+        app:layout_constraintStart_toStartOf="@id/IFV_BACK_BUTTON_FD"
+        app:layout_constraintTop_toTopOf="@id/IFV_BACK_BUTTON_FD"
+        app:tint="@color/white" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:padding="@dimen/_5sdp"
+        android:rotation="180"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/IFV_NEXT_BUTTON_FD"
+        app:layout_constraintEnd_toEndOf="@id/IFV_NEXT_BUTTON_FD"
+        app:layout_constraintStart_toStartOf="@id/IFV_NEXT_BUTTON_FD"
+        app:layout_constraintTop_toTopOf="@id/IFV_NEXT_BUTTON_FD"
+        app:tint="@color/white" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_FD"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:text="About Me"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="42sp"
+        app:layout_constraintBottom_toBottomOf="@id/IFV_BACK_BUTTON_FD"
+        app:layout_constraintEnd_toStartOf="@id/IFV_NEXT_BUTTON_FD"
+        app:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_FD"
+        app:layout_constraintTop_toTopOf="@id/IFV_BACK_BUTTON_FD"
+        app:sizeToFit="true" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="#4A4A4A"
+        app:layout_constraintEnd_toEndOf="@id/ATV_TITLE_FD"
+        app:layout_constraintStart_toStartOf="@id/ATV_TITLE_FD"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_FD" />
+
+    <EditText
+        android:id="@+id/ET_SEARCH_BAR_FD"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:background="@drawable/rounded_white_background"
+        android:backgroundTint="#EFEFEF"
+        android:fontFamily="@font/capriola"
+        android:hint="Age, hobbies, music...."
+        android:maxLines="1"
+        android:paddingStart="@dimen/_50sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:scrollbars="horizontal"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/ET_SEARCH_BAR_FD"
+        app:layout_constraintStart_toStartOf="@id/ET_SEARCH_BAR_FD"
+        app:layout_constraintTop_toTopOf="@id/ET_SEARCH_BAR_FD"
+        app:tint="#858585" />
+
+    <ScrollView
+        android:id="@+id/SV_DETAILS_FD"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/rounded_corners_imageview"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/ET_SEARCH_BAR_FD">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:padding="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/IV_DOT_AB_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_checkbox_unchecked"
+                android:padding="@dimen/_3sdp"
+                android:src="@drawable/rounded_white_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Age &amp; Birthdate"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_AB_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_AB_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_AB_FD" />
+
+            <View
+                android:id="@+id/V_DIVIDER_1_FD"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_GP_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Gender/Pronouns"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_GP_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_GP_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_GP_FD" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_GD_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_AB_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="General Details"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_GD_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_GD_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_GD_FD" />
+
+
+            <ImageView
+                android:id="@+id/IV_DOT_CY_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_GP_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="College Year"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_CY_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_CY_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_CY_FD" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_SIC_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_GD_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Societies In College"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_SIC_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_SIC_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_SIC_FD" />
+
+
+            <ImageView
+                android:id="@+id/IV_DOT_ZS_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_CY_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Zodiac Sign"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_ZS_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_ZS_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_ZS_FD" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_HI_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_SIC_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Hobbies/Interest"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_HI_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_HI_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_HI_FD" />
+
+
+            <ImageView
+                android:id="@+id/IV_DOT_MU_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_SIC_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Music"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_MU_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_MU_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_MU_FD" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_VG_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_HI_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Video Games"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_VG_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_VG_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_VG_FD" />
+
+
+            <ImageView
+                android:id="@+id/IV_DOT_BO_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_MU_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Books"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_BO_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_BO_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_BO_FD" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_DD_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_VG_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Dream Destination"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_DD_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_DD_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_DD_FD" />
+
+
+            <ImageView
+                android:id="@+id/IV_DOT_MO_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toBottomOf="@id/IV_DOT_BO_FD" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Movies/Tv Shows"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_MO_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_MO_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_MO_FD" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_DETAILS_FD"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SV_DETAILS_FD" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

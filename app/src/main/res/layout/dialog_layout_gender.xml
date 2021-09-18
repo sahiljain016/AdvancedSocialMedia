@@ -90,7 +90,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amita_bold"

@@ -238,7 +238,7 @@ private EditText ConfirmPasswordETDialog;
            //Change the user's website
            mFirebaseMethods.UpdateUserAccountSettings(null,website,null,null,null);
        }
-       if(!mAllUserSettings.getUserAccountSettings().getDescription().equals(description)){
+       if(!mAllUserSettings.getUserAccountSettings().getCard_bio().equals(description)){
            //Change the user's description
            mFirebaseMethods.UpdateUserAccountSettings(null,null,description,null,null);
        }
@@ -373,7 +373,7 @@ private EditText ConfirmPasswordETDialog;
         mFullName.setText(settings.getDisplay_name());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());
-        mDescription.setText(settings.getDescription());
+        mDescription.setText(settings.getCard_bio());
         mEmail.setText(allUserSettings.getUser().getEmail());
         mPhone.setText(String.valueOf(allUserSettings.getUser().getPhone_number()));
         mUID.setText(String.valueOf(allUserSettings.getUser().getCollege_uid()));

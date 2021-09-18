@@ -2,23 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/home"
             android:icon="@drawable/ic_social_feed"
             android:title="Home"/>
         <item
-            android:id="@+id/friend_filter"
             android:icon="@drawable/ic_find_friends"
             android:title="Find Friends"/>
         <item
-            android:id="@+id/share"
             android:icon="@drawable/ic_share_posts"
             android:title="Share"/>
         <item
-            android:id="@+id/dashboard"
             android:icon="@drawable/ic_student_dashbaord"
             android:title="Dashboard"/>
         <item
-            android:id="@+id/Profile"
             android:icon="@drawable/ic_default_prpfile_photo"
             android:title="Profile"/>
 

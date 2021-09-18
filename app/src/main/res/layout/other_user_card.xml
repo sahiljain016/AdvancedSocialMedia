@@ -7,12 +7,10 @@
     android:background="@color/white">
 
     <io.codetail.widget.RevealFrameLayout
-        android:id="@+id/conteiner_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/content_overlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
@@ -62,7 +60,6 @@
     </io.codetail.widget.RevealFrameLayout>
 
     <ScrollView
-        android:id="@+id/scrollView"
         android:layout_width="80dp"
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"

@@ -26,11 +26,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.gic.memorableplaces.CustomLibs.EndToEnd.EndToEndEncrypt;
 import com.gic.memorableplaces.CustomLibs.TransitionButton.TransitionButton;
 import com.gic.memorableplaces.DataModels.User;
+import com.gic.memorableplaces.Home.GetStartedFragment;
 import com.gic.memorableplaces.LogIn.LogInActivity;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.FirebaseMethods;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,15 +38,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.functions.FirebaseFunctions;
-import com.google.firebase.functions.HttpsCallableResult;
 import com.virgilsecurity.android.ethree.interaction.EThree;
 import com.virgilsecurity.common.callback.OnResultListener;
 
-import java.util.Map;
 import java.util.Objects;
-
-import kotlin.jvm.functions.Function0;
 
 public class SignUpFragment extends Fragment {
     private static final String TAG = "SignUpFragment";
@@ -100,11 +94,14 @@ public class SignUpFragment extends Fragment {
             if (getArguments().getString("status").equals("not_done")) {
                 Bundle bundle = new Bundle();
                 bundle.putString(mContext.getString(R.string.field_username), getArguments().getString(mContext.getString(R.string.field_username)));
-                PrepareCardFragment fragment = new PrepareCardFragment();
+                bundle.putString(mContext.getString(R.string.field_description), getArguments().getString(mContext.getString(R.string.field_description)));
+                bundle.putString(mContext.getString(R.string.field_course), getArguments().getString(mContext.getString(R.string.field_course)));
+                bundle.putString(mContext.getString(R.string.field_display_name), getArguments().getString(mContext.getString(R.string.field_display_name)));
+                GetStartedFragment fragment = new GetStartedFragment();
                 fragment.setArguments(bundle);
                 FragmentTransaction Transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 Transaction.replace(R.id.FrameLayoutCard, fragment);
-                Transaction.addToBackStack(mContext.getString(R.string.prepare_card_fragment));
+                Transaction.addToBackStack(mContext.getString(R.string.get_started_fragment));
                 Transaction.commit();
             }
         }
@@ -161,35 +158,7 @@ public class SignUpFragment extends Fragment {
 
     }
 
-    private final Function0<String> getAuthTokenUserOne = new Function0<String>() {
-        @Override
-        public String invoke() {
-            final String[] token = {""};
-            FirebaseFunctions.getInstance()
-                    .getHttpsCallable("getVirgilJwt")
-                    .call()
-                    .addOnCompleteListener(new OnCompleteListener<HttpsCallableResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<HttpsCallableResult> task) {
-                            if (task.isSuccessful()) {
 
-                                token[0] = ((Map<String, String>) task.getResult().getData()).get("token");
-                                Log.d(TAG, "onComplete: task result: " + token[0]);
-                                isPaused = false;
-                            } else {
-
-                            }
-                        }
-                    });
-
-            while (true) {
-                if (!isPaused) {
-                    Log.d(TAG, "invoke: token[0]: " + token[0]);
-                    return token[0];
-                }
-            }
-        }
-    };
 
     private void RegisterUserWithVirgil(String BackupPassword, EndToEndEncrypt E2E) {
         com.virgilsecurity.common.callback.OnCompleteListener onBackupListener = new com.virgilsecurity.common.callback.OnCompleteListener() {

@@ -27,7 +27,6 @@
         android:layout_marginTop="@dimen/_70sdp">
 
         <com.gic.memorableplaces.utils.ShadowLayout
-            android:id="@+id/SL_CENTER_MESSAGES"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:sl_is_shadow_top="true"
@@ -219,7 +218,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.gic.memorableplaces.utils.ShadowLayout
-        android:id="@+id/SL_MESSAGES_OPTIONS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -267,7 +265,6 @@
                 android:src="@drawable/ic_connected_people" />
 
             <me.grantland.widget.AutofitTextView
-                android:id="@+id/ATV_MATCH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/IV_MATCH_CHATS"

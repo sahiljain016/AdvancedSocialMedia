@@ -31,7 +31,6 @@
             motion:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
-            android:id="@+id/ATV_FILTERS_TITLE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -83,7 +82,6 @@
             motion:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
-            android:id="@+id/ATV_FILTERS_TITLE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
