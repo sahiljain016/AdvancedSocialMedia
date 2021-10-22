@@ -89,6 +89,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/RL_BOTTOM_OPTIONS_CHAT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="parent" />
@@ -132,6 +133,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/RL_BOTTOM_OPTIONS_CHAT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toBottomOf="parent" />
@@ -182,6 +184,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/RL_BOTTOM_OPTIONS_CHAT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"/>
@@ -229,6 +232,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/RL_BOTTOM_OPTIONS_CHAT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"/>

@@ -37,7 +37,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA"/>
         <activity
-            android:name="com.gic.memorableplaces.SignUp.LocationPickerActivity"
+            android:name="com.gic.memorableplaces.SignUp.DreamDestinationFragment"
             android:label="leku_title_activity_location_picker"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan"

@@ -1,9 +1,13 @@
 package com.gic.memorableplaces.utils;
 
+import static java.util.Objects.requireNonNull;
+
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.core.content.ContextCompat;
 
@@ -198,34 +202,34 @@ public class MiscTools {
     public static int GetFilterIcon(String DetailName, Context mContext) {
         int icon = 0;
         if (DetailName.equals(mContext.getString(R.string.field_age))) {
-            icon = R.drawable.ic_age_filter;
+            icon = R.drawable.ic_filter_age;
         } else if (DetailName.equals(mContext.getString(R.string.field_course))) {
             icon = R.drawable.ic_course_icon;
         } else if (DetailName.equals(mContext.getString(R.string.field_gender))) {
-            icon = R.drawable.ic_gender_symbol;
+            icon = R.drawable.ic_filter_gender;
         } else if (DetailName.equals(mContext.getString(R.string.field_college_year))) {
-            icon = R.drawable.ic_university;
+            icon = R.drawable.ic_filter_college_year;
         } else if (DetailName.equals(mContext.getString(R.string.field_zodiac_sign))) {
-            icon = R.drawable.ic_zodiac_filter;
+            icon = R.drawable.ic_filter_zodiac_scorpion;
         } else if (DetailName.equals(mContext.getString(R.string.field_hobbies))) {
-            icon = R.drawable.ic_hobbies;
+            icon = R.drawable.ic_filter_hobbies;
         } else if (DetailName.equals(mContext.getString(R.string.field_games))) {
-            icon = R.drawable.ic_controller;
+            icon = R.drawable.ic_filter_video_games;
         } else if (DetailName.equals(mContext.getString(R.string.field_music))) {
-            icon = R.drawable.ic_music;
+            icon = R.drawable.ic_filter_music;
         } else if (DetailName.equals(mContext.getString(R.string.field_movie))) {
-            icon = R.drawable.ic_movie;
+            icon = R.drawable.ic_filter_movie;
         } else if (DetailName.equals(mContext.getString(R.string.field_books))) {
-            icon = R.drawable.ic_book;
+            icon = R.drawable.ic_filter_book;
         } else if (DetailName.equals(mContext.getString(R.string.field_society))) {
-            icon = R.drawable.ic_society_filter;
+            icon = R.drawable.ic_filter_society;
         } else if (DetailName.equals(mContext.getString(R.string.field_pronouns))) {
-            icon = R.drawable.ic_gender_symbol;
+            icon = R.drawable.ic_filter_gender;
         }
         return icon;
     }
 
-    public static String GetTimeStamp(long milliseconds){
+    public static String GetTimeStamp(long milliseconds) {
 
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
 
@@ -259,5 +263,16 @@ public class MiscTools {
         newkey = newkey.replaceAll("]", " ");
 
         return newkey;
+    }
+
+    public static Dialog InflateDialog(Context mContext, int layout) {
+
+        final Dialog dialog = new Dialog(mContext);
+        //boolean isLocked  = false;
+        requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setContentView(layout);
+
+        return dialog;
     }
 }

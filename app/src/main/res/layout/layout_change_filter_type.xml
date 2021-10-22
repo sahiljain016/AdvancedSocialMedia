@@ -61,26 +61,6 @@
                 android:src="@drawable/ic_info_icon" />-->
 
 
-<!--            <com.nightonke.jellytogglebutton.JellyToggleButton-->
-<!--                android:id="@+id/ChangeFilterTypeSwitch"-->
-<!--                android:layout_width="@dimen/_60sdp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/heading_change_filter"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginTop="@dimen/_20sdp"-->
-<!--                android:layout_marginBottom="@dimen/_10sdp"-->
-<!--                android:scaleX="2.5"-->
-<!--                android:scaleY="2.5"-->
-<!--                app:jtbDraggable="true"-->
-<!--                app:jtbLeftBackgroundColor="#1167FB"-->
-<!--                app:jtbLeftTextColor="@color/black"-->
-<!--                app:jtbLeftTextSize="10sp"-->
-<!--                app:jtbLeftThumbColor="#EAEAEA"-->
-<!--                app:jtbRightBackgroundColor=""-->
-<!--                app:jtbRightTextColor="@color/white"-->
-<!--                app:jtbRightTextSize="10sp"-->
-<!--                app:jtbThumbRadius="@dimen/_10sdp" />-->
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,7 +79,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="50"
-                    android:background="@drawable/custom_border_white_rounded_all_sides"
+                    android:background="@drawable/border_rounded_grey_20sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
 
                     app:cardCornerRadius="@dimen/_30sdp"
@@ -151,7 +131,7 @@ android:layout_alignParentBottom="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="50"
-                    android:background="@drawable/custom_border_white_rounded_all_sides"
+                    android:background="@drawable/border_rounded_grey_20sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
 
                     app:cardCornerRadius="@dimen/_30sdp"

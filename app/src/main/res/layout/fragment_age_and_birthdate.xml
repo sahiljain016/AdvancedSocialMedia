@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ML_MAIN_AB"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    app:layoutDescription="@xml/age_birthdate_fragment_scene"
+    android:focusable="true">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/GIV_IMG_1_AB"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@raw/confetti"
+        app:layout_constraintBottom_toTopOf="@id/CV_DATE_PICKER"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_BACK_BUTTON_AB"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB"
+        app:tint="@color/black" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_AB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:text="Age &amp; Birthdate"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_AB"
+        app:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_AB"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_PRIVACY_LOCK_AB"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_2sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_unlocked_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+        app:layout_constraintEnd_toStartOf="@id/IV_SWITCH_AB"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_SWITCH_AB"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_opposite"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#D6D6D6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_AB" />
+
+    <ImageView
+        android:id="@+id/IV_IMG_1_AB"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/ic_gift_opened"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_DATE_PICKER"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:layout_constraintBottom_toTopOf="@id/CL_BIRTHDATE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_AB">
+
+        <DatePicker
+            android:id="@+id/DP_AB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_AGE_SELECTION_AB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:alpha="0"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/capriola"
+        android:maxLines="1"
+        android:text="Age between 18 and 19"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:sizeToFit="true" />
+
+   <!-- <com.jaygoo.widget.RangeSeekBar
+        android:id="@+id/RSB_AGE_AB"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/ATV_AGE_SELECTION_AB"
+        android:alpha="0"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:rsb_min="15"
+        app:rsb_max="80"
+        app:rsb_thumb_drawable="@drawable/thumb_white_round"
+        app:rsb_mode="range"
+        app:rsb_min_interval="0"
+        app:rsb_trackColor="#FFFFFF"
+        app:rsb_trackSelectedColor="#ccf4ff"
+        app:rsb_trackSelectedThickness="4dp"
+        app:rsb_trackThickness="2dp" />-->
+
+    <com.jem.rubberpicker.RubberRangePicker
+        android:id="@+id/RSB_AGE_AB"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/ATV_AGE_SELECTION_AB"
+        android:alpha="0"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        app:minValue="15"
+        app:maxValue="80"
+        app:elasticBehavior="cubic"
+        android:elevation="@dimen/_5sdp"
+        app:dampingRatio="0.4"
+        app:stiffness="400"
+        app:stretchRange="36dp"
+        app:defaultThumbRadius="@dimen/_15sdp"
+        app:normalTrackWidth="4dp"
+        app:highlightTrackWidth="4dp"
+        app:normalTrackColor="#ccf4ff"
+        app:highlightTrackColor="#1E88E5"
+        app:defaultThumbInsideColor="#ccf4ff"
+        app:highlightDefaultThumbOnTouchColor="#00ACC1"/>
+
+    <TextView
+        android:id="@+id/TV_NOTICE_AB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="#CACACA"
+        app:layout_constraintTop_toBottomOf="@id/RSB_AGE_AB"
+        android:textSize="18sp"
+        android:alpha="0"
+        android:fontFamily="@font/capriola"
+        android:textAlignment="center"
+
+        android:text="This age range will be used to match your profile with the people you meet here."/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_BIRTHDATE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@id/ATV_AGE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_BIRTHDATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/capriola"
+            android:text="Birthdate: "
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/ET_DATE_AB"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@null"
+            android:hint="DD"
+            android:inputType="date"
+            android:maxLength="2"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/ATV_BIRTHDATE"
+            app:layout_constraintStart_toEndOf="@id/ATV_BIRTHDATE"
+            app:layout_constraintTop_toTopOf="@id/ATV_BIRTHDATE" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/ET_DATE_AB"
+            app:layout_constraintEnd_toEndOf="@id/ET_DATE_AB"
+            app:layout_constraintStart_toStartOf="@id/ET_DATE_AB" />
+
+        <TextView
+            android:id="@+id/TV_SLASH_1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="/"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/ET_DATE_AB"
+            app:layout_constraintStart_toEndOf="@id/ET_DATE_AB"
+            app:layout_constraintTop_toTopOf="@id/ET_DATE_AB" />
+
+        <EditText
+            android:id="@+id/ET_MONTH_AB"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@null"
+            android:hint="MM"
+            android:inputType="date"
+            android:maxLength="2"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/TV_SLASH_1"
+            app:layout_constraintStart_toEndOf="@id/TV_SLASH_1"
+            app:layout_constraintTop_toTopOf="@id/TV_SLASH_1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/ET_MONTH_AB"
+            app:layout_constraintEnd_toEndOf="@id/ET_MONTH_AB"
+            app:layout_constraintStart_toStartOf="@id/ET_MONTH_AB" />
+
+        <TextView
+            android:id="@+id/TV_SLASH_2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="/"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/ET_MONTH_AB"
+            app:layout_constraintStart_toEndOf="@id/ET_MONTH_AB"
+            app:layout_constraintTop_toTopOf="@id/ET_MONTH_AB" />
+
+        <EditText
+            android:id="@+id/ET_YEAR_AB"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@null"
+            android:hint="YYYY"
+            android:inputType="date"
+            android:maxLength="4"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/TV_SLASH_2"
+            app:layout_constraintStart_toEndOf="@id/TV_SLASH_2"
+            app:layout_constraintTop_toTopOf="@id/TV_SLASH_2" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/ET_YEAR_AB"
+            app:layout_constraintEnd_toEndOf="@id/ET_YEAR_AB"
+            app:layout_constraintStart_toStartOf="@id/ET_YEAR_AB" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_AGE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:fontFamily="@font/capriola"
+        android:text="Age:"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

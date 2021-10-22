@@ -51,11 +51,11 @@ public class SearchUserListAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(mContext).inflate(layoutResource, parent, false);
         }
 
-        TextView userName = convertView.findViewById(R.id.ItemName);
-        final TextView FullName = convertView.findViewById(R.id.CreatorName);
-        final CircleImageView profileImage = convertView.findViewById(R.id.CoverImageView);
+        TextView userName = convertView.findViewById(R.id.TV_NAME_GAMES);
+        final TextView FullName = convertView.findViewById(R.id.TV_DESP_GAMES);
+        final CircleImageView profileImage = convertView.findViewById(R.id.CIV_IMAGE_GAMES);
         RelativeLayout relativeLayout = convertView.findViewById(R.id.base_RL_search_list);
-        RelativeLayout relativeLayout1 = convertView.findViewById(R.id.RelLAyout2);
+        RelativeLayout relativeLayout1 = convertView.findViewById(R.id.RL_RESULT_GAMES);
         Skeleton skeletonLayout  = SkeletonLayoutUtils.createSkeleton(relativeLayout);
         Skeleton skeletonLayout1  = SkeletonLayoutUtils.createSkeleton(relativeLayout1);
         skeletonLayout.setShowShimmer(true);

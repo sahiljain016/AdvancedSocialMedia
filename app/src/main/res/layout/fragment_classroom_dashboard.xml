@@ -302,7 +302,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_background_cardview">
+                    android:background="@drawable/border_rounded_yellow_20sdp">
 
                     <ImageView
                         android:id="@+id/icon8"

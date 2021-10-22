@@ -62,7 +62,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
     private FirebaseAuth mAuth;
     private FirebaseMethods mFirebaseMethods;
     private DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-    ;
+
 
 
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {

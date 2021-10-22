@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_MAIN_GP"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    app:layoutDescription="@xml/gender_pronoun_fragment_scene">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_BACK_BUTTON_GP"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_GP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_GP"
+        app:tint="@color/black" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_GP"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:text="Gender &amp; Pronouns"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_GP"
+        app:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_GP"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_PRIVACY_LOCK_GP"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_2sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_unlocked_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_GP"
+        app:layout_constraintEnd_toStartOf="@id/IV_SWITCH_GP"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_GP" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_SWITCH_GP"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_opposite"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_GP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_GP" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#D6D6D6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_GP" />
+
+    <ImageView
+        android:id="@+id/IV_IMG_1_GP"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/ic_gender_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+    <ScrollView
+        android:id="@+id/SV_NOTICE_SWTICH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD"
+        app:layout_constraintBottom_toTopOf="@id/V_CD_1_GP">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_SWITCH_NOTICE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TV_SWITCH_NOTICE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Select a gender, it will be added to the profile of your ideal mate which will be used to find your desired match!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/IV_BOX_GP"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+
+                android:src="@drawable/ic_checkbox"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintEnd_toStartOf="@id/TV_SWITCH_SAME_DETAIL"
+                app:layout_constraintTop_toBottomOf="@id/TV_SWITCH_NOTICE"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/IV_TICK_GP"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="gone"
+                android:src="@drawable/check_gradient"
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_GP"
+                app:layout_constraintEnd_toEndOf="@id/IV_BOX_GP"
+                app:layout_constraintStart_toStartOf="@id/IV_BOX_GP"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_GP"
+                app:tint="@color/is_not_online_color_yellow" />
+
+            <TextView
+                android:id="@+id/TV_SWITCH_SAME_DETAIL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Copy Selected Detail"
+                android:textColor="@color/white"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:textSize="20sp"
+
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_GP"
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_GP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <View
+        android:id="@+id/V_CD_1_GP"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_GP" />
+
+    <View
+        android:id="@+id/V_CD_2_GP"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_GP" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_MALE_GP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/border_rounded_grey_20sdp"
+        app:layout_constraintBottom_toTopOf="@id/V_CD_2_GP"
+        app:layout_constraintEnd_toStartOf="@id/V_CD_1_GP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_GP">
+
+        <ImageView
+            android:id="@+id/IV_MALE_GP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_20sdp"
+            android:src="@drawable/ic_male"
+            app:layout_constraintBottom_toTopOf="@id/ATV_MALE_GP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_MALE_GP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Male"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:sizeToFit="true" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_FEMALE_GP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/border_rounded_grey_20sdp"
+
+        app:layout_constraintBottom_toTopOf="@id/V_CD_2_GP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/V_CD_1_GP"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_GP">
+
+        <ImageView
+            android:id="@+id/IV_FEMALE_GP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_20sdp"
+            android:src="@drawable/ic_female"
+            app:layout_constraintBottom_toTopOf="@id/ATV_FEMALE_GP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_FEMALE_GP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Female"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:sizeToFit="true" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_PNTS_GP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+
+        android:background="@drawable/border_rounded_grey_20sdp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/V_CD_1_GP"
+        app:layout_constraintTop_toBottomOf="@id/V_CD_2_GP">
+
+        <ImageView
+            android:id="@+id/IV_PNTS_GP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_20sdp"
+            android:src="@drawable/ic_cross"
+            app:layout_constraintBottom_toTopOf="@id/ATV_PNTS_GP"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#C6C6C6" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_PNTS_GP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="Prefer not to say"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:sizeToFit="true" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_OTHER_GP"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/border_rounded_grey_20sdp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/V_CD_1_GP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_CD_2_GP">
+
+        <ImageView
+            android:id="@+id/IV_OTHER_GP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_20sdp"
+            android:src="@drawable/ic_filter_gender"
+            app:layout_constraintBottom_toTopOf="@id/ATV_OTHER_GP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_OTHER_GP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="Other"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:sizeToFit="true" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_PRONOUNS_GP"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:alpha="0"
+
+        android:background="@drawable/border_rounded_grey_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/RIV_BACK_FROM_PN_GP"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_back_ff"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitXY"
+            android:src="#C3C3C3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius_bottom_left="@dimen/_20sdp"
+            app:riv_corner_radius_top_left="@dimen/_20sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/ic_back_ff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/RIV_BACK_FROM_PN_GP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_OTHER_FILL_GP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Enter Custom Gender"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/ET_OTHER_GP"
+            app:layout_constraintStart_toEndOf="@id/RIV_BACK_FROM_PN_GP"
+            app:layout_constraintTop_toTopOf="parent"
+            app:sizeToFit="true" />
+
+        <EditText
+            android:id="@+id/ET_OTHER_GP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/capriola"
+            android:hint="(optional)"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/ATV_PRONOUNS_GP"
+            app:layout_constraintStart_toEndOf="@id/RIV_BACK_FROM_PN_GP" />
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_PRONOUNS_GP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:fontFamily="@font/capriola"
+            android:maxLines="1"
+            android:text="Enter your pronouns"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/ET_PRONOUNS_GP"
+            app:layout_constraintStart_toEndOf="@id/RIV_BACK_FROM_PN_GP"
+            app:sizeToFit="true" />
+
+        <EditText
+            android:id="@+id/ET_PRONOUNS_GP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/capriola"
+            android:hint="(optional)"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/RIV_BACK_FROM_PN_GP" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

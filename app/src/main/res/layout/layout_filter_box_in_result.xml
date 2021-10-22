@@ -81,7 +81,7 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_toEndOf="@id/V_DIVIDER"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_zodiac_filter" />
+                android:src="@drawable/ic_filter_zodiac_scorpion" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

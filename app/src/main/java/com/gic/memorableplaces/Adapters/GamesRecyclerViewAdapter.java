@@ -1,6 +1,7 @@
 package com.gic.memorableplaces.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,97 +9,97 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.GlideImageLoader;
-import com.gic.memorableplaces.utils.UniversalImageLoader;
-import com.makeramen.roundedimageview.RoundedImageView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
 public class GamesRecyclerViewAdapter extends RecyclerView.Adapter<GamesRecyclerViewAdapter.MainFeedViewHolder> {
-    private static final String TAG = "SocietiesRecyclerViewAdapter";
+    private static final String TAG = "GamesRecyclerViewAdapter";
 
     //Variables
-    private ArrayList<String> mGamesName;
-    private ArrayList<String> mGamesPlatform;
-    private ArrayList<String> mGamesRating;
-    private ArrayList<String> mGamesImgUrl;
+    private ArrayList<String> alsSelectedList;
     private Context mContext;
+    private OnGameRemovedListener MyOnGameRemovedListener;
 
 
-    public static class MainFeedViewHolder extends RecyclerView.ViewHolder {
-
+    public static class MainFeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        OnGameRemovedListener mOnGameRemovedListener;
         public TextView tGameName;
         public TextView tGamePlatform;
-        public RoundedImageView ivGamesImage;
+        public ImageView ivGamesImage;
         public ImageView ivStar1;
         public ImageView ivStar2;
         public ImageView ivStar3;
         public ImageView ivStar4;
         public ImageView ivStar5;
+        public AppCompatButton ACB_REMOVE;
         // public RelativeLayout relativeLayout;
 
-        public MainFeedViewHolder(@NonNull View itemView) {
+        public MainFeedViewHolder(@NonNull View itemView, OnGameRemovedListener onGameRemovedListener) {
             super(itemView);
-
-            ivGamesImage = itemView.findViewById(R.id.GameImage);
+            mOnGameRemovedListener = onGameRemovedListener;
+            ivGamesImage = itemView.findViewById(R.id.IV_GAME_COVER_VG);
             tGameName = itemView.findViewById(R.id.GameName);
+            ACB_REMOVE = itemView.findViewById(R.id.ACB_REMOVE_VG);
             tGamePlatform = itemView.findViewById(R.id.GamePlatforms);
             ivStar1 = itemView.findViewById(R.id.star1);
             ivStar2 = itemView.findViewById(R.id.star2);
             ivStar3 = itemView.findViewById(R.id.star3);
             ivStar4 = itemView.findViewById(R.id.star4);
             ivStar5 = itemView.findViewById(R.id.star5);
+            ACB_REMOVE.setOnClickListener(this);
             //relativeLayout = itemView.findViewById(R.id.base_result_mmb);
 
         }
+
+
+        @Override
+        public void onClick(View v) {
+            mOnGameRemovedListener.onItemClick(getBindingAdapterPosition());
+        }
     }
 
-    public GamesRecyclerViewAdapter(ArrayList<String> NameList, ArrayList<String> CreatorList,
-                                    ArrayList<String> CoverList, ArrayList<String> GamesRating, Context context) {
-        mGamesName = NameList;
-        mGamesPlatform = CreatorList;
-        mGamesImgUrl = CoverList;
+    public GamesRecyclerViewAdapter(ArrayList<String> SelectedList, Context context, OnGameRemovedListener onGameRemovedListener) {
+        alsSelectedList = SelectedList;
+        MyOnGameRemovedListener = onGameRemovedListener;
         mContext = context;
-        mGamesRating = GamesRating;
 
-        ImageLoader.getInstance().init(UniversalImageLoader.getConfig(mContext, R.drawable.default_user_profile));
 //        gestureDetector = new android.view.GestureDetector(mContext, new ViewPostActivity.GestureListener());
+    }
+
+    public interface OnGameRemovedListener {
+        void onItemClick(int position);
     }
 
     @NonNull
     @Override
     public MainFeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_games, parent, false);
-        return new MainFeedViewHolder(v);
+        return new MainFeedViewHolder(v, MyOnGameRemovedListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MainFeedViewHolder holder, final int position) {
-        holder.setIsRecyclable(false);
-        //AutofitHelper.create(holder.tSocietyName);
-//        holder.tSocietyName.setAnimateType(HTextViewType.EVAPORATE);
-//        holder.tSocietyName.animateText(mSocietyName.get(position));
+        int pos = holder.getBindingAdapterPosition();
+        String MainString = alsSelectedList.get(pos);
+        String Name = MainString.substring(0, MainString.indexOf("$1$"));
+        String img = MainString.substring((MainString.indexOf("$1$") + 3), MainString.indexOf("$2$"));
+        String rating = MainString.substring((MainString.indexOf("$2$") + 3), MainString.indexOf("$3$"));
+        String platforms = MainString.substring((MainString.indexOf("$3$") + 3), MainString.indexOf("$4$"));
 
-        holder.tGameName.setText(mGamesName.get(position));
-//        UniversalImageLoader.setImage(mCoverList.get(position),holder.mCover,null,null);
-        if (position != mGamesImgUrl.size() && position < mGamesImgUrl.size()) {
-            GlideImageLoader.loadImageWithOutTransition(mContext, mGamesImgUrl.get(position), holder.ivGamesImage);
-            // GlideImageLoader.loadImageWithOutTransition(mContext, mSocietyCover.get(position), holder.ivSocietyCover);
-        } else {
-            GlideImageLoader.loadImageWithOutTransition(mContext, null, holder.ivGamesImage);
+        Log.d(TAG, "onBindViewHolder: name: " + Name);
+        holder.tGameName.setText(Name);
+        if (!img.equals("N/A")) {
+            GlideImageLoader.loadImageWithOutTransition(mContext, img, holder.ivGamesImage);
         }
-        if (position != mGamesPlatform.size() && position < mGamesPlatform.size()) {
-            holder.tGamePlatform.setText(mGamesPlatform.get(position));
-        } else {
-            holder.tGamePlatform.setText("Content Not Available");
+        holder.tGamePlatform.setText(platforms);
 
-        }
-        if (position != mGamesRating.size() && position < mGamesRating.size()) {
-            float Rating = Float.parseFloat(mGamesRating.get(position));
+        if (!rating.equals("N/A")) {
+            float Rating = Float.parseFloat(rating);
 
             if (Rating < 1.00 && Rating > 0) {
                 holder.ivStar1.setImageResource(R.drawable.ic_half_filled_star);
@@ -146,7 +147,7 @@ public class GamesRecyclerViewAdapter extends RecyclerView.Adapter<GamesRecycler
 
     @Override
     public int getItemCount() {
-        return mGamesName.size();
+        return alsSelectedList.size();
     }
 
 

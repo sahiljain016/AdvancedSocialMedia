@@ -154,7 +154,7 @@ public class FilterValuesFragment extends Fragment implements FilterResultRecycl
                     isCollegeYearFiltered = true;
                     CurrentField = mContext.getString(R.string.field_college_year);
 
-                    CurrentFilterName = mContext.getString(R.string.college_year);
+                    CurrentFilterName = mContext.getString(R.string.field_college_year);
 
                     CurrentFieldNO = 1;
                 } else if (FilterName.equals(mContext.getString(R.string.field_gender))) {

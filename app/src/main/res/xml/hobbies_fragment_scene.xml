@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/TRANS_HOBBIES_MAIN"
+        motion:constraintSetEnd="@+id/h_end"
+        motion:constraintSetStart="@id/h_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_CUSTOM_HOBBY"
+        motion:constraintSetEnd="@+id/h_custom_end"
+        motion:constraintSetStart="@id/h_custom_start"
+        motion:duration="500"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/h_custom_start">
+        <Constraint
+            android:id="@+id/CL_SEARCH_H"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_ADD_CUSTOM_H"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/IV_ADD_CUSTOM_H"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/CL_SEARCH_H"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/CL_SEARCH_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_custom_end">
+        <Constraint
+            android:id="@+id/CL_SEARCH_H"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_ADD_CUSTOM_H"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/IV_ADD_CUSTOM_H"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/CL_SEARCH_H"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/CL_SEARCH_H" />
+
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/h_start">
+
+        <Constraint
+            android:id="@+id/IFV_BACK_BUTTON_H"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_H">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_H"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_H"
+            motion:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_H"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_SWITCH_H"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_H">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/CL_SEARCH_H"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_ADD_CUSTOM_H"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/IV_ADD_CUSTOM_H"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/CL_SEARCH_H"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/CL_SEARCH_H" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_end">
+
+        <Constraint
+            android:id="@+id/IFV_BACK_BUTTON_H"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_H">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_H"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_H"
+            motion:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_H"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_SWITCH_H"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_H">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/CL_SEARCH_H"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_ADD_CUSTOM_H"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/IV_ADD_CUSTOM_H"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/CL_SEARCH_H"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/CL_SEARCH_H" />
+
+    </ConstraintSet>
+
+
+</MotionScene>

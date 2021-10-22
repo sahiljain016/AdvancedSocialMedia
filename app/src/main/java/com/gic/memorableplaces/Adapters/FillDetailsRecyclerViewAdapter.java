@@ -6,8 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gic.memorableplaces.R;
@@ -22,33 +25,46 @@ public class FillDetailsRecyclerViewAdapter extends RecyclerView.Adapter<FillDet
     //Variables
     private Context mContext;
 
-    private ArrayList<String> alsCourseList;
-
-    private OnCoursesClickListener MyOnCoursesClickListener;
+    private ArrayList<String> alsFilterDetails;
+    private OnDetailFillClicked MyOnDetailFillClicked;
 
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        OnCoursesClickListener mOnCoursesClickListener;
-
+OnDetailFillClicked mOnDetailFillClicked;
         private AutofitTextView ATV_TITLE;
-        public MainFeedViewHolder(@NonNull View itemView, OnCoursesClickListener onCoursesClickListener) {
+        private ConstraintLayout CL;
+        private ImageView IV_ICON;
+        private RelativeLayout RL_BOTTOM;
+
+        public MainFeedViewHolder(@NonNull View itemView,OnDetailFillClicked onDetailFillClicked) {
             super(itemView);
-            mOnCoursesClickListener = onCoursesClickListener;
+            mOnDetailFillClicked = onDetailFillClicked;
             ATV_TITLE = itemView.findViewById(R.id.ATV_DETAIL_TITLE_FD);
-            itemView.setOnClickListener(this);
+            CL = itemView.findViewById(R.id.CL_FD);
+            IV_ICON = itemView.findViewById(R.id.IV_ICON_FD);
+            RL_BOTTOM = itemView.findViewById(R.id.RL_BOTTOM_FILL_IN_FD);
+            RL_BOTTOM.setOnClickListener(this);
         }
+
 
         @Override
         public void onClick(View v) {
-            mOnCoursesClickListener.onItemClick(getAdapterPosition());
+            mOnDetailFillClicked.onItemClick(getBindingAdapterPosition(),RL_BOTTOM);
         }
+
+
+//        @Override
+//        public void onClick(View v) {
+//
+//        }
     }
 
-    public interface OnCoursesClickListener {
-        void onItemClick(int position);
+    public interface OnDetailFillClicked {
+        void onItemClick(int position,RelativeLayout relativeLayout);
     }
 
-    public FillDetailsRecyclerViewAdapter( Context context) {
+    public FillDetailsRecyclerViewAdapter(ArrayList<String> FilterDetails, OnDetailFillClicked onDetailFillClicked, Context context) {
+        alsFilterDetails = FilterDetails;
+        MyOnDetailFillClicked = onDetailFillClicked;
         mContext = context;
     }
 
@@ -56,7 +72,7 @@ public class FillDetailsRecyclerViewAdapter extends RecyclerView.Adapter<FillDet
     @Override
     public MainFeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_fill_details, parent, false);
-        return new MainFeedViewHolder(v, MyOnCoursesClickListener);
+        return new MainFeedViewHolder(v,MyOnDetailFillClicked);
     }
 
     @Override
@@ -66,12 +82,24 @@ public class FillDetailsRecyclerViewAdapter extends RecyclerView.Adapter<FillDet
         Typeface face = Typeface.createFromAsset(mContext.getAssets(), "fonts/CormorantGaramond.ttf");
         holder.ATV_TITLE.setTypeface(face, Typeface.NORMAL);
 
+        int pos = holder.getBindingAdapterPosition();
+
+        String details = alsFilterDetails.get(pos);
+//        Log.d(TAG, "onBindViewHolder: bg: " + );
+//        Log.d(TAG, "onBindViewHolder: icon: " + details.substring(details.indexOf(',') + 1,details.indexOf('*')));
+//        Log.d(TAG, "onBindViewHolder: name: " + details.substring(details.indexOf('*') + 1));
+
+        holder.CL.setBackgroundResource(Integer.parseInt(details.substring(0,details.indexOf(','))));
+        holder.IV_ICON.setImageResource(Integer.parseInt(details.substring(details.indexOf(',') + 1,details.indexOf('*'))));
+        holder.ATV_TITLE.setText(details.substring(details.indexOf('*') + 1));
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return ( 1);
+        return ( alsFilterDetails.size());
     }
 
 

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/TRANS_1_H"
+        motion:constraintSetEnd="@+id/h_1_end"
+        motion:constraintSetStart="@id/h_1_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_2_H"
+        motion:constraintSetEnd="@+id/h_2_end"
+        motion:constraintSetStart="@id/h_2_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+    <Transition
+        android:id="@+id/TRANS_3_H"
+        motion:constraintSetEnd="@+id/h_3_end"
+        motion:constraintSetStart="@id/h_3_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_4_H"
+        motion:constraintSetEnd="@+id/h_4_end"
+        motion:constraintSetStart="@id/h_4_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/TRANS_5_H"
+        motion:constraintSetEnd="@+id/h_5_end"
+        motion:constraintSetStart="@id/h_5_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/h_5_start">
+        <Constraint
+            android:id="@+id/SL_5_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_4_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_5_end">
+        <Constraint
+            android:id="@+id/SL_5_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_4_H" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_4_start">
+        <Constraint
+            android:id="@+id/SL_4_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_3_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_4_end">
+        <Constraint
+
+            android:id="@+id/SL_4_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_3_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_3_start">
+        <Constraint
+            android:id="@+id/SL_3_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_2_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_3_end">
+        <Constraint
+            android:id="@+id/SL_3_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_2_H" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_2_start">
+        <Constraint
+            android:id="@+id/SL_2_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_1_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_2_end">
+        <Constraint
+            android:id="@+id/SL_2_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SL_1_H" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_1_start">
+
+        <Constraint
+            android:id="@+id/SL_1_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/h_1_end">
+        <Constraint
+            android:id="@+id/SL_1_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+
+</MotionScene>

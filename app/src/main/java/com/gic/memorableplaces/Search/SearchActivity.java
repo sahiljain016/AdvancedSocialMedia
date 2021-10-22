@@ -1,16 +1,11 @@
 package com.gic.memorableplaces.Search;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gic.memorableplaces.utils.FirebaseMethods;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gic.memorableplaces.R;
-import com.gic.memorableplaces.utils.NavigationViewHelper;
+import com.gic.memorableplaces.utils.FirebaseMethods;
 
 public class SearchActivity extends AppCompatActivity {
 private static final String TAG = "Search Activity";
@@ -24,7 +19,7 @@ private static final String TAG = "Search Activity";
 
     }
 //RESPONSIBLE FOR SETTING UP BOTTOM NAVIGATION VIEW
-    public void setUpBottomNav(){
+  /*  public void setUpBottomNav(){
         Log.d(TAG, "Bottom nav view clicked");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.BottomNavigationMenu);
@@ -33,7 +28,7 @@ private static final String TAG = "Search Activity";
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(Activity_num);
         menuItem.setChecked(true);
-    }
+    }*/
 
     @Override
     protected void onPause() {

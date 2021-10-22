@@ -46,4 +46,14 @@
 
     </style>
 
+    <style name="OtherDetail" parent="MyDetail">
+        <item name="border">#fff</item>
+        <item name="blocker">#000</item>
+    </style>
+
+    <style name="MyDetail">
+        <item name="border">#000</item>
+        <item name="blocker">#fff</item>
+    </style>
+
 </resources>

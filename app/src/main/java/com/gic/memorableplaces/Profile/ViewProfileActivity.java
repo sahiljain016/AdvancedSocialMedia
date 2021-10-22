@@ -17,20 +17,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.faltenreich.skeletonlayout.Skeleton;
 import com.faltenreich.skeletonlayout.SkeletonLayoutUtils;
+import com.gic.memorableplaces.Adapters.GridViewAdapter;
 import com.gic.memorableplaces.DataModels.AllUserSettings;
 import com.gic.memorableplaces.DataModels.Photo;
 import com.gic.memorableplaces.DataModels.User;
 import com.gic.memorableplaces.DataModels.UserAccountSettings;
 import com.gic.memorableplaces.DataModels.Video;
 import com.gic.memorableplaces.R;
-import com.gic.memorableplaces.SignUp.GamesFragment;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.gic.memorableplaces.utils.FollowButtonAnimation;
-import com.gic.memorableplaces.Adapters.GridViewAdapter;
 import com.gic.memorableplaces.utils.UniversalImageLoader;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -186,11 +184,11 @@ public class ViewProfileActivity extends AppCompatActivity {
 //                    Transaction.addToBackStack(getString(R.string.edit_profile_fragment));
 //                    Transaction.commit();
 
-                    GamesFragment fragment = new GamesFragment();
+                    /*GamesFragment fragment = new GamesFragment();
                     FragmentTransaction Transaction = getSupportFragmentManager().beginTransaction();
                     Transaction.replace(R.id.frame_layout_profile1, fragment);
                     Transaction.addToBackStack(mContext.getString(R.string.games_fragment));
-                    Transaction.commit();
+                    Transaction.commit();*/
 
                 }
             });

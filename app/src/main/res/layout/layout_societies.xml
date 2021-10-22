@@ -1,76 +1,125 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_height="match_parent"
-    android:layout_width="@dimen/_220sdp"
-    android:layout_marginStart="@dimen/_15sdp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.cardview.widget.CardView
-    android:id="@+id/CardView_Male"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentStart="true"
-    app:cardBackgroundColor="@android:color/transparent"
-    app:cardCornerRadius="@dimen/_30sdp"
-    app:cardElevation="9dp"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_marginBottom="@dimen/_10sdp"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout
-
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_SOCIETY"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/custom_background_filters"
-        android:orientation="vertical"
-        android:weightSum="100">
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        app:cardElevation="@dimen/_3sdp">
 
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/SocietyImage"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:riv_corner_radius_top_left="@dimen/_30sdp"
-            app:riv_corner_radius_top_right="@dimen/_30sdp"
-            android:layout_weight="70"
-            android:scaleType="fitXY"
-       />
+            android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30">
 
-            <TextView
-                android:id="@+id/GameName"
+            <ImageView
+                android:id="@+id/IV_SOCIETY"
                 android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/enactus"
+                app:layout_constraintBottom_toTopOf="@id/IV_COVER"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/IV_COVER"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!--            <me.grantland.widget.AutofitTextView-->
+            <!--                android:id="@+id/ATV_SOCIETY_NAME"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="28sp"-->
+            <!--                android:text="Enactus"-->
+            <!--                android:fontFamily="@font/capriola"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                app:layout_constraintBottom_toTopOf="@id/SV_SOCIETY" />-->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CL_ADD_SOCIETY"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:maxLines="1"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/border_rounded_black_20sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <com.csguys.viewmoretextview.ViewMoreTextView
-                android:id="@+id/GamePlatform"
+                <ImageView
+                    android:id="@+id/IV_ADD_SOCIETY"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/ic_plus_sign_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/TV_SOCIETY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/capriola"
+                    android:text="Select"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/IV_ADD_SOCIETY"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/GameName"
-                android:background="#2C000000"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                app:tv_expand_text="view more"
-                app:tv_collapse_text="close"
-                android:text=""
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                android:layout_height="match_parent">
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/TV_DESP_SIC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E6000000"
+                    android:fadeScrollbars="true"
+                    android:isScrollContainer="true"
+                    android:nestedScrollingEnabled="true"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_50sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+            </ScrollView>
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/IV_DESP_SIC"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_question_mark_bubble"
+                android:tag="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

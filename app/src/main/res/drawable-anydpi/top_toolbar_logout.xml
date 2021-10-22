@@ -17,8 +17,6 @@
     android:width="2dp">
 
 </stroke>
-            <solid
-                android:color="@color/textColorPrimary"/>
 
 
 

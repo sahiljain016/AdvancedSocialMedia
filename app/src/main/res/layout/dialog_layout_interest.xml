@@ -31,7 +31,7 @@
         android:paddingTop="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:paddingBottom="@dimen/_120sdp"
-        android:src="@drawable/ic_hobbies"
+        android:src="@drawable/ic_filter_hobbies"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

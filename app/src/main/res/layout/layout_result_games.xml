@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RL_RESULT_GAMES"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/rounded_background_yellow_20sdp"
+        android:backgroundTint="#EFEFEF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/TV_NAME_GAMES"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/TV_RATING_GAMES"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TV_DESP_GAMES"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingStart="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingBottom="5dp"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/tertiary_text_light"
+            android:textSize="12sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/TV_RATING_GAMES"
+            app:layout_constraintStart_toStartOf="@id/TV_NAME_GAMES"
+            app:layout_constraintTop_toBottomOf="@id/TV_NAME_GAMES" />
+
+        <TextView
+            android:id="@+id/TV_RATING_GAMES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxLines="2"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="5dp"
+
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    </androidx.cardview.widget.CardView>-->
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/CIV_IMAGE_GAMES"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="@id/RL_RESULT_GAMES"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/RL_RESULT_GAMES" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

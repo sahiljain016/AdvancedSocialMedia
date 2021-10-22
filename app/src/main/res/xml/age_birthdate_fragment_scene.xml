@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/ab_end"
+        motion:constraintSetStart="@id/ab_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/ab_start">
+
+        <Constraint
+            android:id="@+id/IFV_BACK_BUTTON_AB"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_AB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_AB"
+            motion:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_AB"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_SWITCH_AB"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_IMG_1_AB"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/GIV_IMG_1_AB"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@raw/confetti"
+            motion:layout_constraintBottom_toTopOf="@id/CV_DATE_PICKER"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/ATV_AGE_SELECTION_AB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/RSB_AGE_AB"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:alpha="0"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_AGE_SELECTION_AB" />
+
+        <Constraint
+            android:id="@+id/TV_NOTICE_AB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:alpha="0"
+            android:layout_marginEnd="@dimen/_40sdp"
+            motion:layout_constraintTop_toBottomOf="@id/RSB_AGE_AB" />
+
+        <Constraint
+            android:id="@+id/CL_BIRTHDATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            motion:layout_constraintBottom_toTopOf="@id/ATV_AGE"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/ATV_AGE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/CV_DATE_PICKER"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            motion:layout_constraintBottom_toTopOf="@id/CL_BIRTHDATE"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/IV_IMG_1_AB" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/ab_end">
+
+        <Constraint
+            android:id="@+id/IFV_BACK_BUTTON_AB"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_AB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_AB"
+            motion:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_AB"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_SWITCH_AB"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_AB"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_AB">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_IMG_1_AB"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintBottom_toTopOf="@id/ATV_AGE_SELECTION_AB"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/GIV_IMG_1_AB"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@raw/confetti"
+            motion:layout_constraintBottom_toTopOf="@id/ATV_AGE_SELECTION_AB"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/ATV_AGE_SELECTION_AB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:sizeToFit="true" />
+
+        <Constraint
+            android:id="@+id/RSB_AGE_AB"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_AGE_SELECTION_AB" />
+
+        <Constraint
+            android:id="@+id/TV_NOTICE_AB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            motion:layout_constraintTop_toBottomOf="@id/RSB_AGE_AB" />
+
+        <Constraint
+            android:id="@+id/CL_BIRTHDATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:alpha="0"
+            android:padding="@dimen/_5sdp"
+            motion:layout_constraintBottom_toTopOf="@id/ATV_AGE"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/ATV_AGE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/CV_DATE_PICKER"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toTopOf="@id/CL_BIRTHDATE"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/IV_IMG_1_AB" />
+    </ConstraintSet>
+
+
+</MotionScene>

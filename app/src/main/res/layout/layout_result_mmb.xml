@@ -5,81 +5,167 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_RESULT_LEFT_MMB"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_2sdp"
 
-    <RelativeLayout
-        android:id="@+id/base_result_mmb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/V_DIVIDER_RESULT_MMB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/IV_COVER_LEFT_MMB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_img_1" />
+
+            <View
+                android:id="@+id/V_RESULT_GRADIENT_LEFT_MMB"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/V_POINT_LEFT_MMB" />
+
+            <View
+                android:id="@+id/V_POINT_LEFT_MMB"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                app:layout_constraintBottom_toTopOf="@id/TV_TITLE_LEFT_MMB"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/TV_TITLE_LEFT_MMB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/capriola"
+                android:maxLines="1"
+                android:text="Ariana Grande"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/TV_DESP_LEFT_MMB" />
+
+            <TextView
+                android:id="@+id/TV_DESP_LEFT_MMB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/capriola"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:text="Ariana Grande"
+                android:textAlignment="gravity"
+                android:textColor="#C8C8C8"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/V_DIVIDER_RESULT_MMB"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.gic.memorableplaces.utils.SquareImageView
-            android:id="@+id/CoverImageView"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_2sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:scaleType="centerCrop"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_RESULT_RIGHT_MMB"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/V_DIVIDER_RESULT_MMB"
+        app:layout_constraintTop_toTopOf="parent">
 
-            app:civ_border_color="@color/black"
-            app:civ_border_width="0.5dp" />
-
-        <RelativeLayout
-            android:id="@+id/RelLAyout2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/CoverImageView">
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/IV_COVER_RIGHT_MMB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test_img_1" />
+
+            <View
+                android:id="@+id/V_RESULT_GRADIENT_RIGHT_MMB"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/V_POINT_RIGHT_MMB" />
+
+            <View
+                android:id="@+id/V_POINT_RIGHT_MMB"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                app:layout_constraintBottom_toTopOf="@id/TV_TITLE_RIGHT_MMB"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/ItemName"
-                android:layout_width="wrap_content"
+                android:id="@+id/TV_TITLE_RIGHT_MMB"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/capriola"
+                android:maxLines="1"
+                android:text="Ariana Grande"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/TV_DESP_RIGHT_MMB" />
 
             <TextView
-                android:id="@+id/CreatorName"
-                android:layout_width="wrap_content"
+                android:id="@+id/TV_DESP_RIGHT_MMB"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ItemName"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/capriola"
+                android:gravity="center_vertical"
                 android:maxLines="2"
-                android:paddingStart="@dimen/_2sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:paddingBottom="5dp"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/tertiary_text_light"
-                android:textSize="14sp" />
+                android:text="Ariana Grande"
+                android:textAlignment="gravity"
+                android:textColor="#C8C8C8"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-            <TextView
-                android:id="@+id/GameRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:maxLines="2"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingBottom="5dp"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
-
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

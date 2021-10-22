@@ -94,7 +94,6 @@
     <string name="field_received_count">received_count</string>
     <string name="field_sent">sent</string>
     <string name="field_sent_count">sent_count</string>
-    <string name="field_gender">gender</string>
     <string name="field_likes">likes</string>
     <string name="field_user_id">user_id</string>
     <string name="field_mediaID">mediaID</string>
@@ -112,7 +111,6 @@
     <string name="No_filter_results_available">No Results Available</string>
     <string name="age">Age</string>
     <string name="gender">Gender</string>
-    <string name="college_year">College Year</string>
     <string name="course">Courses In College</string>
     <string name="zodiac_sign">Zodiac Sign</string>
     <string name="hobbies">Hobbies/Interests</string>
@@ -136,10 +134,8 @@
     <string name="society_name">society_name</string>
     <string name="society_cover_url">society_cover_url</string>
     <string name="society_desp">society_desp</string>
-    <string name="field_hobbies">hobbies</string>
     <string name="field_society">my_societies</string>
     <string name="field_filter">filter_name</string>
-    <string name="field_age">age</string>
     <string name="field_zodiac_sign">zodiac_sign</string>
     <string name="field_class_representative">class_representative</string>
     <string name="field_other_posts">other_posts</string>
@@ -153,22 +149,15 @@
     <string name="field">fields</string>
     <string name="field_private">private</string>
     <string name="field_public">public</string>
-    <string name="field_music">music</string>
     <string name="field_no_gender">Prefer not to say gender</string>
-    <string name="field_male">Male</string>
-    <string name="field_Female">Female</string>
-    <string name="field_pronouns">pronoun_preferred</string>
     <string name="no_selection">no_selection</string>
     <string name="field_track_name">track_name</string>
     <string name="field_singer_name">singer_name</string>
     <string name="field_cover_url">cover_url</string>
-    <string name="field_movie">movie</string>
     <string name="field_movie_name">movie_name</string>
     <string name="field_movie_overview">movie_overview</string>
-    <string name="field_books">books</string>
     <string name="field_book_name">book_name</string>
     <string name="field_book_authors">book_authors</string>
-    <string name="field_college_year">college_year</string>
     <string name="field_first_year">First Year</string>
     <string name="field_second_year">Second Year</string>
     <string name="field_third_year">Third Year</string>
@@ -344,5 +333,81 @@
     <string name="field_is_message_pinned">is_message_pinned</string>
     <string name="field_pending_unseen_messages">pending_unseen_messages</string>
     <string name="field_previous_message_id">previous_message_id</string>
+
+    <!--Fill Details Fragment-->
+    <string name="fragment_fill_details">fill_details</string>
+    <string name="field_my_details">my_details</string>
+    <string name="field_match_details">match_details</string>
+    <string name="field_visited_status">visited_status</string>
+    <string name="field_none">none</string>
+    <string name="field_green">green</string>
+    <string name="field_red">red</string>
+
+    <!--Age And Birthdate Fragment-->
+    <string name="fragment_age_and_birthdate">fragment_age_and_birthdate</string>
+    <string name="field_age">age</string>
+    <string name="field_my_age">my_age</string>
+    <string name="field_match_age_range">match_age_range</string>
+    <string name="field_ab_p">ab_p</string>
+
+    <!--Gender And Pronouns Fragment-->
+    <string name="fragment_gender_and_pronouns">fragment_gender_and_pronouns</string>
+    <string name="field_gender">gender</string>
+    <string name="field_match_gender">match_gender</string>
+    <string name="field_male">male</string>
+    <string name="field_female">female</string>
+    <string name="field_other_gender">other_gender</string>
+    <string name="field_prefer_not_to_say">prefer_not_to_say</string>
+    <string name="field_pronouns">pronoun_preferred</string>
+    <string name="field_gp_p">gp_p</string>
+
+    <!--General Details Fragment-->
+    <string name="fragment_general_details">fragment_general_details</string>
+    <string name="field_general_details">general_details</string>
+    <string name="field_match_general_details">match_general_details</string>
+    <string name="field_gd_p">gd_p</string>
+
+    <!--College Year Fragment-->
+    <string name="fragment_college_year">fragment_college_year</string>
+    <string name="field_college_year">college_year</string>
+    <string name="field_match_college_year">match_college_year</string>
+    <string name="field_cy_p">cy_p</string>
+
+    <!--Society In College Fragment-->
+    <string name="fragment_society_in_college">fragment_society_in_college</string>
+    <string name="field_society_in_college">society_in_college</string>
+    <string name="field_match_society_in_college">match_society_in_college</string>
+    <string name="field_sic_p">sic_p</string>
+
+    <!--Hobbies Fragment-->
+    <string name="fragment_hobbies">fragment_hobbies</string>
+    <string name="field_hobbies">hobbies</string>
+    <string name="field_match_hobbies">match_hobbies</string>
+    <string name="field_h_p">h_p</string>
+
+    <!--Video Games Fragment-->
+    <string name="fragment_video_games">fragment_video_games</string>
+    <string name="field_video_games">video_games</string>
+    <string name="field_match_video_games">match_video_games</string>
+    <string name="field_vg_p">vg_p</string>
+
+    <!--Music Fragment-->
+    <string name="fragment_music">fragment_music</string>
+    <string name="field_music">music</string>
+    <string name="field_match_music">match_music</string>
+    <string name="field_mu_p">mu_p</string>
+
+    <!--Movie Fragment-->
+    <string name="fragment_movie">fragment_movie</string>
+    <string name="field_movie">movie</string>
+    <string name="field_match_movie">match_movie</string>
+    <string name="field_mo_p">mo_p</string>
+
+    <!--Books Fragment-->
+    <string name="fragment_books">fragment_books</string>
+    <string name="field_books">books</string>
+    <string name="field_match_books">match_books</string>
+    <string name="field_bo_p">bo_p</string>
+
 
 </resources>

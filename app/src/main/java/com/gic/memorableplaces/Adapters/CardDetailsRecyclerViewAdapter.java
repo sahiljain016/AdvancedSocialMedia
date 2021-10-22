@@ -1,5 +1,7 @@
 package com.gic.memorableplaces.Adapters;
 
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmMyValues;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -28,8 +30,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import me.grantland.widget.AutofitTextView;
-
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmMyValues;
 
 public class CardDetailsRecyclerViewAdapter extends RecyclerView.Adapter<CardDetailsRecyclerViewAdapter.MainFeedViewHolder> {
     private static final String TAG = "FindFriendsRecyclerViewAdapter";
@@ -108,23 +108,23 @@ public class CardDetailsRecyclerViewAdapter extends RecyclerView.Adapter<CardDet
         Log.d(TAG, String.format("onBindViewHolder: alsRightFields: %s", alsRightFields));
         if (!hmFinal.isEmpty()) {
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_age))) {
-                BuildView(position, holder, "Age\nBirthDate", R.drawable.ic_age_filter, mContext.getString(R.string.field_age)
+                BuildView(position, holder, "Age\nBirthDate", R.drawable.ic_filter_age, mContext.getString(R.string.field_age)
                         , mContext.getString(R.string.field_birth_date), 1, "Age: ",
                         "BirthDate: ", true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_age))) {
-                BuildView(position, holder, "Age\nBirthDate", R.drawable.ic_age_filter, mContext.getString(R.string.field_age)
+                BuildView(position, holder, "Age\nBirthDate", R.drawable.ic_filter_age, mContext.getString(R.string.field_age)
                         , mContext.getString(R.string.field_birth_date), 1, "Age: ",
                         "BirthDate: ", false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_gender))) {
-                BuildView(position, holder, "Gender\nPronouns Preferred", R.drawable.ic_gender_symbol,
+                BuildView(position, holder, "Gender\nPronouns Preferred", R.drawable.ic_filter_gender,
                         mContext.getString(R.string.field_gender), mContext.getString(R.string.field_pronouns), 1,
                         "Gender: ", "Pronouns Preferred: ", true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_gender))) {
-                BuildView(position, holder, "Gender\nPronouns Preferred", R.drawable.ic_gender_symbol,
+                BuildView(position, holder, "Gender\nPronouns Preferred", R.drawable.ic_filter_gender,
                         mContext.getString(R.string.field_gender), mContext.getString(R.string.field_pronouns), 1,
                         "Gender: ", "Pronouns Preferred:", false);
 
@@ -141,81 +141,81 @@ public class CardDetailsRecyclerViewAdapter extends RecyclerView.Adapter<CardDet
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_games))) {
-                BuildView(position, holder, "Games\nTop Gaming Platforms", R.drawable.ic_controller,
+                BuildView(position, holder, "Games\nTop Gaming Platforms", R.drawable.ic_filter_video_games,
                         mContext.getString(R.string.field_games), mContext.getString(R.string.Top5Platform), 2,
                         "Games: ", "Top Gaming Platforms:", true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_games))) {
-                BuildView(position, holder, "Games\nTop Gaming Platforms ", R.drawable.ic_controller,
+                BuildView(position, holder, "Games\nTop Gaming Platforms ", R.drawable.ic_filter_video_games,
                         mContext.getString(R.string.field_games), mContext.getString(R.string.Top5Platform), 2,
                         "Games: ", "Top Gaming Platforms: ", false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_hobbies))) {
-                BuildView(position, holder, "My Hobbies ", R.drawable.ic_hobbies, mContext.getString(R.string.field_hobbies),
+                BuildView(position, holder, "My Hobbies ", R.drawable.ic_filter_hobbies, mContext.getString(R.string.field_hobbies),
                         "", 3, "My Hobbies: ", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_hobbies))) {
-                BuildView(position, holder, "My Hobbies ", R.drawable.ic_hobbies, mContext.getString(R.string.field_hobbies),
+                BuildView(position, holder, "My Hobbies ", R.drawable.ic_filter_hobbies, mContext.getString(R.string.field_hobbies),
                         "", 3, "My Hobbies: ", null, false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_books))) {
-                BuildView(position, holder, "My books ", R.drawable.ic_book, mContext.getString(R.string.field_books),
+                BuildView(position, holder, "My books ", R.drawable.ic_filter_book, mContext.getString(R.string.field_books),
                         "", 4, "My Books:", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_books))) {
-                BuildView(position, holder, "My books ", R.drawable.ic_book, mContext.getString(R.string.field_books),
+                BuildView(position, holder, "My books ", R.drawable.ic_filter_book, mContext.getString(R.string.field_books),
                         "", 4, "My Books: ", null, false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_movie))) {
-                BuildView(position, holder, "My Movie", R.drawable.ic_movie, mContext.getString(R.string.field_movie),
+                BuildView(position, holder, "My Movie", R.drawable.ic_filter_movie, mContext.getString(R.string.field_movie),
                         "", 4, "My Movies: ", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_movie))) {
-                BuildView(position, holder, "My Movie", R.drawable.ic_movie, mContext.getString(R.string.field_movie),
+                BuildView(position, holder, "My Movie", R.drawable.ic_filter_movie, mContext.getString(R.string.field_movie),
                         "", 4, "My Movies: ", null, false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_music))) {
-                BuildView(position, holder, "My Music", R.drawable.ic_music, mContext.getString(R.string.field_music), "",
+                BuildView(position, holder, "My Music", R.drawable.ic_filter_music, mContext.getString(R.string.field_music), "",
                         4, "My Music: ", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_music))) {
-                BuildView(position, holder, "My Music", R.drawable.ic_music, mContext.getString(R.string.field_music), "",
+                BuildView(position, holder, "My Music", R.drawable.ic_filter_music, mContext.getString(R.string.field_music), "",
                         4, "My Music: ", null, false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_society))) {
-                BuildView(position, holder, "My Societies", R.drawable.ic_society_filter,
+                BuildView(position, holder, "My Societies", R.drawable.ic_filter_society,
                         mContext.getString(R.string.field_society), "", 4,
                         "My Societies: ", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_society))) {
-                BuildView(position, holder, "My Societies", R.drawable.ic_society_filter,
+                BuildView(position, holder, "My Societies", R.drawable.ic_filter_society,
                         mContext.getString(R.string.field_society), "", 4,
                         "My Societies: ", null, false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_college_year))) {
-                BuildView(position, holder, "College Year", R.drawable.ic_university,
+                BuildView(position, holder, "College Year", R.drawable.ic_filter_college_year,
                         mContext.getString(R.string.field_college_year), "", 5,
                         "College Year: ", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_college_year))) {
-                BuildView(position, holder, "College Year", R.drawable.ic_university,
+                BuildView(position, holder, "College Year", R.drawable.ic_filter_college_year,
                         mContext.getString(R.string.field_college_year), "", 5,
                         "College Year: ", null, false);
 
             }
             if (alsLeftFields.get(position).equals(mContext.getString(R.string.field_zodiac_sign))) {
-                BuildView(position, holder, "Zodiac Sign", R.drawable.ic_zodiac_filter,
+                BuildView(position, holder, "Zodiac Sign", R.drawable.ic_filter_zodiac_scorpion,
                         mContext.getString(R.string.field_zodiac_sign), "", 5,
                         "Zodiac Sign: ", null, true);
 
             } else if (alsRightFields.get(position).equals(mContext.getString(R.string.field_zodiac_sign))) {
-                BuildView(position, holder, "Zodiac Sign", R.drawable.ic_zodiac_filter,
+                BuildView(position, holder, "Zodiac Sign", R.drawable.ic_filter_zodiac_scorpion,
                         mContext.getString(R.string.field_zodiac_sign), "", 5,
                         "Zodiac Sign: ", null, false);
 

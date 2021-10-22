@@ -20,17 +20,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_FD"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_special_bg_ab_fill_details"
+            android:background="@drawable/special_bg_ab_blue"
             android:paddingBottom="@dimen/_10sdp">
 
             <ImageView
+                android:id="@+id/IV_ICON_FD"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:src="@drawable/ic_age_filter"
+                android:layout_margin="@dimen/_30sdp"
+                android:src="@drawable/ic_filter_age"
                 app:layout_constraintBottom_toTopOf="@id/ATV_DETAIL_TITLE_FD"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,15 +44,15 @@
                 android:text="Age &amp; Birthdate"
                 android:textColor="#000000"
                 android:textSize="36sp"
-                app:layout_constraintBottom_toTopOf="@id/RL_BOTTOM_RV_FD"
+                app:layout_constraintBottom_toTopOf="@id/RL_BOTTOM_FILL_IN_FD"
                 tools:layout_editor_absoluteX="14dp" />
 
             <RelativeLayout
-                android:id="@+id/RL_BOTTOM_RV_FD"
+                android:id="@+id/RL_BOTTOM_FILL_IN_FD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/rounded_corners_checkbox_unchecked"
+                android:background="@drawable/rounded_black_outline_white_flash"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_20sdp"

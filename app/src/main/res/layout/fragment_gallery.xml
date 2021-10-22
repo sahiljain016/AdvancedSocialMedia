@@ -51,7 +51,7 @@
                 android:layout_width="45dp"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/ChangeAspectRatio"
-                android:background="@drawable/rounded_corners_share"
+                android:background="@drawable/rounded_corners_black"
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="15dp"
                 android:src="@drawable/ic_aspect_ratio"/>

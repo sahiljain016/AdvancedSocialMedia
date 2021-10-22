@@ -42,7 +42,7 @@ public class SideMenuFragment extends Fragment implements yalantis.com.sidemenu.
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
     private ViewAnimator viewAnimator;
-    private int res = R.drawable.ic_age_filter;
+    private int res = R.drawable.ic_filter_age;
     private LinearLayout linearLayout;
     private Toolbar toolbar;
     private TyperTextView title;
@@ -62,7 +62,7 @@ public class SideMenuFragment extends Fragment implements yalantis.com.sidemenu.
 
 //        Bundle bundle = new Bundle();
 //        bundle.putString(mContext.getString(R.string.field_age),mContext.getString(R.string.age));
-        ContentFragment contentFragment = ContentFragment.newInstance(R.drawable.ic_music,R.color.home_color_1,R.color.home_color_3,"#FFB3CE",mContext);
+        ContentFragment contentFragment = ContentFragment.newInstance(R.drawable.ic_filter_music,R.color.home_color_1,R.color.home_color_3,"#FFB3CE",mContext);
        // contentFragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, contentFragment)
@@ -90,29 +90,29 @@ viewAnimator = new yalantis.com.sidemenu.util.ViewAnimator<>(((FriendsFilterActi
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.CLOSE, R.drawable.ic_profile_popup_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.AGE, R.drawable.ic_age_filter);
+        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.AGE, R.drawable.ic_filter_age);
         list.add(menuItem);
         SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.COURSE, R.drawable.ic_course_icon);
         list.add(menuItem2);
         SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.COLLEGE_YEAR, R.drawable.ic_my_college);
         list.add(menuItem3);
-        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.GENDER, R.drawable.ic_gender_symbol);
+        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.GENDER, R.drawable.ic_filter_gender);
         list.add(menuItem4);
-        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.ZODIAC, R.drawable.ic_zodiac_filter);
+        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.ZODIAC, R.drawable.ic_filter_zodiac_scorpion);
         list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.HOBBIES, R.drawable.ic_hobbies);
+        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.HOBBIES, R.drawable.ic_filter_hobbies);
         list.add(menuItem6);
-        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_controller);
+        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.GAME, R.drawable.ic_filter_video_games);
         list.add(menuItem7);
-        SlideMenuItem menuItem8 = new SlideMenuItem(ContentFragment.MUSIC, R.drawable.ic_music);
+        SlideMenuItem menuItem8 = new SlideMenuItem(ContentFragment.MUSIC, R.drawable.ic_filter_music);
         list.add(menuItem8);
-        SlideMenuItem menuItem9 = new SlideMenuItem(ContentFragment.MOVIE, R.drawable.ic_movie);
+        SlideMenuItem menuItem9 = new SlideMenuItem(ContentFragment.MOVIE, R.drawable.ic_filter_movie);
         list.add(menuItem9);
-        SlideMenuItem menuItem10 = new SlideMenuItem(ContentFragment.BOOK, R.drawable.ic_book);
+        SlideMenuItem menuItem10 = new SlideMenuItem(ContentFragment.BOOK, R.drawable.ic_filter_book);
         list.add(menuItem10);
-        SlideMenuItem menuItem11 = new SlideMenuItem(ContentFragment.SOCIETY, R.drawable.ic_society_filter);
+        SlideMenuItem menuItem11 = new SlideMenuItem(ContentFragment.SOCIETY, R.drawable.ic_filter_society);
         list.add(menuItem11);
-        SlideMenuItem menuItem12 = new SlideMenuItem(ContentFragment.PRONOUN, R.drawable.ic_gender_symbol);
+        SlideMenuItem menuItem12 = new SlideMenuItem(ContentFragment.PRONOUN, R.drawable.ic_filter_gender);
         list.add(menuItem12);
     }
 

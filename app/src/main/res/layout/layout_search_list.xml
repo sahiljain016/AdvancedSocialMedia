@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/CoverImageView"
+            android:id="@+id/CIV_IMAGE_GAMES"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentStart="true"
@@ -33,15 +33,15 @@
             app:civ_border_width="0.5dp" />
 
         <RelativeLayout
-            android:id="@+id/RelLAyout2"
+            android:id="@+id/RL_RESULT_GAMES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/CoverImageView">
+            android:layout_toEndOf="@+id/CIV_IMAGE_GAMES">
 
 
             <TextView
-                android:id="@+id/ItemName"
+                android:id="@+id/TV_NAME_GAMES"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -51,10 +51,10 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/CreatorName"
+                android:id="@+id/TV_DESP_GAMES"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ItemName"
+                android:layout_below="@+id/TV_NAME_GAMES"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:text="                                                                 "

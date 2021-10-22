@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_rounded_yellow_20sdp"
+    android:paddingBottom="@dimen/_10sdp">
+
+
+    <ImageView
+        android:id="@+id/IV_HEIGHT_DIALOG"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/ic_height" />
+
+    <TextView
+        android:id="@+id/TV_HEIGHT_DIALOG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/IV_HEIGHT_DIALOG"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/capriola"
+        android:text="What's your height?"
+        android:textColor="#5A5A5A"
+        android:textSize="24sp" />
+
+    <com.jem.rubberpicker.RubberSeekBar
+        android:id="@+id/RSB_HEIGHT_GD"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_below="@id/TV_HEIGHT_DIALOG"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:elevation="@dimen/_5sdp"
+        app:dampingRatio="0.4"
+        app:defaultThumbInsideColor="#EAEAEA"
+        app:defaultThumbRadius="@dimen/_10sdp"
+        app:elasticBehavior="cubic"
+        app:highlightDefaultThumbOnTouchColor="#EFC400"
+        app:highlightTrackColor="#FFE468"
+        app:highlightTrackWidth="4dp"
+        app:initialValue="150"
+        app:maxValue="300"
+        app:minValue="50"
+        app:normalTrackColor="#D1D1D1"
+        app:normalTrackWidth="4dp"
+        app:stiffness="400"
+        app:stretchRange="36dp" />
+
+    <TextView
+        android:id="@+id/TV_HEIGHT_GD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RSB_HEIGHT_GD"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/border_rounded_grey_20sdp"
+        android:fontFamily="@font/capriola"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="150 cm"
+        android:textColor="#EFC400"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/TV_SKIP_DIALOG_GD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_HEIGHT_GD"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/capriola"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Skip"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp" />
+
+</RelativeLayout>

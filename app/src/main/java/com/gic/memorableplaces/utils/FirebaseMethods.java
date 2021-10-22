@@ -1940,5 +1940,16 @@ public class FirebaseMethods {
                 .setValue(collegeUID);
     }
 
+    /**
+     * --------------------------------------------------------GENERAL METHODS (Upload to firebase)--------------------------------------
+     */
+
+    public void Set5ChildrenValue(String Field1, String Field2, String Field3, String Field4, Object Value) {
+        myRef.child(Field1)
+                .child(Field2)
+                .child(Field3)
+                .child(Field4)
+                .setValue(Value);
+    }
 }
 

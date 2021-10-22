@@ -204,11 +204,11 @@
 
 
         <RelativeLayout
-            android:id="@+id/RelLAyout2"
+            android:id="@+id/RL_RESULT_GAMES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/CoverImageView">
+            android:layout_toEndOf="@+id/CIV_IMAGE_GAMES">
 
 
         </RelativeLayout>

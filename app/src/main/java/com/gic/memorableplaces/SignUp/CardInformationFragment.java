@@ -2,6 +2,8 @@
 
 package com.gic.memorableplaces.SignUp;
 
+import static com.gic.memorableplaces.utils.QueryDatabase.SetFieldsInDatabase5Lines;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -50,7 +52,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gic.memorableplaces.Adapters.SelectedMMBRecyclerViewAdapter;
+import com.gic.memorableplaces.Adapters.SelectedSocietyRecyclerViewAdapter;
 import com.gic.memorableplaces.Adapters.SocietiesRecyclerViewAdapter;
 import com.gic.memorableplaces.Adapters.ZodiacArrayAdapter;
 import com.gic.memorableplaces.DataModels.User;
@@ -70,11 +72,6 @@ import com.nightonke.jellytogglebutton.JellyToggleButton;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -83,14 +80,9 @@ import java.util.Objects;
 
 import me.grantland.widget.AutofitHelper;
 import me.grantland.widget.AutofitTextView;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import www.sanju.zoomrecyclerlayout.ZoomRecyclerLayout;
-
-import static com.gic.memorableplaces.utils.QueryDatabase.SetFieldsInDatabase5Lines;
 
 public class CardInformationFragment extends Fragment {
     private static final String TAG = "CardInformationFragment";
@@ -868,12 +860,12 @@ public class CardInformationFragment extends Fragment {
                 AlertGames.setVisibility(View.INVISIBLE);
                 Bundle bundle = new Bundle();
                 bundle.putString(mContext.getString(R.string.field_games), statusOfFields.get(mContext.getString(R.string.field_games)));
-                GamesFragment fragment = new GamesFragment();
+               /* GamesFragment fragment = new GamesFragment();
                 fragment.setArguments(bundle);
                 FragmentTransaction Transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 Transaction.replace(R.id.FrameLayoutCardInfo, fragment);
                 Transaction.addToBackStack(mContext.getString(R.string.games_fragment));
-                Transaction.commit();
+                Transaction.commit();*/
 
             }
         });
@@ -1126,6 +1118,8 @@ public class CardInformationFragment extends Fragment {
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
+                    .addHeader("accept","application/json")
+                    .addHeader("Authorization","Bearer 9Snr7WOOkzFwyepB848K9NFRPZeRDlVomiypoiuOuHgSyLYgSyDAIhIOpXArdh43")
                     .url("https://en.wikipedia.org/w/api.php?"
                             + "format=json"
                             + "&action=query"
@@ -1135,168 +1129,6 @@ public class CardInformationFragment extends Fragment {
                     .get()
                     .build();
 
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    // Do something when request failed
-                    Log.d(TAG, "onFailure: error " + e.getMessage());
-                    Log.d(TAG, "Request Failed.");
-                }
-
-                @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    if (!response.isSuccessful()) {
-                        throw new IOException("Error : " + response);
-                    } else {
-                        Log.d(TAG, "Request Successful.");
-                    }
-
-                    // Read data in the worker thread
-                    final String data = response.body().string();
-                    JSONObject jsonObject = null;
-                    try {
-                        jsonObject = new JSONObject(data);
-                        String query = jsonObject.getString("query");
-                        JSONObject queryObject = new JSONObject(query);
-                        String insideQuery = queryObject.getString("pages");
-                        JSONObject pagesObject = new JSONObject(insideQuery);
-                        String insidePages = pagesObject.getString("31257416");
-                        JSONObject numberObject = new JSONObject(insidePages);
-                        String insideNumberObjects = numberObject.getString("links");
-                        JSONArray arr = new JSONArray(insideNumberObjects);
-                        HobbiesList.clear();
-
-                        for (int i = 0; i < arr.length(); i++) {
-                            JSONObject jsonPart = arr.getJSONObject(i);
-                            if (!HobbiesList.contains(jsonPart.getString("title"))) {
-                                HobbiesList.add(jsonPart.getString("title"));
-                            }
-                            // Log.d(TAG, "onResponse: Track Name " + jsonPart.getString("title"));
-                        }
-                        Log.d(TAG, String.format("onResponse: HobbiesList %s", HobbiesList));
-                        HobbiesSearchBar.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-                                        android.R.layout.simple_dropdown_item_1line, HobbiesList);
-                                HobbiesSearchBar.setThreshold(1);
-                                HobbiesSearchBar.setAdapter(adapter);
-                                HobbiesSearchBar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        String selection = HobbiesSearchBar.getText().toString().toLowerCase();
-                                        // Log.d(TAG, "onItemClick: selection " + selection);
-                                        if (SelectedHobbies.contains(selection)) {
-                                            //Log.d(TAG, String.format("onItemClick: SelectedHobbies 1 %s", SelectedHobbies));
-                                            Toast.makeText(mContext, "You have already chosen this Hobby!", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            if (SelectedHobbies.size() < MAX_SELECTED_ITEMS) {
-                                                SelectedHobbies.add(selection);
-                                                if (SelectedHobbies.size() == 1) {
-                                                    final Dialog dialog = new Dialog(mContext);
-                                                    dialog.setContentView(R.layout.dialog_selected_year);
-
-                                                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                                    final ImageView SelectedBadge = dialog.findViewById(R.id.Selected_Badge);
-                                                    final TextView BadgeText = dialog.findViewById(R.id.badgeText);
-
-                                                    SelectedBadge.setImageResource(R.drawable.ic_tap);
-                                                    BadgeText.setText("Long Tap on a hobby to delete it!");
-                                                    dialog.show();
-                                                    Handler handler = new Handler(Looper.getMainLooper());
-                                                    handler.postDelayed(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            dialog.dismiss();
-                                                        }
-                                                    }, 3500);
-                                                }
-                                                // Log.d(TAG, String.format("onItemClick: SelectedHobbies 2 %s", SelectedHobbies));
-                                            } else {
-                                                // Log.d(TAG, String.format("onItemClick: SelectedHobbies 3 %s", SelectedHobbies));
-
-                                                Toast.makeText(mContext, "You can select a maximum of 5 Hobbies only!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                        //Log.d(TAG, String.format("onItemClick: SelectedHobbies 4 %s", SelectedHobbies));
-
-                                        SetSelectedHobby(selection, FirstHobby, SecondHobby, ThirdHobby, FourthHobby, FifthHobby);
-
-
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable s) {
-
-                                Handler handler = new Handler(Looper.getMainLooper());
-
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        if (!HobbiesSearchBar.isPopupShowing() && !TextUtils.isEmpty(HobbiesSearchBar.getText().toString())) {
-                                            CustomHobby.setVisibility(View.VISIBLE);
-                                            CustomHobby.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    if (SelectedHobbies.size() < MAX_SELECTED_ITEMS) {
-
-                                                        String selection = HobbiesSearchBar.getText().toString().toLowerCase();
-                                                        if (!SelectedHobbies.contains(selection)) {
-                                                            SelectedHobbies.add(selection);
-                                                            if (SelectedHobbies.size() == 1) {
-                                                                final Dialog dialog = new Dialog(mContext);
-                                                                dialog.setContentView(R.layout.dialog_selected_year);
-
-                                                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                                                final ImageView SelectedBadge = dialog.findViewById(R.id.Selected_Badge);
-                                                                final TextView BadgeText = dialog.findViewById(R.id.badgeText);
-
-                                                                SelectedBadge.setImageResource(R.drawable.ic_tap);
-                                                                BadgeText.setText("Long Tap on a hobby to delete it!");
-                                                                dialog.show();
-                                                                Handler handler = new Handler(Looper.getMainLooper());
-                                                                handler.postDelayed(new Runnable() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        dialog.dismiss();
-                                                                    }
-                                                                }, 3500);
-                                                            }
-                                                            SetSelectedHobby(selection, FirstHobby, SecondHobby, ThirdHobby, FourthHobby, FifthHobby);
-
-                                                            HobbiesSearchBar.setText("");
-                                                            CustomHobby.setVisibility(View.INVISIBLE);
-                                                        } else {
-                                                            Toast.makeText(mContext, "You have already typed this hobby!", Toast.LENGTH_SHORT).show();
-                                                        }
-
-                                                    } else {
-                                                        Toast.makeText(mContext, "You have already selected a maximum of 5 Hobbies!", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
-                                        } else {
-                                            CustomHobby.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-                                }, 1000);
-
-
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    // Log.d(TAG, String.format("onResponse: API RESPONSE %s", data));
-                }
-            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1457,7 +1289,7 @@ public class CardInformationFragment extends Fragment {
                 ZodiacImages.add(R.drawable.ic_zodiac_leo);
                 ZodiacImages.add(R.drawable.ic_zodiac_virgo);
                 ZodiacImages.add(R.drawable.ic_zodiac_libra);
-                ZodiacImages.add(R.drawable.ic_zodiac_filter);
+                ZodiacImages.add(R.drawable.ic_filter_zodiac_scorpion);
                 ZodiacImages.add(R.drawable.ic_zodiac_sagittarius);
                 ZodiacImages.add(R.drawable.ic_zodiac_sagittarius);
 
@@ -2040,7 +1872,7 @@ public class CardInformationFragment extends Fragment {
                         }
                     }
                 }
-                mAdapter = new SocietiesRecyclerViewAdapter(SocietyNames, SocietyDesp, SocietyCover, mContext);
+                mAdapter = new SocietiesRecyclerViewAdapter(null,null,null,mContext);
 
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setNestedScrollingEnabled(false);
@@ -2232,8 +2064,7 @@ public class CardInformationFragment extends Fragment {
                     }
                 }
                 if (rSelected != null) {
-                    mSelectedAdapter = new SelectedMMBRecyclerViewAdapter(SelectedSocietyNames, SelectedSocietyDesp,
-                            SelectedSocietyCover, getActivity(), false, false, false, false);
+                    mSelectedAdapter = new SelectedSocietyRecyclerViewAdapter(SelectedSocietyNames, getActivity(), false, false, false, false);
                     rSelected.setAdapter(mSelectedAdapter);
                     mSelectedAdapter.notifyDataSetChanged();
 
@@ -2503,7 +2334,7 @@ public class CardInformationFragment extends Fragment {
                 PrivacyDialog(MAKE_PRIVATE, mContext.getString(R.string.field_gender));
                 if (!valueOfFields.get(mContext.getString(R.string.field_pronouns)).equals("N/A"))
                     TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
-                if (!valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_no_gender)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_male)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_Female)))
+                if (!valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_no_gender)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_male)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_female)))
                     TypeGender.setText(valueOfFields.get(mContext.getString(R.string.field_gender)));
 
                 Back.setOnClickListener(new View.OnClickListener() {
@@ -2653,8 +2484,8 @@ public class CardInformationFragment extends Fragment {
                     public void onClick(View v) {
 
                         if (!isClickedGender) {
-                            SetFieldInDatabase(mContext.getString(R.string.field_Female), mContext.getString(R.string.field_gender));
-                            SetDetailForFilter(mContext.getString(R.string.field_gender), mContext.getString(R.string.field_Female), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
+                            SetFieldInDatabase(mContext.getString(R.string.field_female), mContext.getString(R.string.field_gender));
+                            SetDetailForFilter(mContext.getString(R.string.field_gender), mContext.getString(R.string.field_female), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
 
                             cv_other.animate().alpha(0).setDuration(1500);
                             cv_Male.animate().alpha(0).setDuration(1500);
@@ -2776,11 +2607,11 @@ public class CardInformationFragment extends Fragment {
                 Log.d(TAG, "onClick: shaked");
                 rlMuMoBo.startAnimation(myAnim);
                 AlertMuMoBo.setVisibility(View.INVISIBLE);
-                MusicMoviesBooksFragment fragment = new MusicMoviesBooksFragment();
+//                MusicMoviesBooksFragment fragment = new MusicMoviesBooksFragment();
                 FragmentTransaction Transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                Transaction.replace(R.id.FrameLayoutCardInfo, fragment);
-                Transaction.addToBackStack(mContext.getString(R.string.music_movies_books_fragment));
-                Transaction.commit();
+//                Transaction.replace(R.id.FrameLayoutCardInfo, fragment);
+//                Transaction.addToBackStack(mContext.getString(R.string.music_movies_books_fragment));
+//                Transaction.commit();
             }
         });
     }

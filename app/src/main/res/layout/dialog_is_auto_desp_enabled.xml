@@ -41,11 +41,11 @@
                 android:id="@+id/IV_BOX_CFN"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_below="@id/ATV_AUTO_DESP_TEXT_CFN"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:src="@drawable/ic_checkbox" />
 
             <ImageView

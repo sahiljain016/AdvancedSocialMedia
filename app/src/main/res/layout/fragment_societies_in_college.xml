@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_MAIN_SIC"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    app:layoutDescription="@xml/society_scene">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_BACK_BUTTON_SIC"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_SIC"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_SIC"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/IV_BG_H"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+
+        />
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_SIC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:text="Societies In College"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_SIC"
+        app:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_SIC"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_PRIVACY_LOCK_SIC"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_2sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_unlocked_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_SIC"
+        app:layout_constraintEnd_toStartOf="@id/IV_SWITCH_SIC"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_SIC" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_SWITCH_SIC"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_opposite"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_SIC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_SIC" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#D6D6D6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_SIC" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_SEARCH_SOCIETY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/rounded_white_background"
+        android:backgroundTint="#F1F1F1"
+        app:layout_constraintEnd_toStartOf="@id/ATV_MY_SOCIETY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD">
+
+        <AutoCompleteTextView
+            android:id="@+id/ACTV_SEARCH_SOCIETY"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@null"
+            android:hint="placement cell, NSS etc...."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/IV_SEARCH_ICON"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_SEARCH_ICON"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_search_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_MY_SOCIETY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/capriola"
+        android:text="View"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/CL_SEARCH_SOCIETY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/CL_SEARCH_SOCIETY" />
+
+
+    <ScrollView
+        android:id="@+id/SV_NOTICE_SWTICH"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CL_SEARCH_SOCIETY">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_SWITCH_NOTICE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TV_SWITCH_NOTICE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Please select up to 5 societies that you are a part of, people will be available to filter you based upon these societies."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/IV_BOX_SIC"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_checkbox"
+                app:layout_constraintEnd_toStartOf="@id/TV_SWITCH_SAME_DETAIL"
+                app:layout_constraintTop_toBottomOf="@id/TV_SWITCH_NOTICE"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/IV_TICK_SIC"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/check_gradient"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_SIC"
+                app:layout_constraintEnd_toEndOf="@id/IV_BOX_SIC"
+                app:layout_constraintStart_toStartOf="@id/IV_BOX_SIC"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_SIC"
+                app:tint="@color/is_not_online_color_yellow" />
+
+            <TextView
+                android:id="@+id/TV_SWITCH_SAME_DETAIL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Copy Selected Detail"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_SIC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_SIC" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_societies"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SV_NOTICE_SWTICH" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

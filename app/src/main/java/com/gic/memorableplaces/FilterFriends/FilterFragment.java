@@ -1,5 +1,15 @@
 package com.gic.memorableplaces.FilterFriends;
 
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.GetFilteredUID;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.GetRandomUserUIDs;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.alsCurrentFields;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.alsFieldsFiltered;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.alsFixedUIDList;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmFinal;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmSelectedFiltersHashMap;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmSelectedValues;
+import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.isUltraFilterOn;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -36,16 +46,6 @@ import java.util.List;
 import java.util.Objects;
 
 import me.grantland.widget.AutofitTextView;
-
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.GetFilteredUID;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.GetRandomUserUIDs;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.alsCurrentFields;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.alsFieldsFiltered;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.alsFixedUIDList;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmFinal;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmSelectedFiltersHashMap;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.hmSelectedValues;
-import static com.gic.memorableplaces.FilterFriends.FriendsFilterActivity.isUltraFilterOn;
 
 public class FilterFragment extends Fragment implements FiltersRecyclerViewAdapter.OnFilterClickListener {
     private static final String TAG = "FilterFragment";
@@ -276,7 +276,7 @@ public class FilterFragment extends Fragment implements FiltersRecyclerViewAdapt
     private void InitialiseFilters() {
         alsFilterName.add(mContext.getString(R.string.age));
         alsFilterName.add(mContext.getString(R.string.course));
-        alsFilterName.add(mContext.getString(R.string.college_year));
+        alsFilterName.add(mContext.getString(R.string.field_college_year));
         alsFilterName.add(mContext.getString(R.string.gender));
         alsFilterName.add(mContext.getString(R.string.zodiac_sign));
         alsFilterName.add(mContext.getString(R.string.hobbies));
@@ -290,18 +290,18 @@ public class FilterFragment extends Fragment implements FiltersRecyclerViewAdapt
         for (int i = 0; i < alsFilterName.size(); i++)
             hmSelectedFiltersHashMap.put(alsFilterName.get(i), false);
 
-        aliIconsList.add(R.drawable.ic_age_filter);
+        aliIconsList.add(R.drawable.ic_filter_age);
         aliIconsList.add(R.drawable.ic_course_icon);
-        aliIconsList.add(R.drawable.ic_university);
-        aliIconsList.add(R.drawable.ic_gender_symbol);
-        aliIconsList.add(R.drawable.ic_zodiac_filter);
-        aliIconsList.add(R.drawable.ic_hobbies);
-        aliIconsList.add(R.drawable.ic_controller);
-        aliIconsList.add(R.drawable.ic_music);
-        aliIconsList.add(R.drawable.ic_movie);
-        aliIconsList.add(R.drawable.ic_book);
-        aliIconsList.add(R.drawable.ic_society_filter);
-        aliIconsList.add(R.drawable.ic_gender_symbol);
+        aliIconsList.add(R.drawable.ic_filter_college_year);
+        aliIconsList.add(R.drawable.ic_filter_gender);
+        aliIconsList.add(R.drawable.ic_filter_zodiac_scorpion);
+        aliIconsList.add(R.drawable.ic_filter_hobbies);
+        aliIconsList.add(R.drawable.ic_filter_video_games);
+        aliIconsList.add(R.drawable.ic_filter_music);
+        aliIconsList.add(R.drawable.ic_filter_movie);
+        aliIconsList.add(R.drawable.ic_filter_book);
+        aliIconsList.add(R.drawable.ic_filter_society);
+        aliIconsList.add(R.drawable.ic_filter_gender);
         if (alsFieldsFiltered.size() > 0) {
 
             Log.d(TAG, String.format("InitialiseFilters: alsFieldsFiltered: %s", alsFieldsFiltered));
@@ -344,7 +344,7 @@ public class FilterFragment extends Fragment implements FiltersRecyclerViewAdapt
             s = mContext.getString(R.string.field_course);
         } else if (DetailName.equals(mContext.getString(R.string.gender))) {
             s = mContext.getString(R.string.field_gender);
-        } else if (DetailName.equals(mContext.getString(R.string.college_year))) {
+        } else if (DetailName.equals(mContext.getString(R.string.field_college_year))) {
             s = mContext.getString(R.string.field_college_year);
         } else if (DetailName.equals(mContext.getString(R.string.zodiac_sign))) {
             s = mContext.getString(R.string.field_zodiac_sign);
@@ -392,7 +392,7 @@ public class FilterFragment extends Fragment implements FiltersRecyclerViewAdapt
             bundle.putString(mContext.getString(R.string.field_filter), mContext.getString(R.string.field_gender));
             sNavigationDrawer.setAppbarTitleTV("Gender Filter");
             FragmentName = mContext.getString(R.string.filter_1_fragment);
-        } else if (autofitTextView.getText().toString().equals(mContext.getString(R.string.college_year))) {
+        } else if (autofitTextView.getText().toString().equals(mContext.getString(R.string.field_college_year))) {
             fragment = new FilterValuesFragment();
             bundle.putString(mContext.getString(R.string.field_filter), mContext.getString(R.string.field_college_year));
             sNavigationDrawer.setAppbarTitleTV("College Year Filter");

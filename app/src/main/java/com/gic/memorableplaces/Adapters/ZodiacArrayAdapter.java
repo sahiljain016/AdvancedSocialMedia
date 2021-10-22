@@ -5,17 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gic.memorableplaces.R;
-import com.gic.memorableplaces.utils.GlideImageLoader;
 import com.gic.memorableplaces.utils.SquareImageView;
 
-import java.net.URLConnection;
 import java.util.ArrayList;
-
-import xyz.neocrux.suziloader.SuziLoader;
 
 public class ZodiacArrayAdapter extends ArrayAdapter<String> {
     private static final String TAG = "SpinnerAdapter";
@@ -45,10 +40,10 @@ public class ZodiacArrayAdapter extends ArrayAdapter<String> {
     public View getCustomView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = inflater.inflate(R.layout.layout_result_mmb, parent, false);
+        View row = inflater.inflate(R.layout.layout_result_games, parent, false);
 
-        TextView ZodiacName = row.findViewById(R.id.ItemName);
-        SquareImageView ZodiacImage = row.findViewById(R.id.CoverImageView);
+        TextView ZodiacName = row.findViewById(R.id.TV_NAME_GAMES);
+        SquareImageView ZodiacImage = row.findViewById(R.id.CIV_IMAGE_GAMES);
 
         ZodiacName.setText(contentArray.get(position));
         if(imageArray.get(position) != 0) {

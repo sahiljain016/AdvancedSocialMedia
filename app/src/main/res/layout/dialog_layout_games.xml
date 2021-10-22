@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:alpha="0.7"
         android:padding="@dimen/_30sdp"
-        android:src="@drawable/ic_controller" />
+        android:src="@drawable/ic_filter_video_games" />
 
     <TextView
         android:id="@+id/RL_heading"

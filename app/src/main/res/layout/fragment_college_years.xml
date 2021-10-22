@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_MAIN_CY"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FDFF"
+    android:clickable="true"
+    android:focusable="true"
+    app:layoutDescription="@xml/college_year_fragment_scene">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_BACK_BUTTON_CY"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_CY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_CY"
+        app:tint="@color/black" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_CY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:text="College Year"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_CY"
+        app:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_CY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_PRIVACY_LOCK_CY"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_2sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_unlocked_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_CY"
+        app:layout_constraintEnd_toStartOf="@id/IV_SWITCH_CY"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_CY" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_SWITCH_CY"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_opposite"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_CY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_CY" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#D6D6D6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_CY" />
+
+    <ImageView
+        android:id="@+id/IV_IMG_1_CY"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+
+        android:src="@drawable/ic_college_year_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+    <ScrollView
+        android:id="@+id/SV_NOTICE_SWTICH"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        app:layout_constraintBottom_toTopOf="@id/V_CD_1_CY"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_SWITCH_NOTICE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TV_SWITCH_NOTICE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Select a college year, it will be added to the profile of your ideal mate which will be used to find your desired match!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/IV_BOX_CY"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_checkbox"
+                app:layout_constraintEnd_toStartOf="@id/TV_SWITCH_SAME_DETAIL"
+                app:layout_constraintTop_toBottomOf="@id/TV_SWITCH_NOTICE"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/IV_TICK_CY"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/check_gradient"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_CY"
+                app:layout_constraintEnd_toEndOf="@id/IV_BOX_CY"
+                app:layout_constraintStart_toStartOf="@id/IV_BOX_CY"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_CY"
+                app:tint="@color/is_not_online_color_yellow" />
+
+            <TextView
+                android:id="@+id/TV_SWITCH_SAME_DETAIL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Copy Selected Detail"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_CY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_CY" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <View
+        android:id="@+id/V_CD_1_CY"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_CY" />
+
+    <View
+        android:id="@+id/V_CD_2_CY"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_CY" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_1_CY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        android:background="@drawable/border_rounded_yellow_20sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:layout_constraintBottom_toTopOf="@id/V_CD_2_CY"
+        app:layout_constraintEnd_toStartOf="@id/V_CD_1_CY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_CY">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_1_CY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:maxLines="2"
+                android:text="Hope you get settled quickly, All the best!"
+                android:textAlignment="center"
+                android:textColor="#737373"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:sizeToFit="true" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/IV_1_CY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:elevation="@dimen/_3sdp"
+        android:paddingStart="@dimen/_2sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:src="@drawable/number_1"
+        app:layout_constraintBottom_toBottomOf="@id/CV_1_CY"
+        app:layout_constraintEnd_toEndOf="@id/CV_1_CY"
+        app:layout_constraintStart_toStartOf="@id/CV_1_CY"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_CY" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_2_CY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:layout_constraintBottom_toTopOf="@id/V_CD_2_CY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/V_CD_1_CY"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_CY">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_2_CY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:text="All the best, hope you have a successful &amp; memorable year."
+                android:textAlignment="center"
+
+                android:maxLines="3"
+                android:textColor="#737373"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:sizeToFit="true" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/IV_2_CY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_45sdp"
+        android:elevation="@dimen/_3sdp"
+        android:paddingStart="@dimen/_2sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:src="@drawable/number_2"
+        app:layout_constraintBottom_toBottomOf="@id/CV_2_CY"
+        app:layout_constraintEnd_toEndOf="@id/CV_2_CY"
+        app:layout_constraintStart_toStartOf="@id/CV_2_CY"
+        app:layout_constraintTop_toBottomOf="@id/IV_IMG_1_CY" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CV_3_CY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_80sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/V_CD_2_CY">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/ATV_3_CY"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+
+                android:text="All the best for the start of a splendid career"
+                android:textAlignment="center"
+
+                android:maxLines="2"
+                android:textColor="#737373"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:sizeToFit="true" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/IV_3_CY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_35sdp"
+        android:elevation="@dimen/_3sdp"
+        android:paddingStart="@dimen/_2sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:src="@drawable/number_3"
+        app:layout_constraintBottom_toBottomOf="@id/CV_3_CY"
+        app:layout_constraintEnd_toEndOf="@id/CV_3_CY"
+        app:layout_constraintStart_toStartOf="@id/CV_3_CY"
+        app:layout_constraintTop_toBottomOf="@id/CV_2_CY" />
+
+
+    <ImageView
+        android:id="@+id/IV_GO_BACK_CY"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:rotation="-90"
+        android:src="@drawable/ic_coloured_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:tint="@color/black" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

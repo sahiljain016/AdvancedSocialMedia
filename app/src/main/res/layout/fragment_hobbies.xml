@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_MAIN_H"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    app:layoutDescription="@xml/hobbies_fragment_scene">
+
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IFV_BACK_BUTTON_H"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:src="@drawable/ic_back_ff"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_H"
+        app:tint="@color/black" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_H"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:text="Hobbies/Interests"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/IV_PRIVACY_LOCK_H"
+        app:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_H"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_PRIVACY_LOCK_H"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:padding="@dimen/_2sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_unlocked_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+        app:layout_constraintEnd_toStartOf="@id/IV_SWITCH_H"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_H" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/IV_SWITCH_H"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_opposite"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_H"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_H" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#D6D6D6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_H" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL_SEARCH_H"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/rounded_white_background"
+        android:backgroundTint="#F1F1F1"
+        app:layout_constraintEnd_toStartOf="@id/IV_ADD_CUSTOM_H"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD">
+
+        <AutoCompleteTextView
+            android:id="@+id/ACTV_SEARCH_H"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@null"
+            android:hint="Dancing, Gaming, Reading...."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/IV_SEARCH_ICON"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IV_SEARCH_ICON"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_search_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/IV_ADD_CUSTOM_H"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/glow_circle_light_blue"
+        android:backgroundTint="#FFE780"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_plus_sign_white"
+        android:tag="gone"
+        app:layout_constraintBottom_toBottomOf="@id/CL_SEARCH_H"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/CL_SEARCH_H"
+        app:tint="#FFFFFF" />
+
+
+    <ScrollView
+        android:id="@+id/SV_NOTICE_SWTICH"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CL_SEARCH_H">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_SWITCH_NOTICE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TV_SWITCH_NOTICE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Please enter up to 5 hobbies, people will be able to filter you based upon these hobbies."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/IV_BOX_H"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+android:visibility="gone"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_checkbox"
+                app:layout_constraintEnd_toStartOf="@id/TV_SWITCH_SAME_DETAIL"
+                app:layout_constraintTop_toBottomOf="@id/TV_SWITCH_NOTICE"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/IV_TICK_H"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/check_gradient"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_H"
+                app:layout_constraintEnd_toEndOf="@id/IV_BOX_H"
+                app:layout_constraintStart_toStartOf="@id/IV_BOX_H"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_H"
+                app:tint="@color/is_not_online_color_yellow" />
+
+            <TextView
+                android:id="@+id/TV_SWITCH_SAME_DETAIL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:visibility="gone"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Copy Selected Detail"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+
+                app:layout_constraintBottom_toBottomOf="@id/IV_BOX_H"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/IV_BOX_H" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <ImageView
+        android:id="@+id/IV_BG_H"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_50sdp"
+        android:alpha="0.5"
+        android:src="@drawable/ic_filter_hobbies"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SV_NOTICE_SWTICH" />
+
+
+    <ScrollView
+        android:id="@+id/SV_HOBBIES"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SV_NOTICE_SWTICH">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ML_HOBBIES_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutDescription="@xml/hobbies">
+
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/ML_1_H"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                app:layoutDescription="@xml/hobbies">
+
+                <com.gic.memorableplaces.utils.ShadowLayout
+                    android:id="@+id/SL_1_H"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sl_is_shadow_start="false"
+                    app:sl_shadow_color="#ACACAC"
+                    app:sl_shadow_distance="@dimen/_2sdp"
+                    app:sl_shadow_radius="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/rounded_rect_tr_br_white_20sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/TV_1_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:layout_weight="65"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center"
+                            android:maxLines="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/IV_1_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@raw/rock_bunny"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_weight="34" />
+                    </LinearLayout>
+                </com.gic.memorableplaces.utils.ShadowLayout>
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/ML_2_H"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                app:layoutDescription="@xml/hobbies"
+                app:layout_constraintTop_toBottomOf="@id/ML_1_H">
+
+                <com.gic.memorableplaces.utils.ShadowLayout
+                    android:id="@+id/SL_2_H"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_90sdp"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sl_is_shadow_start="false"
+                    app:sl_is_shadow_top="false"
+                    app:sl_shadow_color="#ACACAC"
+                    app:sl_shadow_distance="@dimen/_2sdp"
+                    app:sl_shadow_radius="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="@drawable/rounded_rect_tr_br_white_20sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/TV_2_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:layout_weight="65"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center"
+                            android:maxLines="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/IV_2_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:src="@raw/rock_bunny"
+                            android:layout_weight="34" />
+                    </LinearLayout>
+                </com.gic.memorableplaces.utils.ShadowLayout>
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/ML_3_H"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                app:layoutDescription="@xml/hobbies"
+                app:layout_constraintTop_toBottomOf="@id/ML_2_H">
+
+                <com.gic.memorableplaces.utils.ShadowLayout
+                    android:id="@+id/SL_3_H"
+                    android:layout_width="0dp"
+
+                    android:layout_height="@dimen/_90sdp"
+                    app:layout_constraintEnd_toStartOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sl_is_shadow_start="false"
+                    app:sl_is_shadow_top="false"
+                    app:sl_shadow_color="#ACACAC"
+                    app:sl_shadow_distance="@dimen/_2sdp"
+                    app:sl_shadow_radius="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="@drawable/rounded_rect_tr_br_white_20sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/TV_3_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:layout_weight="65"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center"
+                            android:maxLines="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/IV_3_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:src="@raw/rock_bunny"
+                            android:layout_weight="34" />
+                    </LinearLayout>
+                </com.gic.memorableplaces.utils.ShadowLayout>
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/ML_4_H"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                app:layoutDescription="@xml/hobbies"
+                app:layout_constraintTop_toBottomOf="@id/ML_3_H">
+
+                <com.gic.memorableplaces.utils.ShadowLayout
+                    android:id="@+id/SL_4_H"
+                    android:layout_width="0dp"
+
+                    android:layout_height="@dimen/_90sdp"
+                    app:layout_constraintEnd_toStartOf="parent"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sl_is_shadow_start="false"
+                    app:sl_is_shadow_top="false"
+                    app:sl_shadow_color="#ACACAC"
+                    app:sl_shadow_distance="@dimen/_2sdp"
+                    app:sl_shadow_radius="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="@drawable/rounded_rect_tr_br_white_20sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/TV_4_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:layout_weight="65"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center"
+                            android:maxLines="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/IV_4_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+
+                            android:src="@raw/rock_bunny"
+                            android:layout_weight="34" />
+                    </LinearLayout>
+                </com.gic.memorableplaces.utils.ShadowLayout>
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/ML_5_H"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                app:layoutDescription="@xml/hobbies"
+                app:layout_constraintTop_toBottomOf="@id/ML_4_H">
+
+                <com.gic.memorableplaces.utils.ShadowLayout
+                    android:id="@+id/SL_5_H"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_90sdp"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sl_is_shadow_start="false"
+                    app:sl_is_shadow_top="false"
+                    app:sl_shadow_color="#ACACAC"
+                    app:sl_shadow_distance="@dimen/_2sdp"
+                    app:sl_shadow_radius="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="@drawable/rounded_rect_tr_br_white_20sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/TV_5_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:layout_weight="65"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/capriola"
+                            android:gravity="center"
+                            android:maxLines="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/IV_5_H"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:src="@raw/rock_bunny"
+                            android:layout_weight="34" />
+                    </LinearLayout>
+                </com.gic.memorableplaces.utils.ShadowLayout>
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/V_WHITE_BLUR"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/gradient_white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

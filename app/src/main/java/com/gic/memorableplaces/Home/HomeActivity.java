@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
         TitleStringList.add("Student Dashboard");
         TitleStringList.add("Friends Filter");
         TitleStringList.add("My Profile");
-        bottomNavigationView = findViewById(R.id.BottomNavigationMenu);
+        //bottomNavigationView = findViewById(R.id.BottomNavigationMenu);
         //BottomBoomMenu = findViewById(R.id.BottomBoomMenu);
         //CL_BOTTOM_NAV = findViewById(R.id.CL_BOTTOM_NAV);
 //        // RELATED TO UNIVERSAL IMAGE LOADER FIND METHOD BELOW
