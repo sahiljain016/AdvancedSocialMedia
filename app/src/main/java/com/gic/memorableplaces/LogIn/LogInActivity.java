@@ -19,26 +19,26 @@ import androidx.core.content.ContextCompat;
 
 import com.gic.memorableplaces.CustomLibs.EndToEnd.EndToEndEncrypt;
 import com.gic.memorableplaces.CustomLibs.TransitionButton.TransitionButton;
+import com.gic.memorableplaces.DataModels.User;
 import com.gic.memorableplaces.Home.NavigatingCardActivity;
 import com.gic.memorableplaces.R;
+import com.gic.memorableplaces.RoomsDatabases.UserDetailsDatabase;
 import com.gic.memorableplaces.SignUp.SignUpActivity;
+import com.gic.memorableplaces.interfaces.UserDetailsDao;
 import com.gic.memorableplaces.utils.FirebaseMethods;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.functions.FirebaseFunctions;
-import com.google.firebase.functions.HttpsCallableResult;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.virgilsecurity.android.ethree.interaction.EThree;
 
-import java.util.Map;
 import java.util.Objects;
-
-import kotlin.jvm.functions.Function0;
+import java.util.concurrent.ExecutorService;
 
 
 public class LogInActivity extends AppCompatActivity {
@@ -55,13 +55,48 @@ public class LogInActivity extends AppCompatActivity {
 
     private DatabaseReference myRef;
 
+    private User user;
+    private UserDetailsDatabase UD_DETAILS;
+    private UserDetailsDao userDetailsDao;
+    private ExecutorService databaseWriteExecutor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitvity_login);
         mContext = LogInActivity.this;
         myRef = FirebaseDatabase.getInstance().getReference();
+        user = new User();
+        user.SetDefault();
+        UD_DETAILS = UserDetailsDatabase.getDatabase(mContext);
+        databaseWriteExecutor = UD_DETAILS.databaseWriteExecutor;
+        userDetailsDao = UD_DETAILS.userDetailsDao();
 
+//        databaseWriteExecutor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (userDetailsDao.GetAllDetails().size() == 0) {
+//                    Query query = myRef.child(mContext.getString(R.string.dbname_users))
+//                            .child(mAuth.getCurrentUser().getUid());
+//
+//                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            user = snapshot.getValue(User.class);
+//                            userDetailsDao.InsertNewDetail(user);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+//
+//                } else {
+//                    user = userDetailsDao.GetAllDetails().get(0);
+//                }
+//            }
+//        });
 //        RIV = findViewById(R.id.IV_USER_IMAGES_FF);
 //
 //
@@ -90,48 +125,10 @@ public class LogInActivity extends AppCompatActivity {
     private boolean isStringNull(String string) {
         Log.d(TAG, "CHECKING IF STRING IS NULL");
 
-        if (string.equals("")) {
-            return true;
-        } else {
-
-            return false;
-        }
+        return string.equals("");
 
     }
 
-    private boolean isPaused = true;
-    private final Function0<String> getAuthTokenUserOne = () -> {
-
-        Log.d(TAG, "getAutHtokenUserOne: ");
-
-        final String[] token = {""};
-        FirebaseFunctions.getInstance()
-                .getHttpsCallable("getVirgilJwt")
-                .call()
-                .addOnCompleteListener(new OnCompleteListener<HttpsCallableResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<HttpsCallableResult> task) {
-
-                        if (task.isSuccessful()) {
-
-                            token[0] = ((Map<String, String>) task.getResult().getData()).get("token");
-                            // Log.d(TAG, "onComplete: task result: " + token[0]);
-                            isPaused = false;
-                        } else {
-                            Log.d(TAG, String.format("onComplete: task error: %s", task.getException()));
-                        }
-                    }
-                });
-
-        while (true) {
-            if (!isPaused) {
-                Log.d(TAG, "invoke: token[0]: " + token[0]);
-                return token[0];
-            }
-        }
-
-    };
-    
     /*
     ------------------------------------ Firebase ---------------------------------------------
      */
@@ -163,33 +160,77 @@ public class LogInActivity extends AppCompatActivity {
                 loadingLoginTV.setVisibility(View.VISIBLE);
 
                 mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LogInActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+                        .addOnCompleteListener(LogInActivity.this, task -> {
 
-                                final FirebaseUser user = mAuth.getCurrentUser();
+                            final FirebaseUser user = mAuth.getCurrentUser();
 
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    try {
-                                        //CHECKING IF EMAIL IS VERIFIED
-                                        if (Objects.requireNonNull(user).isEmailVerified()) {
-                                            Log.d(TAG, "OnComplete success : email is verfied");
-                                            LoginButton.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, new TransitionButton.OnAnimationStopEndListener() {
-                                                @Override
-                                                public void onAnimationStopEnd() {
-                                                    myRef.child(mContext.getString(R.string.dbname_users))
-                                                            .child(mAuth.getCurrentUser().getUid())
-                                                            .child(mContext.getString(R.string.field_is_email_verified))
-                                                            .setValue("true");
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                try {
+                                    //CHECKING IF EMAIL IS VERIFIED
+                                    if (Objects.requireNonNull(user).isEmailVerified()) {
+                                        Log.d(TAG, "onSuccess: Route isEmailVerified Login: ");
+                                        LoginButton.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, () -> {
+                                            myRef.child(mContext.getString(R.string.dbname_users))
+                                                    .child(mAuth.getCurrentUser().getUid())
+                                                    .child(mContext.getString(R.string.field_email_verified))
+                                                    .setValue(true);
 
-//                                                    EThreeParams params = new EThreeParams(mAuth.getCurrentUser().getUid(), getAuthTokenUserOne, mContext);
-//                                                    EThree eThreeSender = new EThree(params);
+                                            databaseWriteExecutor.execute(() -> {
+                                                if (userDetailsDao.GetAllDetails(mAuth.getCurrentUser().getUid()).size() == 0) {
+                                                    Query query = myRef
+                                                            .child(mContext.getString(R.string.dbname_users))
+                                                            .child(mAuth.getCurrentUser().getUid());
 
+                                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            databaseWriteExecutor.execute(() -> {
+                                                                userDetailsDao.InsertNewDetail(snapshot.getValue(User.class));
+                                                                EndToEndEncrypt E2EUser = new EndToEndEncrypt(mAuth.getCurrentUser().getUid(), mContext);
+
+                                                                com.virgilsecurity.common.callback.OnCompleteListener restoreListener = new com.virgilsecurity.common.callback.OnCompleteListener() {
+                                                                    @Override
+                                                                    public void onSuccess() {
+                                                                        Log.d(TAG, "onSuccess: reached");
+                                                                        Intent intent = new Intent(LogInActivity.this, NavigatingCardActivity.class);
+                                                                        startActivity(intent);
+                                                                        finish();
+
+                                                                        Toast.makeText(LogInActivity.this, "     WELCOME TO THE \n St Xavier's Social Club!",
+                                                                                Toast.LENGTH_LONG).show();
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onError(@NonNull Throwable throwable) {
+                                                                        Log.d(TAG, "onError: registering error");
+                                                                        throwable.printStackTrace();
+                                                                    }
+                                                                };
+
+                                                                if (!E2EUser.hasLocalPrivateKey()) {
+                                                                    E2EUser.restorePrivateKey(EThree.derivePasswords(password).getBackupPassword()).addCallback(restoreListener);
+                                                                } else {
+
+                                                                    Intent intent = new Intent(LogInActivity.this, NavigatingCardActivity.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+
+//                                                    Toast.makeText(LogInActivity.this, "     WELCOME TO THE \n St Xavier's Social Club!",
+//                                                            Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+                                                } else {
+                                                    userDetailsDao.UpdateEmailVerifiedBool(true, mAuth.getCurrentUser().getUid());
                                                     EndToEndEncrypt E2EUser = new EndToEndEncrypt(mAuth.getCurrentUser().getUid(), mContext);
-                                                    //DerivedPasswords derivedPasswords = EThree.derivePasswords(password);
-                                                    // Log.d(TAG, "onAnimationStopEnd: backup Password: " + derivedPasswords.getBackupPassword());
-                                                    ///Log.d(TAG, "onAnimationStopEnd: login Password: " + derivedPasswords.getLoginPassword());
 
                                                     com.virgilsecurity.common.callback.OnCompleteListener restoreListener = new com.virgilsecurity.common.callback.OnCompleteListener() {
                                                         @Override
@@ -210,15 +251,6 @@ public class LogInActivity extends AppCompatActivity {
                                                         }
                                                     };
 
-
-
-//                                                    Intent intent = new Intent(LogInActivity.this, NavigatingCardActivity.class);
-//                                                    startActivity(intent);
-//                                                    finish();
-//
-//                                                    Toast.makeText(LogInActivity.this, "     WELCOME TO THE \n St Xavier's Social Club!",
-//                                                            Toast.LENGTH_LONG).show();
-//                                                    //
                                                     if (!E2EUser.hasLocalPrivateKey()) {
                                                         E2EUser.restorePrivateKey(EThree.derivePasswords(password).getBackupPassword()).addCallback(restoreListener);
                                                     } else {
@@ -227,39 +259,39 @@ public class LogInActivity extends AppCompatActivity {
                                                         startActivity(intent);
                                                         finish();
 
-                                                        Toast.makeText(LogInActivity.this, "     WELCOME TO THE \n St Xavier's Social Club!",
-                                                                Toast.LENGTH_LONG).show();
+//                                                    Toast.makeText(LogInActivity.this, "     WELCOME TO THE \n St Xavier's Social Club!",
+//                                                            Toast.LENGTH_LONG).show();
                                                     }
-
                                                 }
                                             });
+                                        });
 
 
-                                        } else {
-                                            LoginButton.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
-                                            Toast.makeText(LogInActivity.this, "Your email is not verified.\n Check your email Inbox",
-                                                    Toast.LENGTH_LONG).show();
+                                    } else {
+                                        LoginButton.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
+                                        Toast.makeText(LogInActivity.this, "Your email is not verified.\n Check your email Inbox",
+                                                Toast.LENGTH_LONG).show();
 
 //                                            final Handler handler = new Handler(Looper.getMainLooper());
 //                                            handler.postDelayed(() -> {
 //                                                LoginButton.setBackgroundResource(R.drawable.custom_button_login);
 //                                                LoginButton.revertAnimation();
 //                                            }, 2000);
-                                            loadingLoginTV.setVisibility(View.GONE);
-                                            mAuth.signOut();
-                                        }
-                                    } catch (NullPointerException e) {
-                                        Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage());
+                                        loadingLoginTV.setVisibility(View.GONE);
+                                        mAuth.signOut();
                                     }
+                                } catch (NullPointerException e) {
+                                    Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage());
+                                }
 
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
 
-                                    LoginButton.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
+                                LoginButton.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
 
-                                    Toast.makeText(LogInActivity.this, task.getException().toString(),
-                                            Toast.LENGTH_LONG).show();
+                                Toast.makeText(LogInActivity.this, task.getException().toString(),
+                                        Toast.LENGTH_LONG).show();
 
 //                                    final Handler handler = new Handler(Looper.getMainLooper());
 //                                    handler.postDelayed(new Runnable() {
@@ -270,16 +302,15 @@ public class LogInActivity extends AppCompatActivity {
 //                                        }
 //                                    }, 2000);
 
-                                }
-                                //LoginButton.setText("Log In");
-
-
-                                //LoginButton.revertAnimation();
-                                loadingLoginTV.setVisibility(View.GONE);
-
-
-                                // ...
                             }
+                            //LoginButton.setText("Log In");
+
+
+                            //LoginButton.revertAnimation();
+                            loadingLoginTV.setVisibility(View.GONE);
+
+
+                            // ...
                         });
 
             }

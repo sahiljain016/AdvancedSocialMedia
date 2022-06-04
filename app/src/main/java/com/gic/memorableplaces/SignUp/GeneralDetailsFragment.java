@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,9 @@ import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerV
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
 import com.jem.rubberpicker.RubberSeekBar;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
+import com.wooplr.spotlight.prefs.PreferencesManager;
 
 import java.util.ArrayList;
 
@@ -53,6 +57,8 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
     private TextView TV_SWITCH_NOTICE;
     private MotionLayout ML;
     private View V_WHITE_BLUR;
+    private AnimatedRecyclerView arv;
+    private RelativeLayout RL;
 
 
     @Nullable
@@ -61,7 +67,8 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
         View view = inflater.inflate(R.layout.fragment_general_details, container, false);
         mContext = getActivity();
 
-        AnimatedRecyclerView arv = view.findViewById(R.id.ARV_GD);
+        arv = view.findViewById(R.id.ARV_GD);
+        RL = view.findViewById(R.id.RL_GD);
         AutofitTextView ATV_TITLE = view.findViewById(R.id.ATV_TITLE_GD);
         ArrayList<StringBuilder> alsb = new ArrayList<>(11);
         alsDetails = new ArrayList<>(11);
@@ -69,15 +76,16 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
         ald = new ArrayList<>(11);
 
         if (getArguments() != null) {
-            alsDetails = getArguments().getStringArrayList(mContext.getString(R.string.field_general_details));
-            alsMatchDetails = getArguments().getStringArrayList(mContext.getString(R.string.field_match_general_details));
+            if (getArguments().getStringArrayList(requireActivity().getString(R.string.field_general_details)) != null)
+                alsDetails.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_general_details)));
+            if (getArguments().getStringArrayList(requireActivity().getString(R.string.field_match_general_details)) != null)
+                alsMatchDetails.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_general_details)));
 
             isLocked = getArguments().getBoolean(mContext.getString(R.string.field_is_private));
         }
 
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/Abril_fatface.ttf");
         ATV_TITLE.setTypeface(tf);
-
 
         boolean isDetailsBreak = false, isMatchDetailsBreak = false;
         for (int i = 0; i < alsDetails.size(); i++) {
@@ -132,6 +140,7 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
         TV_SWITCH_NOTICE = view.findViewById(R.id.TV_SWITCH_NOTICE);
         V_WHITE_BLUR = view.findViewById(R.id.V_WHITE_BLUR);
 
+        ShowSpotlights(IV_SWITCH_INPUT, IV_BOX);
         Log.d(TAG, "onCreateView: alsDetails: " + alsDetails);
 
         SetPrivacyDialog();
@@ -156,6 +165,7 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
         });
 
         IV_SWITCH_INPUT.setOnClickListener(v -> {
+            RL.setVisibility(View.GONE);
             if (!isSwitched) {
                 ML.setBackgroundColor(Color.parseColor("#212121"));
                 ML.transitionToEnd();
@@ -179,7 +189,6 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
             }
         });
         IV_BACK.setOnClickListener(v ->
-
         {
             Bundle bundle = new Bundle();
             bundle.putStringArrayList(mContext.getString(R.string.field_general_details), alsDetails);
@@ -192,6 +201,89 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
         return view;
     }
 
+    private void ShowSpotlights(ImageView IV_SWITCH_INPUT, ImageView IV_BOX) {
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#FFFFD6A5"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
+
+        PreferencesManager preferencesManager = new PreferencesManager(mContext);
+        /*
+
+        SpotlightView.Builder SB_PRONOUNS = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Enter Pronouns")
+                .subHeadingTvText("Enter your pronouns here, it is optional.")
+                .target(ET_PRONOUNS)
+                .usageId("ET_PRONOUNS")
+                .setListener(spotlightViewId -> {
+                    if (!preferencesManager.isDisplayed("IV_BOX")) {
+                        IV_SWITCH_INPUT.performClick();
+                        SB_SAME_DETAIL.show();
+                    }
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });*/
+
+        SpotlightView.Builder SB_SAME_DETAIL = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Copy Detail")
+                .subHeadingTvText("Click this box to copy the detail selected on your page.")
+                .target(IV_BOX)
+                .usageId("IV_BOX")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        SpotlightView.Builder SB_RECYCLER_VIEW = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("General Details")
+                .subHeadingTvText("Click Individual items to fill the respective details.")
+                .target(RL)
+                .usageId("SB_RECYCLER_VIEW")
+                .setListener(spotlightViewId -> {
+                    if (!preferencesManager.isDisplayed("IV_BOX")) {
+                        IV_SWITCH_INPUT.performClick();
+                        SB_SAME_DETAIL.show();
+                    }
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        if (!preferencesManager.isDisplayed("SWITCH")) {
+            RL.setVisibility(View.VISIBLE);
+            SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Switch Profiles")
+                    .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                    .target(IV_SWITCH_INPUT)
+                    .usageId("SWITCH")
+                    .setListener(spotlightViewId -> {
+                        SB_RECYCLER_VIEW.show();
+                        RL.setVisibility(View.GONE);
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    });
+
+            new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Privacy Button")
+                    .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                    .target(IV_PRIVACY)
+                    .usageId("PRIVACY")
+                    .setListener(spotlightViewId -> {
+                        SB_SWITCH.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    }).show();
+
+        } else if (!preferencesManager.isDisplayed("SB_RECYCLER_VIEW")) {
+            RL.setVisibility(View.VISIBLE);
+            SB_RECYCLER_VIEW.show();
+        }
+    }
 
     private void Height(Dialog dialog) {
 
@@ -473,7 +565,7 @@ public class GeneralDetailsFragment extends Fragment implements GeneralDetailsRe
         acb1.setText("Gamer");
         acb2.setText("Study group");
         acb3.setText("Volunteering");
-        acb4.setText("Gym/Sports partner");
+        acb4.setText("Gym\\Sports partner");
         acb5.setText("Travel partner");
         acb6.setText("Clubbing");
         acb7.setText("Debating");

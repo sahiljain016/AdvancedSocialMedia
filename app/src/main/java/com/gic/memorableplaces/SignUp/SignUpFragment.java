@@ -29,6 +29,8 @@ import com.gic.memorableplaces.DataModels.User;
 import com.gic.memorableplaces.Home.GetStartedFragment;
 import com.gic.memorableplaces.LogIn.LogInActivity;
 import com.gic.memorableplaces.R;
+import com.gic.memorableplaces.RoomsDatabases.UserDetailsDatabase;
+import com.gic.memorableplaces.interfaces.UserDetailsDao;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +44,7 @@ import com.virgilsecurity.android.ethree.interaction.EThree;
 import com.virgilsecurity.common.callback.OnResultListener;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
 
 public class SignUpFragment extends Fragment {
     private static final String TAG = "SignUpFragment";
@@ -65,6 +68,11 @@ public class SignUpFragment extends Fragment {
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference myRef;
 
+    private User user;
+    private UserDetailsDatabase UD_DETAILS;
+    private UserDetailsDao userDetailsDao;
+    private ExecutorService databaseWriteExecutor;
+
     private String append = "";
 
     @Nullable
@@ -75,6 +83,11 @@ public class SignUpFragment extends Fragment {
 
         mContext = getActivity();
         //INITIALISING ALL WIDGETS
+        user = new User();
+        user.SetDefault();
+        UD_DETAILS = UserDetailsDatabase.getDatabase(mContext);
+        databaseWriteExecutor = UD_DETAILS.databaseWriteExecutor;
+        userDetailsDao = UD_DETAILS.userDetailsDao();
         //mProgressBar = findViewById(R.id.SignUpButtonProgressBar);
         mEmail = view.findViewById(R.id.SignUpEmail);
         mPassword = view.findViewById(R.id.SignUpPassword);
@@ -92,13 +105,7 @@ public class SignUpFragment extends Fragment {
 
         if (getArguments() != null) {
             if (getArguments().getString("status").equals("not_done")) {
-                Bundle bundle = new Bundle();
-                bundle.putString(mContext.getString(R.string.field_username), getArguments().getString(mContext.getString(R.string.field_username)));
-                bundle.putString(mContext.getString(R.string.field_description), getArguments().getString(mContext.getString(R.string.field_description)));
-                bundle.putString(mContext.getString(R.string.field_course), getArguments().getString(mContext.getString(R.string.field_course)));
-                bundle.putString(mContext.getString(R.string.field_display_name), getArguments().getString(mContext.getString(R.string.field_display_name)));
                 GetStartedFragment fragment = new GetStartedFragment();
-                fragment.setArguments(bundle);
                 FragmentTransaction Transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 Transaction.replace(R.id.FrameLayoutCard, fragment);
                 Transaction.addToBackStack(mContext.getString(R.string.get_started_fragment));
@@ -129,14 +136,11 @@ public class SignUpFragment extends Fragment {
     IF PASSWORD GAINS FOCUS AFTER EMPTY STRING
      */
     private void PasswordFocusGained() {
-        mPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (mPassword.hasFocus()) {
-                    // mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    mPassword.setText("");
-                    //mPassword.setTextColor(Color.BLACK);
-                }
+        mPassword.setOnFocusChangeListener((view, b) -> {
+            if (mPassword.hasFocus()) {
+                // mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mPassword.setText("");
+                //mPassword.setTextColor(Color.BLACK);
             }
         });
 
@@ -146,12 +150,9 @@ public class SignUpFragment extends Fragment {
    IF Confirm PASSWORD GAINS FOCUS AFTER EMPTY STRING
     */
     private void ConfirmPasswordFocusGained() {
-        mConfirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (mConfirmPassword.hasFocus()) {
-                    mConfirmPassword.setText("");
-                }
+        mConfirmPassword.setOnFocusChangeListener((view, b) -> {
+            if (mConfirmPassword.hasFocus()) {
+                mConfirmPassword.setText("");
             }
         });
 
@@ -159,20 +160,22 @@ public class SignUpFragment extends Fragment {
     }
 
 
-
-    private void RegisterUserWithVirgil(String BackupPassword, EndToEndEncrypt E2E) {
+    private void RegisterUserWithVirgil(String BackupPassword, String finalMUsername, EndToEndEncrypt E2E) {
         com.virgilsecurity.common.callback.OnCompleteListener onBackupListener = new com.virgilsecurity.common.callback.OnCompleteListener() {
             @Override
             public void onSuccess() {
-                Bundle bundle = new Bundle();
+
+                Log.d(TAG, "onSuccess: Route Get Started fragment");
                 Log.d(TAG, "onClick: username firebase methods " + Username);
-                bundle.putString(mContext.getString(R.string.field_username), Username);
-                PrepareCardFragment fragment = new PrepareCardFragment();
-                fragment.setArguments(bundle);
-                FragmentTransaction Transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                Transaction.replace(R.id.FrameLayoutCard, fragment);
-                Transaction.addToBackStack(mContext.getString(R.string.prepare_card_fragment));
-                Transaction.commit();
+//                GetStartedFragment fragment = new GetStartedFragment();
+//                FragmentTransaction Transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+//                Transaction.replace(R.id.FrameLayoutCard, fragment);
+//                Transaction.addToBackStack(mContext.getString(R.string.get_started_fragment));
+//                Transaction.commit();
+
+
+                firebaseMethods.AddNewUser(FullName, 0, 9, Email, finalMUsername, "", "",
+                        "", "", "");
             }
 
             @Override
@@ -188,10 +191,6 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void onSuccess() {
                         Log.i(TAG, "User one backup");
-                        // First user is registered successfully. Starting work with main user - second (She will encrypt data
-                        // for the first user).
-                        // firebaseAuth.signOut(); // Simulating second session
-                        //initUserTwo();
                         E2E.backupPrivateKey(BackupPassword).addCallback(onBackupListener);
 
 
@@ -201,13 +200,6 @@ public class SignUpFragment extends Fragment {
                     public void onError(final Throwable throwable) {
                         Log.e(TAG, "User one backup failed", throwable);
 
-                        // Error handling
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-                        //Toast.makeText(mContext, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
                     }
                 };
 
@@ -227,21 +219,34 @@ public class SignUpFragment extends Fragment {
 // <------------------------------------------------------ passsword check if equal start ------------------------------>
                 if (Password.equals(ConfirmPassword) /*&& CheckIfPhoneNoExists(PhoneNumber).equals("true")*/) {
                     btn_signup.startAnimation();
-                    // mProgressBar.setVisibility(View.VISIBLE);
                     loadingSignUpTV.setVisibility(View.VISIBLE);
                     btn_signup.setText("");
+
                     firebaseMethods.registerNewUser(Email, Password, Username, getActivity(), btn_signup, new OnResultListener<String>() {
                         @Override
                         public void onSuccess(String s) {
-                            Log.d(TAG, "onSuccess: s: " + s);
-                            /*EThreeParams params = new EThreeParams(mAuth.getCurrentUser().getUid(),
-                                    getAuthTokenUserOne,
-                                    mContext);
-                            EThree eThreeUserOne = new EThree(params);*/
-                            EndToEndEncrypt E2EUser = new EndToEndEncrypt(mAuth.getCurrentUser().getUid(), mContext);
+                            Log.d(TAG, "onSuccess: Route OnResultListener");
+//                            user.setEmail(Email);
+//                            user.setUsername(Username);
+//                            user.setUser_id(mAuth.getCurrentUser().getUid());
+//                            user.setEmail_verified(true);
+
+                            myRef.child(mContext.getString(R.string.dbname_users))
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .child(mContext.getString(R.string.field_email_verified))
+                                    .setValue(true);
 
 
-                            RegisterUserWithVirgil(EThree.derivePasswords(Password).getBackupPassword(), E2EUser);
+                            databaseWriteExecutor.execute(() -> {
+                                userDetailsDao.UpdateEmailVerifiedBool(true, mAuth.getCurrentUser().getUid());
+                                GetStartedFragment fragment = new GetStartedFragment();
+                                FragmentTransaction Transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                                Transaction.replace(R.id.FrameLayoutCard, fragment);
+                                Transaction.addToBackStack(mContext.getString(R.string.get_started_fragment));
+                                Transaction.commit();
+//                                    EndToEndEncrypt E2EUser = new EndToEndEncrypt(mAuth.getCurrentUser().getUid(), mContext);
+//                                    RegisterUserWithVirgil(EThree.derivePasswords(Password).getBackupPassword(), E2EUser);
+                            });
                         }
 
                         @Override
@@ -406,9 +411,19 @@ public class SignUpFragment extends Fragment {
 
                 String mUsername = "";
                 mUsername = username + append;
+                String finalMUsername = mUsername;
+                databaseWriteExecutor.execute(() -> {
+                    user.setUsername(finalMUsername);
+                    user.setUser_id(mAuth.getCurrentUser().getUid());
+                    user.setEmail(Email);
+                    userDetailsDao.InsertNewDetail(user);
 
-                firebaseMethods.AddNewUser(FullName, 0, 9, Email, mUsername, "", "",
-                        "", "", "");
+                    EndToEndEncrypt E2EUser = new EndToEndEncrypt(mAuth.getCurrentUser().getUid(), mContext);
+                    RegisterUserWithVirgil(EThree.derivePasswords(Password).getBackupPassword(), finalMUsername, E2EUser);
+//                    firebaseMethods.AddNewUser(FullName, 0, 9, Email, finalMUsername, "", "",
+//                            "", "", "");
+                });
+                Log.d(TAG, "onSuccess: Route CheckIfUsernameExists");
                 //  mAuth.signOut();
 
 

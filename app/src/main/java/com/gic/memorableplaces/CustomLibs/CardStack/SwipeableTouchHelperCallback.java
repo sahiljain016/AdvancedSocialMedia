@@ -1,6 +1,9 @@
 package com.gic.memorableplaces.CustomLibs.CardStack;
 
+import static com.gic.memorableplaces.CustomLibs.CardStack.ItemTouchHelper.TAG;
+
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +48,7 @@ public class SwipeableTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public final boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                                 RecyclerView.ViewHolder target) {
+        Log.d(TAG, "onMove: swiping");
         return false;
     }
 

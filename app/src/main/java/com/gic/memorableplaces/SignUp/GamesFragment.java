@@ -40,6 +40,9 @@ import com.gic.memorableplaces.Adapters.GamesRecyclerViewAdapter;
 import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
+import com.wooplr.spotlight.prefs.PreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -63,34 +66,33 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
     private Context mContext;
     private boolean isLocked = false, isSwitched = false, isSameDetail = false;
 
-    private GamesRecyclerViewAdapter grva;
     private GameResultsRecyclerViewAdapter grrva;
     private GameResultsRecyclerViewAdapter.OnGameSelectedListener ogsl;
     private ArrayList<String> alsPlatforms, alsSelectedList, alsMatchSelectedList, alsGamesList;
 
-    private ImageView IV_PRIVACY, IV_TICK, IV_BOX, IV_QUES;
-    private AppCompatButton ACB_SHOW_SELECTED;
-    //IV_SELECTED, IV_ALL;
+    private ImageView IV_PRIVACY, IV_SEARCH_ICON;
+    private ImageView IV_TICK;
+    private ImageView IV_BOX;
+    private ImageView IV_SWITCH_INPUT;
+
     private MotionLayout ML, ML_2;
     private EditText ET_SEARCH;
     private TextView TV_NO_SELECTION;
-    //private TextView TV_SELECTED, TV_ALL;
-    private View view;
     private RecyclerView RV_SELECTED;
     private GifImageView GIV_LOADING;
     private AnimatedRecyclerView RV_ALL;
     private GamesRecyclerViewAdapter mSelectedAdapter;
 
     private ZoomRecyclerLayout mLayoutManager;
-    private Runnable runnable;
+    private Handler handler;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_games_fd, container, false);
+        View view = inflater.inflate(R.layout.fragment_games_fd, container, false);
         mContext = getActivity();
-        Handler handler = new Handler(Looper.getMainLooper());
+        handler = new Handler(Looper.getMainLooper());
         alsPlatforms = new ArrayList<>();
         alsSelectedList = new ArrayList<>(5);
         alsMatchSelectedList = new ArrayList<>(5);
@@ -102,20 +104,16 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
         RV_ALL = view.findViewById(R.id.RV_ALL_VG);
         RV_SELECTED = view.findViewById(R.id.RV_SELECTED_VG);
         ET_SEARCH = view.findViewById(R.id.ET_SEARCH_VG);
-        ACB_SHOW_SELECTED = view.findViewById(R.id.ACB_SHOW_SELECTED_VG);
+        IV_SEARCH_ICON = view.findViewById(R.id.IV_SEARCH_ICON);
+        AppCompatButton ACB_SHOW_SELECTED = view.findViewById(R.id.ACB_SHOW_SELECTED_VG);
         TV_NO_SELECTION = view.findViewById(R.id.TV_NO_SELECTION_VG);
-        IV_QUES = view.findViewById(R.id.IV_QUES_VG);
+        ImageView IV_QUES = view.findViewById(R.id.IV_QUES_VG);
         GIV_LOADING = view.findViewById(R.id.GIV_LOADING_VG);
-//        TV_SELECTED = view.findViewById(R.id.TV_SELECTED_VG);
-//        IV_SELECTED = view.findViewById(R.id.IV_SEARCH_ARROW_VG);
-//        TV_ALL = view.findViewById(R.id.TV_ALL_VG);
-//        IV_ALL = view.findViewById(R.id.IV_ALL_VG);
 
 
         if (getArguments() != null) {
-            alsSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_video_games));
-            alsMatchSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_match_video_games));
-
+            alsSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_video_games)));
+            alsMatchSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_video_games)));
             isLocked = getArguments().getBoolean(mContext.getString(R.string.field_is_private));
         }
 
@@ -124,12 +122,12 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
         Log.d(TAG, "SetBackButton: alsMatchSelectList: " + alsMatchSelectedList);
         if (alsSelectedList.contains("N/A")) {
             alsSelectedList.clear();
+            TV_NO_SELECTION.setVisibility(View.VISIBLE);
         } else {
             GIV_LOADING.setVisibility(View.VISIBLE);
+            TV_NO_SELECTION.setVisibility(View.GONE);
             for (int i = 0; i < alsSelectedList.size(); i++)
                 GetDetailsFromName(alsSelectedList.get(i), true, (i + 1) == alsSelectedList.size(), i);
-
-
         }
         if (alsMatchSelectedList.contains("N/A")) {
             alsMatchSelectedList.clear();
@@ -145,6 +143,8 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
         SameDetailBox(view);
         SwitchInput(view);
         SetBackButton(view);
+
+        ShowSpotlights(IV_SWITCH_INPUT);
 
 
         ACB_SHOW_SELECTED.setOnClickListener(v -> {
@@ -181,6 +181,74 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
         return view;
     }
 
+    private void ShowSpotlights(ImageView IV_SWITCH_INPUT) {
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#FFFFD6A5"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
+
+        PreferencesManager preferencesManager = new PreferencesManager(mContext);
+
+
+        SpotlightView.Builder SB_SAME_DETAIL = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Copy Detail")
+                .subHeadingTvText("Click this box to copy the detail selected on your page.")
+                .target(IV_BOX)
+                .usageId("IV_BOX")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        SpotlightView.Builder SB_SEARCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Search Games")
+                .subHeadingTvText("Enter the name of the game her to make a search & select option from the list that appears.")
+                .target(IV_SEARCH_ICON)
+                .usageId("SB_SEARCH")
+                .setListener(spotlightViewId -> {
+                    SB_SAME_DETAIL.show();
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+
+        if (!preferencesManager.isDisplayed("SWITCH")) {
+
+            SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Switch Profiles")
+                    .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                    .target(IV_SWITCH_INPUT)
+                    .usageId("SWITCH")
+                    .setListener(spotlightViewId -> {
+                        SB_SEARCH.show();
+                        ET_SEARCH.setText("Grand theft auto");
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    });
+
+            new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Privacy Button")
+                    .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                    .target(IV_PRIVACY)
+                    .usageId("PRIVACY")
+                    .setListener(spotlightViewId -> {
+                        SB_SWITCH.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    }).show();
+
+        } else if (!preferencesManager.isDisplayed("SB_SEARCH")) {
+            ET_SEARCH.setText("Grand theft auto");
+            SB_SEARCH.show();
+        }
+    }
 
     private void GetGamesListFromAPI() {
         final long delay = 1000; // 1 seconds after user stops typing
@@ -222,118 +290,87 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                                         final String data = requireNonNull(response.body()).string();
                                         // Log.d(TAG, "onResponse: data: "+ response.body().string());
                                         // Read data in the worker thread
-                                        Thread thread = new Thread() {
-                                            @Override
-                                            public void run() {
-                                                try {
-                                                    synchronized (this) {
-                                                        wait(1000);
+                                        requireActivity().runOnUiThread(() -> {
+                                            alsGamesList.clear();
+                                            alsPlatforms.clear();
+                                            ML_2.setTransition(R.id.TRANS_VG);
+                                            if (ML_2.getProgress() == 0.0)
+                                                ML_2.transitionToEnd();
+                                            TV_NO_SELECTION.setVisibility(View.INVISIBLE);
 
+                                            JSONObject jsonObject = null;
+                                            try {
+                                                jsonObject = new JSONObject(data);
+                                                String result = jsonObject.getString("results");
+                                                JSONArray resultArray = new JSONArray(result);
 
-                                                        requireActivity().runOnUiThread(() -> {
-                                                            alsGamesList.clear();
-                                                            alsPlatforms.clear();
-                                                            ML_2.setTransition(R.id.TRANS_VG);
-                                                            if (ML_2.getProgress() == 0.0)
-                                                                ML_2.transitionToEnd();
-                                                            TV_NO_SELECTION.setVisibility(View.INVISIBLE);
+                                                int limit = 0;
+                                                limit = Math.min(resultArray.length(), 10);
+                                                for (int i = 0; i < limit; i++) {
+                                                    StringBuilder stringBuilder = new StringBuilder();
+                                                    JSONObject jsonPart = resultArray.getJSONObject(i);
 
-                                                            JSONObject jsonObject = null;
-                                                            try {
-                                                                jsonObject = new JSONObject(data);
-                                                                String result = jsonObject.getString("results");
-                                                                JSONArray resultArray = new JSONArray(result);
+                                                    if (!TextUtils.isEmpty(jsonPart.getString("slug"))) {
+                                                        stringBuilder.append(jsonPart.getString("name"));
+                                                        stringBuilder.append("$1$");
+                                                        if (!TextUtils.isEmpty(jsonPart.getString("background_image")))
+                                                            stringBuilder.append(jsonPart.getString("background_image"));
+                                                        else
+                                                            stringBuilder.append("N/A");
+                                                        stringBuilder.append("$2$");
+                                                        if (!TextUtils.isEmpty(jsonPart.getString("background_image")))
+                                                            stringBuilder.append(jsonPart.getString("rating"));
+                                                        else
+                                                            stringBuilder.append("N/A");
 
-                                                                int limit = 0;
-                                                                limit = Math.min(resultArray.length(), 10);
-                                                                for (int i = 0; i < limit; i++) {
-                                                                    StringBuilder stringBuilder = new StringBuilder();
-                                                                    JSONObject jsonPart = resultArray.getJSONObject(i);
-
-                                                                    if (!TextUtils.isEmpty(jsonPart.getString("slug"))) {
-                                                                        stringBuilder.append(jsonPart.getString("name"));
-                                                                        stringBuilder.append("$1$");
-                                                                        if (!TextUtils.isEmpty(jsonPart.getString("background_image")))
-                                                                            stringBuilder.append(jsonPart.getString("background_image"));
-                                                                        else
-                                                                            stringBuilder.append("N/A");
-                                                                        stringBuilder.append("$2$");
-                                                                        if (!TextUtils.isEmpty(jsonPart.getString("background_image")))
-                                                                            stringBuilder.append(jsonPart.getString("rating"));
-                                                                        else
-                                                                            stringBuilder.append("N/A");
-
-                                                                        stringBuilder.append("$3$");
-                                                                        String Platforms = jsonPart.getString("platforms");
-                                                                        JSONArray PlatformsArray = new JSONArray(Platforms);
-                                                                        StringBuilder platforms = new StringBuilder();
-                                                                        if (PlatformsArray.length() > 0) {
-                                                                            for (int j = 0; j < PlatformsArray.length(); j++) {
-                                                                                JSONObject PlatformsObject = PlatformsArray.getJSONObject(j);
-                                                                                String insidePlatforms = PlatformsObject.getString("platform");
-                                                                                JSONObject insidePlatformsObject = new JSONObject(insidePlatforms);
-                                                                                platforms.append(insidePlatformsObject.getString("name"));
-                                                                                if ((j + 1) != PlatformsArray.length()) {
-                                                                                    platforms.append(" , ");
-                                                                                }
-                                                                            }
-                                                                        } else {
-                                                                            platforms.append("N/A");
-                                                                        }
-
-                                                                        stringBuilder.append(platforms.toString());
-                                                                        stringBuilder.append("$4$");
-                                                                        stringBuilder.append(jsonPart.getString("slug"));
-                                                                        alsGamesList.add(stringBuilder.toString());
-                                                                    }
-
+                                                        stringBuilder.append("$3$");
+                                                        String Platforms = jsonPart.getString("platforms");
+                                                        JSONArray PlatformsArray = new JSONArray(Platforms);
+                                                        StringBuilder platforms = new StringBuilder();
+                                                        if (PlatformsArray.length() > 0) {
+                                                            for (int j = 0; j < PlatformsArray.length(); j++) {
+                                                                JSONObject PlatformsObject = PlatformsArray.getJSONObject(j);
+                                                                String insidePlatforms = PlatformsObject.getString("platform");
+                                                                JSONObject insidePlatformsObject = new JSONObject(insidePlatforms);
+                                                                platforms.append(insidePlatformsObject.getString("name"));
+                                                                if ((j + 1) != PlatformsArray.length()) {
+                                                                    platforms.append(" , ");
                                                                 }
-
-                                                                Log.d(TAG, "run: alsGamesList: " + alsGamesList);
-                                                                Log.d(TAG, "run: alsPlatforms: " + alsPlatforms);
-
-                                                                GIV_LOADING.setVisibility(View.GONE);
-                                                                if (isSwitched) {
-
-                                                                    grrva = new GameResultsRecyclerViewAdapter(alsGamesList, "#212121",
-                                                                            mContext, ogsl);
-                                                                } else {
-
-                                                                    grrva = new GameResultsRecyclerViewAdapter(alsGamesList, "#FFFFFF",
-                                                                            mContext, ogsl);
-                                                                }
-                                                                RV_ALL.setItemAnimator(new DefaultItemAnimator());
-                                                                RV_ALL.setAdapter(grrva);
-                                                                grrva.notifyDataSetChanged();
-                                                                RV_ALL.scheduleLayoutAnimation();
-                                                                //CloseKeyBoard();
-//                                                GamesAutoCompleteAdapter adapter = new GamesAutoCompleteAdapter(mContext, GamesName, GamesPlatform
-//                                                        , GamesImgUrl, GamesRating);
-//                                                GamesSearchBar.setThreshold(0);
-//                                                GamesSearchBar.setAdapter(adapter);
-//                                                GamesSearchBar.showDropDown();
-//                                                if (GamesSearchBar.isPopupShowing()) {
-//                                                    CloseKeyBoard();
-
-                                                                // lvCircularZoom.stopAnim();
-                                                                //   lvCircularZoom.setVisibility(View.GONE);
-//
-
-
-                                                            } catch (Exception e) {
-                                                                Log.d(TAG, "onResponse: error " + e.getMessage());
                                                             }
-                                                        });
+                                                        } else {
+                                                            platforms.append("N/A");
+                                                        }
 
+                                                        stringBuilder.append(platforms.toString());
+                                                        stringBuilder.append("$4$");
+                                                        stringBuilder.append(jsonPart.getString("slug"));
+                                                        alsGamesList.add(stringBuilder.toString());
                                                     }
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
+
                                                 }
 
-                                            }
-                                        };
-                                        thread.start();
+                                                Log.d(TAG, "run: alsGamesList: " + alsGamesList);
+                                                Log.d(TAG, "run: alsPlatforms: " + alsPlatforms);
 
+                                                GIV_LOADING.setVisibility(View.GONE);
+                                                if (isSwitched) {
+
+                                                    grrva = new GameResultsRecyclerViewAdapter(alsGamesList, "#212121", true,
+                                                            mContext, ogsl);
+                                                } else {
+
+                                                    grrva = new GameResultsRecyclerViewAdapter(alsGamesList, "#FFFFFF", true,
+                                                            mContext, ogsl);
+                                                }
+                                                RV_ALL.setItemAnimator(new DefaultItemAnimator());
+                                                RV_ALL.setAdapter(grrva);
+                                                grrva.notifyDataSetChanged();
+                                                RV_ALL.scheduleLayoutAnimation();
+
+                                            } catch (Exception e) {
+                                                Log.d(TAG, "onResponse: error " + e.getMessage());
+                                            }
+                                        });
                                         //    Log.d(TAG, String.format("onResponse: API RESPONSE %s", data));
                                     }
                                 }
@@ -425,7 +462,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                         jsonObject = new JSONObject(data);
                         String result = jsonObject.getString("results");
                         JSONArray resultArray = new JSONArray(result);
-
+                        Log.d(TAG, String.format("onResponse: resultArray: %s", resultArray));
                         for (int i = 0; i < 1; i++) {
                             StringBuilder stringBuilder = new StringBuilder();
                             JSONObject jsonPart = resultArray.getJSONObject(i);
@@ -477,51 +514,47 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
 
 
                         if (isSelected && isLast) {
-                            Handler handler = new Handler(Looper.getMainLooper());
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
+                            handler.post(() -> {
 
-                                    Log.d(TAG, "SetBackButton: a alsSelectedList: " + alsSelectedList);
-                                    Log.d(TAG, "SetBackButton: a  alsMatchSelectList: " + alsMatchSelectedList);
+                                Log.d(TAG, "SetBackButton: a alsSelectedList: " + alsSelectedList);
+                                Log.d(TAG, "SetBackButton: a  alsMatchSelectList: " + alsMatchSelectedList);
 
-                                    GIV_LOADING.setVisibility(View.GONE);
-                                    mLayoutManager = new ZoomRecyclerLayout(mContext);
-                                    mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                                    mLayoutManager.setStackFromEnd(true);
+                                GIV_LOADING.setVisibility(View.GONE);
+                                TV_NO_SELECTION.setVisibility(View.VISIBLE);
+                                mLayoutManager = new ZoomRecyclerLayout(mContext);
+                                mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                                mLayoutManager.setStackFromEnd(true);
 
-                                    RV_SELECTED.setLayoutManager(mLayoutManager);
-                                    mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList, getActivity(), position -> {
-                                        Log.d(TAG, "onItemClick: position: " + position);
-                                        alsSelectedList.remove(position);
-                                        mSelectedAdapter.notifyItemRemoved(position);
-                                    });
-                                    RV_SELECTED.setAdapter(mSelectedAdapter);
-                                    mSelectedAdapter.notifyDataSetChanged();
-                                }
+                                RV_SELECTED.setLayoutManager(mLayoutManager);
+                                mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList,true, getActivity(), position -> {
+                                    Log.d(TAG, "onItemClick: position: " + position);
+                                    alsSelectedList.remove(position);
+                                    mSelectedAdapter.notifyItemRemoved(position);
+                                });
+                                RV_SELECTED.setAdapter(mSelectedAdapter);
+                                mSelectedAdapter.notifyDataSetChanged();
                             });
                         }
-
-                        //CloseKeyBoard();
-//                                                GamesAutoCompleteAdapter adapter = new GamesAutoCompleteAdapter(mContext, GamesName, GamesPlatform
-//                                                        , GamesImgUrl, GamesRating);
-//                                                GamesSearchBar.setThreshold(0);
-//                                                GamesSearchBar.setAdapter(adapter);
-//                                                GamesSearchBar.showDropDown();
-//                                                if (GamesSearchBar.isPopupShowing()) {
-//                                                    CloseKeyBoard();
-
-                        // lvCircularZoom.stopAnim();
-                        //   lvCircularZoom.setVisibility(View.GONE);
-//
-
-
                     } catch (Exception e) {
+                        if (isLast && isSelected) {
+                            GIV_LOADING.setVisibility(View.GONE);
+                            TV_NO_SELECTION.setVisibility(View.VISIBLE);
+                            mLayoutManager = new ZoomRecyclerLayout(mContext);
+                            mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                            mLayoutManager.setStackFromEnd(true);
+
+                            RV_SELECTED.setLayoutManager(mLayoutManager);
+                            mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList, true,getActivity(), position -> {
+                                Log.d(TAG, "onItemClick: position: " + position);
+                                alsSelectedList.remove(position);
+                                mSelectedAdapter.notifyItemRemoved(position);
+                            });
+                            RV_SELECTED.setAdapter(mSelectedAdapter);
+                            mSelectedAdapter.notifyDataSetChanged();
+
+                        }
                         e.printStackTrace();
                     }
-
-
-                    //    Log.d(TAG, String.format("onResponse: API RESPONSE %s", data));
                 }
             }
         });
@@ -559,7 +592,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                 mLayoutManager.setStackFromEnd(true);
 
                 RV_SELECTED.setLayoutManager(mLayoutManager);
-                mSelectedAdapter = new GamesRecyclerViewAdapter(alsMatchSelectedList, getActivity(), position -> {
+                mSelectedAdapter = new GamesRecyclerViewAdapter(alsMatchSelectedList, true,getActivity(), position -> {
                     Log.d(TAG, "onItemClick: position: " + position);
                     alsMatchSelectedList.remove(position);
                     mSelectedAdapter.notifyItemRemoved(position);
@@ -575,7 +608,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
     }
 
     private void SwitchInput(View view) {
-        ImageView IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_VG);
+        IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_VG);
         IV_SWITCH_INPUT.setOnClickListener(v -> {
 
             ML.setTransition(R.id.TRANS_SWITCH_VG);
@@ -597,7 +630,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                 mLayoutManager.setStackFromEnd(true);
 
                 RV_SELECTED.setLayoutManager(mLayoutManager);
-                mSelectedAdapter = new GamesRecyclerViewAdapter(alsMatchSelectedList, getActivity(), position -> {
+                mSelectedAdapter = new GamesRecyclerViewAdapter(alsMatchSelectedList, true,getActivity(), position -> {
                     Log.d(TAG, "onItemClick: position: " + position);
                     alsMatchSelectedList.remove(position);
                     mSelectedAdapter.notifyItemRemoved(position);
@@ -615,7 +648,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                 mLayoutManager.setStackFromEnd(true);
 
                 RV_SELECTED.setLayoutManager(mLayoutManager);
-                mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList, getActivity(), position -> {
+                mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList,true, getActivity(), position -> {
                     Log.d(TAG, "onItemClick: position: " + position);
                     alsSelectedList.remove(position);
                     mSelectedAdapter.notifyItemRemoved(position);
@@ -724,7 +757,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                 RV_SELECTED.setLayoutManager(mLayoutManager);
                 if (isSwitched) {
                     alsMatchSelectedList.add(alsGamesList.get(position));
-                    mSelectedAdapter = new GamesRecyclerViewAdapter(alsMatchSelectedList, getActivity(), new GamesRecyclerViewAdapter.OnGameRemovedListener() {
+                    mSelectedAdapter = new GamesRecyclerViewAdapter(alsMatchSelectedList, true,getActivity(), new GamesRecyclerViewAdapter.OnGameRemovedListener() {
                         @Override
                         public void onItemClick(int position) {
                             Log.d(TAG, "onItemClick: position: " + position);
@@ -734,7 +767,7 @@ public class GamesFragment extends Fragment implements GameResultsRecyclerViewAd
                     });
                 } else {
                     alsSelectedList.add(alsGamesList.get(position));
-                    mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList, getActivity(), new GamesRecyclerViewAdapter.OnGameRemovedListener() {
+                    mSelectedAdapter = new GamesRecyclerViewAdapter(alsSelectedList, true,getActivity(), new GamesRecyclerViewAdapter.OnGameRemovedListener() {
                         @Override
                         public void onItemClick(int position) {
                             alsSelectedList.remove(position);

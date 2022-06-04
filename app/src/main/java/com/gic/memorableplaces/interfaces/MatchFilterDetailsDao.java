@@ -26,16 +26,19 @@ interface MatchFilterDetailsDao {
     void UpdateMatchAgeRange(String other_age_range, String type);
 
     @Query("UPDATE match_filter_details SET match_gender = :match_gender WHERE type = :type")
-    void UpdateMatchGender(String match_gender, String type);
+    void UpdateMatchGender(ArrayList<String> match_gender, String type);
 
     @Query("UPDATE match_filter_details SET match_general_details = :match_general_details WHERE type = :type")
     void UpdateMatchGeneralDetails(ArrayList<String> match_general_details, String type);
 
     @Query("UPDATE match_filter_details SET match_college_year = :match_college_year WHERE type = :type")
-    void UpdateMatchCollegeYear(String match_college_year, String type);
+    void UpdateMatchCollegeYear(ArrayList<String> match_college_year, String type);
 
     @Query("UPDATE match_filter_details SET match_society_in_college = :match_society WHERE type = :type")
     void UpdateMatchSociety(ArrayList<String> match_society, String type);
+
+    @Query("UPDATE match_filter_details SET match_titles_posts = :match_titles_posts WHERE type = :type")
+    void UpdateMatchTitles(ArrayList<String> match_titles_posts, String type);
 
     @Query("UPDATE match_filter_details SET match_hobbies = :match_hobbies WHERE type = :type")
     void UpdateMatchHobbies(ArrayList<String> match_hobbies, String type);
@@ -51,6 +54,9 @@ interface MatchFilterDetailsDao {
 
     @Query("UPDATE match_filter_details SET match_movie = :match_movie WHERE type = :type")
     void UpdateMatchMovie(ArrayList<String> match_movie, String type);
+
+    @Query("UPDATE match_filter_details SET match_loc = :match_loc,match_dd = :match_dd WHERE type = :type")
+    void UpdateMatchLocAndDD(String match_loc, ArrayList<String> match_dd, String type);
 
     @Query("SELECT * FROM match_filter_details")
     List<MatchFilterDetails> GetAllMatchFilterDetails();

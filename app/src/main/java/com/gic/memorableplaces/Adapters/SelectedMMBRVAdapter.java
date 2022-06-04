@@ -81,8 +81,6 @@ public class SelectedMMBRVAdapter extends RecyclerView.Adapter<SelectedMMBRVAdap
 
         if (!Cover.equals("N/A"))
             GlideImageLoader.loadImageWithOutTransition(mContext, Cover, holder.IV_COVER);
-        else
-            holder.IV_COVER.setImageResource(Integer.parseInt(Cover));
 
 
         if (sType.equals(mContext.getString(R.string.field_music)))

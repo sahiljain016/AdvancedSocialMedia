@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/TRANS_SWITCH_DD"
+        motion:constraintSetEnd="@+id/dd_end"
+        motion:constraintSetStart="@id/dd_start"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+
+    <Transition
+        android:id="@+id/TRANS_MY_LOC_DD"
+        motion:constraintSetEnd="@+id/CS_MY_LOC_DD_END"
+        motion:constraintSetStart="@id/CS_MY_LOC_DD_START"
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/dd_start">
+        <Constraint
+            android:id="@+id/IFV_BACK_BUTTON_DD"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_DD"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_DD">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_DD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_QUES_DD"
+            motion:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_DD"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/IV_SWITCH_DD"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_DD"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_DD">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/SV_NOTICE_SWTICH"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD"/>
+
+        <Constraint
+            android:id="@+id/CL_SEARCH_DD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IFV_TYPE_DD"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/TV_TITLE_MY_LOC_DD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintTop_toBottomOf="@id/CL_SEARCH_DD">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+
+        <Constraint
+
+            android:id="@+id/TV_TITLE_LOC_DD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_2_FD">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/black" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/RL_ARV_DD"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/CL_SEARCH_DD"
+            motion:layout_constraintVertical_bias="0.0"
+            motion:layout_editor_absoluteX="-128dp" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/dd_end">
+
+        <Constraint
+            android:id="@+id/IFV_BACK_BUTTON_DD"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_DD"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_DD">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/ATV_TITLE_DD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IV_QUES_DD"
+            motion:layout_constraintStart_toEndOf="@id/IFV_BACK_BUTTON_DD"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/CL_SEARCH_DD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:layout_constraintEnd_toStartOf="@id/IFV_TYPE_DD"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/SV_NOTICE_SWTICH" />
+
+        <Constraint
+            android:id="@+id/IV_SWITCH_DD"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_DD"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/ATV_TITLE_DD">
+            <CustomAttribute
+                motion:attributeName="colorFilter"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/SV_NOTICE_SWTICH"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+        <Constraint
+            android:id="@+id/TV_TITLE_MY_LOC_DD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            motion:layout_constraintTop_toBottomOf="@id/CL_SEARCH_DD">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+        <Constraint
+
+            android:id="@+id/TV_TITLE_LOC_DD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            motion:layout_constraintTop_toBottomOf="@id/V_LINE_2_FD">
+            <CustomAttribute
+                motion:attributeName="TextColor"
+                motion:customColorValue="@color/white" />
+        </Constraint>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/CS_MY_LOC_DD_START">
+
+        <Constraint
+            android:id="@+id/RL_MY_LOC_DD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"/>
+
+        <Constraint
+            android:id="@+id/TV_NO_SEL_MY_LOC_DD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"/>
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/CS_MY_LOC_DD_END">
+
+        <Constraint
+            android:id="@+id/RL_MY_LOC_DD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/TV_NO_SEL_MY_LOC_DD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+
+</MotionScene>

@@ -75,7 +75,7 @@
     <string name="field_birth_date">birth_date</string>
     <string name="field_email">email</string>
     <string name="field_phoneNumber">phone_number</string>
-    <string name="field_is_email_verified">is_email_verified</string>
+    <string name="field_email_verified">email_verified</string>
     <string name="field_is_online">is_online</string>
     <string name="field_page_number">page_number</string>
     <string name="field_collegeUID">college_uid</string>
@@ -85,6 +85,7 @@
     <string name="field_website">website</string>
     <string name="field_profile_photo">profile_photo</string>
     <string name="field_course">course</string>
+    <string name="field_location">location</string>
     <string name="field_posts">posts</string>
     <string name="field_following">following</string>
     <string name="field_followers">friendly_xavierites</string>
@@ -111,15 +112,19 @@
     <string name="No_filter_results_available">No Results Available</string>
     <string name="age">Age</string>
     <string name="gender">Gender</string>
+    <string name="general_details">General Details</string>
+    <string name="college_year">College Year</string>
+    <string name="title_post">Title &amp; Posts</string>
+    <string name="books">Books</string>
+    <string name="movie">Movies\\ Tv Shows</string>
+    <string name="music">Music</string>
+    <string name="hobbies">Hobbies\\Interests</string>
+    <string name="societies">Societies In College</string>
+    <string name="games">Games</string>
+    <string name="dream_destination">Dream Destinations</string>
     <string name="course">Courses In College</string>
     <string name="zodiac_sign">Zodiac Sign</string>
-    <string name="hobbies">Hobbies/Interests</string>
-    <string name="games">Games</string>
-    <string name="music">Music</string>
-    <string name="movie">Movies/ Tv Shows</string>
     <string name="pronouns">Pronouns</string>
-    <string name="books">Books</string>
-    <string name="societies">Societies In College</string>
     <string name="drawer_open">Open Drawer</string>
     <string name="LEFT_TV_COLOR">LEFT_TV_COLOR</string>
     <string name="RIGHT_TV_COLOR">RIGHT_TV_COLOR</string>
@@ -136,7 +141,6 @@
     <string name="society_desp">society_desp</string>
     <string name="field_society">my_societies</string>
     <string name="field_filter">filter_name</string>
-    <string name="field_zodiac_sign">zodiac_sign</string>
     <string name="field_class_representative">class_representative</string>
     <string name="field_other_posts">other_posts</string>
     <string name="field_sections_in_course">sections_in_course</string>
@@ -321,9 +325,10 @@
     <!--Share Activity-->
     <string name="next_share">Next</string>
     <string name="remove_this_game">REMOVE THIS GAME</string>
-    <!--FIND FRIENDS-->
+    <!--FIND FRIENDS ACTIVITY-->
     <string name="ff_user_details">FFUserDetails</string>
     <string name="title_filters">Filters</string>
+    <string name="location_radius">location_radius</string>
     <!--Message Activity-->
     <string name="field_date_messaged">date_messaged</string>
     <string name="field_latest_date_messaged">latest_date_messaged</string>
@@ -364,6 +369,18 @@
     <!--General Details Fragment-->
     <string name="fragment_general_details">fragment_general_details</string>
     <string name="field_general_details">general_details</string>
+    <string name="field_height">Height</string>
+    <string name="field_education_level">Education Level</string>
+    <string name="field_exercise">Exercise </string>
+    <string name="field_drinking">Drinking </string>
+    <string name="field_smoking">Smoking </string>
+    <string name="field_looking_for_friend">Looking For (Friend)</string>
+    <string name="field_looking_for_dating">Looking For (Dating)</string>
+    <string name="field_looking_for_other">Looking For (Other)</string>
+    <string name="field_sexual_preference">Sexual Preference</string>
+    <string name="field_politics">Politics</string>
+    <string name="field_zodiac_sign">Zodiac Sign</string>
+    <string name="field_religion">Religion</string>
     <string name="field_match_general_details">match_general_details</string>
     <string name="field_gd_p">gd_p</string>
 
@@ -378,6 +395,12 @@
     <string name="field_society_in_college">society_in_college</string>
     <string name="field_match_society_in_college">match_society_in_college</string>
     <string name="field_sic_p">sic_p</string>
+
+    <!--Society In College Fragment-->
+    <string name="fragment_titles_posts">fragment_titles_posts</string>
+    <string name="field_titles_posts">Titles &amp; Posts</string>
+    <string name="field_match_titles_posts">match_titles_posts</string>
+    <string name="field_tp_p">tp_p</string>
 
     <!--Hobbies Fragment-->
     <string name="fragment_hobbies">fragment_hobbies</string>
@@ -408,6 +431,27 @@
     <string name="field_books">books</string>
     <string name="field_match_books">match_books</string>
     <string name="field_bo_p">bo_p</string>
+
+    <!--Dream Destinations Fragment-->
+    <string name="fragment_dream_destinations">fragment_dream_destinations</string>
+    <string name="field_my_loc">my_loc</string>
+    <string name="field_my_dd">my_dd</string>
+    <string name="field_match_loc">match_loc</string>
+    <string name="field_match_dd">match_dd</string>
+    <string name="field_dd_p">dd_p</string>
+
+    <!--Questions Fragment-->
+    <string name="questions_fragment">questions_fragment</string>
+    <string name="field_questions">questions</string>
+
+    <!--Gallery Fragment-->
+    <string name="field_add_images">add_images</string>
+
+    <!--User Object-->
+    <string name="field_photos_list">photos_list</string>
+    <string name="field_sign_up_complete">sign_up_complete</string>
+    <string name="field_auto_desp_enabled">autoDespEnabled</string>
+    <string name="field_auto_desp">auto_desp</string>
 
 
 </resources>

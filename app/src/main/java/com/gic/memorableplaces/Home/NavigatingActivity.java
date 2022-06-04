@@ -10,17 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gic.memorableplaces.LogIn.LogInActivity;
-import com.gic.memorableplaces.R;
-import com.gic.memorableplaces.SignUp.SignUpActivity;
-import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class NavigatingActivity extends AppCompatActivity {
     private static final String TAG = "NavigatingActivity";
@@ -55,6 +48,8 @@ public class NavigatingActivity extends AppCompatActivity {
         Intent intent;
         if (user == null) {
             intent = new Intent(mContext, LogInActivity.class);
+
+            Log.d(TAG, "onSuccess: Route Navigating to login: ");
         }
         else{
             intent = new Intent(mContext, NavigatingCardActivity.class);

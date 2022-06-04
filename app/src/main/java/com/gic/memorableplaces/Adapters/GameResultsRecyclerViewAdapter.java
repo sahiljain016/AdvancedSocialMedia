@@ -14,6 +14,7 @@ import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.GlideImageLoader;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -24,6 +25,7 @@ public class GameResultsRecyclerViewAdapter extends RecyclerView.Adapter<GameRes
     private Context mContext;
     private ArrayList<String> alsGameDetails;
     private String sColor;
+    private boolean bIsGames;
     private OnGameSelectedListener MyOnResultsClickListener;
     //Firebase
 
@@ -57,10 +59,11 @@ public class GameResultsRecyclerViewAdapter extends RecyclerView.Adapter<GameRes
         void onItemClick(int position);
     }
 
-    public GameResultsRecyclerViewAdapter(ArrayList<String> alsGameDetails, String Color,
+    public GameResultsRecyclerViewAdapter(ArrayList<String> alsGameDetails, String Color, boolean isGames,
                                           Context context, OnGameSelectedListener onResultsClickListener) {
         this.alsGameDetails = alsGameDetails;
         mContext = context;
+        bIsGames = isGames;
         sColor = Color;
         MyOnResultsClickListener = onResultsClickListener;
 
@@ -78,11 +81,17 @@ public class GameResultsRecyclerViewAdapter extends RecyclerView.Adapter<GameRes
 
         int pos = holder.getBindingAdapterPosition();
         String MainString = alsGameDetails.get(pos);
-        String Name = MainString.substring(0, MainString.indexOf("$1$"));
-        String img = MainString.substring((MainString.indexOf("$1$") + 3), MainString.indexOf("$2$"));
-        String rating = MainString.substring((MainString.indexOf("$2$") + 3), MainString.indexOf("$3$"));
-        String platforms = MainString.substring((MainString.indexOf("$3$") + 3), MainString.indexOf("$4$"));
+        String Name = "", img = "", rating = "", platforms = "";
+        if (bIsGames) {
+            Name = MainString.substring(0, MainString.indexOf("$1$"));
+            img = MainString.substring((MainString.indexOf("$1$") + 3), MainString.indexOf("$2$"));
+            rating = MainString.substring((MainString.indexOf("$2$") + 3), MainString.indexOf("$3$"));
+            platforms = MainString.substring((MainString.indexOf("$3$") + 3), MainString.indexOf("$4$"));
+        } else {
+            Name = alsGameDetails.get(position);
+            img = "https://flagcdn.com/256x192/" + (Name.substring((Name.length() - 3), (Name.length() - 1))).toLowerCase(Locale.ROOT) + ".png";
 
+        }
 
         holder.GameName.setText(Name);
         holder.GamePlatform.setText(platforms);

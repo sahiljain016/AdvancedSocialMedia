@@ -284,7 +284,7 @@
 
 
             <ImageView
-                android:id="@+id/IV_DOT_HI_FD"
+                android:id="@+id/IV_DOT_TIO_FD"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -296,6 +296,35 @@
                 android:tag="none"
                 app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
                 app:layout_constraintTop_toBottomOf="@id/IV_DOT_CY_FD" />
+
+            <TextView
+                android:id="@+id/TV_TIO_FD"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/capriola"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:text="Posts/Titles"
+                android:textColor="#959595"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/IV_DOT_TIO_FD"
+                app:layout_constraintStart_toEndOf="@id/IV_DOT_TIO_FD"
+                app:layout_constraintTop_toTopOf="@id/IV_DOT_TIO_FD" />
+
+            <ImageView
+                android:id="@+id/IV_DOT_HI_FD"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corners_imageview"
+                android:padding="@dimen/_3sdp"
+                android:tag="none"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TV_SIC_FD" />
 
             <TextView
                 android:id="@+id/TV_HI_FD"
@@ -324,8 +353,8 @@
                 android:background="@drawable/rounded_corners_imageview"
                 android:padding="@dimen/_5sdp"
                 android:tag="none"
-                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
-                app:layout_constraintTop_toBottomOf="@id/IV_DOT_SIC_FD" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TV_HI_FD" />
 
             <TextView
                 android:id="@+id/TV_MU_FD"
@@ -353,8 +382,8 @@
                 android:background="@drawable/rounded_corners_imageview"
                 android:padding="@dimen/_3sdp"
                 android:tag="none"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/IV_DOT_HI_FD" />
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintTop_toBottomOf="@id/TV_TIO_FD" />
 
             <TextView
                 android:id="@+id/TV_VG_FD"
@@ -383,7 +412,7 @@
                 android:background="@drawable/rounded_corners_imageview"
                 android:padding="@dimen/_5sdp"
                 android:tag="none"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
                 app:layout_constraintTop_toBottomOf="@id/IV_DOT_VG_FD" />
 
             <TextView
@@ -413,7 +442,7 @@
                 android:background="@drawable/rounded_corners_imageview"
                 android:padding="@dimen/_5sdp"
                 android:tag="none"
-                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/IV_DOT_MU_FD" />
 
             <TextView
@@ -430,6 +459,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/IV_DOT_MO_FD"
                 app:layout_constraintStart_toEndOf="@id/IV_DOT_MO_FD"
                 app:layout_constraintTop_toTopOf="@id/IV_DOT_MO_FD" />
+
             <ImageView
                 android:id="@+id/IV_DOT_DD_FD"
                 android:layout_width="@dimen/_15sdp"
@@ -439,9 +469,9 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/rounded_corners_imageview"
-                android:padding="@dimen/_3sdp"
+                android:padding="@dimen/_5sdp"
                 android:tag="none"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/V_DIVIDER_1_FD"
                 app:layout_constraintTop_toBottomOf="@id/IV_DOT_BO_FD" />
 
             <TextView
@@ -452,12 +482,13 @@
                 android:fontFamily="@font/capriola"
                 android:scrollbars="horizontal"
                 android:scrollHorizontally="true"
-                android:text="Dream Destination"
+                android:text="Dream Destinations"
                 android:textColor="#959595"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/IV_DOT_DD_FD"
                 app:layout_constraintStart_toEndOf="@id/IV_DOT_DD_FD"
                 app:layout_constraintTop_toTopOf="@id/IV_DOT_DD_FD" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -488,6 +519,32 @@
         android:id="@+id/FL_DETAILS_FD"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/GIV_LOADING_FD"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@raw/loading_circle"
+        android:tag="gone"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/TV_LOADING_FD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TV_LOADING_FD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:fontFamily="@font/capriola"
+        android:text="Fetching data from server..."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

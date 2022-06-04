@@ -65,6 +65,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import me.grantland.widget.AutofitHelper;
+import pl.droidsonroids.gif.GifImageView;
 
 public class FirebaseMethods {
 
@@ -992,6 +993,81 @@ public class FirebaseMethods {
         return Vcount;
     }
 
+
+    public void UploadPhotosList(ArrayList<String> ImagesList, String profile_photo, final Activity activity, final OnResultListener<String> onResultListener) {
+        Log.d(TAG, "UploadNewPhoto: uploading new photo");
+
+        final String FIREBASE_IMAGE_STORAGE = "photos/users/";
+        String user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        FileCompressor fileCompressor = new FileCompressor(mContext);
+        StorageReference storageReference = null;
+        CustomDialog = new CustomDialog(mContext, R.layout.dialog_upload_progress);
+        CustomDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        CustomDialog.setCancelable(false);
+        CustomDialog.show();
+        uploadProgressTV = (CustomDialog).findViewById(R.id.TV_UPLOAD_PERC_D_UP);
+        TextView TV_TITLE = (CustomDialog).findViewById(R.id.TV_TITLE_DIALOG_UP);
+        TextView TV_FUNNY_NOTE = (CustomDialog).findViewById(R.id.TV_FUNNY_NOTE_DIALOG_UP);
+        GifImageView GIV_FUNNY = (CustomDialog).findViewById(R.id.GIV_FUNNY_DIALOG_UP);
+
+        AutofitHelper.create(uploadProgressTV);
+        //Upload new photo
+
+        UploadTask uploadTask = null;
+        while (ImagesList.contains("N/A")) {
+            ImagesList.remove("N/A");
+        }
+        ImagesList.remove("N/A");
+        Log.d(TAG, "UploadPhotosList: ImagesList: " + ImagesList);
+        for (int i = 0; i < ImagesList.size(); i++) {
+            storageReference = mStorageRef.child(FIREBASE_IMAGE_STORAGE + user_id + "/photo" + (i + 1));
+            TV_TITLE.setText("Uploading Your Photos (" + (i + 1) + "/" + ImagesList.size() + ")");
+            uploadTask = storageReference.putFile(Uri.parse(ImagesList.get(i)));
+            StorageReference finalStorageReference = storageReference;
+            int finalI = i;
+            uploadTask.continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                return finalStorageReference.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+
+                if (task.isSuccessful()) {
+                    Uri downloaduri = task.getResult();
+                    addPhotoListToDatabase(Objects.requireNonNull(downloaduri).toString(), profile_photo, finalI);
+                    uploadProgressTV.setText("Upload complete!");
+                    if (finalI == (ImagesList.size() - 1)) {
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(() -> {
+                            onResultListener.onSuccess("Upload Complete");
+                            CustomDialog.dismiss();
+                            activity.finish();
+                            mContext.startActivity(new Intent(mContext, HomeActivity.class));
+                        }, 1000);
+                    }
+                } else {
+                    uploadProgressTV.setText("Upload failed! One or more photos might have been deleted. Please try again or choose another image.");
+                    uploadProgressTV.setTextColor(Color.parseColor("#D60000"));
+                    if (task.getException() != null)
+                        onResultListener.onError(task.getException());
+                    CustomDialog.setCancelable(true);
+                }
+            });
+
+
+            uploadTask.addOnProgressListener(snapshot -> {
+                int uploadProgress = (int) ((snapshot.getBytesTransferred() * 100) / snapshot.getTotalByteCount());
+                uploadProgressTV.setText(String.format("Upload Progress: %d%%", uploadProgress));
+                RoundedProgressBar roundedHorizontalProgressBar =
+                        (CustomDialog).findViewById(R.id.RPB_UPLOAD_D_UP);
+                roundedHorizontalProgressBar.setProgressPercentage(uploadProgress, true);
+            });
+        }
+
+        //Upload new profile photo
+    }
+
+
     /**
      * uploading new photo to storage & database
      *
@@ -1014,8 +1090,8 @@ public class FirebaseMethods {
         CustomDialog = new CustomDialog(mContext, R.layout.dialog_upload_progress);
         CustomDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         CustomDialog.show();
-        uploadProgressTV = (CustomDialog).findViewById(R.id.UploadProgressTV);
-        TextView dialogTitle = (CustomDialog).findViewById(R.id.dialogTitle);
+        uploadProgressTV = (CustomDialog).findViewById(R.id.TV_UPLOAD_PERC_D_UP);
+        TextView dialogTitle = (CustomDialog).findViewById(R.id.TV_TITLE_DIALOG_UP);
 
         AutofitHelper.create(uploadProgressTV);
         //Upload new photo
@@ -1052,7 +1128,7 @@ public class FirebaseMethods {
                 int uploadProgress = (int) ((snapshot.getBytesTransferred() * 100) / snapshot.getTotalByteCount());
                 uploadProgressTV.setText(String.format("Upload Progress: %d%%", uploadProgress));
                 RoundedProgressBar roundedHorizontalProgressBar =
-                        (CustomDialog).findViewById(R.id.UploadProgressBar);
+                        (CustomDialog).findViewById(R.id.RPB_UPLOAD_D_UP);
                 roundedHorizontalProgressBar.setProgressPercentage(uploadProgress, true);
             });
 
@@ -1096,9 +1172,25 @@ public class FirebaseMethods {
                 int uploadProgress = (int) ((snapshot.getBytesTransferred() * 100) / snapshot.getTotalByteCount());
                 uploadProgressTV.setText(String.format("Upload Progress: %d%%", uploadProgress));
                 RoundedProgressBar roundedHorizontalProgressBar =
-                        (CustomDialog).findViewById(R.id.UploadProgressBar);
+                        (CustomDialog).findViewById(R.id.RPB_UPLOAD_D_UP);
                 roundedHorizontalProgressBar.setProgressPercentage(uploadProgress, true);
             });
+        }
+    }
+
+
+    public void addPhotoListToDatabase(final String imgUrl, String profile_photo, int count) {
+        myRef.child(mContext.getString(R.string.dbname_users))
+                .child(userID)
+                .child(mContext.getString(R.string.field_photos_list))
+                .child(String.valueOf(count))
+                .setValue(imgUrl);
+
+        if (imgUrl.equals(profile_photo)) {
+            myRef.child(mContext.getString(R.string.dbname_users))
+                    .child(userID)
+                    .child(mContext.getString(R.string.field_profile_photo))
+                    .setValue(profile_photo);
         }
     }
 
@@ -1231,7 +1323,7 @@ public class FirebaseMethods {
         storageReference = mStorageRef.child(FIREBASE_VIDEO_STORAGE + user_id + "/video" + (count + 1));
         CustomDialog = new CustomDialog(mContext, R.layout.dialog_upload_progress);
         CustomDialog.show();
-        uploadProgressTV = (CustomDialog).findViewById(R.id.UploadProgressTV);
+        uploadProgressTV = (CustomDialog).findViewById(R.id.TV_UPLOAD_PERC_D_UP);
         UploadTask uploadTask = null;
         uploadTask = storageReference.putFile(Uri.fromFile(new File(videoUrl)));
         AutofitHelper.create(uploadProgressTV);
@@ -1276,7 +1368,7 @@ public class FirebaseMethods {
             AutofitHelper.create(uploadProgressTV);
             uploadProgressTV.setText(String.format("Upload Progress: %d%%", uploadProgress));
             RoundedProgressBar roundedHorizontalProgressBar =
-                    (CustomDialog).findViewById(R.id.UploadProgressBar);
+                    (CustomDialog).findViewById(R.id.RPB_UPLOAD_D_UP);
             roundedHorizontalProgressBar.setProgressPercentage(uploadProgress, true);
 
         });
@@ -1439,6 +1531,7 @@ public class FirebaseMethods {
                         Toast.makeText(mContext, R.string.auth_success_singup,
                                 Toast.LENGTH_LONG).show();
 
+                        Log.d(TAG, "onSuccess: Route RegisterNewUser");
 
                         // SENDING VERIFICATION EMAIL
                         sendVerificationEmail(activity, username, onResultListener);
@@ -1488,44 +1581,44 @@ public class FirebaseMethods {
         ghost.startAnim(1500);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        Log.d(TAG, "onSuccess: Route Verification Mail Send");
         if (user != null) {
 
             user.sendEmailVerification()
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "onComplete: LOG 1");
-                                Title.setText("Verification Email Sent!");
-                                Desp.setText("Please check your email for a confirmation link.\nThis is to verify that the email belongs to you. :)");
-                                Positive.setText("Confirmed. Let's Go!");
-                                Negative.setText("I'll Do It Later...");
-                                dialog.show();
-                                ghost.setOnClickListener((View.OnClickListener) v -> requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).reload()
-                                        .addOnCompleteListener(task1 -> {
-                                            if (task1.isSuccessful()) {
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "onComplete: LOG 1");
+                            Title.setText("Verification Email Sent!");
+                            Desp.setText("Please check your email for a confirmation link.\nThis is to verify that the email belongs to you. :)");
+                            Positive.setText("Confirmed. Let's Go!");
+                            Negative.setText("I'll Do It Later...");
+                            dialog.show();
+                            ghost.setOnClickListener(v -> requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).reload()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
 
-                                                Toast.makeText(mContext, "Refreshed!", Toast.LENGTH_SHORT).show();
-                                            }
+                                            Toast.makeText(mContext, "Refreshed!", Toast.LENGTH_SHORT).show();
+                                        }
 
-                                        }));
-                                Positive.setOnClickListener(v -> {
-                                    // FirebaseAuth.getInstance().getCurrentUser().reload();
-                                    if (requireNonNull(user).isEmailVerified()) {
-                                        Log.d(TAG, "onComplete: LOG 2");
-                                        Toast.makeText(mContext, "Great Work! Let's Proceed.",
-                                                Toast.LENGTH_LONG).show();
+                                    }));
+                            Positive.setOnClickListener(v -> {
+                                // FirebaseAuth.getInstance().getCurrentUser().reload();
+                                if (requireNonNull(user).isEmailVerified()) {
+                                    Log.d(TAG, "onComplete: LOG 2");
+                                    Toast.makeText(mContext, "Great Work! Let's Proceed.",
+                                            Toast.LENGTH_LONG).show();
 
-                                        dialog.dismiss();
-                                        user.getIdToken(true).addOnCompleteListener(task12 -> {
-                                            if (task12.isSuccessful()) {
-                                                Log.i(TAG, "ID Token received", task12.getException());
-                                                onResultListener.onSuccess(task12.getResult().getToken());
-                                            } else {
-                                                Log.e(TAG, "ID Token not received", task12.getException());
-                                                onResultListener.onError(task12.getException());
-                                            }
-                                        });
+                                    Log.d(TAG, "onSuccess: Route Positive Email Verification Dialog");
+                                    dialog.dismiss();
+                                    user.getIdToken(true).addOnCompleteListener(task12 -> {
+                                        if (task12.isSuccessful()) {
+                                            Log.i(TAG, "ID Token received", task12.getException());
+                                            onResultListener.onSuccess(task12.getResult().getToken());
+                                        } else {
+                                            Log.e(TAG, "ID Token not received", task12.getException());
+                                            onResultListener.onError(task12.getException());
+                                        }
+                                    });
 
 //                                        Bundle bundle = new Bundle();
 //                                        Log.d(TAG, "onClick: username firebase methods " + Username);
@@ -1537,47 +1630,43 @@ public class FirebaseMethods {
 //                                        Transaction.addToBackStack(mContext.getString(R.string.prepare_card_fragment));
 //                                        Transaction.commit();
 
-                                    } else {
-                                        Log.d(TAG, "onComplete: LOG 3");
-                                        Toast.makeText(mContext, "If you have already verified your email. Please click the ghost to refresh the page.",
-                                                Toast.LENGTH_LONG).show();
+                                } else {
+                                    Log.d(TAG, "onComplete: LOG 3");
+                                    Toast.makeText(mContext, "If you have already verified your email. Please click the ghost to refresh the page.",
+                                            Toast.LENGTH_LONG).show();
 
-                                    }
-                                });
-                                Negative.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Log.d(TAG, "onComplete: LOG 4");
-                                        Toast.makeText(mContext, "Trying doing it right now. Please!",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            } else {
-                                Log.d(TAG, "onComplete: LOG 5");
-                                Title.setText("Verification Email Failed!");
-                                Desp.setText("Please try again. This is important.");
-                                Positive.setText("Try Again..");
-                                Negative.setText("I'll Do It Later...");
-                                Positive.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        sendVerificationEmail(activity, Username, onResultListener);
-                                    }
-                                });
-                                Negative.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Toast.makeText(mContext, "Trying doing it right now. Please!",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                                dialog.show();
-                                Toast.makeText(mContext, "Could'nt send Verification Email. Try again",
+                                }
+                            });
+                            Negative.setOnClickListener(v -> {
+                                Log.d(TAG, "onComplete: LOG 4");
+                                Toast.makeText(mContext, "Trying doing it right now. Please!",
                                         Toast.LENGTH_LONG).show();
-                            }
-
-
+                            });
+                        } else {
+                            Log.d(TAG, "onComplete: LOG 5");
+                            Title.setText("Verification Email Failed!");
+                            Desp.setText("Please try again. This is important.");
+                            Positive.setText("Try Again..");
+                            Negative.setText("I'll Do It Later...");
+                            Positive.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    sendVerificationEmail(activity, Username, onResultListener);
+                                }
+                            });
+                            Negative.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(mContext, "Trying doing it right now. Please!",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            dialog.show();
+                            Toast.makeText(mContext, "Couldn't send Verification Email. Try again",
+                                    Toast.LENGTH_LONG).show();
                         }
+
+
                     });
         }
 
@@ -1601,22 +1690,22 @@ public class FirebaseMethods {
     public void AddNewUser(String display_name, long college_uid, long phone_number, String email, String username,
                            String gender, String course, String website, String description, String profile_photo) {
 
-        User user = new User(college_uid, course, email, gender, phone_number, userID, "false", "1", StringManipulation.comdenseUsername(username));
+        User user = new User();
 
+        user.SetDefault();
+        user.setUsername(StringManipulation.comdenseUsername(username));
+        user.setUser_id(userID);
+        user.setPhone_number(phone_number);
+        user.setEmail(email);
+        user.setEmail_verified(false);
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
                 .setValue(user);
 
-        myRef.child(mContext.getString(R.string.dbname_users))
-                .child(userID)
-                .child(mContext.getString(R.string.field_is_email_verified))
-                .setValue("false");
-
         UserAccountSettings userAccountSettings = new UserAccountSettings();
-        userAccountSettings.setCard_bio(description);
         userAccountSettings.setDisplay_name(display_name);
         userAccountSettings.setFollowing(0);
-        userAccountSettings.setFriendly_xavierites(0);
+        userAccountSettings.setFollowers(0);
         userAccountSettings.setPosts(0);
         userAccountSettings.setProfile_photo(profile_photo);
         userAccountSettings.setUsername(StringManipulation.comdenseUsername(username));
@@ -1758,10 +1847,10 @@ public class FirebaseMethods {
                 Log.d(TAG, "getUserAccountSettings: data snapshot" + ds);
 
                 try {
-                    settings.setCard_bio(
+                    user.setAuto_desp(
                             Objects.requireNonNull(ds.child(UserID)
-                                    .getValue(UserAccountSettings.class))
-                                    .getCard_bio()
+                                    .getValue(User.class))
+                                    .getAuto_desp()
                     );
                     settings.setDisplay_name(
                             Objects.requireNonNull(ds.child(UserID)
@@ -1773,10 +1862,10 @@ public class FirebaseMethods {
                                     .getValue(UserAccountSettings.class))
                                     .getFollowing()
                     );
-                    settings.setFriendly_xavierites(
+                    settings.setFollowers(
                             Objects.requireNonNull(ds.child(UserID)
                                     .getValue(UserAccountSettings.class))
-                                    .getFriendly_xavierites()
+                                    .getFollowers()
                     );
                     settings.setPosts(
                             Objects.requireNonNull(ds.child(UserID)
@@ -1811,11 +1900,6 @@ public class FirebaseMethods {
                             Objects.requireNonNull(ds.child(UserID)
                                     .getValue(User.class))
                                     .getUsername()
-                    );
-                    user.setCollege_uid(
-                            Objects.requireNonNull(ds.child(UserID)
-                                    .getValue(User.class))
-                                    .getCollege_uid()
                     );
                     user.setCourse(
                             Objects.requireNonNull(ds.child(UserID)
@@ -1944,6 +2028,13 @@ public class FirebaseMethods {
      * --------------------------------------------------------GENERAL METHODS (Upload to firebase)--------------------------------------
      */
 
+    public void Set4ChildrenValue(String Field1, String Field2, String Field3,  Object Value) {
+        myRef.child(Field1)
+                .child(Field2)
+                .child(Field3)
+                .setValue(Value);
+    }
+
     public void Set5ChildrenValue(String Field1, String Field2, String Field3, String Field4, Object Value) {
         myRef.child(Field1)
                 .child(Field2)
@@ -1951,5 +2042,24 @@ public class FirebaseMethods {
                 .child(Field4)
                 .setValue(Value);
     }
+
+    public void Set6ChildrenValue(String Field1, String Field2, String Field3, String Field4, String Field5, Object Value) {
+        myRef.child(Field1)
+                .child(Field2)
+                .child(Field3)
+                .child(Field4)
+                .child(Field5)
+                .setValue(Value);
+    }
+
+    public void Remove5Value(String Field1, String Field2, String Field3, String Field4) {
+        myRef.child(Field1)
+                .child(Field2)
+                .child(Field3)
+                .child(Field4)
+                .removeValue();
+    }
+
+
 }
 

@@ -42,6 +42,9 @@ import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
 import com.google.android.material.snackbar.Snackbar;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
+import com.wooplr.spotlight.prefs.PreferencesManager;
 
 import java.util.ArrayList;
 
@@ -55,7 +58,7 @@ public class SocietiesFragment extends Fragment implements SocietiesRecyclerView
 
     private ArrayList<String> als, alsSelectedList, alsMatchSelectedList, alsSocietyNames;
 
-    private ImageView IV_PRIVACY;
+    private ImageView IV_PRIVACY, IV_SWITCH_INPUT;
     private ImageView IV_TICK;
     private ImageView IV_BOX;
     private MotionLayout ML;
@@ -75,15 +78,15 @@ public class SocietiesFragment extends Fragment implements SocietiesRecyclerView
         alsMatchSelectedList = new ArrayList<>(5);
         alsSocietyNames = new ArrayList<>(40);
 
-         ML = view.findViewById(R.id.ML_MAIN_SIC);
+        ML = view.findViewById(R.id.ML_MAIN_SIC);
         IV_PRIVACY = view.findViewById(R.id.IV_PRIVACY_LOCK_SIC);
 
         ATV_VIEW = view.findViewById(R.id.ATV_MY_SOCIETY);
 
 
         if (getArguments() != null) {
-            alsSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_society_in_college));
-            alsMatchSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_match_society_in_college));
+            alsSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_society_in_college)));
+            alsMatchSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_society_in_college)));
 
             isLocked = getArguments().getBoolean(mContext.getString(R.string.field_is_private));
         }
@@ -110,7 +113,7 @@ public class SocietiesFragment extends Fragment implements SocietiesRecyclerView
         SameDetailBox(view);
         SwitchInput(view);
         SetBackButton(view);
-
+        ShowSpotlights();
         ATV_VIEW.setOnClickListener(v -> {
             AlertDialog.Builder builder;
             LayoutInflater inflaterDialog;
@@ -135,6 +138,63 @@ public class SocietiesFragment extends Fragment implements SocietiesRecyclerView
 
 
         return view;
+    }
+
+    private void ShowSpotlights() {
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#FFFFD6A5"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
+
+        PreferencesManager preferencesManager = new PreferencesManager(mContext);
+
+
+        SpotlightView.Builder SB_SAME_DETAIL = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Copy Detail")
+                .subHeadingTvText("Click this box to copy the detail selected on your page.")
+                .target(IV_BOX)
+                .usageId("IV_BOX")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+
+        if (!preferencesManager.isDisplayed("SWITCH")) {
+
+            SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Switch Profiles")
+                    .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                    .target(IV_SWITCH_INPUT)
+                    .usageId("SWITCH")
+                    .setListener(spotlightViewId -> {
+                        SB_SAME_DETAIL.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    });
+
+            new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Privacy Button")
+                    .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                    .target(IV_PRIVACY)
+                    .usageId("PRIVACY")
+                    .setListener(spotlightViewId -> {
+                        SB_SWITCH.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    }).show();
+
+        } else if (!preferencesManager.isDisplayed("SB_SAME_DETAIL")) {
+            SB_SAME_DETAIL.show();
+        }
     }
 
     private void DisplaySelectedSociety(SwipeableRecyclerView recyclerView) {
@@ -342,7 +402,7 @@ public class SocietiesFragment extends Fragment implements SocietiesRecyclerView
     }
 
     private void SwitchInput(View view) {
-        ImageView IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_SIC);
+        IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_SIC);
         TextView TV_NOTICE = view.findViewById(R.id.TV_SWITCH_NOTICE);
         TextView TV_SAME_DETAIL = view.findViewById(R.id.TV_SWITCH_SAME_DETAIL);
         IV_SWITCH_INPUT.setOnClickListener(v -> {
@@ -465,8 +525,10 @@ public class SocietiesFragment extends Fragment implements SocietiesRecyclerView
     }
 
     @Override
-    public void onItemClick(int position, String color, ImageView IV, TextView TV, ConstraintLayout CL) {
+    public void onItemClick(int position, String color, ImageView IV, TextView
+            TV, ConstraintLayout CL) {
 
+        Log.d(TAG, "onItemClick: CL Tag: " + CL.getTag());
         if (CL.getTag().equals("unselected")) {
             if (isSwitched) {
                 if (alsMatchSelectedList.size() < 5) {

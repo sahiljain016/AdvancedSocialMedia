@@ -36,6 +36,9 @@ interface FilterPrivacyDao {
     @Query("UPDATE filter_privacy_details SET society_p = :society_p WHERE dummy_pk = 0")
     void UpdateSocietyPrivacy(boolean society_p);
 
+    @Query("UPDATE filter_privacy_details SET titles_p = :titles_p WHERE dummy_pk = 0")
+    void UpdateTitlesPrivacy(boolean titles_p);
+
     @Query("UPDATE filter_privacy_details SET hobbies_p = :hobbies_p WHERE dummy_pk = 0")
     void UpdateHobbiesPrivacy(boolean hobbies_p);
 
@@ -51,10 +54,11 @@ interface FilterPrivacyDao {
     @Query("UPDATE filter_privacy_details SET movie_p = :movies_p WHERE dummy_pk = 0")
     void UpdateMoviePrivacy(boolean movies_p);
 
+    @Query("UPDATE filter_privacy_details SET loc_p = :loc_p WHERE dummy_pk = 0")
+    void UpdateLocAndDDPrivacy(boolean loc_p);
+
     @Query("SELECT * FROM filter_privacy_details")
     List<FilterPrivacyDetails> GetAllPrivacyDetails();
-
-
 
 
 }

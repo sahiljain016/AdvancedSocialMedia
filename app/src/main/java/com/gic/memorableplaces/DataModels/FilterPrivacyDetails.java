@@ -13,25 +13,29 @@ public class FilterPrivacyDetails {
     @ColumnInfo(name = "dummy_pk")
     private Integer dummy_pk = 0;
     @ColumnInfo(name = "age_birthdate_p")
-    private boolean age_birthdate_p;
+    private boolean ab_p;
     @ColumnInfo(name = "gender_pronouns_p")
-    private boolean gender_pronouns_p;
+    private boolean gp_p;
     @ColumnInfo(name = "general_details_p")
-    private boolean general_details_p;
+    private boolean gd_p;
     @ColumnInfo(name = "college_year_p")
-    private boolean college_year_p;
+    private boolean cy_p;
     @ColumnInfo(name = "society_p")
-    private boolean society_p;
+    private boolean sic_p;
+    @ColumnInfo(name = "titles_p")
+    private boolean tp_p;
     @ColumnInfo(name = "hobbies_p")
-    private boolean hobbies_p;
+    private boolean h_p;
     @ColumnInfo(name = "video_games_p")
-    private boolean video_games_p;
+    private boolean vg_p;
     @ColumnInfo(name = "music_p")
-    private boolean music_p;
+    private boolean mu_p;
     @ColumnInfo(name = "books_p")
-    private boolean books_p;
+    private boolean bo_p;
     @ColumnInfo(name = "movie_p")
-    private boolean movie_p;
+    private boolean mo_p;
+    @ColumnInfo(name = "loc_p")
+    private boolean dd_p;
 
 
     public FilterPrivacyDetails() {
@@ -39,18 +43,20 @@ public class FilterPrivacyDetails {
     }
 
 
-    public FilterPrivacyDetails(@NonNull Integer dummy_pk, boolean age_birthdate_p, boolean gender_pronouns_p, boolean general_details_p, boolean college_year_p, boolean society_p, boolean hobbies_p, boolean video_games_p, boolean music_p, boolean books_p, boolean movie_p) {
+    public FilterPrivacyDetails(@NonNull Integer dummy_pk, boolean ab_p, boolean gp_p, boolean gd_p, boolean cy_p, boolean sic_p, boolean tp_p, boolean h_p, boolean vg_p, boolean mu_p, boolean bo_p, boolean mo_p, boolean dd_p) {
         this.dummy_pk = dummy_pk;
-        this.age_birthdate_p = age_birthdate_p;
-        this.gender_pronouns_p = gender_pronouns_p;
-        this.general_details_p = general_details_p;
-        this.college_year_p = college_year_p;
-        this.society_p = society_p;
-        this.hobbies_p = hobbies_p;
-        this.video_games_p = video_games_p;
-        this.music_p = music_p;
-        this.books_p = books_p;
-        this.movie_p = movie_p;
+        this.ab_p = ab_p;
+        this.gp_p = gp_p;
+        this.gd_p = gd_p;
+        this.cy_p = cy_p;
+        this.sic_p = sic_p;
+        this.tp_p = tp_p;
+        this.h_p = h_p;
+        this.vg_p = vg_p;
+        this.mu_p = mu_p;
+        this.bo_p = bo_p;
+        this.mo_p = mo_p;
+        this.dd_p = dd_p;
     }
 
     @NonNull
@@ -62,95 +68,118 @@ public class FilterPrivacyDetails {
         this.dummy_pk = dummy_pk;
     }
 
-    public boolean isAge_birthdate_p() {
-        return age_birthdate_p;
+    public boolean isAb_p() {
+        return ab_p;
     }
 
-    public void setAge_birthdate_p(boolean age_birthdate_p) {
-        this.age_birthdate_p = age_birthdate_p;
+    public void setAb_p(boolean ab_p) {
+        this.ab_p = ab_p;
     }
 
-    public boolean isGender_pronouns_p() {
-        return gender_pronouns_p;
+    public boolean isGp_p() {
+        return gp_p;
     }
 
-    public void setGender_pronouns_p(boolean gender_pronouns_p) {
-        this.gender_pronouns_p = gender_pronouns_p;
+    public void setGp_p(boolean gp_p) {
+        this.gp_p = gp_p;
     }
 
-    public boolean isGeneral_details_p() {
-        return general_details_p;
+    public boolean isGd_p() {
+        return gd_p;
     }
 
-    public void setGeneral_details_p(boolean general_details_p) {
-        this.general_details_p = general_details_p;
+    public void setGd_p(boolean gd_p) {
+        this.gd_p = gd_p;
     }
 
-    public boolean isCollege_year_p() {
-        return college_year_p;
+    public boolean isCy_p() {
+        return cy_p;
     }
 
-    public void setCollege_year_p(boolean college_year_p) {
-        this.college_year_p = college_year_p;
+    public void setCy_p(boolean cy_p) {
+        this.cy_p = cy_p;
     }
 
-    public boolean isSociety_p() {
-        return society_p;
+    public boolean isSic_p() {
+        return sic_p;
     }
 
-    public void setSociety_p(boolean society_p) {
-        this.society_p = society_p;
+    public void setSic_p(boolean sic_p) {
+        this.sic_p = sic_p;
     }
 
-    public boolean isHobbies_p() {
-        return hobbies_p;
+    public boolean isTp_p() {
+        return tp_p;
     }
 
-    public void setHobbies_p(boolean hobbies_p) {
-        this.hobbies_p = hobbies_p;
+    public void setTp_p(boolean tp_p) {
+        this.tp_p = tp_p;
     }
 
-    public boolean isVideo_games_p() {
-        return video_games_p;
+    public boolean isH_p() {
+        return h_p;
     }
 
-    public void setVideo_games_p(boolean video_games_p) {
-        this.video_games_p = video_games_p;
+    public void setH_p(boolean h_p) {
+        this.h_p = h_p;
     }
 
-    public boolean isMusic_p() {
-        return music_p;
+    public boolean isVg_p() {
+        return vg_p;
     }
 
-    public void setMusic_p(boolean music_p) {
-        this.music_p = music_p;
+    public void setVg_p(boolean vg_p) {
+        this.vg_p = vg_p;
     }
 
-    public boolean isBooks_p() {
-        return books_p;
+    public boolean isMu_p() {
+        return mu_p;
     }
 
-    public void setBooks_p(boolean books_p) {
-        this.books_p = books_p;
+    public void setMu_p(boolean mu_p) {
+        this.mu_p = mu_p;
     }
 
-    public boolean isMovie_p() {
-        return movie_p;
+    public boolean isBo_p() {
+        return bo_p;
     }
 
-    public void setMovie_p(boolean movie_p) {
-        this.movie_p = movie_p;
+    public void setBo_p(boolean bo_p) {
+        this.bo_p = bo_p;
+    }
+
+    public boolean isMo_p() {
+        return mo_p;
+    }
+
+    public void setMo_p(boolean mo_p) {
+        this.mo_p = mo_p;
+    }
+
+    public boolean isDd_p() {
+        return dd_p;
+    }
+
+    public void setDd_p(boolean dd_p) {
+        this.dd_p = dd_p;
     }
 
     @Override
     public String toString() {
         return "FilterPrivacyDetails{" +
                 "dummy_pk=" + dummy_pk +
-                ", age_birthdate_p=" + age_birthdate_p +
-                ", gender_pronouns_p=" + gender_pronouns_p +
-                ", general_details_p=" + general_details_p +
-                ", college_year_p=" + college_year_p +
-                ", society_p=" + society_p +
+                ", age_birthdate_p=" + ab_p +
+                ", gender_pronouns_p=" + gp_p +
+                ", general_details_p=" + gd_p +
+                ", college_year_p=" + cy_p +
+                ", society_p=" + sic_p +
+                ", titles_p=" + tp_p +
+                ", hobbies_p=" + h_p +
+                ", video_games_p=" + vg_p +
+                ", music_p=" + mu_p +
+                ", books_p=" + bo_p +
+                ", movie_p=" + mo_p +
+                ", loc_p=" + dd_p +
                 '}';
     }
 }

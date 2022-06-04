@@ -31,26 +31,18 @@
             motion:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:layout_marginTop="@dimen/_40sdp"
-            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_1"
-            motion:layout_constraintTop_toTopOf="parent"
-            />
-
-        <Constraint
-            android:id="@+id/LL_FILTER_LAYER_1"
+            android:id="@+id/HSV_FILTER_LAYER_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleY="0.8"
             android:alpha="0"
             android:scaleX="0.8"
+            motion:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="@dimen/_50sdp"
-            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_2"/>
+            motion:layout_constraintBottom_toTopOf="@id/HSV_FILTER_LAYER_2"/>
 
         <Constraint
-            android:id="@+id/LL_FILTER_LAYER_2"
+            android:id="@+id/HSV_FILTER_LAYER_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleY="0.8"
@@ -81,24 +73,18 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"/>
 
+
         <Constraint
+            android:id="@+id/HSV_FILTER_LAYER_1"
+            android:layout_marginTop="@dimen/_30sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_40sdp"
-            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_1"
             motion:layout_constraintTop_toTopOf="parent"
-           />
+            motion:layout_constraintBottom_toTopOf="@id/HSV_FILTER_LAYER_2"/>
 
         <Constraint
-            android:id="@+id/LL_FILTER_LAYER_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/HSV_FILTER_LAYER_2"
             android:layout_marginTop="@dimen/_5sdp"
-            motion:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_2"/>
-
-        <Constraint
-            android:id="@+id/LL_FILTER_LAYER_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,8 +10,8 @@
     android:focusable="true"
     app:layoutDescription="@xml/activity_find_friends_scene">
 
-
     <View
+        android:id="@+id/V_BG_EXP"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF" />
@@ -20,33 +19,31 @@
     <View
         android:id="@+id/V_BOTTOM_MARGIN"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_200sdp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CV_MAIN_FF_EXP"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:cardElevation="@dimen/_7sdp"
-        app:layout_constraintBottom_toBottomOf="@id/V_IMAGE_BOTTOM"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/G_55_H_FF_EXP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
 
-
-    </androidx.cardview.widget.CardView>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/G_50_H_FF_EXP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/IV_USER_IMAGES_FF"
-        android:layout_width="0dp"
+        android:id="@+id/RIV_USER_IMAGES_FF_EXP"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:adjustViewBounds="true"
         android:elevation="@dimen/_7sdp"
         android:scaleType="centerCrop"
-        android:src="@drawable/test_img_1"
-        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
-        app:riv_corner_radius="@dimen/_25sdp" />
+        app:layout_constraintBottom_toTopOf="@id/G_55_H_FF_EXP"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    <View-->
     <!--        android:layout_width="match_parent"-->
@@ -88,22 +85,23 @@
         android:paddingEnd="@dimen/_10sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:src="@drawable/ic_back_ff"
-        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/RIV_USER_IMAGES_FF_EXP"
         app:riv_corner_radius_bottom_right="@dimen/_20sdp"
         app:riv_corner_radius_top_left="@dimen/_20sdp" />
 
 
     <RelativeLayout
+        android:id="@+id/RL_EXP"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_50sdp"
-        android:elevation="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP">
+        android:elevation="@dimen/_7sdp"
+        app:layout_constraintEnd_toEndOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/RIV_USER_IMAGES_FF_EXP">
 
         <!--        <io.alterac.blurkit.BlurLayout-->
         <!--            android:layout_width="match_parent"-->
@@ -173,19 +171,6 @@
 
     </RelativeLayout>
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:elevation="@dimen/_7sdp"
-        android:scaleType="fitXY"
-        android:src="#80000000"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
-        app:riv_corner_radius="@dimen/_25sdp" />
-
 
     <me.grantland.widget.AutofitTextView
         android:id="@+id/ATV_PREVIEW_TEXT"
@@ -194,7 +179,7 @@
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:elevation="@dimen/_10sdp"
+        android:elevation="@dimen/_7sdp"
         android:fontFamily="@font/capriola"
         android:gravity="center"
         android:maxLines="3"
@@ -203,24 +188,25 @@
         android:textColor="@color/preview_text_color"
         android:textSize="24sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintTop_toTopOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintEnd_toEndOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintTop_toTopOf="@id/RIV_USER_IMAGES_FF_EXP"
         app:sizeToFit="true" />
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/IV_SWIPE_ME"
+        android:id="@+id/GIV_SWIPE_ME"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:elevation="@dimen/_10sdp"
+        android:elevation="@dimen/_7sdp"
         android:src="@raw/gif_swipe_up"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
-        app:layout_constraintStart_toStartOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintBottom_toBottomOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintEnd_toEndOf="@id/RIV_USER_IMAGES_FF_EXP"
+        app:layout_constraintStart_toStartOf="@id/RIV_USER_IMAGES_FF_EXP"
         app:layout_constraintTop_toBottomOf="@id/ATV_PREVIEW_TEXT" />
 
     <ImageView
+        android:id="@+id/IV_EXP"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:layout_margin="@dimen/_5sdp"
@@ -230,7 +216,7 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_megaphone"
-        app:layout_constraintEnd_toEndOf="@id/CV_MAIN_FF_EXP"
+        app:layout_constraintEnd_toEndOf="@id/RIV_USER_IMAGES_FF_EXP"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -240,7 +226,7 @@
         android:layout_height="@dimen/_70sdp"
 
         android:layout_marginStart="@dimen/_20sdp"
-        android:elevation="@dimen/_8sdp"
+        android:elevation="@dimen/_7sdp"
         app:layoutDescription="@xml/ff_exp_about_me_scene"
         app:layout_constraintBottom_toBottomOf="@id/V_BUTTONS_BOTTOM"
         app:layout_constraintStart_toStartOf="parent">
@@ -251,7 +237,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_5sdp"
-            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardCornerRadius="@dimen/_30sdp"
             app:cardElevation="@dimen/_4sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -259,6 +245,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/IFV_EXP"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_10sdp"
@@ -290,6 +277,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/IFV_CP_EXP"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_10sdp"
@@ -321,6 +309,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/IFV_FF_EXP"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -342,8 +331,8 @@
 
     <View
         android:id="@+id/V_IMAGE_BOTTOM"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_50sdp"
         app:layout_constraintTop_toTopOf="@id/ML_DETAILS_FF_EXP" />
     <!--        <com.gic.memorableplaces.LibSahil.BlurKit.BlurLayout-->
@@ -368,11 +357,13 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <View
+            android:id="@+id/V_EXP"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:background="@drawable/gradient_black"
             android:backgroundTint="#CDCDCD"
             android:rotation="180"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -442,6 +433,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/RL_VS_2_EXP"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_230sdp"
 
@@ -459,6 +451,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/RL_VS_1_EXP"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_230sdp"
 

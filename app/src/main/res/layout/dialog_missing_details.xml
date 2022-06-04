@@ -1,110 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:wave="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_20sdp"
+    app:cardElevation="@dimen/_2sdp">
 
-    android:orientation="vertical">
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E0F3CC">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/title_missing_details"
-            android:layout_width="215dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
-            android:shadowColor="#FDFDFD"
-            android:shadowDx="10"
-            android:shadowDy="10"
-            android:shadowRadius="5"
-            android:text="Few details Missing!"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/desp_missing_items"
+            android:id="@+id/TV_TITLE_MISSING_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_missing_details"
-            android:layout_marginStart="7dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:elevation="2dp"
+            android:fontFamily="@font/capriola"
+            android:text="Incomplete Details"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/SV_DESP_MD"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_alignParentStart="true"
-android:layout_toStartOf="@id/missing_details_icon"
-            android:layout_marginEnd="5dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text=""
-            android:textAlignment="viewStart"
-            android:textColor="#000000"
-            android:textColorHint="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            app:layout_constraintBottom_toBottomOf="@id/IV_ICON_MISSING_DETAILS"
+            app:layout_constraintEnd_toStartOf="@id/IV_ICON_MISSING_DETAILS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/V_UNDERLINE_MD">
+
+            <TextView
+                android:id="@+id/TV_DESP_MISSING_DETAILS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.05"
+                android:text="engwnongwgwgwgw\n^fdfff\n%trtrtrrg"
+                android:textColor="#656565"
+                android:textSize="16sp" />
+
+
+        </ScrollView>
+
         <ImageView
-            android:id="@+id/missing_details_icon"
+            android:id="@+id/IV_ICON_MISSING_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:src="@drawable/ic_missing_details"
-            android:layout_above="@id/Border"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/V_UNDERLINE_MD" />
+
         <View
-            android:id="@+id/Border"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@id/desp_missing_items"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="#636363" />
+            android:id="@+id/V_UNDERLINE_MD"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TV_TITLE_MISSING_DETAILS" />
 
-        <LinearLayout
+        <View
+            android:id="@+id/V_LINE_MD"
             android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/IV_ICON_MISSING_DETAILS" />
+
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_NEG_MD"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Border"
-            android:background="#E0F3CC"
-            android:orientation="horizontal"
-            android:weightSum="100">
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            android:text="Fill Missing Details"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/V_LINE_3_MD"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/V_LINE_MD"
+            app:sizeToFit="true" />
 
-            <Button
-                android:id="@+id/negative"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:layout_margin="@dimen/_10sdp"
-                android:background="@android:color/transparent"
-                android:text=""
-                android:textAllCaps="false"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+        <View
+            android:id="@+id/V_LINE_3_MD"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#636363"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/V_LINE_MD" />
 
-            <View
-                android:layout_width="2dp"
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_POS_MD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            android:text="Move Ahead"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20sp"
 
-                android:layout_height="match_parent"
-               android:layout_margin="@dimen/_5sdp"
-                android:background="#636363" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/V_LINE_3_MD"
+            app:layout_constraintTop_toBottomOf="@id/V_LINE_MD"
+            app:sizeToFit="true" />
 
-            <Button
-                android:id="@+id/positive"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:layout_margin="@dimen/_10sdp"
-                android:background="@android:color/transparent"
-                android:text=""
-                android:textAllCaps="false"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_GO_BACK_MD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/_10sdp"
+            android:text="Go Back"
+            android:textAlignment="gravity"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/V_LINE_MD"
+            app:sizeToFit="true" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+</androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
-
-</LinearLayout>

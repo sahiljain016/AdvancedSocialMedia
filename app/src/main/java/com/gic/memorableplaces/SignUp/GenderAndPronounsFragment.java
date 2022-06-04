@@ -34,20 +34,31 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
+import com.wooplr.spotlight.prefs.PreferencesManager;
+
+import java.util.ArrayList;
 
 import me.grantland.widget.AutofitTextView;
 
 public class GenderAndPronounsFragment extends Fragment {
     private static final String TAG = "GenderAndPronounsFragment";
-    private Context mContext;
+    private Context mContext = getActivity();
     private boolean isLocked = false, isSwitched = false, isSameDetail = false;
 
-    private String sGender = "N/A", sMatchedGender = "N/A", sPronouns = "N/A";
+    private String sGender, sMatchedGender, sPronouns;
+    private ArrayList<String> alsMatchedGender;
     private Handler handler;
 
-    private ImageView IV_PRIVACY;
+    private ImageView IV_PRIVACY, IV_BOX;
     private MotionLayout ML;
-    private AutofitTextView ATV_OTHER_FILL, ATV_PRONOUNS_TITLE, ATV_MALE, ATV_FEMALE, ATV_OTHER, ATV_PNTS, ATV_TITLE;
+    private AutofitTextView ATV_OTHER_FILL;
+    private AutofitTextView ATV_PRONOUNS_TITLE;
+    private AutofitTextView ATV_MALE;
+    private AutofitTextView ATV_FEMALE;
+    private AutofitTextView ATV_OTHER;
+    private AutofitTextView ATV_PNTS;
     private EditText ET_OTHER_GENDER, ET_PRONOUNS;
     private RoundedImageView RIV;
 
@@ -60,6 +71,12 @@ public class GenderAndPronounsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gender_pronouns, container, false);
         mContext = getActivity();
         handler = new Handler(Looper.getMainLooper());
+
+        sGender = mContext.getString(R.string.not_available);
+        sMatchedGender = mContext.getString(R.string.not_available);
+        sPronouns = mContext.getString(R.string.not_available);
+
+        alsMatchedGender = new ArrayList<>();
         CL_MALE = view.findViewById(R.id.CL_MALE_GP);
         CL_FEMALE = view.findViewById(R.id.CL_FEMALE_GP);
         CL_OTHER = view.findViewById(R.id.CL_OTHER_GP);
@@ -68,7 +85,7 @@ public class GenderAndPronounsFragment extends Fragment {
         ATV_MALE = view.findViewById(R.id.ATV_MALE_GP);
         ATV_FEMALE = view.findViewById(R.id.ATV_FEMALE_GP);
         ATV_OTHER = view.findViewById(R.id.ATV_OTHER_GP);
-        ATV_TITLE = view.findViewById(R.id.ATV_TITLE_GP);
+        AutofitTextView ATV_TITLE = view.findViewById(R.id.ATV_TITLE_GP);
         ATV_PNTS = view.findViewById(R.id.ATV_PNTS_GP);
         ATV_OTHER_FILL = view.findViewById(R.id.ATV_OTHER_FILL_GP);
         ATV_PRONOUNS_TITLE = view.findViewById(R.id.ATV_PRONOUNS_GP);
@@ -79,23 +96,30 @@ public class GenderAndPronounsFragment extends Fragment {
 
         ImageView IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_GP);
         ImageFilterView IV_BACK = view.findViewById(R.id.IFV_BACK_BUTTON_GP);
-        ImageView IV_BOX = view.findViewById(R.id.IV_BOX_GP);
+        IV_BOX = view.findViewById(R.id.IV_BOX_GP);
         ImageView IV_TICK = view.findViewById(R.id.IV_TICK_GP);
         IV_PRIVACY = view.findViewById(R.id.IV_PRIVACY_LOCK_GP);
         ML = view.findViewById(R.id.ML_MAIN_GP);
 
         if (getArguments() != null) {
             sGender = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_gender)));
+            if (getArguments().getStringArrayList(requireActivity().getString(R.string.field_match_gender)) != null)
+                alsMatchedGender.addAll(getArguments().getStringArrayList(requireActivity().getString(R.string.field_match_gender)));
             sPronouns = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_pronouns)));
-            sMatchedGender = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_match_gender)));
+            // sMatchedGender = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_match_gender)));
             isLocked = getArguments().getBoolean(mContext.getString(R.string.field_is_private));
         }
-
+        ShowSpotlights(IV_SWITCH_INPUT);
+        //alsMatchedGender.add(mContext.getString(R.string.not_available));
+        if (alsMatchedGender.contains(mContext.getString(R.string.not_available))) {
+            alsMatchedGender.clear();
+        }
         SetSelected(sGender);
-        Log.d(TAG, "onCreateView: sPronouns: " + sPronouns);
-        if (!sPronouns.equals("N/A")) {
+        Log.d(TAG, "onCreateView: alsMatchedGender 1: " + alsMatchedGender);
+        if (!sPronouns.equals(mContext.getString(R.string.not_available))) {
             ET_PRONOUNS.setText(sPronouns);
         }
+
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/Abril_fatface.ttf");
         Typeface cap = Typeface.createFromAsset(mContext.getAssets(), "fonts/Capriola.ttf");
 
@@ -110,17 +134,20 @@ public class GenderAndPronounsFragment extends Fragment {
         ChangeTheme(R.style.MyDetail, IV_PRIVACY);
 
         IV_BOX.setOnClickListener(v1 -> {
-
             if (isSameDetail) {
                 IV_TICK.setVisibility(View.GONE);
                 isSameDetail = false;
             } else {
                 IV_TICK.setVisibility(View.VISIBLE);
-                SetSelected(sGender);
-                sMatchedGender = sGender;
+                if (!sGender.equals("N/A")) {
+                    sMatchedGender = sGender;
+                    alsMatchedGender.clear();
+                    alsMatchedGender.add(sGender);
+                    SetMultiSelected();
+                }
                 isSameDetail = true;
-            }
 
+            }
         });
 
         IV_SWITCH_INPUT.setOnClickListener(v -> {
@@ -133,12 +160,12 @@ public class GenderAndPronounsFragment extends Fragment {
                         ML.transitionToEnd();
                         ChangeTheme(R.style.OtherDetail, IV_PRIVACY);
                         isSwitched = true;
-                        SetSelected(sMatchedGender);
-
-                        ATV_OTHER.setTextColor(Color.parseColor("#FFFFFF"));
-                        ATV_FEMALE.setTextColor(Color.parseColor("#FFFFFF"));
-                        ATV_MALE.setTextColor(Color.parseColor("#FFFFFF"));
-                        ATV_PNTS.setTextColor(Color.parseColor("#FFFFFF"));
+                        SetMultiSelected();
+//
+//                        ATV_OTHER.setTextColor(Color.parseColor("#FFFFFF"));
+//                        ATV_FEMALE.setTextColor(Color.parseColor("#FFFFFF"));
+//                        ATV_MALE.setTextColor(Color.parseColor("#FFFFFF"));
+//                        ATV_PNTS.setTextColor(Color.parseColor("#FFFFFF"));
 
                     } else {
                         ML.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -146,11 +173,11 @@ public class GenderAndPronounsFragment extends Fragment {
                         ChangeTheme(R.style.MyDetail, IV_PRIVACY);
                         isSwitched = false;
                         SetSelected(sGender);
-
-                        ATV_OTHER.setTextColor(Color.parseColor("#000000"));
-                        ATV_FEMALE.setTextColor(Color.parseColor("#000000"));
-                        ATV_MALE.setTextColor(Color.parseColor("#000000"));
-                        ATV_PNTS.setTextColor(Color.parseColor("#000000"));
+//
+//                        ATV_OTHER.setTextColor(Color.parseColor("#000000"));
+//                        ATV_FEMALE.setTextColor(Color.parseColor("#000000"));
+//                        ATV_MALE.setTextColor(Color.parseColor("#000000"));
+//                        ATV_PNTS.setTextColor(Color.parseColor("#000000"));
 
                     }
                 }, 1000);
@@ -163,12 +190,12 @@ public class GenderAndPronounsFragment extends Fragment {
                     ML.transitionToEnd();
                     ChangeTheme(R.style.OtherDetail, IV_PRIVACY);
                     isSwitched = true;
-                    SetSelected(sMatchedGender);
-
-                    ATV_OTHER.setTextColor(Color.parseColor("#FFFFFF"));
-                    ATV_FEMALE.setTextColor(Color.parseColor("#FFFFFF"));
-                    ATV_MALE.setTextColor(Color.parseColor("#FFFFFF"));
-                    ATV_PNTS.setTextColor(Color.parseColor("#FFFFFF"));
+                    SetMultiSelected();
+//
+//                    ATV_OTHER.setTextColor(Color.parseColor("#FFFFFF"));
+//                    ATV_FEMALE.setTextColor(Color.parseColor("#FFFFFF"));
+//                    ATV_MALE.setTextColor(Color.parseColor("#FFFFFF"));
+//                    ATV_PNTS.setTextColor(Color.parseColor("#FFFFFF"));
 
                 } else {
                     ML.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -176,13 +203,15 @@ public class GenderAndPronounsFragment extends Fragment {
                     ChangeTheme(R.style.MyDetail, IV_PRIVACY);
                     isSwitched = false;
                     SetSelected(sGender);
-
-                    ATV_OTHER.setTextColor(Color.parseColor("#000000"));
-                    ATV_FEMALE.setTextColor(Color.parseColor("#000000"));
-                    ATV_MALE.setTextColor(Color.parseColor("#000000"));
-                    ATV_PNTS.setTextColor(Color.parseColor("#000000"));
+//
+//                    ATV_OTHER.setTextColor(Color.parseColor("#000000"));
+//                    ATV_FEMALE.setTextColor(Color.parseColor("#000000"));
+//                    ATV_MALE.setTextColor(Color.parseColor("#000000"));
+//                    ATV_PNTS.setTextColor(Color.parseColor("#000000"));
                 }
             }
+
+            Log.d(TAG, "SetMultiSelected: alsMatchedGender 3: " + alsMatchedGender);
         });
 
         ET_OTHER_GENDER.addTextChangedListener(new TextWatcher() {
@@ -198,15 +227,17 @@ public class GenderAndPronounsFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!isSwitched) {
                     if (TextUtils.isEmpty(s.toString())) {
-                        sGender = "N/A";
+                        sGender = mContext.getString(R.string.not_available);
                     } else {
                         sGender = s.toString();
                     }
                 } else {
                     if (TextUtils.isEmpty(s.toString())) {
-                        sMatchedGender = "N/A";
+                        sMatchedGender = mContext.getString(R.string.not_available);
+                        SetMultiSelectedGender(CL_OTHER, ATV_OTHER, true);
                     } else {
                         sMatchedGender = s.toString();
+                        SetMultiSelectedGender(CL_OTHER, ATV_OTHER, false);
                     }
                 }
             }
@@ -224,9 +255,8 @@ public class GenderAndPronounsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 if (TextUtils.isEmpty(s.toString())) {
-                    sPronouns = "N/A";
+                    sPronouns = mContext.getString(R.string.not_available);
                 } else {
                     sPronouns = s.toString();
                 }
@@ -238,25 +268,45 @@ public class GenderAndPronounsFragment extends Fragment {
             if (!isSwitched) {
                 ML.setTransition(R.id.TRANS_MALE_CENTER);
                 ML.transitionToEnd();
+                ATV_PRONOUNS_TITLE.setVisibility(View.VISIBLE);
+                ET_PRONOUNS.setVisibility(View.VISIBLE);
                 SetSelectedGenderProperties(CL_MALE, ATV_MALE);
                 sGender = mContext.getString(R.string.field_male);
             } else {
-                sMatchedGender = mContext.getString(R.string.field_male);
-                SetSelectedGenderProperties(CL_MALE, ATV_MALE);
+                if (alsMatchedGender.contains(mContext.getString(R.string.field_male))) {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.remove(mContext.getString(R.string.field_male));
+                    SetMultiSelectedGender(CL_MALE, ATV_MALE, true);
+                } else {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.add(mContext.getString(R.string.field_male));
+                    SetMultiSelectedGender(CL_MALE, ATV_MALE, false);
+                }
                 if (isSameDetail) {
                     IV_TICK.setVisibility(View.GONE);
                 }
             }
+
+            Log.d(TAG, "SetMultiSelected: alsMatchedGender: " + alsMatchedGender);
         });
         CL_FEMALE.setOnClickListener(v -> {
             if (!isSwitched) {
                 ML.setTransition(R.id.TRANS_FEMALE_CENTER);
                 ML.transitionToEnd();
+                ATV_PRONOUNS_TITLE.setVisibility(View.VISIBLE);
+                ET_PRONOUNS.setVisibility(View.VISIBLE);
                 SetSelectedGenderProperties(CL_FEMALE, ATV_FEMALE);
                 sGender = mContext.getString(R.string.field_female);
             } else {
-                sMatchedGender = mContext.getString(R.string.field_female);
-                SetSelectedGenderProperties(CL_FEMALE, ATV_FEMALE);
+                if (alsMatchedGender.contains(mContext.getString(R.string.field_female))) {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.remove(mContext.getString(R.string.field_female));
+                    SetMultiSelectedGender(CL_FEMALE, ATV_FEMALE, true);
+                } else {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.add(mContext.getString(R.string.field_female));
+                    SetMultiSelectedGender(CL_FEMALE, ATV_FEMALE, false);
+                }
                 if (isSameDetail) {
                     IV_TICK.setVisibility(View.GONE);
                 }
@@ -265,12 +315,16 @@ public class GenderAndPronounsFragment extends Fragment {
         });
         CL_OTHER.setOnClickListener(v -> {
 
-            ML.setTransition(R.id.TRANS_OTHER_CENTER);
-            ML.transitionToEnd();
-            SetSelectedGenderProperties(CL_OTHER, ATV_OTHER);
+
             ATV_OTHER_FILL.setVisibility(View.VISIBLE);
             ET_OTHER_GENDER.setVisibility(View.VISIBLE);
+            ATV_PRONOUNS_TITLE.setVisibility(View.VISIBLE);
+            ET_PRONOUNS.setVisibility(View.VISIBLE);
             if (!isSwitched) {
+                ML.setTransition(R.id.TRANS_OTHER_CENTER);
+                ML.transitionToEnd();
+                SetSelectedGenderProperties(CL_OTHER, ATV_OTHER);
+                ET_OTHER_GENDER.setText(sGender);
                 ATV_OTHER_FILL.setTextColor(Color.parseColor("#000000"));
                 ATV_PRONOUNS_TITLE.setTextColor(Color.parseColor("#000000"));
                 ET_OTHER_GENDER.setTextColor(Color.parseColor("#000000"));
@@ -279,8 +333,15 @@ public class GenderAndPronounsFragment extends Fragment {
                 ET_PRONOUNS.setTextColor(Color.parseColor("#000000"));
                 ET_PRONOUNS.setHintTextColor(Color.parseColor("#CC000000"));
                 ET_PRONOUNS.setHighlightColor(Color.parseColor("#000000"));
-
             } else {
+                ATV_PRONOUNS_TITLE.setVisibility(View.GONE);
+                ET_PRONOUNS.setVisibility(View.GONE);
+                for (String string : alsMatchedGender) {
+                    if (!string.equals(mContext.getString(R.string.field_female)) && !string.equals(mContext.getString(R.string.field_male)) && !string.equals(mContext.getString(R.string.field_prefer_not_to_say))) {
+                        ET_OTHER_GENDER.setText(string);
+                        break;
+                    }
+                }
                 ATV_OTHER_FILL.setTextColor(Color.parseColor("#FFFFFF"));
                 ATV_PRONOUNS_TITLE.setTextColor(Color.parseColor("#FFFFFF"));
                 ET_OTHER_GENDER.setTextColor(Color.parseColor("#FFFFFF"));
@@ -292,18 +353,38 @@ public class GenderAndPronounsFragment extends Fragment {
                 if (isSameDetail) {
                     IV_TICK.setVisibility(View.GONE);
                 }
+
+                ML.setTransition(R.id.TRANS_OTHER_CENTER);
+//                if (contains) {
+                //alsMatchedGender.remove(gender);
+                Log.d(TAG, "onCreateView: alsMatchedGender 4: " + alsMatchedGender);
+                if (ML.getProgress() == 1.0) {
+                    ML.transitionToStart();
+                } else {
+                    ML.transitionToEnd();
+                    // SetMultiSelectedGender(CL_OTHER, ATV_OTHER, false);
+                }
             }
         });
         CL_PNTS.setOnClickListener(v -> {
             if (!isSwitched) {
                 ML.setTransition(R.id.TRANS_PNTS_CENTER);
                 ML.transitionToEnd();
+                ATV_PRONOUNS_TITLE.setVisibility(View.VISIBLE);
+                ET_PRONOUNS.setVisibility(View.VISIBLE);
                 SetSelectedGenderProperties(CL_PNTS, ATV_PNTS);
                 sGender = mContext.getString(R.string.field_prefer_not_to_say);
 
             } else {
-                sMatchedGender = mContext.getString(R.string.field_prefer_not_to_say);
-                SetSelectedGenderProperties(CL_PNTS, ATV_PNTS);
+                if (alsMatchedGender.contains(mContext.getString(R.string.field_prefer_not_to_say))) {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.remove(mContext.getString(R.string.field_prefer_not_to_say));
+                    SetMultiSelectedGender(CL_PNTS, ATV_PNTS, true);
+                } else {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.add(mContext.getString(R.string.field_prefer_not_to_say));
+                    SetMultiSelectedGender(CL_PNTS, ATV_PNTS, false);
+                }
                 if (isSameDetail) {
                     IV_TICK.setVisibility(View.GONE);
                 }
@@ -313,6 +394,27 @@ public class GenderAndPronounsFragment extends Fragment {
 
         RIV.setOnClickListener(v -> {
             ML.transitionToStart();
+            if (isSwitched) {
+                boolean contains = false;
+                String gender = "";
+                for (String string : alsMatchedGender) {
+                    if (!string.equals(mContext.getString(R.string.field_female)) && !string.equals(mContext.getString(R.string.field_male)) && !string.equals(mContext.getString(R.string.field_prefer_not_to_say))) {
+                        contains = true;
+                        gender = string;
+                        break;
+                    }
+                }
+                Log.d(TAG, "onCreateView: sMatchedGender: " + sMatchedGender);
+                Log.d(TAG, "onCreateView: contains: " + contains);
+                Log.d(TAG, "onCreateView: alsMatchedGender 2: " + alsMatchedGender);
+                Log.d(TAG, "onCreateView: condition: " + !sMatchedGender.equals(mContext.getString(R.string.not_available)));
+                if (!sMatchedGender.equals(mContext.getString(R.string.not_available)) && !contains && !alsMatchedGender.contains(sMatchedGender)) {
+                    alsMatchedGender.add(sMatchedGender);
+                } else if ((sMatchedGender.equals(mContext.getString(R.string.not_available)) || TextUtils.isEmpty(sMatchedGender)) && contains) {
+                    alsMatchedGender.remove(gender);
+                }
+            }
+            Log.d(TAG, "onCreateView: alsMatchedGender 2 after: " + alsMatchedGender);
             if (CL_OTHER.getAlpha() == 1.0) {
                 ATV_OTHER_FILL.setVisibility(View.GONE);
                 ET_OTHER_GENDER.setVisibility(View.GONE);
@@ -321,8 +423,31 @@ public class GenderAndPronounsFragment extends Fragment {
 
         IV_BACK.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
+            if (isSwitched) {
+                boolean contains = false;
+                String gender = "";
+                for (String string : alsMatchedGender) {
+                    if (!string.equals(mContext.getString(R.string.field_female)) && !string.equals(mContext.getString(R.string.field_male)) && !string.equals(mContext.getString(R.string.field_prefer_not_to_say))) {
+                        contains = true;
+                        gender = string;
+                        break;
+                    }
+                }
+                Log.d(TAG, "onCreateView: sMatchedGender: " + sMatchedGender);
+                Log.d(TAG, "onCreateView: contains: " + contains);
+                Log.d(TAG, "onCreateView: alsMatchedGender 2: " + alsMatchedGender);
+                Log.d(TAG, "onCreateView: condition: " + !sMatchedGender.equals(mContext.getString(R.string.not_available)));
+                if (!sMatchedGender.equals(mContext.getString(R.string.not_available)) && !contains) {
+                    alsMatchedGender.add(sMatchedGender);
+                } else if ((sMatchedGender.equals(mContext.getString(R.string.not_available)) || TextUtils.isEmpty(sMatchedGender)) && contains) {
+                    alsMatchedGender.remove(gender);
+                }
+            }
+            if (alsMatchedGender.size() == 0) {
+                alsMatchedGender.add(mContext.getString(R.string.not_available));
+            }
             bundle.putString(mContext.getString(R.string.field_gender), sGender);
-            bundle.putString(mContext.getString(R.string.field_match_gender), sMatchedGender);
+            bundle.putStringArrayList(mContext.getString(R.string.field_match_gender), alsMatchedGender);
             bundle.putString(mContext.getString(R.string.field_pronouns), sPronouns);
             bundle.putBoolean(mContext.getString(R.string.field_is_private), isLocked);
             getParentFragmentManager().setFragmentResult("requestKey", bundle);
@@ -332,6 +457,102 @@ public class GenderAndPronounsFragment extends Fragment {
         return view;
     }
 
+
+    private void ShowSpotlights(ImageView IV_SWITCH_INPUT) {
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#FFFFD6A5"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
+
+        PreferencesManager preferencesManager = new PreferencesManager(mContext);
+        SpotlightView.Builder SB_SAME_DETAIL = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Copy Detail")
+                .subHeadingTvText("Click this box to copy the detail selected on your page.")
+                .target(IV_BOX)
+                .usageId("IV_BOX")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        SpotlightView.Builder SB_PRONOUNS = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Enter Pronouns")
+                .subHeadingTvText("Enter your pronouns here, it is optional.")
+                .target(ET_PRONOUNS)
+                .usageId("ET_PRONOUNS")
+                .setListener(spotlightViewId -> {
+                    if (!preferencesManager.isDisplayed("IV_BOX")) {
+                        IV_SWITCH_INPUT.performClick();
+                        SB_SAME_DETAIL.show();
+                    }
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        SpotlightView.Builder SB_FEMALE = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Select Gender")
+                .subHeadingTvText("Click the gender to select it as your gender.")
+                .target(CL_FEMALE)
+                .usageId("CL_FEMALE")
+                .setListener(spotlightViewId -> {
+                    SB_PRONOUNS.show();
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        if (!preferencesManager.isDisplayed("SWITCH")) {
+            SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Switch Profiles")
+                    .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                    .target(IV_SWITCH_INPUT)
+                    .usageId("SWITCH")
+                    .setListener(spotlightViewId -> {
+
+                        CL_FEMALE.performClick();
+                        SB_FEMALE.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    });
+
+            new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Privacy Button")
+                    .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                    .target(IV_PRIVACY)
+                    .usageId("PRIVACY")
+                    .setListener(spotlightViewId -> {
+                        SB_SWITCH.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    }).show();
+
+        } else if (!preferencesManager.isDisplayed("CL_FEMALE")) {
+            if (!isSwitched) {
+                ML.setTransition(R.id.TRANS_FEMALE_CENTER);
+                ML.transitionToEnd();
+                ATV_PRONOUNS_TITLE.setVisibility(View.VISIBLE);
+                ET_PRONOUNS.setVisibility(View.VISIBLE);
+                SetSelectedGenderProperties(CL_FEMALE, ATV_FEMALE);
+                sGender = mContext.getString(R.string.field_female);
+            } else {
+                if (alsMatchedGender.contains(mContext.getString(R.string.field_female))) {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.remove(mContext.getString(R.string.field_female));
+                    SetMultiSelectedGender(CL_FEMALE, ATV_FEMALE, true);
+                } else {
+                    sMatchedGender = mContext.getString(R.string.not_available);
+                    alsMatchedGender.add(mContext.getString(R.string.field_female));
+                    SetMultiSelectedGender(CL_FEMALE, ATV_FEMALE, false);
+                }
+            }
+            SB_FEMALE.show();
+        }
+    }
 
     private void SetPrivacyDialog() {
         Dialog dialog = MiscTools.InflateDialog(mContext, R.layout.dialog_privacy_dialog);
@@ -375,6 +596,15 @@ public class GenderAndPronounsFragment extends Fragment {
 
     }
 
+    private void SetMultiSelectedGender(ConstraintLayout CV, AutofitTextView ATV, boolean isSelected) {
+        if (isSelected) {
+            ATV.setTextColor(Color.parseColor("#FFFFFF"));
+            CV.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
+        } else {
+            ATV.setTextColor(Color.parseColor("#efc859"));
+            CV.setBackgroundResource(R.drawable.border_rounded_yellow_20sdp);
+        }
+    }
 
     private void SetSelectedGenderProperties(ConstraintLayout CV, AutofitTextView ATV) {
         CL_PNTS.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
@@ -398,6 +628,32 @@ public class GenderAndPronounsFragment extends Fragment {
         CV.setBackgroundResource(R.drawable.border_rounded_yellow_20sdp);
     }
 
+    private void SetMultiSelected() {
+        CL_PNTS.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
+        CL_OTHER.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
+        CL_MALE.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
+        CL_FEMALE.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
+
+        ATV_OTHER.setTextColor(Color.parseColor("#FFFFFF"));
+        ATV_FEMALE.setTextColor(Color.parseColor("#FFFFFF"));
+        ATV_MALE.setTextColor(Color.parseColor("#FFFFFF"));
+        ATV_PNTS.setTextColor(Color.parseColor("#FFFFFF"));
+        Log.d(TAG, "SetMultiSelected: multi alsMatchedGender: " + alsMatchedGender);
+        for (String string : alsMatchedGender) {
+            if (string.equals(mContext.getString(R.string.field_male))) {
+                SetMultiSelectedGender(CL_MALE, ATV_MALE, false);
+            } else if (string.equals(mContext.getString(R.string.field_female))) {
+                SetMultiSelectedGender(CL_FEMALE, ATV_FEMALE, false);
+            } else if (string.equals(mContext.getString(R.string.field_prefer_not_to_say))) {
+                SetMultiSelectedGender(CL_PNTS, ATV_PNTS, false);
+            } else {
+                if (!string.equals(mContext.getString(R.string.not_available))) {
+                    SetMultiSelectedGender(CL_OTHER, ATV_OTHER, false);
+                }
+            }
+        }
+    }
+
     private void SetSelected(String Field) {
         if (Field.equals(mContext.getString(R.string.field_male))) {
             SetSelectedGenderProperties(CL_MALE, ATV_MALE);
@@ -405,16 +661,24 @@ public class GenderAndPronounsFragment extends Fragment {
             SetSelectedGenderProperties(CL_FEMALE, ATV_FEMALE);
         } else if (Field.equals(mContext.getString(R.string.field_prefer_not_to_say))) {
             SetSelectedGenderProperties(CL_PNTS, ATV_PNTS);
-        } else if (Field.equals("N/A") || TextUtils.isEmpty(sGender)) {
+        } else if (Field.equals(mContext.getString(R.string.not_available)) || TextUtils.isEmpty(sGender)) {
             CL_PNTS.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
             CL_OTHER.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
             CL_MALE.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
             CL_FEMALE.setBackgroundResource(R.drawable.border_rounded_grey_20sdp);
 
-            ATV_OTHER.setTextColor(Color.parseColor("#000000"));
-            ATV_FEMALE.setTextColor(Color.parseColor("#000000"));
-            ATV_MALE.setTextColor(Color.parseColor("#000000"));
-            ATV_PNTS.setTextColor(Color.parseColor("#000000"));
+            if (isSwitched) {
+                ATV_OTHER.setTextColor(Color.parseColor("#FFFFFF"));
+                ATV_FEMALE.setTextColor(Color.parseColor("#FFFFFF"));
+                ATV_MALE.setTextColor(Color.parseColor("#FFFFFF"));
+                ATV_PNTS.setTextColor(Color.parseColor("#FFFFFF"));
+            } else {
+
+                ATV_OTHER.setTextColor(Color.parseColor("#000000"));
+                ATV_FEMALE.setTextColor(Color.parseColor("#000000"));
+                ATV_MALE.setTextColor(Color.parseColor("#000000"));
+                ATV_PNTS.setTextColor(Color.parseColor("#000000"));
+            }
         } else {
             SetSelectedGenderProperties(CL_OTHER, ATV_OTHER);
         }

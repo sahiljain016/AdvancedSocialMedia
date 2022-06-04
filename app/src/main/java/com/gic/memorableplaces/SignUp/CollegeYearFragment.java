@@ -10,6 +10,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +28,22 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
+import com.wooplr.spotlight.prefs.PreferencesManager;
+
+import java.util.ArrayList;
 
 import me.grantland.widget.AutofitTextView;
 
 public class CollegeYearFragment extends Fragment {
     private static final String TAG = "CollegeYearFragment";
+    private int StrokeSize = 10;
     private Context mContext;
     private boolean isLocked = false, isSwitched = false, isSameDetail = false;
 
-    private String sCollegeYear = "N/A", sMatchCollegeYear = "N/A";
+    private String sCollegeYear = "N/A";
+    private ArrayList<String> alsMatchCollegeYear;
     private Handler handler;
 
     private ImageView IV_PRIVACY;
@@ -49,6 +57,8 @@ public class CollegeYearFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_college_years, container, false);
         mContext = getActivity();
         handler = new Handler(Looper.getMainLooper());
+        alsMatchCollegeYear = new ArrayList<>();
+
         ML = view.findViewById(R.id.ML_MAIN_CY);
         CV_1 = view.findViewById(R.id.CV_1_CY);
         CV_2 = view.findViewById(R.id.CV_2_CY);
@@ -73,27 +83,39 @@ public class CollegeYearFragment extends Fragment {
         ATV_3.setTypeface(cap);
 
         if (getArguments() != null) {
-            sMatchCollegeYear = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_match_college_year)));
+            alsMatchCollegeYear = getArguments().getStringArrayList(requireActivity().getString(R.string.field_match_college_year));
             sCollegeYear = String.format("%s", getArguments().getString(requireActivity().getString(R.string.field_college_year)));
-
             isLocked = getArguments().getBoolean(mContext.getString(R.string.field_is_private));
         }
+
+        ShowSpotlights(IV_SWITCH_INPUT, IV_BOX);
+        while (alsMatchCollegeYear.contains(mContext.getString(R.string.not_available)))
+            alsMatchCollegeYear.remove(mContext.getString(R.string.not_available));
 
         SetInitialSelection(sCollegeYear);
 
         CV_1.setOnClickListener(v -> {
             ML.setTransition(R.id.TRANS_1_CENTER);
             ML.transitionToEnd();
-            CV_1.setForeground(null);
-            CV_2.setForeground(null);
-            CV_3.setForeground(null);
-            GradientDrawable drawable = new GradientDrawable();
-            drawable.setCornerRadius(100);
-            drawable.setStroke(5, Color.GREEN);
-            CV_1.setForeground(drawable);
             if (isSwitched) {
-                sMatchCollegeYear = "1";
+                if (alsMatchCollegeYear.contains("1")) {
+                    alsMatchCollegeYear.remove("1");
+                    CV_1.setForeground(null);
+                } else {
+                    alsMatchCollegeYear.add("1");
+                    GradientDrawable drawable = new GradientDrawable();
+                    drawable.setCornerRadius(100);
+                    drawable.setStroke(StrokeSize, Color.GREEN);
+                    CV_1.setForeground(drawable);
+                }
             } else {
+                CV_1.setForeground(null);
+                CV_2.setForeground(null);
+                CV_3.setForeground(null);
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setCornerRadius(100);
+                drawable.setStroke(StrokeSize, Color.GREEN);
+                CV_1.setForeground(drawable);
                 sCollegeYear = "1";
             }
         });
@@ -101,34 +123,53 @@ public class CollegeYearFragment extends Fragment {
         CV_2.setOnClickListener(v -> {
             ML.setTransition(R.id.TRANS_2_CENTER);
             ML.transitionToEnd();
-            CV_1.setForeground(null);
-            CV_2.setForeground(null);
-            CV_3.setForeground(null);
-            GradientDrawable drawable = new GradientDrawable();
-            drawable.setCornerRadius(100);
-            drawable.setStroke(5, Color.parseColor("#FB8C00"));
-            CV_2.setForeground(drawable);
             if (isSwitched) {
-                sMatchCollegeYear = "2";
+                if (alsMatchCollegeYear.contains("2")) {
+                    alsMatchCollegeYear.remove("2");
+                    CV_2.setForeground(null);
+                } else {
+                    alsMatchCollegeYear.add("2");
+                    GradientDrawable drawable = new GradientDrawable();
+                    drawable.setCornerRadius(100);
+                    drawable.setStroke(StrokeSize, Color.parseColor("#FB8C00"));
+                    CV_2.setForeground(drawable);
+                }
             } else {
                 sCollegeYear = "2";
+                CV_1.setForeground(null);
+                CV_2.setForeground(null);
+                CV_3.setForeground(null);
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setCornerRadius(100);
+                drawable.setStroke(StrokeSize, Color.parseColor("#FB8C00"));
+                CV_2.setForeground(drawable);
             }
         });
 
         CV_3.setOnClickListener(v -> {
             ML.setTransition(R.id.TRANS_3_CENTER);
             ML.transitionToEnd();
-            CV_1.setForeground(null);
-            CV_2.setForeground(null);
-            CV_3.setForeground(null);
-            GradientDrawable drawable = new GradientDrawable();
-            drawable.setCornerRadius(100);
-            drawable.setStroke(5, Color.parseColor("#8800FF"));
-            CV_3.setForeground(drawable);
+
             if (isSwitched) {
-                sMatchCollegeYear = "3";
+                if (alsMatchCollegeYear.contains("3")) {
+                    alsMatchCollegeYear.remove("3");
+                    CV_3.setForeground(null);
+                } else {
+                    alsMatchCollegeYear.add("3");
+                    GradientDrawable drawable = new GradientDrawable();
+                    drawable.setCornerRadius(100);
+                    drawable.setStroke(StrokeSize, Color.parseColor("#8800FF"));
+                    CV_3.setForeground(drawable);
+                }
             } else {
                 sCollegeYear = "3";
+                CV_1.setForeground(null);
+                CV_2.setForeground(null);
+                CV_3.setForeground(null);
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setCornerRadius(100);
+                drawable.setStroke(StrokeSize, Color.parseColor("#8800FF"));
+                CV_3.setForeground(drawable);
             }
         });
 
@@ -146,8 +187,9 @@ public class CollegeYearFragment extends Fragment {
                 isSameDetail = false;
             } else {
                 IV_TICK.setVisibility(View.VISIBLE);
-                sMatchCollegeYear = sCollegeYear;
-                SetInitialSelection(sMatchCollegeYear);
+                alsMatchCollegeYear.clear();
+                alsMatchCollegeYear.add(sCollegeYear);
+                SetInitialSelection(sCollegeYear);
                 isSameDetail = true;
             }
 
@@ -167,7 +209,8 @@ public class CollegeYearFragment extends Fragment {
                     ChangeTheme(R.style.OtherDetail, IV_PRIVACY);
                     IV_GO_BACK.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
                     isSwitched = true;
-                    SetInitialSelection(sMatchCollegeYear);
+                    for (String string : alsMatchCollegeYear)
+                        SetInitialSelection(string);
 
                 } else {
                     ML.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -175,6 +218,9 @@ public class CollegeYearFragment extends Fragment {
                     ChangeTheme(R.style.MyDetail, IV_PRIVACY);
                     IV_GO_BACK.setImageTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                     isSwitched = false;
+                    CV_1.setForeground(null);
+                    CV_2.setForeground(null);
+                    CV_3.setForeground(null);
                     SetInitialSelection(sCollegeYear);
                 }
             }, 1000);
@@ -184,12 +230,95 @@ public class CollegeYearFragment extends Fragment {
         IV_BACK.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString(mContext.getString(R.string.field_college_year), sCollegeYear);
-            bundle.putString(mContext.getString(R.string.field_match_college_year), sMatchCollegeYear);
+            bundle.putStringArrayList(mContext.getString(R.string.field_match_college_year), alsMatchCollegeYear);
             bundle.putBoolean(mContext.getString(R.string.field_is_private), isLocked);
             getParentFragmentManager().setFragmentResult("requestKey", bundle);
             requireFragmentManager().beginTransaction().remove(CollegeYearFragment.this).commit();
         });
         return view;
+    }
+
+    private void ShowSpotlights(ImageView IV_SWITCH_INPUT, ImageView IV_BOX) {
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#FFFFD6A5"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
+
+        PreferencesManager preferencesManager = new PreferencesManager(mContext);
+        /*
+
+        SpotlightView.Builder SB_PRONOUNS = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Enter Pronouns")
+                .subHeadingTvText("Enter your pronouns here, it is optional.")
+                .target(ET_PRONOUNS)
+                .usageId("ET_PRONOUNS")
+                .setListener(spotlightViewId -> {
+                    if (!preferencesManager.isDisplayed("IV_BOX")) {
+                        IV_SWITCH_INPUT.performClick();
+                        SB_SAME_DETAIL.show();
+                    }
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });*/
+
+
+        SpotlightView.Builder SB_SAME_DETAIL = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Copy Detail")
+                .subHeadingTvText("Click this box to copy the detail selected on your page.")
+                .target(IV_BOX)
+                .usageId("IV_BOX")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        SpotlightView.Builder SB_COLLEGE_YEAR = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Selecting College Year")
+                .subHeadingTvText("Click on the number to select your college year.")
+                .target(CV_1)
+                .usageId("SB_COLLEGE_YEAR")
+                .setListener(spotlightViewId -> {
+                    if (!preferencesManager.isDisplayed("IV_BOX")) {
+                        IV_SWITCH_INPUT.performClick();
+                        SB_SAME_DETAIL.show();
+                    }
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        if (!preferencesManager.isDisplayed("SWITCH")) {
+
+            SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Switch Profiles")
+                    .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                    .target(IV_SWITCH_INPUT)
+                    .usageId("SWITCH")
+                    .setListener(spotlightViewId -> {
+                        SB_COLLEGE_YEAR.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    });
+
+            new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Privacy Button")
+                    .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                    .target(IV_PRIVACY)
+                    .usageId("PRIVACY")
+                    .setListener(spotlightViewId -> {
+                        SB_SWITCH.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    }).show();
+
+        } else if (!preferencesManager.isDisplayed("SB_COLLEGE_YEAR")) {
+            SB_COLLEGE_YEAR.show();
+        }
     }
 
     private void SetUnselectedCardView(CardView cardView) {
@@ -201,21 +330,21 @@ public class CollegeYearFragment extends Fragment {
             case "1": {
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setCornerRadius(100);
-                drawable.setStroke(5, Color.GREEN);
+                drawable.setStroke(StrokeSize, Color.GREEN);
                 CV_1.setForeground(drawable);
                 break;
             }
             case "2": {
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setCornerRadius(100);
-                drawable.setStroke(5, Color.parseColor("#FB8C00"));
+                drawable.setStroke(StrokeSize, Color.parseColor("#FB8C00"));
                 CV_2.setForeground(drawable);
                 break;
             }
             case "3": {
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setCornerRadius(100);
-                drawable.setStroke(5, Color.parseColor("#8800FF"));
+                drawable.setStroke(StrokeSize, Color.parseColor("#8800FF"));
                 CV_3.setForeground(drawable);
                 break;
             }
@@ -268,6 +397,7 @@ public class CollegeYearFragment extends Fragment {
         });
 
     }
+
     private void ChangeTheme(int Style, ImageView IV) {
         final ContextThemeWrapper wrapper = new ContextThemeWrapper(mContext, Style);
 

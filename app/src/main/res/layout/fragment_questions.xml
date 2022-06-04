@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ML_MAIN_Q"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_blue"
+    android:clickable="true"
+    android:focusable="true"
+    app:layoutDescription="@xml/general_detail_scene">
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ACB_BACK_Q"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/ic_back_arrow"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_1_Q"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_1_Q" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ACB_NEXT_Q"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/ic_back_arrow"
+        android:backgroundTint="@color/white"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/ATV_TITLE_1_Q"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ATV_TITLE_1_Q" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/ATV_TITLE_1_Q"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:text="Questions"
+        android:textAlignment="center"
+        android:textColor="@color/White"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/ACB_NEXT_Q"
+        app:layout_constraintStart_toEndOf="@id/ACB_BACK_Q"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeToFit="true" />
+
+    <View
+        android:id="@+id/V_LINE_1_FD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="#E1E1E1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ATV_TITLE_1_Q" />
+
+    <TextView
+        android:id="@+id/TV_TITLE_2_Q"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:fontFamily="@font/capriola"
+        android:text="Answer a few questions to tell people more about yourself. "
+        android:textAlignment="center"
+        android:textColor="#E8E8E8"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/V_LINE_1_FD" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_NUMBERS_Q"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_white_background"
+        android:backgroundTint="#1A000000"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@id/ACIB_FAV_Q" />
+
+
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/CSV_QUESTION_Q"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@id/RV_NUMBERS_Q"
+        app:layout_constraintTop_toBottomOf="@id/TV_TITLE_2_Q" />
+
+
+    <!-- <EditText
+         android:id="@+id/ET_ANSWER_Q"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="@dimen/_5sdp"
+         android:layout_marginTop="@dimen/_10sdp"
+         android:layout_marginEnd="@dimen/_5sdp"
+         android:layout_marginBottom="@dimen/_10sdp"
+         android:background="@null"
+         android:fontFamily="@font/capriola"
+         android:gravity="top"
+         android:hint="Type Here......"
+         android:inputType="textMultiLine"
+         android:maxLength="150"
+         android:scrollbars="vertical"
+         android:scrollHorizontally="false"
+         android:text="gdngggggggggggggggggggngggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+         android:textColor="#6A6A6A"
+         android:textSize="24sp"
+         app:layout_constraintBottom_toTopOf="@id/RV_NUMBERS_Q"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent" />
+
+     <TextView
+         android:id="@+id/TV_CHARACTER_NO_Q"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/_5sdp"
+         android:layout_marginEnd="@dimen/_5sdp"
+         android:fontFamily="@font/capriola"
+         android:text="0/150"
+         android:textSize="16sp"
+         app:layout_constraintBottom_toTopOf="@id/ET_ANSWER_Q"
+         app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ACIB_FAV_Q"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_white_background"
+        android:padding="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_filled_star"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ACIB_REMOVE_FAV_Q"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_white_background"
+        android:padding="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_filled_star_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

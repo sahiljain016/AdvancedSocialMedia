@@ -1,20 +1,33 @@
 package com.gic.memorableplaces.FilterFriends;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static com.gic.memorableplaces.FilterFriends.FilterFragment.InflateFilterAdapter;
+import static com.gic.memorableplaces.FilterFriends.FilterFragment.alsFilterName;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,18 +37,32 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryDataEventListener;
 import com.gic.memorableplaces.Adapters.FindFriendsRecyclerViewAdapter;
 import com.gic.memorableplaces.CustomLibs.CardStack.ItemTouchHelper;
 import com.gic.memorableplaces.CustomLibs.CardStack.OnItemSwiped;
 import com.gic.memorableplaces.CustomLibs.CardStack.SwipeableLayoutManager;
 import com.gic.memorableplaces.CustomLibs.CardStack.SwipeableTouchHelperCallback;
 import com.gic.memorableplaces.CustomLibs.HTextView.RainbowTextView;
+import com.gic.memorableplaces.DataModels.FFUserDetails;
+import com.gic.memorableplaces.DataModels.MatchFilterDetails;
+import com.gic.memorableplaces.DataModels.User;
 import com.gic.memorableplaces.R;
+import com.gic.memorableplaces.RoomsDatabases.FilterDetailsDatabase;
+import com.gic.memorableplaces.RoomsDatabases.UserDetailsDatabase;
+import com.gic.memorableplaces.interfaces.FilterDetailsDao;
+import com.gic.memorableplaces.interfaces.FilterPrivacyDao;
+import com.gic.memorableplaces.interfaces.MatchFilterDetailsDao;
+import com.gic.memorableplaces.interfaces.UserDetailsDao;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -47,18 +74,22 @@ import com.google.firebase.database.ValueEventListener;
 import com.wooplr.spotlight.SpotlightConfig;
 import com.wooplr.spotlight.SpotlightView;
 import com.wooplr.spotlight.utils.SpotlightListener;
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
+import com.yuyakaido.android.cardstackview.CardStackListener;
+import com.yuyakaido.android.cardstackview.CardStackView;
+import com.yuyakaido.android.cardstackview.Direction;
+import com.yuyakaido.android.cardstackview.StackFrom;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
 
 import me.grantland.widget.AutofitTextView;
 import www.sanju.zoomrecyclerlayout.ZoomRecyclerLayout;
-
-import static com.gic.memorableplaces.FilterFriends.FilterFragment.InflateFilterAdapter;
-import static com.gic.memorableplaces.FilterFriends.FilterFragment.alsFilterName;
 
 public class FriendsFilterActivity extends AppCompatActivity implements FindFriendsRecyclerViewAdapter.OnMoreFilterClickListener {
     private static final String TAG = "FriendsFilterActivity";
@@ -68,11 +99,12 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
     public static ZoomRecyclerLayout linearLayoutManager;
     @SuppressLint("StaticFieldLeak")
     public static ConstraintLayout CL_FILTERS;
-    public static ImageView NoDetailImageView, IV_BG,IV_NOTIFICATIONS;
+    public static ImageView NoDetailImageView, IV_BG, IV_NOTIFICATIONS;
     public static ImageView No_Result_cross, IV_FAKE;
     public static AutofitTextView NoDetailTV, ATV_TITLE;
     public static RainbowTextView HEADING_FIND_FRIENDS;
     private CardView CV_BACK, CV_FILTERS, CV_NOTIF;
+    private CardStackView CSV_RESULT;
 
     @SuppressLint("StaticFieldLeak")
     private static Context mContext;
@@ -84,9 +116,20 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
 
     private static DatabaseReference myRef;
     private static FirebaseAuth mAuth;
-    public static String FirstField = "", CurrentFilterType = "none";
+    public static String FirstField = "", CurrentFilterType = "none", sUID;
     public static boolean isLimitUsed = false, isUltraFilterOn = false;
     public static int NumberOfFilters = 0;
+
+    private FilterDetailsDao FD_Dao;
+    private MatchFilterDetailsDao MFD_Dao;
+    private FilterPrivacyDao FP_Dao;
+    private ExecutorService databaseWriteExecutor;
+
+    private UserDetailsDatabase UD_DETAILS;
+    private UserDetailsDao userDetailsDao;
+
+    private MatchFilterDetails mfd;
+    private User user;
 
     public static ArrayList<String> alsUserUIDList;
     private static ArrayList<String> alsImagesList;
@@ -101,6 +144,7 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
     public static ArrayList<String> alsCurrentFields;
 
     private static LinkedHashMap<String, ArrayList<String>> hmImagesHashMap;
+    private LinkedHashMap<String, User> hmFinalUIDDetails;
     public static HashMap<String, Boolean> hmSelectedFiltersHashMap;
     public static HashMap<String, ArrayList<String>> hmSelectedValues;
     public static HashMap<String, ArrayList<String>> hmMyValues;
@@ -123,6 +167,12 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
     public static ArrayList<String> alsFixedUIDList;
     public static ArrayList<String> UsersUIDList;
 
+    private boolean isInProcess = false;
+    private int CurrPos = 0;
+    private ArrayList<String> alsNearByUIDs, alsUIDsToRemove, alsFinalUIDs;
+
+    private SharedPreferences sharedPref;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -133,76 +183,27 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
         myRef = FirebaseDatabase.getInstance().getReference();
         mContext = FriendsFilterActivity.this;
         mActivity = FriendsFilterActivity.this;
-        alsUserUIDList = new ArrayList<>();
-        alsImagesList = new ArrayList<>();
-        alsUsernameList = new ArrayList<>();
-        alsFollowersList = new ArrayList<>();
-        alsFollowingList = new ArrayList<>();
-        alsCurrentFields = new ArrayList<>();
-        hmImagesHashMap = new LinkedHashMap<>();
-        onMoreFilterClickListener = this;
 
-        builder = new AlertDialog.Builder(this);
-        hmSelectedFiltersHashMap = new HashMap<>();
-        hmFinal = new HashMap<>();
-        hmDetailsFinal = new LinkedHashMap<>();
-        hmMyValues = new HashMap<>();
-        hmSelectedValues = new HashMap<>();
-        alsCardBGList = new ArrayList<>();
-        alsAgeList = new ArrayList<>();
-        alsFullNamesList = new ArrayList<>();
-        alsDescriptionList = new ArrayList<>();
-        alsFieldsFiltered = new ArrayList<>();
-        alsFixedUIDList = new ArrayList<>();
+        FilterDetailsDatabase FD_DETAILS = FilterDetailsDatabase.getDatabase(mContext);
+        FD_Dao = FD_DETAILS.filterDetailsDao();
+        MFD_Dao = FD_DETAILS.matchFilterDetailsDao();
+        databaseWriteExecutor = FD_DETAILS.databaseWriteExecutor;
+        mfd = new MatchFilterDetails();
 
+        UD_DETAILS = UserDetailsDatabase.getDatabase(mContext);
+        userDetailsDao = UD_DETAILS.userDetailsDao();
 
-        builder = new AlertDialog.Builder(mContext);
-        MoreFilterDialog = builder.create();
-
-//        ImageButton backButton = findViewById(R.id.BackButton);
-        rResults = findViewById(R.id.RV_FF_RESULT);
-        No_Result_cross = findViewById(R.id.No_Result_cross);
-        CV_BACK = findViewById(R.id.CV_BACK);
-        CL_FILTERS = findViewById(R.id.CL_FILTERS);
-        CV_FILTERS = findViewById(R.id.CV_FILTERS);
-        IV_NOTIFICATIONS = findViewById(R.id.IV_NOTIFICATIONS);
-        CV_NOTIF = findViewById(R.id.CV_NOTIF);
-        ATV_TITLE = findViewById(R.id.ATV_TITLE);
-
-
-
-//        FIND_FILTERS = findViewById(R.id.FIND_FILTERS);
-        NoDetailTV = findViewById(R.id.no_user_found_text);
-        NoDetailImageView = findViewById(R.id.missing_iv);
-//        Tutorial = findViewById(R.id.TutorialButton);
-//        MyCard = findViewById(R.id.My_Card);
-//        AIB_LIKES_MESSAGES = findViewById(R.id.AIB_LIKES_MESSAGES);
-        Typeface title = Typeface.createFromAsset(mContext.getAssets(), "fonts/Capriola.ttf");
-        ATV_TITLE.setTypeface(title, Typeface.NORMAL);
-
-        Log.d(TAG, "onCreate: ENTERING MAIN PAGE FILTERS");
-
-        linearLayoutManager = new ZoomRecyclerLayout(FriendsFilterActivity.this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rResults.setLayoutManager(linearLayoutManager);
-
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        if (preferences.getBoolean("Card", false)) {
-            SetSpotlightConfig("#eb273f", "#ffffff", "#eb273f");
-            //InitiateSequence();
-        } else {
-            GetRandomUserUIDs();
-        }
-        CV_BACK.setFocusableInTouchMode(false);
-        CV_BACK.setOnClickListener(v -> {
-
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            finish();
+        databaseWriteExecutor.execute(() -> {
+            user = userDetailsDao.GetAllDetails(mAuth.getCurrentUser().getUid()).get(0);
+            GetMyPreferences();
 
         });
-
+        Init();
+        CV_BACK.setFocusableInTouchMode(false);
+        CV_BACK.setOnClickListener(v -> {
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            finish();
+        });
 
 //        MyCard.setOnClickListener(v -> {
 //            Fragment fragment = new TestSample();
@@ -250,10 +251,10 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
             transaction.commit();
         });
 
-
-        GetMyDetails();
+        //GetMyDetails();
 
     }
+
 
     public static void SetSpotlightConfig(String HeadingTvColor, String SubHeadingTvColor, String LineAndArcColor) {
 
@@ -378,158 +379,320 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
         alsDescriptionList.clear();
         alsCardBGList.clear();
     }
-//    private v
 
-    /*public static void GetRandomUserUIDs() {
-        Query query = myRef.child(mContext.getString(R.string.dbname_users));
+    private void GetMyPreferences() {
+        databaseWriteExecutor.execute(() -> {
+            if (MFD_Dao.GetAllMatchFilterDetails().size() != 0) {
+                mfd = MFD_Dao.GetAllMatchFilterDetails().get(0);
+            }
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                alsUserUIDList.clear();
-                for (DataSnapshot UIDSnapshot : snapshot.getChildren()) {
-                    if (alsUserUIDList.size() > 21) {
-                        break;
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(this::GetUIDWithinRange);
+        });
+    }
+
+    private void GetUIDWithinRange() {
+        // String provider;
+        MyLocationListener mylistener;
+        LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+
+        // user defines the criteria
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);   //default
+        criteria.setCostAllowed(false);
+
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            Location newestLocation = null;
+            mylistener = new MyLocationListener();
+            List<String> providers = locationManager.getProviders(criteria, true);
+            if (providers != null) {
+
+                for (String provider : providers) {
+                    Log.d(TAG, "GetUIDWithinRange: provider: " + provider);
+                    Location location = locationManager.getLastKnownLocation(provider);
+                    if (location != null) {
+                        if (newestLocation == null) {
+                            newestLocation = location;
+                        } else {
+                            if (location.getTime() > newestLocation.getTime()) {
+                                newestLocation = location;
+                            }
+                        }
                     }
-                    if(!UIDSnapshot.getKey().equals(mAuth.getCurrentUser().getUid()))
-                    alsUserUIDList.add(UIDSnapshot.getKey());
+                }
+            }
+
+            Log.d(TAG, "GetUIDWithinRange: newestLocation: " + newestLocation);
+
+            if (newestLocation != null) {
+                mylistener.onLocationChanged(newestLocation);
+            } else {
+                // leads to the settings because there is no last known location
+                double latitude = Double.parseDouble(user.getLocation().substring(0, user.getLocation().indexOf(",")));
+                double longitude = Double.parseDouble(user.getLocation().substring(user.getLocation().indexOf(",") + 1));
+                Log.d(TAG, "GetUIDWithinRange: latitude and longitude: " + latitude + "/" + longitude);
+                mylistener.onLocationChanged(new Location("gps"));
+
+            }
+
+        } else {
+            ActivityCompat.requestPermissions(FriendsFilterActivity.this, new String[]
+                    {ACCESS_FINE_LOCATION}, 100);
+        }
+    }
+
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+            Log.d(TAG, "onLocationChanged: lat long: " + location.getLatitude() + location.getLongitude());
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("geofire");
+            GeoFire geoFire = new GeoFire(ref);
+
+            alsNearByUIDs.clear();
+
+            sharedPref = getSharedPreferences(mContext.getString(R.string.app_name), Context.MODE_PRIVATE);
+
+            geoFire.setLocation(mAuth.getCurrentUser().getUid(), new GeoLocation(location.getLatitude(), location.getLongitude()));
+            GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(location.getLatitude(), location.getLongitude()), sharedPref.getInt(mContext.getString(R.string.location_radius), 500));
+
+            geoQuery.addGeoQueryDataEventListener(new GeoQueryDataEventListener() {
+                @Override
+                public void onDataEntered(DataSnapshot dataSnapshot, GeoLocation location) {
+                    Log.d(TAG, "onDataEntered: datasnapshot: " + dataSnapshot);
+                    alsNearByUIDs.add(dataSnapshot.getKey());
+
                 }
 
-                Collections.shuffle(alsUserUIDList);
+                @Override
+                public void onDataExited(DataSnapshot dataSnapshot) {
 
-                int MaxResults = alsUserUIDList.size();
-                Query query = myRef.child(mContext.getString(R.string.dbname_user_account_settings));
-                final int finalMaxResults = MaxResults;
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot SettingsSnapshot) {
-                        if (SettingsSnapshot.exists()) {
+                }
 
-                            for (int i = 0; i < finalMaxResults; i++) {
-                                for (DataSnapshot DetailsSnapshot : SettingsSnapshot.getChildren()) {
-                                    if (DetailsSnapshot.getKey().equals(alsUserUIDList.get(i))) {
-                                        for (DataSnapshot UserDetails : DetailsSnapshot.getChildren()) {
-                                            // Log.d(TAG, "onDataChange: DetailsSnapshot key " + UserDetails.getKey());
-//
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_display_name))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString()))
-                                                    alsFullNamesList.add(UserDetails.getValue().toString());
-                                                else
-                                                    alsFullNamesList.add("N/A");
-                                            }
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_username))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString()))
-                                                    alsUsernameList.add(UserDetails.getValue().toString());
-                                                else
-                                                    alsUsernameList.add("N/A");
-                                            }
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_followers))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString()))
-                                                    alsFollowersList.add(UserDetails.getValue().toString());
-                                                else
-                                                    alsFollowersList.add("N/A");
-                                            }
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_following))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString()))
-                                                    alsFollowingList.add(UserDetails.getValue().toString());
-                                                else
-                                                    alsFollowingList.add("N/A");
-                                            }
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_card_bg_color))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString())) {
-                                                    alsCardBGList.add(UserDetails.getValue().toString());
-                                                } else
-                                                    alsCardBGList.add("N/A");
+                @Override
+                public void onDataMoved(DataSnapshot dataSnapshot, GeoLocation location) {
 
-                                            }
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_age))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString()))
-                                                    alsAgeList.add(UserDetails.getValue().toString());
-                                                else
-                                                    alsAgeList.add("N/A");
-                                            }
-                                            Log.d(TAG, "onDataChange: AgeList " + alsAgeList);
-                                            if (UserDetails.getKey().equals(mContext.getString(R.string.field_card_bio))) {
-                                                if (!TextUtils.isEmpty(UserDetails.getValue().toString()))
-                                                    alsDescriptionList.add(UserDetails.getValue().toString());
-                                                else
-                                                    alsDescriptionList.add("N/A");
-                                                Log.d(TAG, "run: DescriptionSnapshot " + UserDetails.getValue().toString());
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            // Log.d(TAG, String.format("onDataChange:  mImagesHashMap get UID %d%s", 0, mImagesHashMap.get(UserUIDList.get(0))));
-                            Query query = myRef.child(mContext.getString(R.string.dbname_user_photos));
+                }
 
-                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChanged(DataSnapshot dataSnapshot, GeoLocation location) {
+                    Log.d(TAG, "onDataChanged: datasnapshot: " + dataSnapshot);
+                }
+
+                @Override
+                public void onGeoQueryReady() {
+                    alsNearByUIDs.remove(sUID);
+                    Log.d(TAG, "onGeoQueryReady: mfd match age range: " + mfd.getMatch_age_range());
+                    int minAge = Integer.parseInt(mfd.getMatch_age_range().substring(0, mfd.getMatch_age_range().indexOf("-")));
+                    int maxAge = Integer.parseInt(mfd.getMatch_age_range().substring(mfd.getMatch_age_range().indexOf("-") + 1));
+                    Log.d(TAG, "onGeoQueryReady: minAge: " + minAge);
+                    Log.d(TAG, "onGeoQueryReady: maxAge: " + maxAge);
+                    Log.d(TAG, "onGeoQueryReady: Queries Loaded: " + alsNearByUIDs);
+                    long timebefore = System.currentTimeMillis();
+                    if (alsNearByUIDs.size() != 0) {
+                        for (int i = 0; i < Math.min(7, alsNearByUIDs.size()); i++) {
+                            Query Q_AGE = myRef.child(mContext.getString(R.string.dbname_user_common_details))
+                                    .child(alsNearByUIDs.get(i));
+                            int finalI = i;
+                            Q_AGE.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.exists()) {
-                                        for (int i = 0; i < finalMaxResults; i++) {
-                                            String ProfilePictureLink = "";
-                                            alsImagesList.clear();
-//                                            Log.d(TAG, String.format("onDataChange:  mImagesHashMap get UID %d%s", i, mImagesHashMap.get(UserUIDList.get(i))));
-//                                            ArrayList<String> TempImagesList =  mImagesHashMap.get(UserUIDList.get(i));
-//                                            Log.d(TAG, String.format("onDataChange:  TempImagesList %s", TempImagesList));
-                                            for (DataSnapshot DetailsSnapshot : snapshot.getChildren()) {
-                                               // Log.d(TAG, String.format("onDataChange: UserUIDList %s", alsUserUIDList));
-                                                if (DetailsSnapshot.getKey().equals(alsUserUIDList.get(i))) {
-                                                    for (DataSnapshot ImageChildren : DetailsSnapshot.getChildren()) {
-                                                       // Log.d(TAG, "onDataChange: ImageChildren " + ImageChildren.getValue().toString());
-                                                       // Log.d(TAG, "onDataChange: ImageChildren key" + ImageChildren.getKey());
-                                                        if (ImageChildren.getKey().equals(mContext.getString(R.string.field_profile_photo))) {
-                                                            ProfilePictureLink = ImageChildren.getValue().toString();
-                                                        } else {
-                                                            ProfilePictureLink = "N/A";
+                                public void onDataChange(@NonNull DataSnapshot AgeSnapshot) {
+                                    Log.d(TAG, "onDataChange: AgeSnapshot: " + AgeSnapshot);
+                                    Log.d(TAG, "onDataChange: time elapsed: " + (System.currentTimeMillis() - timebefore));
+
+                                    if (AgeSnapshot.getValue() != null) {
+                                        int age = AgeSnapshot.child(mContext.getString(R.string.field_age)).getValue(Integer.class);
+                                        Log.d(TAG, "onDataChange: age: " + age);
+                                        if ((age > minAge && age < maxAge) || (age == minAge || age == maxAge)) {
+//                                            Query Q_GENDER = myRef.child(mContext.getString(R.string.dbname_user_card))
+//                                                    .child(alsNearByUIDs.get(finalI))
+//                                                    .child(mContext.getString(R.string.field))
+//                                                    .child(mContext.getString(R.string.field_gender));
+//                                            Q_GENDER.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                                @Override
+//                                                public void onDataChange(@NonNull DataSnapshot GenderSnapshot) {
+                                            //  if (GenderSnapshot.getValue() != null) {
+                                            Log.d(TAG, "onDataChange: gender: " + AgeSnapshot.child(mContext.getString(R.string.field_gender)).getValue());
+                                            if (mfd.getMatch_gender().contains(String.valueOf(AgeSnapshot.child(mContext.getString(R.string.field_gender)).getValue()))) {
+
+                                                Query query = myRef.child(mContext.getString(R.string.dbname_users))
+                                                        .child(alsNearByUIDs.get(finalI));
+                                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot UserSnapshot) {
+                                                        User user = new User(String.valueOf(age));
+                                                        alsFinalUIDs.add(alsNearByUIDs.get(finalI));
+
+                                                        if (UserSnapshot.hasChild(mContext.getString(R.string.field_display_name))) {
+
+                                                            user.setDisplay_name(String.valueOf(UserSnapshot.child(mContext.getString(R.string.field_display_name)).getValue()));
                                                         }
-                                                        if (!ImageChildren.getKey().equals(mContext.getString(R.string.field_profile_photo))) {
-                                                            for (DataSnapshot ImageDetails : ImageChildren.getChildren()) {
-                                                                if (ImageDetails.getKey().equals("imageUrl")) {
-                                                                    if (!TextUtils.isEmpty(Objects.requireNonNull(ImageDetails.getValue()).toString())) {
-                                                                        alsImagesList.add(ImageDetails.getValue().toString());
-                                                                    } else {
-                                                                        alsImagesList.add("N/A");
-                                                                    }
+                                                        user.setGender(String.valueOf(AgeSnapshot.child(mContext.getString(R.string.field_gender)).getValue()));
+                                                        Log.d(TAG, "onDataChange: age: " + age);
+                                                        //user.setAge(String.valueOf(age));
+                                                        if (UserSnapshot.hasChild(mContext.getString(R.string.field_location))) {
+                                                            user.setLocation(String.valueOf(UserSnapshot.child(mContext.getString(R.string.field_location)).getValue()));
+                                                        }
+                                                        if (UserSnapshot.hasChild(mContext.getString(R.string.field_profile_photo))) {
+                                                            user.setProfile_photo(String.valueOf(UserSnapshot.child(mContext.getString(R.string.field_profile_photo)).getValue()));
+                                                        }
+                                                        if (UserSnapshot.hasChild(mContext.getString(R.string.field_auto_desp))) {
+                                                            user.setAuto_desp(String.valueOf(UserSnapshot.child(mContext.getString(R.string.field_auto_desp)).getValue()));
+                                                        }
+                                                        if (UserSnapshot.hasChild(mContext.getString(R.string.field_photos_list))) {
+                                                            ArrayList<String> alsImagesList = new ArrayList<>(5);
+                                                            for (DataSnapshot dataSnapshot : UserSnapshot.child(mContext.getString(R.string.field_photos_list)).getChildren()) {
+                                                                if (!String.valueOf(dataSnapshot.getValue()).equals(mContext.getString(R.string.not_available))) {
+                                                                    alsImagesList.add(String.valueOf(dataSnapshot.getValue()));
                                                                 }
                                                             }
+                                                            user.setPhotos_list(alsImagesList);
+                                                        }
+                                                        if (UserSnapshot.hasChild(mContext.getString(R.string.field_username))) {
+                                                            user.setUsername(String.valueOf(UserSnapshot.child(mContext.getString(R.string.field_username)).getValue()));
+                                                        }
+                                                        Log.d(TAG, "onDataChange: user: " + user);
+                                                        hmFinalUIDDetails.put(alsNearByUIDs.get(finalI), user);
+                                                        Log.d(TAG, "onDataChange: hmDetailsFinal: " + hmFinalUIDDetails);
+
+                                                        Log.d(TAG, "onDataChange: alsFinalUIDs: " + alsFinalUIDs);
+                                                        if (alsFinalUIDs.size() == 1) {
+
+                                                            CardStackLayoutManager cardStackLayoutManager = new CardStackLayoutManager(mContext, new CardStackListener() {
+                                                                @Override
+                                                                public void onCardDragging(Direction direction, float ratio) {
+
+                                                                    Log.d(TAG, "onCardRewound: dragging dir: " + direction.name());
+
+                                                                    Log.d(TAG, "onCardRewound: dragging ratio: " + ratio);
+                                                                    if (direction.name().equals("Top") && ratio > 0.55 && !isInProcess) {
+                                                                        isInProcess = true;
+                                                                        Log.d(TAG, "onCardDragging: current UID: " + alsFinalUIDs.get(CurrPos));
+                                                                        Log.d(TAG, "onCardDragging: Current Details: " + hmFinalUIDDetails.get(alsFinalUIDs.get(CurrPos)));
+                                                                        Log.d(TAG, "onCardDragging: Filter Details: " + hmFinal.get(alsFinalUIDs.get(CurrPos)));
+                                                                        User TargetUser = hmFinalUIDDetails.get(alsFinalUIDs.get(CurrPos));
+                                                                        FFUserDetails ffUserDetails = new FFUserDetails();
+                                                                        if (TargetUser != null) {
+                                                                            ffUserDetails.setTargetUsername(TargetUser.getUsername());
+                                                                            ffUserDetails.setMyUsername(user.getUsername());
+                                                                            ffUserDetails.setMyProfilePic(user.getProfile_photo());
+                                                                            if (!hmFinal.isEmpty()) {
+                                                                                ffUserDetails.setFiltersMatched(hmFinal.get(alsFinalUIDs.get(CurrPos)).keySet().toString());
+                                                                            } else {
+                                                                                ffUserDetails.setFiltersMatched(mContext.getString(R.string.field_random_match));
+                                                                            }
+                                                                            ffUserDetails.setTargetDisplayName(TargetUser.getDisplay_name() + ", " + TargetUser.getAge());
+                                                                            ffUserDetails.setTargetGender(TargetUser.getGender());
+                                                                            ffUserDetails.setMyName(user.getDisplay_name());
+                                                                            ffUserDetails.setDesp(user.getAuto_desp());
+                                                                            ffUserDetails.setTargetUID(alsFinalUIDs.get(CurrPos));
+                                                                            ffUserDetails.setAlsImagesList(TargetUser.getPhotos_list());
+                                                                           // ffUserDetails.setAlsTargetFilterList(null);
+                                                                            //ffUserDetails.setAlsMyFilterList(mfd);
+                                                                            ffUserDetails.setAliIconList(null);
+                                                                            ffUserDetails.setMatchPercentage(10);
+
+                                                                            Bundle bundle = new Bundle();
+                                                                            bundle.putSerializable(mContext.getString(R.string.ff_user_details), ffUserDetails);
+                                                                            bundle.putSerializable(mContext.getString(R.string.field_filter), mfd);
+                                                                            UserDetailsFragment fragment = new UserDetailsFragment();
+                                                                            String FragmentName = "UserDetailsFragment";
+                                                                            fragment.setArguments(bundle);
+                                                                            FragmentTransaction transaction = ((FriendsFilterActivity) mActivity).getSupportFragmentManager().beginTransaction();
+                                                                            transaction.replace(R.id.FrameLayoutFilters, Objects.requireNonNull(fragment));
+                                                                            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                                                                            transaction.addToBackStack(FragmentName);
+                                                                            transaction.commit();
+                                                                            isInProcess = false;
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onCardSwiped(Direction direction) {
+                                                                    Log.d(TAG, "onCardSwiped: dragging dir: " + direction.name());
+                                                                    if (sharedPref.contains(alsFinalUIDs.get(CurrPos) + " FD")) {
+                                                                        SharedPreferences.Editor prefsEditor = sharedPref.edit();
+                                                                        prefsEditor.remove(alsFinalUIDs.get(CurrPos) + " FD");
+                                                                        prefsEditor.remove(alsFinalUIDs.get(CurrPos) + " FP");
+                                                                        prefsEditor.remove(alsFinalUIDs.get(CurrPos) + " AD");
+                                                                        prefsEditor.apply();
+                                                                    }
+                                                                    Log.d(TAG, "onCardSwiped: contains: " + sharedPref.contains(alsFinalUIDs.get(CurrPos) + " FD"));
+
+                                                                }
+
+                                                                @Override
+                                                                public void onCardRewound() {
+                                                                    //Log.d(TAG, "onCardRewound: rewound");
+                                                                }
+
+                                                                @Override
+                                                                public void onCardCanceled() {
+
+                                                                    //  Log.d(TAG, "onCardRewound: canceled");
+                                                                }
+
+                                                                @Override
+                                                                public void onCardAppeared(View view, int position) {
+                                                                    CurrPos = position;
+                                                                    Log.d(TAG, "onCardAppeared: appered pos: " + position);
+                                                                }
+
+                                                                @Override
+                                                                public void onCardDisappeared(View view, int position) {
+                                                                    Log.d(TAG, "onCardDisappeared: disappered pos: " + position);
+
+
+                                                                }
+                                                            }) {
+                                                                @Override
+                                                                public boolean canScrollVertically() {
+                                                                    return true;
+                                                                }
+                                                            };
+
+
+                                                            mResultAdapter = new FindFriendsRecyclerViewAdapter(alsFinalUIDs, mfd, hmFinalUIDDetails,
+                                                                    hmFinal, mActivity, mContext, null, user.getProfile_photo(), user.getUsername(), user.getDisplay_name(),
+                                                                    true, onMoreFilterClickListener);
+                                                            cardStackLayoutManager.setStackFrom(StackFrom.Bottom);
+                                                            cardStackLayoutManager.setMaxDegree(45);
+
+                                                            cardStackLayoutManager.setVisibleCount(1);
+                                                            cardStackLayoutManager.setOverlayInterpolator(new LinearInterpolator());
+                                                            CSV_RESULT.setLayoutManager(cardStackLayoutManager);
+                                                            CSV_RESULT.setAdapter(mResultAdapter);
+
+                                                        } else {
+                                                            mResultAdapter.notifyItemInserted(alsFinalUIDs.size() - 1);
                                                         }
                                                     }
-                                                }
-                                            }
-                                            Collections.shuffle(alsImagesList);
-                                            int MAX_RESULTS = 0;
-                                            if (alsImagesList.size() > 6) {
-                                                MAX_RESULTS = 6;
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
                                             } else {
-                                                MAX_RESULTS = alsImagesList.size();
+                                                alsUIDsToRemove.add(alsNearByUIDs.get(finalI));
                                             }
-                                            ArrayList<String> ImagesList = new ArrayList<>();
 
-                                            for (int j = 0; j < MAX_RESULTS; j++) {
-                                                ImagesList.add(alsImagesList.get(j));
-                                            }
-                                            alsImagesList.clear();
-                                            ImagesList.add(0, ProfilePictureLink);
-                                            hmImagesHashMap.put(alsUserUIDList.get(i), ImagesList);
+                                            Log.d(TAG, "onGeoQueryReady: alsFinalUIDs: " + alsFinalUIDs);
+                                            Log.d(TAG, "onGeoQueryReady: alsUIDsToBeRemoved: " + alsUIDsToRemove);
+                                            // }
+//                                                }
+//
+//                                                @Override
+//                                                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                                }
+//                                            });
+                                        } else {
+                                            alsUIDsToRemove.add(alsNearByUIDs.get(finalI));
                                         }
-
-
-//                                        Log.d(TAG, String.format("onDataChange: ImagesList %s", ImagesList));
-//                                        Log.d(TAG, String.format("onDataChange: imagesList size %d", ImagesList.size()));
-
-
-                                    } else {
-                                        alsImagesList.add("N/A");
                                     }
-                                   // Log.d(TAG, String.format("onDataChange: Random UserUIDList  %s", alsUserUIDList));
-                                    mResultAdapter = new FindFriendsRecyclerViewAdapter(alsUserUIDList, hmImagesHashMap,
-                                            alsAgeList, alsUsernameList, hmFinal, alsDescriptionList, alsFollowersList, alsFollowingList, alsFullNamesList,
-                                            alsImagesList, alsCardBGList, mActivity, mContext, true, onMoreFilterClickListener);
-                                    rResults.setAdapter(mResultAdapter);
-                                    mResultAdapter.notifyDataSetChanged();
-                                    rResults.setNestedScrollingEnabled(false);
                                 }
 
                                 @Override
@@ -537,50 +700,54 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
 
                                 }
                             });
-                        } else {
-                            Log.d(TAG, "onDataChange: Settings snapshot doesn't exist.");
                         }
+
+                        Log.d(TAG, "onGeoQueryReady: alsFinalUIDs: " + alsFinalUIDs);
+                        Log.d(TAG, "onGeoQueryReady: alsUIDsToBeRemoved: " + alsUIDsToRemove);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onGeoQueryError(DatabaseError error) {
 
-                    }
-                });
-                // GetUserDetails(UserUIDList, MaxResults);
+                }
+            });
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.d(TAG, "onStatusChanged: status: " + provider);
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+            Log.d(TAG, "onProviderEnabled: status: " + provider);
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+            Log.d(TAG, "onProviderDisabled: status: " + provider);
+        }
+    }
 
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }*/
     public static void GetRandomUserUIDs() {
 
+        Query query = myRef.child(mContext.getString(R.string.dbname_users));
 
-        Query query = myRef.child(mContext.getString(R.string.dbname_user_account_settings));
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot Snapshot) {
                 if (Snapshot.exists()) {
-//                    alsUserUIDList.clear();
-//                    for (DataSnapshot UIDSnapshot : Snapshot.getChildren()) {
-//                        if (alsUserUIDList.size() > 21) {
-//                            break;
-//                        }
-//                        if (!UIDSnapshot.getKey().equals(mAuth.getCurrentUser().getUid()))
-//                            alsUserUIDList.add(UIDSnapshot.getKey());
-//                    }
-//                    Collections.shuffle(alsUserUIDList);
-//                    int MaxResults = alsUserUIDList.size();
-                    String MyUsername = Snapshot.child(mAuth.getCurrentUser().getUid()).child(mContext.getString(R.string.field_username)).getValue().toString();
-                    String MyName = Snapshot.child(mAuth.getCurrentUser().getUid()).child(mContext.getString(R.string.field_display_name)).getValue().toString();
-                    String MyProfilePictureLink = Snapshot.child(mAuth.getCurrentUser().getUid()).child(mContext.getString(R.string.field_profile_photo)).getValue().toString();
+                    String MyUsername = Snapshot.child(sUID).child(mContext.getString(R.string.field_username)).getValue().toString();
+                    String MyName = Snapshot.child(sUID).child(mContext.getString(R.string.field_display_name)).getValue().toString();
+                    String MyProfilePictureLink = Snapshot.child(sUID).child(mContext.getString(R.string.field_profile_photo)).getValue().toString();
 
                     int count = 0;
+                    ArrayList<String> path = new ArrayList<>(5);
+
                     for (DataSnapshot UIDSnapshot : Snapshot.getChildren()) {
                         if (!UIDSnapshot.getKey().equals(mAuth.getCurrentUser().getUid())) {
                             count++;
@@ -644,14 +811,20 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
                                     else
                                         Value = "N/A";
                                     Log.d(TAG, "run: DescriptionSnapshot " + DetailsSnapshot.getValue().toString());
+                                } else if (DetailsSnapshot.getKey().equals(mContext.getString(R.string.field_photos_list))) {
+                                    Field = mContext.getString(R.string.field_photos_list);
+                                    for (DataSnapshot dataSnapshot : DetailsSnapshot.getChildren()) {
+                                        if (!String.valueOf(dataSnapshot.getValue()).equals(mContext.getString(R.string.not_available)))
+                                            path.add(String.valueOf(dataSnapshot.getValue()));
+                                    }
+                                    Log.d(TAG, "run: DescriptionSnapshot " + DetailsSnapshot.getValue().toString());
                                 }
 
-
-                                hmTempDetails.replace(Field, Value);
+                                if (!Field.equals(mContext.getString(R.string.field_card_bio)))
+                                    hmTempDetails.replace(Field, Value);
 
                             }
-
-
+                            hmImagesHashMap.put(UID, path);
                             hmDetailsFinal.put(UID, hmTempDetails);
 
                         }
@@ -659,123 +832,49 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
                     Log.d(TAG, String.format("onDataChange: hmDetailsFinal: %s", hmDetailsFinal));
                     ArrayList<String> KeySetUIDS = new ArrayList<>(hmDetailsFinal.keySet());
 
-                    // Log.d(TAG, String.format("onDataChange:  mImagesHashMap get UID %d%s", 0, mImagesHashMap.get(UserUIDList.get(0))));
-                    Query query = myRef.child(mContext.getString(R.string.dbname_user_photos));
-
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    SwipeableTouchHelperCallback swipeableTouchHelperCallback = new SwipeableTouchHelperCallback(new OnItemSwiped() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                for (int i = 0; i < KeySetUIDS.size(); i++) {
-                                    String ProfilePictureLink = "";
-                                    alsImagesList.clear();
-//                                            Log.d(TAG, String.format("onDataChange:  mImagesHashMap get UID %d%s", i, mImagesHashMap.get(UserUIDList.get(i))));
-//                                            ArrayList<String> TempImagesList =  mImagesHashMap.get(UserUIDList.get(i));
-//                                            Log.d(TAG, String.format("onDataChange:  TempImagesList %s", TempImagesList));
-                                    // Log.d(TAG, String.format("onDataChange: UserUIDList %s", alsUserUIDList));
-                                    for (DataSnapshot ImageChildren : snapshot.child(KeySetUIDS.get(i)).getChildren()) {
-                                        // Log.d(TAG, "onDataChange: ImageChildren " + ImageChildren.getValue().toString());
-                                        // Log.d(TAG, "onDataChange: ImageChildren key" + ImageChildren.getKey());
-
-                                        if (ImageChildren.getKey().equals(mContext.getString(R.string.field_profile_photo))) {
-                                            if (!TextUtils.isEmpty(ImageChildren.getValue().toString()))
-                                                ProfilePictureLink = ImageChildren.getValue().toString();
-                                            else
-                                                ProfilePictureLink = "N/A";
-
-                                        } else if (!ImageChildren.getKey().equals(mContext.getString(R.string.field_profile_photo))) {
-                                            for (DataSnapshot ImageDetails : ImageChildren.getChildren()) {
-                                                if (ImageDetails.getKey().equals("imageUrl")) {
-                                                    if (!TextUtils.isEmpty(Objects.requireNonNull(ImageDetails.getValue()).toString())) {
-                                                        alsImagesList.add(ImageDetails.getValue().toString());
-                                                    } else {
-                                                        alsImagesList.add("N/A");
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    Collections.shuffle(alsImagesList);
-                                    int MAX_RESULTS = 0;
-                                    if (alsImagesList.size() > 6) {
-                                        MAX_RESULTS = 6;
-                                    } else {
-                                        MAX_RESULTS = alsImagesList.size();
-                                    }
-                                    ArrayList<String> ImagesList = new ArrayList<>();
-
-                                    for (int j = 0; j < MAX_RESULTS; j++) {
-                                        ImagesList.add(alsImagesList.get(j));
-                                    }
-                                    alsImagesList.clear();
-                                    ImagesList.add(0, ProfilePictureLink);
-                                    hmImagesHashMap.put(KeySetUIDS.get(i), ImagesList);
-                                }
-
-
-//                                        Log.d(TAG, String.format("onDataChange: ImagesList %s", ImagesList));
-//                                        Log.d(TAG, String.format("onDataChange: imagesList size %d", ImagesList.size()));
-
-
-                            } else {
-                                alsImagesList.add("N/A");
-                            }
-
-                            // Log.d(TAG, String.format("onDataChange: Random UserUIDList  %s", alsUserUIDList));
-
-
-                            SwipeableTouchHelperCallback swipeableTouchHelperCallback = new SwipeableTouchHelperCallback(new OnItemSwiped() {
-                                @Override
-                                public void onItemSwiped() {
-                                    mResultAdapter.removeItemFromTop();
-                                }
-
-                                @Override
-                                public void onItemSwipedLeft() {
-                                    Log.d(TAG, "onItemSwipedLeft: LEFT SWIPED");
-                                }
-
-                                @Override
-                                public void onItemSwipedRight() {
-                                    Log.d(TAG, "onItemSwipedRight: RIGHT SWIPED");
-                                }
-                            }) {
-                                @Override
-                                public int getAllowedSwipeDirectionsMovementFlags(RecyclerView.ViewHolder viewHolder) {
-                                    return ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
-                                }
-                            };
-
-                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeableTouchHelperCallback);
-                            itemTouchHelper.attachToRecyclerView(rResults);
-
-                            SwipeableLayoutManager swipeableLayoutManager = new SwipeableLayoutManager() {
-                                @Override
-                                public boolean canScrollVertically() {
-                                    return false;
-                                }
-                            }.setAngle(10)
-                                    .setAnimationDuratuion(450)
-                                    .setMaxShowCount(2)
-                                    .setScaleGap(0.1f)
-                                    .setTransYGap(0);
-                            mResultAdapter = new FindFriendsRecyclerViewAdapter(KeySetUIDS, hmImagesHashMap, hmDetailsFinal,
-                                    hmFinal, mActivity, mContext, swipeableLayoutManager, MyProfilePictureLink, MyUsername, MyName,
-                                    true, onMoreFilterClickListener);
-
-                            rResults.setLayoutManager(swipeableLayoutManager);
-                            rResults.setAdapter(mResultAdapter);
-                            mResultAdapter.notifyDataSetChanged();
-                            rResults.setNestedScrollingEnabled(true);
-
+                        public void onItemSwiped() {
+                            mResultAdapter.removeItemFromTop();
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
+                        public void onItemSwipedLeft() {
+                            Log.d(TAG, "onItemSwipedLeft: LEFT SWIPED");
                         }
-                    });
+
+                        @Override
+                        public void onItemSwipedRight() {
+                            Log.d(TAG, "onItemSwipedRight: RIGHT SWIPED");
+                        }
+                    }) {
+                        @Override
+                        public int getAllowedSwipeDirectionsMovementFlags(RecyclerView.ViewHolder viewHolder) {
+                            return ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
+                        }
+                    };
+
+                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeableTouchHelperCallback);
+                    itemTouchHelper.attachToRecyclerView(rResults);
+
+                    SwipeableLayoutManager swipeableLayoutManager = new SwipeableLayoutManager() {
+                        @Override
+                        public boolean canScrollVertically() {
+                            return false;
+                        }
+                    }.setAngle(10)
+                            .setAnimationDuratuion(450)
+                            .setMaxShowCount(2)
+                            .setScaleGap(0.1f)
+                            .setTransYGap(0);
+//                    mResultAdapter = new FindFriendsRecyclerViewAdapter(KeySetUIDS, hmImagesHashMap, hmDetailsFinal,
+//                            hmFinal, mActivity, mContext, swipeableLayoutManager, MyProfilePictureLink, MyUsername, MyName,
+//                            true, onMoreFilterClickListener);
+
+                    rResults.setLayoutManager(swipeableLayoutManager);
+                    rResults.setAdapter(mResultAdapter);
+                    mResultAdapter.notifyDataSetChanged();
+                    rResults.setNestedScrollingEnabled(true);
                 } else {
                     Log.d(TAG, "onDataChange: Settings snapshot doesn't exist.");
                 }
@@ -929,9 +1028,9 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
                                 Log.d(TAG, String.format("onDataChange: ShuffledUIDList %s", UsersUIDList));
                                 Log.d(TAG, String.format("onDataChange: UsernameList %s", alsUsernameList));
 
-                                mResultAdapter = new FindFriendsRecyclerViewAdapter(UsersUIDList, hmImagesHashMap, hmDetailsFinal,
-                                        hmFinal, mActivity, mContext, null, MyProfilePictureLink, MyUsername,MyName,
-                                        true, onMoreFilterClickListener);
+//                                mResultAdapter = new FindFriendsRecyclerViewAdapter(UsersUIDList, hmImagesHashMap, hmDetailsFinal,
+//                                        hmFinal, mActivity, mContext, null, MyProfilePictureLink, MyUsername, MyName,
+//                                        true, onMoreFilterClickListener);
                                 rResults.setAdapter(mResultAdapter);
                                 mResultAdapter.notifyDataSetChanged();
                                 //rResults.setNestedScrollingEnabled(false);
@@ -1057,6 +1156,78 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
         MoreFilterDialog = builder.create();
         MoreFilterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         MoreFilterDialog.show();
+    }
+
+
+    private void Init() {
+        alsUserUIDList = new ArrayList<>();
+        alsImagesList = new ArrayList<>();
+        alsUsernameList = new ArrayList<>();
+        alsFollowersList = new ArrayList<>();
+        alsFollowingList = new ArrayList<>();
+        alsCurrentFields = new ArrayList<>();
+        alsNearByUIDs = new ArrayList<>();
+        alsFinalUIDs = new ArrayList<>();
+        alsUIDsToRemove = new ArrayList<>();
+        hmImagesHashMap = new LinkedHashMap<>();
+        hmFinalUIDDetails = new LinkedHashMap<>();
+        onMoreFilterClickListener = this;
+        sUID = mAuth.getCurrentUser().getUid();
+
+        builder = new AlertDialog.Builder(this);
+        hmSelectedFiltersHashMap = new HashMap<>();
+        hmFinal = new HashMap<>();
+        hmDetailsFinal = new LinkedHashMap<>();
+        hmMyValues = new HashMap<>();
+        hmSelectedValues = new HashMap<>();
+        alsCardBGList = new ArrayList<>();
+        alsAgeList = new ArrayList<>();
+        alsFullNamesList = new ArrayList<>();
+        alsDescriptionList = new ArrayList<>();
+        alsFieldsFiltered = new ArrayList<>();
+        alsFixedUIDList = new ArrayList<>();
+
+
+        builder = new AlertDialog.Builder(mContext);
+        MoreFilterDialog = builder.create();
+
+//        ImageButton backButton = findViewById(R.id.BackButton);
+        rResults = findViewById(R.id.RV_FF_RESULT);
+        CSV_RESULT = findViewById(R.id.CSV_RESULT);
+        No_Result_cross = findViewById(R.id.No_Result_cross);
+        CV_BACK = findViewById(R.id.CV_BACK);
+        CL_FILTERS = findViewById(R.id.CL_FILTERS);
+        CV_FILTERS = findViewById(R.id.CV_FILTERS);
+        IV_NOTIFICATIONS = findViewById(R.id.IV_NOTIFICATIONS);
+        CV_NOTIF = findViewById(R.id.CV_NOTIF);
+        ATV_TITLE = findViewById(R.id.ATV_TITLE);
+
+
+//        FIND_FILTERS = findViewById(R.id.FIND_FILTERS);
+        NoDetailTV = findViewById(R.id.no_user_found_text);
+        NoDetailImageView = findViewById(R.id.missing_iv);
+//        Tutorial = findViewById(R.id.TutorialButton);
+//        MyCard = findViewById(R.id.My_Card);
+//        AIB_LIKES_MESSAGES = findViewById(R.id.AIB_LIKES_MESSAGES);
+        Typeface title = Typeface.createFromAsset(mContext.getAssets(), "fonts/Capriola.ttf");
+        ATV_TITLE.setTypeface(title, Typeface.NORMAL);
+
+        Log.d(TAG, "onCreate: ENTERING MAIN PAGE FILTERS");
+
+        linearLayoutManager = new ZoomRecyclerLayout(FriendsFilterActivity.this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rResults.setLayoutManager(linearLayoutManager);
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (preferences.getBoolean("Card", false)) {
+            SetSpotlightConfig("#eb273f", "#ffffff", "#eb273f");
+            //InitiateSequence();
+        } else {
+            //GetRandomUserUIDs();
+        }
+
     }
 
     private String GetHeading(String Fields) {

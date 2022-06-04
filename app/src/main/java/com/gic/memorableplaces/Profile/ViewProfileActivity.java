@@ -263,7 +263,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         mDisplayName.setText(settings.getDisplay_name());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());
-        mDescription.setText(settings.getCard_bio());
+        mDescription.setText(user.getAuto_desp());
         mFirebaseMethods.SetPostCount(UserID, mPosts);
         mFirebaseMethods.setFollowersCount(UserID, mFollowers);
         mFirebaseMethods.setFollowingCount(UserID, mFollowing);

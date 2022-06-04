@@ -1,7 +1,6 @@
 package com.gic.memorableplaces.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.GlideImageLoader;
-import com.gic.memorableplaces.utils.SquareImageView;
 import com.gic.memorableplaces.utils.UniversalImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SelectedSocietyRecyclerViewAdapter extends RecyclerView.Adapter<SelectedSocietyRecyclerViewAdapter.MainFeedViewHolder> {
-    private static final String TAG = "SelectedMMBRecyclerViewAdapter";
+    private static final String TAG = "SelectedSocietyRecyclerViewAdapter";
 
     //alsDetailList
     private ArrayList<String> alsDetailList;
@@ -35,7 +35,7 @@ public class SelectedSocietyRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mItemName, mCreator;
-        public SquareImageView mCover;
+        public CircleImageView mCover;
         public RelativeLayout relativeLayout;
 
         public MainFeedViewHolder(@NonNull View itemView) {
@@ -77,15 +77,15 @@ public class SelectedSocietyRecyclerViewAdapter extends RecyclerView.Adapter<Sel
         String Desp = alsDetailList.get(pos).substring((alsDetailList.get(pos).indexOf("$1*") + 3), alsDetailList.get(pos).indexOf("$2*"));
         String Cover = alsDetailList.get(pos).substring((alsDetailList.get(pos).indexOf("$2*") + 3), alsDetailList.get(pos).indexOf("$3*"));
 
-        if ((position % 2) == 0) {
-            holder.relativeLayout.setBackgroundColor(Color.parseColor("#88000000"));
-            holder.mItemName.setTextColor(Color.WHITE);
-
-        } else {
-            holder.relativeLayout.setBackgroundColor(Color.WHITE);
-            holder.mItemName.setTextColor(Color.BLACK);
-
-        }
+//        if ((position % 2) == 0) {
+//            holder.relativeLayout.setBackgroundColor(Color.parseColor("#88000000"));
+//            holder.mItemName.setTextColor(Color.WHITE);
+//
+//        } else {
+//            holder.relativeLayout.setBackgroundColor(Color.WHITE);
+//            holder.mItemName.setTextColor(Color.BLACK);
+//
+//        }
         holder.mItemName.setText(Name);
 //        UniversalImageLoader.setImage(mCoverList.get(position),holder.mCover,null,null);
         if (Cover.length() > 40)

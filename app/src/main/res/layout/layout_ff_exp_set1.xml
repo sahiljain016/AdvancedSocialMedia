@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -218,18 +219,47 @@
             app:layout_constraintTop_toBottomOf="@id/HSV_MORE_IMAGES"
             app:sizeToFit="true" />
 
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_GENDER_EXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:background="@drawable/rounded_white_background"
+            android:backgroundTint="#80FFC234"
+            android:fontFamily="@font/convergence"
+            android:maxLines="2"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="Male"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP"
+            app:sizeToFit="true" />
+
+        <TextView
+            android:id="@+id/TV_DESP_TITLE_FF_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Something about me: "
+            android:textSize="24sp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_100sdp"
+            app:layout_constraintTop_toBottomOf="@id/ATV_GENDER_EXP"/>
+
         <TextView
             android:id="@+id/TV_DESP_FF_EXP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_50sdp"
             android:ellipsize="end"
             android:maxLines="5"
             android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP" />
+            app:layout_constraintTop_toBottomOf="@id/TV_DESP_TITLE_FF_EXP" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 

@@ -70,12 +70,7 @@ public class DynamicLinesRecyclerViewAdapter extends RecyclerView.Adapter<Dynami
 
         holder.TV_TITLE.setText(alsAnchorDetails.get(pos).getAnchor_id());
         holder.TV_MESSAGE.setText("Message: "  + alsAnchorDetails.get(pos).getMessage());
-        holder.IV_GO_TO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAnchorClicked.onItemClick(alsAnchorDetails.get(pos));
-            }
-        });
+        holder.IV_GO_TO.setOnClickListener(v -> onAnchorClicked.onItemClick(alsAnchorDetails.get(pos)));
 
     }
 

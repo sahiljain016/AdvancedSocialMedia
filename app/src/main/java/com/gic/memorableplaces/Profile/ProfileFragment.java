@@ -196,7 +196,7 @@ public class ProfileFragment extends Fragment {
         menuItem.setTitle(settings.getUsername());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());
-        mDescription.setText(settings.getCard_bio());
+        mDescription.setText(user.getAuto_desp());
         mFirebaseMethods.SetPostCount(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), mPosts);
         mFirebaseMethods.setFollowersCount(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), mFollowers);
         mFirebaseMethods.setFollowingCount(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), mFollowing);

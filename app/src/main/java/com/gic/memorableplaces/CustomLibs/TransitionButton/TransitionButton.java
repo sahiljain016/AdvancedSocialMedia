@@ -9,6 +9,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -77,11 +78,11 @@ public class TransitionButton extends AppCompatButton {
 
             CharSequence dc = attrsArray.getString(R.styleable.TransitionButton_defaultColor);
             if (dc != null)
-                defaultColor = ColorUtils.parse(dc.toString());
+                defaultColor = Color.parseColor(dc.toString());
 
             CharSequence lc = attrsArray.getString(R.styleable.TransitionButton_loaderColor);
             if (lc != null)
-                loaderColor = ColorUtils.parse(lc.toString());
+                loaderColor = Color.parseColor(lc.toString());
 
             attrsArray.recycle();
         }
@@ -249,7 +250,7 @@ public class TransitionButton extends AppCompatButton {
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                setBackgroundTintList(ColorStateList.valueOf((Integer)valueAnimator.getAnimatedValue()));
+                setBackgroundTintList(ColorStateList.valueOf((Integer) valueAnimator.getAnimatedValue()));
                 refreshDrawableState();
             }
         });

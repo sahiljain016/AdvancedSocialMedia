@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CL_DATA_LOADING_SCREEN"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/_5sdp"
+    android:visibility="gone"
+    android:tag="gone">
+
+    <View
+        android:id="@+id/V_LOADING_COVER"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CD000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:tag="gone" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/GIV_LOADING"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_centerHorizontal="true"
+        android:src="@raw/loading_circle"
+        android:tag="gone"
+        android:layout_marginBottom="@dimen/_40sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TV_LOADING"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:fontFamily="@font/capriola"
+        android:text="Fetching data from server..."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/GIV_LOADING" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

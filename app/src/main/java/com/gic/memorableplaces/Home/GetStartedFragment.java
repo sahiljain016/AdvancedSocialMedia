@@ -22,8 +22,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.gic.memorableplaces.DataModels.User;
 import com.gic.memorableplaces.R;
+import com.gic.memorableplaces.RoomsDatabases.UserDetailsDatabase;
 import com.gic.memorableplaces.SignUp.CourseAndFullNameCardFragment;
+import com.gic.memorableplaces.interfaces.UserDetailsDao;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.concurrent.ExecutorService;
 
 import me.grantland.widget.AutofitTextView;
 
@@ -38,6 +46,14 @@ public class GetStartedFragment extends Fragment {
     private RelativeLayout RL_B;
     private boolean isAutoDespEnabled = false;
     //private MotionLayout ML;
+    private DatabaseReference myRef;
+    private FirebaseAuth mAuth;
+
+    private User user;
+    private UserDetailsDatabase UD_DETAILS;
+    private UserDetailsDao userDetailsDao;
+    private ExecutorService databaseWriteExecutor;
+
     private Context mContext;
     private Handler handler;
 
@@ -47,6 +63,79 @@ public class GetStartedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_get_started, container, false);
         mContext = getActivity();
         Log.d(TAG, "onCreateView: " + TAG);
+        handler = new Handler(Looper.getMainLooper());
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+
+        user = new User();
+        UD_DETAILS = UserDetailsDatabase.getDatabase(mContext);
+        databaseWriteExecutor = UD_DETAILS.databaseWriteExecutor;
+        userDetailsDao = UD_DETAILS.userDetailsDao();
+
+//        Bundle bundle = new Bundle();
+//        if (getArguments() != null) {
+//            bundle.putString(mContext.getString(R.string.field_username), getArguments().getString(mContext.getString(R.string.field_username)));
+//            bundle.putString(mContext.getString(R.string.field_description), getArguments().getString(mContext.getString(R.string.field_description)));
+//            bundle.putString(mContext.getString(R.string.field_course), getArguments().getString(mContext.getString(R.string.field_course)));
+//            bundle.putString(mContext.getString(R.string.field_display_name), getArguments().getString(mContext.getString(R.string.field_display_name)));
+//        }
+
+        final Dialog Dialog = new Dialog(mContext);
+        databaseWriteExecutor.execute(() -> {
+            user = userDetailsDao.GetAllDetails(mAuth.getCurrentUser().getUid()).get(0);
+            isAutoDespEnabled = user.isAutoDespEnabled();
+            handler.post(() -> {
+                requireNonNull(Dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+                Dialog.setContentView(R.layout.dialog_is_auto_desp_enabled);
+                ImageView IV_BOX = Dialog.findViewById(R.id.IV_BOX_CFN);
+                ImageView IV_TICK = Dialog.findViewById(R.id.IV_TICK_CFN);
+
+
+                IV_BOX.setOnClickListener(v1 -> {
+
+                    if (isAutoDespEnabled) {
+                        IV_TICK.setVisibility(View.GONE);
+                        isAutoDespEnabled = false;
+                    } else {
+                        IV_TICK.setVisibility(View.VISIBLE);
+                        isAutoDespEnabled = true;
+                    }
+
+                });
+
+                Dialog.setOnCancelListener(dialog -> {
+                    getParentFragmentManager().addOnBackStackChangedListener(() -> {
+                        Log.d(TAG, "onCreateView: fragment lists: " + getParentFragmentManager().getFragments());
+                        Log.d(TAG, "onCreateView: fragemnet count: " + getParentFragmentManager().getBackStackEntryCount());
+                    });
+                    user.setAutoDespEnabled(isAutoDespEnabled);
+                    databaseWriteExecutor.execute(() -> {
+                        myRef.child(mContext.getString(R.string.dbname_users))
+                                .child(mAuth.getCurrentUser().getUid())
+                                .child(mContext.getString(R.string.field_auto_desp_enabled))
+                                .setValue(isAutoDespEnabled);
+                        userDetailsDao.UpdateAutoDespBool(isAutoDespEnabled, mAuth.getCurrentUser().getUid());
+                        CourseAndFullNameCardFragment fragment = new CourseAndFullNameCardFragment();
+                        FragmentTransaction Transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+                        Transaction.replace(R.id.FrameLayoutCard, fragment);
+                        Transaction.addToBackStack(mContext.getString(R.string.course_and_full_name_Card_fragment));
+                        Transaction.commit();
+                    });
+                });
+
+                RL_B.setOnClickListener(v -> {
+                    Dialog.show();
+                    if (isAutoDespEnabled) {
+                        IV_TICK.setVisibility(View.VISIBLE);
+                    } else {
+                        IV_TICK.setVisibility(View.GONE);
+                    }
+                });
+            });
+
+        });
+
         ATV_MAIN_TITLE = view.findViewById(R.id.ATV_TITLE_GS);
         ATV_SERIAL_NO_1 = view.findViewById(R.id.ATV_SERIAL_NO_1_GS);
         ATV_SERIAL_NO_2 = view.findViewById(R.id.ATV_SERIAL_NO_2_GS);
@@ -67,14 +156,6 @@ public class GetStartedFragment extends Fragment {
         RL_B = view.findViewById(R.id.RL_BUTTON_GS);
         // ML = findViewById(R.id.ML_GS);
 
-        Bundle bundle = new Bundle();
-        if (getArguments() != null) {
-            bundle.putString(mContext.getString(R.string.field_username), getArguments().getString(mContext.getString(R.string.field_username)));
-            bundle.putString(mContext.getString(R.string.field_description), getArguments().getString(mContext.getString(R.string.field_description)));
-            bundle.putString(mContext.getString(R.string.field_course), getArguments().getString(mContext.getString(R.string.field_course)));
-            bundle.putString(mContext.getString(R.string.field_display_name), getArguments().getString(mContext.getString(R.string.field_display_name)));
-
-        }
 
         StartAnimation(ATV_SERIAL_NO_1, ATV_TITLE_1, ATV_SUB_TITLE_1, 0);
         StartAnimation(ATV_SERIAL_NO_2, ATV_TITLE_2, ATV_SUB_TITLE_2, 1000);
@@ -104,41 +185,6 @@ public class GetStartedFragment extends Fragment {
         ATV_SUB_TITLE_4.setTypeface(tf1, Typeface.NORMAL);
         ATV_SUB_TITLE_5.setTypeface(tf1, Typeface.NORMAL);
 
-        final Dialog Dialog = new Dialog(mContext);
-        requireNonNull(Dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        Dialog.setContentView(R.layout.dialog_is_auto_desp_enabled);
-        ImageView IV_BOX = Dialog.findViewById(R.id.IV_BOX_CFN);
-        ImageView IV_TICK = Dialog.findViewById(R.id.IV_TICK_CFN);
-
-        IV_BOX.setOnClickListener(v1 -> {
-
-            if (isAutoDespEnabled) {
-                IV_TICK.setVisibility(View.GONE);
-                isAutoDespEnabled = false;
-            } else {
-                IV_TICK.setVisibility(View.VISIBLE);
-                isAutoDespEnabled = true;
-            }
-
-        });
-
-        Dialog.setOnCancelListener(dialog -> {
-            getParentFragmentManager().addOnBackStackChangedListener(() -> {
-                Log.d(TAG, "onCreateView: fragment lists: " + getParentFragmentManager().getFragments());
-                Log.d(TAG, "onCreateView: fragemnet count: " + getParentFragmentManager().getBackStackEntryCount());
-            });
-            CourseAndFullNameCardFragment fragment = new CourseAndFullNameCardFragment();
-            bundle.putBoolean("auto_desp", isAutoDespEnabled);
-            fragment.setArguments(bundle);
-            FragmentTransaction Transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-            Transaction.replace(R.id.FrameLayoutCard, fragment);
-            Transaction.addToBackStack(mContext.getString(R.string.course_and_full_name_Card_fragment));
-            Transaction.commit();
-        });
-
-        RL_B.setOnClickListener(v -> {
-            Dialog.show();
-        });
 
         return view;
     }

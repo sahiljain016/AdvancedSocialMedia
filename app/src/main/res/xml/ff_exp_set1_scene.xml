@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
+        motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/set_unsent_end"
         motion:constraintSetStart="@id/set_unsent_start"
-        motion:autoTransition="animateToEnd"
-        motion:motionInterpolator="@string/material_motion_easing_decelerated"
-        motion:duration="1000">
-       <KeyFrameSet>
-       </KeyFrameSet>
+        motion:duration="1000"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/set_unsent_start">
@@ -19,30 +17,50 @@
             android:id="@+id/HSV_MORE_IMAGES"
             android:layout_width="0dp"
             android:layout_height="@dimen/_70sdp"
+            android:layout_marginStart="@dimen/_100sdp"
             android:layout_marginTop="@dimen/_35sdp"
             android:alpha="0"
-            android:layout_marginStart="@dimen/_100sdp"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"/>
+            motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/ATV_FULLNAME_EXP"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:alpha="0"
             android:layout_marginStart="@dimen/_100sdp"
+            android:alpha="0"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/HSV_MORE_IMAGES" />
+
+        <Constraint
+            android:id="@+id/ATV_GENDER_EXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:alpha="0"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP" />
+
+        <Constraint
+            android:id="@+id/TV_DESP_TITLE_FF_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:alpha="0"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_GENDER_EXP" />
 
         <Constraint
             android:id="@+id/TV_DESP_FF_EXP"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:alpha="0"
             android:layout_marginStart="@dimen/_100sdp"
-            motion:layout_constraintStart_toStartOf="parent"
+            android:alpha="0"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/TV_DESP_TITLE_FF_EXP" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/set_unsent_end">
@@ -53,7 +71,7 @@
             android:layout_height="@dimen/_70sdp"
             android:layout_marginTop="@dimen/_35sdp"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"/>
+            motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/ATV_FULLNAME_EXP"
@@ -61,14 +79,30 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
             motion:layout_constraintTop_toBottomOf="@id/HSV_MORE_IMAGES" />
+        <Constraint
+            android:id="@+id/ATV_GENDER_EXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP" />
+
+        <Constraint
+            android:id="@+id/TV_DESP_TITLE_FF_EXP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            motion:layout_constraintTop_toBottomOf="@id/ATV_GENDER_EXP" />
 
         <Constraint
             android:id="@+id/TV_DESP_FF_EXP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/ATV_FULLNAME_EXP" />
+            motion:layout_constraintTop_toBottomOf="@id/TV_DESP_TITLE_FF_EXP" />
     </ConstraintSet>
 </MotionScene>

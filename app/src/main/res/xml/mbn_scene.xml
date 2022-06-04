@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/TRANS_HOME_TO_FRIENDS"
+        motion:constraintSetEnd="@+id/CS_FRIENDS_FILLED"
+        motion:constraintSetStart="@id/CS_HOME_FILLED"
+        motion:duration="500"
+        motion:motionInterpolator="@string/material_motion_easing_decelerated">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/CS_HOME_FILLED">
+        <Constraint
+            android:id="@+id/IFB_HOME_MBN"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/G_2_MBN"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="ImageResource"
+                motion:customReference="@drawable/ic_home_filled" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/IFB_FRIENDS_MBN"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/G_3_MBN"
+            motion:layout_constraintStart_toEndOf="@id/G_2_MBN"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="ImageResource"
+                motion:customReference="@drawable/ic_friends" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/V_BOTTOM_INDICATOR_MBN"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/G_2_MBN"
+            motion:layout_constraintStart_toStartOf="parent"/>
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/CS_FRIENDS_FILLED">
+        <Constraint
+            android:id="@+id/IFB_FRIENDS_MBN"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/G_3_MBN"
+            motion:layout_constraintStart_toEndOf="@id/G_2_MBN"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="ImageResource"
+                motion:customReference="@drawable/ic_friends_filled" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/IFB_HOME_MBN"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/G_2_MBN"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="ImageResource"
+                motion:customReference="@drawable/ic_home" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/V_BOTTOM_INDICATOR_MBN"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/G_3_MBN"
+            motion:layout_constraintStart_toStartOf="@id/G_2_MBN"/>
+    </ConstraintSet>
+
+
+
+</MotionScene>

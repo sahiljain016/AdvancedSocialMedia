@@ -18,95 +18,84 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#039BE5"
+            android:background="#FFFFFF"
             android:elevation="@dimen/_10sdp">
 
             <TextView
-                android:id="@+id/dialogTitle"
-                android:layout_width="215dp"
+                android:id="@+id/TV_TITLE_DIALOG_UP"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="10dp"
-                android:shadowColor="@android:color/black"
-                android:shadowDx="10"
-                android:shadowDy="10"
-                android:shadowRadius="5"
-                android:text="Uploading Your Post!"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/capriola"
+                android:text="Uploading Your Photos (1/5)"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+            <View
+                android:id="@+id/V_LINE_UP"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/TV_TITLE_DIALOG_UP"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:background="#AEAEAE" />
 
             <TextView
-                android:id="@+id/desp_missing_items"
+                android:id="@+id/TV_FUNNY_NOTE_DIALOG_UP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dialogTitle"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_below="@id/V_LINE_UP"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="5dp"
+                android:fontFamily="@font/capriola"
+                android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Tip: Type SXC# before words to make it a tag"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:text="Rock bunny is sending your image to storage!"
+                android:textAlignment="gravity"
+                android:textColor="#7C7C7C"
+                android:textSize="16sp" />
 
 
             <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/pacman_loading"
+                android:id="@+id/GIV_FUNNY_DIALOG_UP"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_below="@id/desp_missing_items"
+                android:layout_below="@id/TV_FUNNY_NOTE_DIALOG_UP"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:scaleType="center"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:scaleType="center"
                 android:src="@raw/rock_bunny"
                 android:visibility="visible" />
 
-
-
-
-            <ImageView
-                android:id="@+id/icon_upload"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_below="@id/pacman_loading"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:src="@drawable/ic_upload" />
-
             <TextView
-                android:id="@+id/UploadProgressTV"
+                android:id="@+id/TV_UPLOAD_PERC_D_UP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pacman_loading"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="@dimen/_35sdp"
-                android:layout_marginEnd="1dp"
-                android:layout_toEndOf="@+id/icon_upload"
-                android:hint=""
-                android:paddingStart="10dp"
-                android:paddingEnd="5dp"
-                android:textAlignment="viewStart"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_below="@id/GIV_FUNNY_DIALOG_UP"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="98%"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                android:id="@+id/UploadProgressBar"
+                android:id="@+id/RPB_UPLOAD_D_UP"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_5sdp"
-                android:layout_below="@id/icon_upload"
+                android:layout_below="@id/TV_UPLOAD_PERC_D_UP"
+                android:layout_marginTop="@dimen/_7sdp"
                 app:rpbBackgroundColor="#FDD835"
                 app:rpbProgressColor="#1E88E5"
                 app:rpbShowProgressText="false" />

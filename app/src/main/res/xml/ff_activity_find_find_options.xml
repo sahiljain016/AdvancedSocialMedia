@@ -13,18 +13,49 @@
     <!--    </Transition>-->
 
     <Transition
-        motion:constraintSetEnd="@+id/CS_CARD_FF_END"
-        motion:constraintSetStart="@+id/CS_CARD_FF_START"
+        motion:constraintSetEnd="@+id/CS_CARD_OPTIONS_FF_END"
+        motion:constraintSetStart="@+id/CS_CARD_OPTIONS_FF_START"
         motion:duration="1500">
-<!--        <OnClick motion:targetId="@id/IV_OPEN_OPTIONS"-->
-<!--            motion:clickAction="transitionToEnd"/>-->
-        <KeyFrameSet>
-        </KeyFrameSet>
+        <!--        <OnClick motion:targetId="@id/IV_OPEN_OPTIONS"-->
+        <!--            motion:clickAction="transitionToEnd"/>-->
+        <KeyFrameSet></KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/CS_CARD_FF_START"
 
-        >
+    <ConstraintSet android:id="@+id/CS_CARD_FF_START">
+
+        <Constraint
+            android:id="@+id/CV_MAIN_FF"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            motion:cardCornerRadius="@dimen/_25sdp"
+            motion:layout_constraintBottom_toTopOf="@id/V_BOTTOM_MARGIN"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="Radius"
+                motion:customFloatValue="60" />
+        </Constraint>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/CS_CARD_FF_END">
+
+        <Constraint
+            android:id="@+id/CV_MAIN_FF"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toTopOf="@id/G_55_H_FF"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="Radius"
+                motion:customFloatValue="0" />
+        </Constraint>
+
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/CS_CARD_OPTIONS_FF_START">
 
         <Constraint
             android:id="@+id/IV_OPEN_OPTIONS"
@@ -33,23 +64,19 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-
             android:padding="@dimen/_10sdp"
-            android:rotation="0"
-
-            motion:layout_constraintBottom_toBottomOf="@id/ATV_USERNAME_FFR"
+            android:rotation="90"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_DESP_FFR"
             motion:layout_constraintEnd_toEndOf="parent" />
 
         <Constraint
             android:id="@+id/IV_CARD_DETAILS"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:visibility="invisible"
-            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            motion:layout_constraintBottom_toTopOf="@id/IV_OPEN_OPTIONS"
+            motion:layout_constraintStart_toEndOf="parent" />
 
         <Constraint
             android:id="@+id/IV_LIKE_FF"
@@ -59,8 +86,8 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:visibility="invisible"
-            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            motion:layout_constraintBottom_toTopOf="@id/IV_CARD_DETAILS"
+            motion:layout_constraintStart_toEndOf="parent" />
 
         <Constraint
             android:id="@+id/IV_FOLLOW_FF"
@@ -70,8 +97,8 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:visibility="invisible"
-            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            motion:layout_constraintBottom_toTopOf="@id/IV_LIKE_FF"
+            motion:layout_constraintStart_toEndOf="parent" />
 
         <Constraint
             android:id="@+id/IV_SAY_HI_FF"
@@ -81,13 +108,13 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:visibility="invisible"
-            motion:layout_constraintBottom_toBottomOf="@id/IV_OPEN_OPTIONS"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            motion:layout_constraintBottom_toTopOf="@id/IV_FOLLOW_FF"
+            motion:layout_constraintStart_toEndOf="parent" />
 
     </ConstraintSet>
 
 
-    <ConstraintSet android:id="@+id/CS_CARD_FF_END"
+    <ConstraintSet android:id="@+id/CS_CARD_OPTIONS_FF_END"
 
         >
         <Constraint
@@ -99,10 +126,9 @@
             android:layout_marginEnd="@dimen/_15sdp"
 
             android:padding="@dimen/_10sdp"
-            android:rotation="180"
-
-            motion:layout_constraintBottom_toBottomOf="@id/ATV_USERNAME_FFR"
-            motion:layout_constraintEnd_toEndOf="parent"  />
+            android:rotation="-90"
+            motion:layout_constraintBottom_toBottomOf="@id/ATV_DESP_FFR"
+            motion:layout_constraintEnd_toEndOf="parent" />
 
         <Constraint
             android:id="@+id/IV_CARD_DETAILS"
@@ -149,4 +175,4 @@
             motion:layout_constraintEnd_toEndOf="parent" />
 
     </ConstraintSet>
-   </MotionScene>
+</MotionScene>

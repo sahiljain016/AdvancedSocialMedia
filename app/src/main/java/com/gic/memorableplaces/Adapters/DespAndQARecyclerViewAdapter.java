@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +31,10 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
     private static final String TAG = "FindFriendsRecyclerViewAdapter";
 
     //Variables
-    private final ArrayList<String> alsDespList;
+    private final ArrayList<String> alsDespList, alsQuesList;
     private final Context mContext;
     private final boolean isSmallText;
-    private final String sUID,sMyPPLink,sMyUsername,sPPLink,sUsername;
+    private final String sUID, sMyPPLink, sMyUsername, sPPLink, sUsername;
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private AnimatedRecyclerView ARV;
@@ -43,7 +44,7 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
 
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView Desp_TV;
+        public TextView Desp_TV, DESP_TITLE;
         public AutofitTextView ATV_SERIAL_NO, ATV_SEND;
         public EditText ET_LINE;
 
@@ -54,6 +55,7 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
 
             Desp_TV = itemView.findViewById(R.id.Desp_TV);
             ET_LINE = itemView.findViewById(R.id.ET_ML1);
+            DESP_TITLE = itemView.findViewById(R.id.DESP_TITLE);
             ATV_SERIAL_NO = itemView.findViewById(R.id.ATV_SERIAL_NO);
             ATV_SEND = itemView.findViewById(R.id.IV_GO_TO_ANCHOR);
 
@@ -62,11 +64,12 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
 
     }
 
-    public DespAndQARecyclerViewAdapter(ArrayList<String> DespList, Context context, boolean smallText,String UID,String MyPPLink,String PPLink ,
-                                        String MyUsername,String Username, AnimatedRecyclerView rv,
+    public DespAndQARecyclerViewAdapter(ArrayList<String> DespList, ArrayList<String> QuesList, Context context, boolean smallText, String UID, String MyPPLink, String PPLink,
+                                        String MyUsername, String Username, AnimatedRecyclerView rv,
                                         AlertDialog alertDialog, GifImageView gifImageView) {
 
         alsDespList = DespList;
+        alsQuesList = QuesList;
         mContext = context;
         isSmallText = smallText;
         sUID = UID;
@@ -104,12 +107,12 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
         if (isSmallText)
             holder.ATV_SERIAL_NO.setText((position + 1) + ".");
 
-        if (!alsDespList.isEmpty() && position < alsDespList.size()) {
-            if (isSmallText) {
-                holder.ET_LINE.setText(alsDespList.get(position));
-            } else {
-                holder.Desp_TV.setText(alsDespList.get(position));
-            }
+
+        if (isSmallText) {
+            holder.ET_LINE.setText(alsDespList.get(position));
+        } else {
+            holder.Desp_TV.setText(Html.fromHtml(alsDespList.get(position), Html.FROM_HTML_MODE_COMPACT));
+            holder.DESP_TITLE.setText(Html.fromHtml(alsQuesList.get(position), Html.FROM_HTML_MODE_COMPACT));
         }
 
         if (isSmallText) {
@@ -121,8 +124,8 @@ public class DespAndQARecyclerViewAdapter extends RecyclerView.Adapter<DespAndQA
                 drawable.addAnimationListener(i -> new Handler(Looper.getMainLooper()).postDelayed(() -> MessageDialog.dismiss(), 1000));
                 Message_Sent_GIF.setImageDrawable(drawable);
                 FirebaseMethods firebaseMethods = new FirebaseMethods(mContext);
-                firebaseMethods.addFollowOrMessageToFilterList(sUID,sUsername,sMyUsername,sMyPPLink,holder.ET_LINE.getText().toString()
-                        ,sPPLink,"Type1",mContext.getString(R.string.field_message_list_for_notifications),
+                firebaseMethods.addFollowOrMessageToFilterList(sUID, sUsername, sMyUsername, sMyPPLink, holder.ET_LINE.getText().toString()
+                        , sPPLink, "Type1", mContext.getString(R.string.field_message_list_for_notifications),
                         mContext.getString(R.string.field_message_sent));
 
 

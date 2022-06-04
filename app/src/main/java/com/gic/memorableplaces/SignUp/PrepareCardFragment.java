@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.gic.memorableplaces.Home.GetStartedFragment;
 import com.gic.memorableplaces.R;
 
 
@@ -21,7 +22,6 @@ public class PrepareCardFragment extends Fragment {
     private String sUsername;
 
     private Context mContext;
-
 
 
     @Nullable
@@ -35,13 +35,12 @@ public class PrepareCardFragment extends Fragment {
 
         }
 
-        final CourseAndFullNameCardFragment courseAndFullNameCardFragment = new CourseAndFullNameCardFragment();
+        final GetStartedFragment getStartedFragment = new GetStartedFragment();
 
         Bundle CourseBundle = new Bundle();
         CourseBundle.putString(requireActivity().getString(R.string.field_username), sUsername);
 
-        ChangeFragment(courseAndFullNameCardFragment, mContext.getString(R.string.course_and_full_name_Card_fragment), CourseBundle);
-
+        ChangeFragment(getStartedFragment, mContext.getString(R.string.get_started_fragment), CourseBundle);
 
 
         return view;

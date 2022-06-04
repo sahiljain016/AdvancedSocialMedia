@@ -10,21 +10,21 @@
         android:id="@+id/ML_SET_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutDescription="@xml/ff_exp_set3_scene"
-        android:clickable="false">
+        android:clickable="false"
+        app:layoutDescription="@xml/ff_exp_set3_scene">
 
         <me.grantland.widget.AutofitTextView
             android:id="@+id/ATV_OPTIONS_TITLE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/capriola"
             android:maxLines="1"
             android:text="Options"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/CL_OPTIONS_EXP"
-            app:sizeToFit="true" />
+            app:sizeToFit="true"
+            tools:layout_editor_absoluteX="14dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CL_OPTIONS_EXP"
@@ -52,6 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/IV_FF_EXP_VS"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingBottom="@dimen/_5sdp"
@@ -95,6 +96,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/IV_LIKE_EXP"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_like_without_bubble" />
@@ -116,6 +118,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/IV_SEND_HI_EXP"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_send_bubble" />
@@ -124,6 +127,7 @@
 
 
         <me.grantland.widget.AutofitTextView
+            android:id="@+id/ATV_TITLE_EXP_F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_40sdp"
@@ -132,7 +136,8 @@
             android:text="@string/title_filters"
             android:textColor="#000000"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_1"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/HSV_FILTER_LAYER_2"
             app:layout_constraintTop_toTopOf="parent"
             app:sizeToFit="true"
             tools:layout_editor_absoluteX="4dp" />
@@ -153,299 +158,307 @@
         <!--        android:textSize="16sp"-->
         <!--        app:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_1"-->
         <!--        app:sizeToFit="true" />-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LL_FILTER_LAYER_1"
+        <HorizontalScrollView
+            android:id="@+id/HSV_FILTER_LAYER_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_2">
+            android:layout_marginTop="@dimen/_30sdp"
+            app:layout_constraintBottom_toTopOf="@id/HSV_FILTER_LAYER_2"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
-                android:id="@+id/RL_FILTER_1"
-                android:layout_width="wrap_content"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_rounded_grey_stroke"
-                android:padding="@dimen/_5sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/TV_FILTER_1_exp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/_80sdp"
-                    android:maxLines="1"
-                    android:textAlignment="center"
-                    android:textColor="#3A3A3A"
-                    android:textSize="20sp" />
-
-                <View
-                    android:id="@+id/V_DIVIDER_exp"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_alignTop="@id/TV_FILTER_1_exp"
-                    android:layout_alignBottom="@id/TV_FILTER_1_exp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_toEndOf="@id/TV_FILTER_1_exp"
-                    android:background="@color/black" />
-
-                <ImageView
-                    android:id="@+id/IV_FILTER_ICON"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/V_DIVIDER_exp"/>
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/RL_FILTER_2"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LL_FILTER_LAYER_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-android:visibility="gone"
-                android:background="@drawable/background_rounded_grey_stroke"
                 android:padding="@dimen/_5sdp"
-                app:layout_constraintStart_toEndOf="@id/RL_FILTER_1"
+                app:layout_constraintBottom_toTopOf="@id/LL_FILTER_LAYER_2"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/TV_FILTER_2_exp"
+                <RelativeLayout
+                    android:id="@+id/RL_FILTER_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/_80sdp"
-                    android:maxLines="1"
-                    android:textAlignment="center"
-                    android:textColor="#3A3A3A"
-                    android:textSize="20sp" />
+                    android:background="@drawable/background_rounded_grey_stroke"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <View
-                    android:id="@+id/V_DIVIDER_2_exp"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_alignTop="@id/TV_FILTER_2_exp"
-                    android:layout_alignBottom="@id/TV_FILTER_2_exp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_toEndOf="@id/TV_FILTER_2_exp"
-                    android:background="@color/black" />
+                    <TextView
+                        android:id="@+id/TV_FILTER_1_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
 
-                <ImageView
-                    android:id="@+id/IV_FILTER_ICON_2"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/V_DIVIDER_2_exp" />
-            </RelativeLayout>
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="#3A3A3A"
+                        android:textSize="20sp" />
 
-            <RelativeLayout
-                android:id="@+id/RL_FILTER_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:background="@drawable/background_rounded_grey_stroke"
-                android:padding="@dimen/_5sdp"
-                app:layout_constraintStart_toEndOf="@id/RL_FILTER_2"
-                app:layout_constraintTop_toTopOf="parent">
+                    <View
+                        android:id="@+id/V_DIVIDER_exp"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@id/TV_FILTER_1_exp"
+                        android:layout_alignBottom="@id/TV_FILTER_1_exp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:layout_toEndOf="@id/TV_FILTER_1_exp"
+                        android:background="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/IV_FILTER_ICON"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/V_DIVIDER_exp" />
+                </RelativeLayout>
 
 
-                <TextView
-                    android:id="@+id/TV_FILTER_3_exp"
+                <RelativeLayout
+                    android:id="@+id/RL_FILTER_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/_80sdp"
-                    android:maxLines="1"
-                    android:textAlignment="center"
-                    android:textColor="#3A3A3A"
-                    android:textSize="20sp" />
-
-                <View
-                    android:id="@+id/V_DIVIDER_3_exp"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_alignTop="@id/TV_FILTER_3_exp"
-                    android:layout_alignBottom="@id/TV_FILTER_3_exp"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_toEndOf="@id/TV_FILTER_3_exp"
-                    android:background="@color/black" />
+                    android:background="@drawable/background_rounded_grey_stroke"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_1"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/IV_FILTER_ICON_3"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/V_DIVIDER_3_exp"/>
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/TV_FILTER_2_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="#3A3A3A"
+                        android:textSize="20sp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LL_FILTER_LAYER_2"
+                    <View
+                        android:id="@+id/V_DIVIDER_2_exp"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@id/TV_FILTER_2_exp"
+                        android:layout_alignBottom="@id/TV_FILTER_2_exp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:layout_toEndOf="@id/TV_FILTER_2_exp"
+                        android:background="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/IV_FILTER_ICON_2"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/V_DIVIDER_2_exp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RL_FILTER_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:background="@drawable/background_rounded_grey_stroke"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_2"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/TV_FILTER_3_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="#3A3A3A"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:id="@+id/V_DIVIDER_3_exp"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@id/TV_FILTER_3_exp"
+                        android:layout_alignBottom="@id/TV_FILTER_3_exp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:layout_toEndOf="@id/TV_FILTER_3_exp"
+                        android:background="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/IV_FILTER_ICON_3"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/V_DIVIDER_3_exp" />
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/HSV_FILTER_LAYER_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_5sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
-            android:paddingStart="@dimen/_5sdp"
             android:paddingBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@id/ATV_OPTIONS_TITLE">
 
-            <RelativeLayout
-                android:id="@+id/RL_FILTER_4"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LL_FILTER_LAYER_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_rounded_grey_stroke"
-                android:padding="@dimen/_5sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:visibility="gone"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/ATV_OPTIONS_TITLE">
 
-                <TextView
-                    android:id="@+id/TV_FILTER_4_exp"
+                <RelativeLayout
+                    android:id="@+id/RL_FILTER_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/_80sdp"
-                    android:maxLines="1"
-                    android:textAlignment="center"
-                    android:textColor="#3A3A3A"
-                    android:textSize="20sp" />
+                    android:background="@drawable/background_rounded_grey_stroke"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <View
-                    android:id="@+id/V_DIVIDER_4_exp"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_alignTop="@id/TV_FILTER_4_exp"
-                    android:layout_alignBottom="@id/TV_FILTER_4_exp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_toEndOf="@id/TV_FILTER_4_exp"
-                    android:background="@color/black" />
+                    <TextView
+                        android:id="@+id/TV_FILTER_4_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
 
-                <ImageView
-                    android:id="@+id/IV_FILTER_ICON_4"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/V_DIVIDER_4_exp"/>
-            </RelativeLayout>
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="#3A3A3A"
+                        android:textSize="20sp" />
 
-            <RelativeLayout
-                android:id="@+id/RL_FILTER_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:visibility="gone"
-                android:padding="@dimen/_5sdp"
-                app:layout_constraintStart_toEndOf="@id/RL_FILTER_4"
-                app:layout_constraintTop_toTopOf="parent">
+                    <View
+                        android:id="@+id/V_DIVIDER_4_exp"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@id/TV_FILTER_4_exp"
+                        android:layout_alignBottom="@id/TV_FILTER_4_exp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:layout_toEndOf="@id/TV_FILTER_4_exp"
+                        android:background="@color/black" />
 
-                <TextView
-                    android:id="@+id/TV_FILTER_5_exp"
+                    <ImageView
+                        android:id="@+id/IV_FILTER_ICON_4"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/V_DIVIDER_4_exp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RL_FILTER_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/_80sdp"
-                    android:maxLines="1"
-                    android:textAlignment="center"
-                    android:textColor="@color/Black"
-                    android:textSize="20sp" />
-
-                <View
-                    android:id="@+id/V_DIVIDER_5_exp"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_alignTop="@id/TV_FILTER_5_exp"
-                    android:layout_alignBottom="@id/TV_FILTER_5_exp"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_toEndOf="@id/TV_FILTER_5_exp"
-                    android:background="@color/black" />
+                    android:background="@drawable/background_rounded_grey_stroke"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_4"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/IV_FILTER_ICON_5"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/V_DIVIDER_5_exp"/>
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/TV_FILTER_5_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
 
-            <RelativeLayout
-                android:id="@+id/RL_FILTER_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:visibility="gone"
-                android:background="@drawable/background_rounded_grey_stroke"
-                android:padding="@dimen/_5sdp"
-                app:layout_constraintStart_toEndOf="@id/RL_FILTER_5"
-                app:layout_constraintTop_toTopOf="parent">
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/Black"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/TV_FILTER_6_exp"
+                    <View
+                        android:id="@+id/V_DIVIDER_5_exp"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@id/TV_FILTER_5_exp"
+                        android:layout_alignBottom="@id/TV_FILTER_5_exp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:layout_toEndOf="@id/TV_FILTER_5_exp"
+                        android:background="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/IV_FILTER_ICON_5"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/V_DIVIDER_5_exp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RL_FILTER_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/_80sdp"
-                    android:maxLines="1"
-                    android:textAlignment="center"
-                    android:textColor="@color/unmatched_filter_text"
-                    android:textSize="20sp" />
-
-                <View
-                    android:id="@+id/V_DIVIDER_6_exp"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_alignTop="@id/TV_FILTER_6_exp"
-                    android:layout_alignBottom="@id/TV_FILTER_6_exp"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_toEndOf="@id/TV_FILTER_6_exp"
-                    android:background="@color/black" />
+                    android:background="@drawable/background_rounded_grey_stroke"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/RL_FILTER_5"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/IV_FILTER_ICON_6"
-                    android:layout_width="44dp"
-                    android:layout_height="35dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/V_DIVIDER_6_exp" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/TV_FILTER_6_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/unmatched_filter_text"
+                        android:textSize="20sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <View
+                        android:id="@+id/V_DIVIDER_6_exp"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_alignTop="@id/TV_FILTER_6_exp"
+                        android:layout_alignBottom="@id/TV_FILTER_6_exp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:layout_toEndOf="@id/TV_FILTER_6_exp"
+                        android:background="@color/black" />
 
+                    <ImageView
+                        android:id="@+id/IV_FILTER_ICON_6"
+                        android:layout_width="44dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/V_DIVIDER_6_exp" />
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </RelativeLayout>

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,8 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
 import com.jem.rubberpicker.RubberRangePicker;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
 
 import java.util.Calendar;
 
@@ -71,9 +74,42 @@ public class AgeAndBirthdateFragment extends Fragment {
         ImageFilterView IFV_BACK = view.findViewById(R.id.IFV_BACK_BUTTON_AB);
         AutofitTextView ATV_AGE_RANGE_TITLE = view.findViewById(R.id.ATV_AGE_SELECTION_AB);
 
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#9bf6ff"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
 
 
+        SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Switch Profiles")
+                .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                .target(IV_SWITCH_INPUT)
+                .usageId("SWITCH")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
 
+
+        new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Privacy Button")
+                .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                .target(IV_PRIVACY)
+                .usageId("PRIVACY")
+                .setListener(spotlightViewId -> {
+                    SB_SWITCH.show();
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                }).show();
 
         String sOtherAgeRange = "N/A";
         if (getArguments() != null) {
@@ -99,13 +135,17 @@ public class AgeAndBirthdateFragment extends Fragment {
         SetEditTextListeners();
 
         IFV_BACK.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString(mContext.getString(R.string.field_match_age_range), RSB.getCurrentStartValue() + "-" + RSB.getCurrentEndValue());
-            bundle.putString(mContext.getString(R.string.field_birth_date), sBirthdate);
-            bundle.putLong(mContext.getString(R.string.field_age), lMyAge);
-            bundle.putBoolean(mContext.getString(R.string.field_is_private), isLocked);
-            getParentFragmentManager().setFragmentResult("requestKey", bundle);
-            requireFragmentManager().beginTransaction().remove(AgeAndBirthdateFragment.this).commit();
+            if (lMyAge > 15) {
+                Bundle bundle = new Bundle();
+                bundle.putString(mContext.getString(R.string.field_match_age_range), RSB.getCurrentStartValue() + "-" + RSB.getCurrentEndValue());
+                bundle.putString(mContext.getString(R.string.field_birth_date), sBirthdate);
+                bundle.putLong(mContext.getString(R.string.field_age), lMyAge);
+                bundle.putBoolean(mContext.getString(R.string.field_is_private), isLocked);
+                getParentFragmentManager().setFragmentResult("requestKey", bundle);
+                requireFragmentManager().beginTransaction().remove(AgeAndBirthdateFragment.this).commit();
+            } else {
+                Toast.makeText(mContext, "Minimum age required is 15 Years.", Toast.LENGTH_SHORT).show();
+            }
         });
         IV_SWITCH_INPUT.setOnClickListener(v -> {
             if (ML.getProgress() == 0.0) {
@@ -121,18 +161,14 @@ public class AgeAndBirthdateFragment extends Fragment {
 
 
         if (sOtherAgeRange.equals("N/A")) {
-
             RSB.setCurrentStartValue(18);
             RSB.setCurrentEndValue(25);
-
             ATV_AGE_RANGE_TITLE.setText("Age between " + 18 + " and " + 25);
         } else {
-
             int StartValue = Integer.parseInt(sOtherAgeRange.substring(0, sOtherAgeRange.indexOf("-")));
             RSB.setCurrentStartValue(StartValue);
             int EndValue = Integer.parseInt(sOtherAgeRange.substring(sOtherAgeRange.indexOf("-") + 1));
             RSB.setCurrentEndValue(EndValue);
-
             ATV_AGE_RANGE_TITLE.setText("Age between " + StartValue + " and " + EndValue);
         }
         RSB.setOnRubberRangePickerChangeListener(new RubberRangePicker.OnRubberRangePickerChangeListener() {
@@ -143,12 +179,10 @@ public class AgeAndBirthdateFragment extends Fragment {
 
             @Override
             public void onStartTrackingTouch(@NonNull RubberRangePicker rubberRangePicker, boolean b) {
-
             }
 
             @Override
             public void onStopTrackingTouch(@NonNull RubberRangePicker rubberRangePicker, boolean b) {
-
             }
         });
 
@@ -163,8 +197,27 @@ public class AgeAndBirthdateFragment extends Fragment {
                 Calendar c = Calendar.getInstance();
                 c.setTimeInMillis(System.currentTimeMillis());
                 int mYear = c.get(Calendar.YEAR);
-                ATV_AGE.setText("Age: " + ((mYear - year1) - 1) + " years old");
-                lMyAge = ((mYear - year1) - 1);
+                int mMonth = c.get(Calendar.MONTH) + 1;
+                int mDate = c.get(Calendar.DATE);
+                Log.d(TAG, "afterTextChanged: Current Date: " + mDate + "/" + mMonth + "/" + mYear);
+                Log.d(TAG, "afterTextChanged: Entered Date: " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1);
+
+                if (mMonth < (monthOfYear + 1)) {
+                    ATV_AGE.setText("Age: " + ((mYear - year1) - 1) + " years old");
+                    lMyAge = ((mYear - year1) - 1);
+                } else if (mMonth == (monthOfYear + 1)) {
+                    if (mDate < dayOfMonth) {
+                        ATV_AGE.setText("Age: " + ((mYear - year1) - 1) + " years old");
+                        lMyAge = ((mYear - year1) - 1);
+                    } else {
+                        ATV_AGE.setText("Age: " + (mYear - year1) + " years old");
+                        lMyAge = (mYear - year1);
+                    }
+                } else {
+                    ATV_AGE.setText("Age: " + (mYear - year1) + " years old");
+                    lMyAge = (mYear - year1);
+                }
+
 
                 //  Log.d(TAG, "onDateChanged: month: " + monthOfYear);
                 if (dayOfMonth < 10)
@@ -308,24 +361,40 @@ public class AgeAndBirthdateFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (s.length() == 4 && !isCalendarDate) {
                     Calendar c = Calendar.getInstance();
-                    c.setTimeInMillis(DP_AB.getMaxDate());
+                    c.setTimeInMillis(System.currentTimeMillis());
                     int mYear = c.get(Calendar.YEAR);
+                    int mDate = c.get(Calendar.DATE);
+                    int mMonth = c.get(Calendar.MONTH) + 1;
                     if (Integer.parseInt(s.toString()) <= mYear) {
 
 
                         DP_AB.updateDate(Integer.parseInt(ET_YEAR.getText().toString()), Integer.parseInt(ET_MONTH.getText().toString()) - 1, Integer.parseInt(ET_DATE.getText().toString()));
 
                         sBirthdate = DP_AB.getDayOfMonth() + "/" + (DP_AB.getMonth() + 1) + "/" + DP_AB.getYear();
-                        ATV_AGE.setText("Age: " + ((mYear - DP_AB.getYear()) - 1) + " years old");
-                        lMyAge = ((mYear - DP_AB.getYear()) - 1);
-
+                        Log.d(TAG, "afterTextChanged: Current Date: " + mDate + "/" + mMonth + "/" + mYear);
+                        Log.d(TAG, "afterTextChanged: Entered Date: " + Integer.parseInt(ET_DATE.getText().toString()) + "/" + Integer.parseInt(ET_MONTH.getText().toString()) + "/" + Integer.parseInt(ET_YEAR.getText().toString()));
+                        if (mMonth < Integer.parseInt(ET_MONTH.getText().toString())) {
+                            ATV_AGE.setText("Age: " + ((mYear - DP_AB.getYear()) - 1) + " years old");
+                            lMyAge = ((mYear - DP_AB.getYear()) - 1);
+                        } else if (mMonth == Integer.parseInt(ET_MONTH.getText().toString())) {
+                            if (mDate < Integer.parseInt(ET_DATE.getText().toString())) {
+                                ATV_AGE.setText("Age: " + ((mYear - DP_AB.getYear()) - 1) + " years old");
+                                lMyAge = ((mYear - DP_AB.getYear()) - 1);
+                            } else {
+                                ATV_AGE.setText("Age: " + ((mYear - DP_AB.getYear())) + " years old");
+                                lMyAge = ((mYear - DP_AB.getYear()));
+                            }
+                        } else {
+                            ATV_AGE.setText("Age: " + ((mYear - DP_AB.getYear())) + " years old");
+                            lMyAge = ((mYear - DP_AB.getYear()));
+                        }
                         // Log.d(TAG, "afterTextChanged: day: " + DP_AB.getDayOfMonth());
                         //Log.d(TAG, "afterTextChanged: month: " + DP_AB.getMonth());
                         //Log.d(TAG, "afterTextChanged: years: " + DP_AB.getYear());
                         isCalendarDate = true;
                         return;
                     } else {
-                        MiscTools.InflateBalloonTooltip(mContext, "What are you a time traveller?", 0, ET_YEAR);
+                        MiscTools.InflateBalloonTooltip(mContext, "Are you a time traveller?", 0, ET_YEAR);
 
                     }
                 }

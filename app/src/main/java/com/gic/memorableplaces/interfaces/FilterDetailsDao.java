@@ -37,6 +37,9 @@ interface FilterDetailsDao {
     @Query("UPDATE filter_details SET society_in_college = :society WHERE type = :type")
     void UpdateSociety(ArrayList<String> society, String type);
 
+    @Query("UPDATE filter_details SET titles_posts = :titles_posts WHERE type = :type")
+    void UpdateTitles(ArrayList<String> titles_posts, String type);
+
     @Query("UPDATE filter_details SET hobbies = :hobbies WHERE type = :type")
     void UpdateHobbies(ArrayList<String> hobbies, String type);
 
@@ -51,6 +54,10 @@ interface FilterDetailsDao {
 
     @Query("UPDATE filter_details SET movies = :movie WHERE type = :type")
     void UpdateMovie(ArrayList<String> movie, String type);
+
+    @Query("UPDATE filter_details SET my_loc = :loc,my_dd=:dd WHERE type = :type")
+    void UpdateMyLocAndDD(String loc, ArrayList<String> dd, String type);
+
 
     @Query("SELECT * FROM filter_details")
     List<FilterDetails> GetAllFilterDetails();

@@ -27,11 +27,6 @@ public class SignUpActivity extends AppCompatActivity {
             if (getIntent().getStringExtra("status").equals("not_done")) {
                 Bundle bundle = new Bundle();
                 bundle.putString("status", "not_done");
-
-                bundle.putString(mContext.getString(R.string.field_username),getIntent().getStringExtra(mContext.getString(R.string.field_username)));
-                bundle.putString(mContext.getString(R.string.field_description),getIntent().getStringExtra(mContext.getString(R.string.field_description)));
-                bundle.putString(mContext.getString(R.string.field_course),getIntent().getStringExtra(mContext.getString(R.string.field_course)));
-                bundle.putString(mContext.getString(R.string.field_display_name),getIntent().getStringExtra(mContext.getString(R.string.field_display_name)));
                 fragment.setArguments(bundle);
             }
         }

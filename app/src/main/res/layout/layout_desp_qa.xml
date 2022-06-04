@@ -7,15 +7,14 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:cardCornerRadius="@dimen/_20sdp"
         app:cardElevation="@dimen/_3sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,26 +28,35 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/convergence"
-                android:text="Description"
+                android:padding="@dimen/_10sdp"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <View
+                android:id="@+id/V_DIVIDER_DQA"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/DESP_TITLE"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:background="#8C8C8C" />
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/DESP_TITLE"
+                android:layout_below="@id/V_DIVIDER_DQA"
                 android:layout_alignParentBottom="true">
 
                 <TextView
                     android:id="@+id/Desp_TV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_9sdp"
-                    android:text="I am Rakhi Jain from Hansraj College: B.Com (Hons.) pursuing B.Com (Hons.). I am in the Third Year of my College Life. I was born on 25/3/1976 &amp; some quick math says that I am 44 years old. My zodiac Sign is Aries. I identify as Female. The pronouns that I prefer are She/Her. Now, Here are some insights into my choices over common subjects in life. I am a part of Placement Cell Hansraj College. These were the best societies for me in my college. Few areas that are interesting to me include teaching, cooking, you can also call them my hobbies. I also like to read a few books, my best reads are false. So, that's it about me. Thanks for reading. Bye!"
+                    android:padding="@dimen/_5sdp"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
             </ScrollView>
         </RelativeLayout>
 

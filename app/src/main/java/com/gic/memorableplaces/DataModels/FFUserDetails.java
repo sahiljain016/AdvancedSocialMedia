@@ -4,15 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class FFUserDetails implements Serializable {
-    private String FullName;
+    private String TargetDisplayName;
     private String MyName;
     private String Desp;
     private String TargetUID;
+    private String TargetGender;
     private String TargetUsername;
     private String MyUsername;
     private String MyProfilePic;
     private String FiltersMatched;
     private ArrayList<String> alsImagesList;
+
     private ArrayList<String> alsTargetFilterList;
     private ArrayList<String> alsMyFilterList;
     private ArrayList<Integer> aliIconList;
@@ -22,17 +24,17 @@ public class FFUserDetails implements Serializable {
 
     }
 
-    public FFUserDetails(String fullName, String myName, String desp, String targetUID, String targetUsername, String myUsername,
-                         String myProfilePic, String filtersMatched, ArrayList<String> alsImagesList,
+    public FFUserDetails(String targetDisplayName, String myName, String desp, String targetUID, String targetUsername, String myUsername,
+                         String myProfilePic, String TargetGender, String filtersMatched, ArrayList<String> alsImagesList,
                          ArrayList<String> alsTargetFilterList, ArrayList<String> alsMyFilterList, ArrayList<Integer> aliIconList,
                          int matchPercentage) {
-        FullName = fullName;
+        TargetDisplayName = targetDisplayName;
         MyName = myName;
         Desp = desp;
         TargetUID = targetUID;
         TargetUsername = targetUsername;
         MyUsername = myUsername;
-
+        this.TargetGender = TargetGender;
         MyProfilePic = myProfilePic;
         FiltersMatched = filtersMatched;
         this.alsImagesList = alsImagesList;
@@ -42,12 +44,12 @@ public class FFUserDetails implements Serializable {
         MatchPercentage = matchPercentage;
     }
 
-    public String getFullName() {
-        return FullName;
+    public String getTargetDisplayName() {
+        return TargetDisplayName;
     }
 
-    public void setFullName(String fullName) {
-        FullName = fullName;
+    public void setTargetDisplayName(String targetDisplayName) {
+        TargetDisplayName = targetDisplayName;
     }
 
     public String getMyName() {
@@ -90,6 +92,13 @@ public class FFUserDetails implements Serializable {
         MyUsername = myUsername;
     }
 
+    public String getTargetGender() {
+        return TargetGender;
+    }
+
+    public void setTargetGender(String targetGender) {
+        TargetGender = targetGender;
+    }
 
     public String getMyProfilePic() {
         return MyProfilePic;
@@ -148,11 +157,10 @@ public class FFUserDetails implements Serializable {
     }
 
 
-
     @Override
     public String toString() {
         return "FFUserDetails{" +
-                "FullName='" + FullName + '\'' +
+                "FullName='" + TargetDisplayName + '\'' +
                 ", MyName='" + MyName + '\'' +
                 ", Desp='" + Desp + '\'' +
                 ", TargetUID='" + TargetUID + '\'' +

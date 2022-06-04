@@ -41,6 +41,9 @@ import com.gic.memorableplaces.Adapters.SelectedMMBRVAdapter;
 import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.MiscTools;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
+import com.wooplr.spotlight.prefs.PreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -71,7 +74,7 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
     private ResultMMBRecyclerViewAdapter.OnMMBResultsClickListener omrcl;
     private ArrayList<String> alsSelectedList, alsMatchSelectedList, alsLeftResultsList, alsRightResultsList;
 
-    private ImageView IV_PRIVACY, IV_NO_RESULT;
+    private ImageView IV_PRIVACY, IV_NO_RESULT, IV_SEARCH_ICON, IV_BOX, IV_SWITCH_INPUT;
     private ImageView IV_TICK;
     private AutofitTextView ATV_SHOW_SELECTED;
     private MotionLayout ML, ML_2;
@@ -80,6 +83,7 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
     private RecyclerView RV_SELECTED;
     private GifImageView GIV_LOADING;
     private ResultMMBRecyclerViewAdapter rmrva;
+    private AppCompatButton ACB_MOVIE_TYPE;
 
 
     @Nullable
@@ -100,26 +104,27 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
         ATV_SHOW_SELECTED = view.findViewById(R.id.ATV_VIEW_MMB);
         ImageView IV_QUES = view.findViewById(R.id.IV_QUES_MMB);
         GIV_LOADING = view.findViewById(R.id.GIV_LOADING_MMB);
+        IV_SEARCH_ICON = view.findViewById(R.id.IV_SEARCH_ICON);
         IV_NO_RESULT = view.findViewById(R.id.IV_NO_RESULT_MMB);
         TV_NO_RESULT = view.findViewById(R.id.TV_NO_RESULTS_MMB);
 
 
         if (getArguments() != null) {
             if (getArguments().containsKey(mContext.getString(R.string.field_music))) {
-                alsSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_music));
-                alsMatchSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_match_music));
+                alsSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_music)));
+                alsMatchSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_music)));
                 sType = mContext.getString(R.string.field_music);
                 sName = "track";
                 ET_SEARCH.setHint("Enter song name.....");
             } else if (getArguments().containsKey(mContext.getString(R.string.field_movie))) {
-                alsSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_movie));
-                alsMatchSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_match_movie));
+                alsSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_movie)));
+                alsMatchSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_movie)));
                 sType = mContext.getString(R.string.field_movie);
                 sName = "movie";
                 ET_SEARCH.setHint("Enter movie/Tv Show name.....");
             } else if (getArguments().containsKey(mContext.getString(R.string.field_books))) {
-                alsSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_books));
-                alsMatchSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_match_books));
+                alsSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_books)));
+                alsMatchSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_books)));
                 sType = mContext.getString(R.string.field_books);
                 sName = "book";
                 ET_SEARCH.setHint("Enter book name.....");
@@ -187,6 +192,7 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
         SameDetailBox(view);
         SwitchInput(view);
         SetBackButton(view);
+        ShowSpotlights();
 
 
         ATV_SHOW_SELECTED.setOnClickListener(v -> {
@@ -234,6 +240,92 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
         return view;
     }
 
+    private void ShowSpotlights() {
+        SpotlightConfig spotlightConfig = new SpotlightConfig();
+
+        spotlightConfig.setIntroAnimationDuration(400);
+        spotlightConfig.setRevealAnimationEnabled(true);
+        spotlightConfig.setPerformClick(true);
+        spotlightConfig.setFadingTextDuration(400);
+        spotlightConfig.setHeadingTvColor(Color.parseColor("#FFFFFF"));
+        spotlightConfig.setHeadingTvSize(32);
+        spotlightConfig.setSubHeadingTvColor(Color.parseColor("#DCDCDC"));
+        spotlightConfig.setSubHeadingTvSize(16);
+        spotlightConfig.setMaskColor(Color.parseColor("#dc000000"));
+        spotlightConfig.setLineAnimationDuration(400);
+        spotlightConfig.setLineAndArcColor(Color.parseColor("#FFFFD6A5"));
+        spotlightConfig.setDismissOnTouch(true);
+        spotlightConfig.setDismissOnBackpress(true);
+
+        PreferencesManager preferencesManager = new PreferencesManager(mContext);
+
+        SpotlightView.Builder SB_SAME_DETAIL = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Copy Detail")
+                .subHeadingTvText("Click this box to copy the detail selected on your page.")
+                .target(IV_BOX)
+                .usageId("IV_BOX")
+                .setListener(spotlightViewId -> {
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+        SpotlightView.Builder SB_SWITCH_MOVIE_TYPE = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Movie Type")
+                .subHeadingTvText("Click here before searching to get TV Shows and vice versa.")
+                .target(ACB_MOVIE_TYPE)
+                .usageId("SB_SWITCH_MOVIE_TYPE")
+                .setListener(spotlightViewId -> {
+                    SB_SAME_DETAIL.show();
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+        SpotlightView.Builder SB_SEARCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                .headingTvText("Search " + sType)
+                .subHeadingTvText("Enter the name of the " + sName + " her to make a search & select option from the list that appears.")
+                .target(IV_SEARCH_ICON)
+                .usageId("SB_SEARCH")
+                .setListener(spotlightViewId -> {
+                    if (sType.equals(mContext.getString(R.string.field_movie))) {
+                        SB_SWITCH_MOVIE_TYPE.show();
+                    } else {
+                        SB_SAME_DETAIL.show();
+                    }
+                    Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                });
+
+
+        if (!preferencesManager.isDisplayed("SWITCH")) {
+
+            SpotlightView.Builder SB_SWITCH = new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Switch Profiles")
+                    .subHeadingTvText("Click to enter data in the profile of your ideal match.")
+                    .target(IV_SWITCH_INPUT)
+                    .usageId("SWITCH")
+                    .setListener(spotlightViewId -> {
+                        SB_SEARCH.show();
+                        ET_SEARCH.setText("Grand theft auto");
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    });
+
+            new SpotlightView.Builder(requireActivity()).setConfiguration(spotlightConfig)
+                    .headingTvText("Privacy Button")
+                    .subHeadingTvText("This button can help you lock this detail on your profile. If Locked, it will only be visible to those who you swipe right.")
+                    .target(IV_PRIVACY)
+                    .usageId("PRIVACY")
+                    .setListener(spotlightViewId -> {
+                        SB_SWITCH.show();
+                        Log.d(TAG, "InitViews: spotlightViewId: " + spotlightViewId);
+                    }).show();
+
+        } else if (!preferencesManager.isDisplayed("SB_SEARCH")) {
+            if (sType.equals(mContext.getString(R.string.field_music)))
+                ET_SEARCH.setText("7 rings");
+            else if (sType.equals(mContext.getString(R.string.field_music)))
+                ET_SEARCH.setText("Avengers");
+            else if (sType.equals(mContext.getString(R.string.field_books)))
+                ET_SEARCH.setText("Harry Potter");
+            SB_SEARCH.show();
+        }
+    }
+
     private void SetSelectedRecyclerView() {
         if (isSwitched) {
             smrva = new SelectedMMBRVAdapter(alsMatchSelectedList, mContext,
@@ -268,7 +360,7 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
 
     private void SameDetailBox(View view) {
 
-        ImageView IV_BOX = view.findViewById(R.id.IV_BOX_MMB);
+        IV_BOX = view.findViewById(R.id.IV_BOX_MMB);
         IV_TICK = view.findViewById(R.id.IV_TICK_MMB);
 
         IV_BOX.setOnClickListener(v1 -> {
@@ -295,7 +387,7 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
     }
 
     private void SwitchInput(View view) {
-        ImageView IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_MMB);
+        IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_MMB);
         View V_GRADIENT_2 = view.findViewById(R.id.V_GRADIENT_2_MMB);
         View V_GRADIENT = view.findViewById(R.id.V_GRADIENT_MMB);
         TextView TV_SELECTED = view.findViewById(R.id.TV_TITLE_SELCTED_MMB);
@@ -741,7 +833,7 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
     }
 
     private void GetMoviesFromAPI(View view) {
-        AppCompatButton ACB_MOVIE_TYPE = view.findViewById(R.id.ACB_MOVIE_TYPE);
+        ACB_MOVIE_TYPE = view.findViewById(R.id.ACB_MOVIE_TYPE);
         AnimatedRecyclerView RV_RESULTS = view.findViewById(R.id.ARV_RESULTS_MMB);
 
         ACB_MOVIE_TYPE.setVisibility(View.VISIBLE);
@@ -1136,8 +1228,11 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    handler.post(() -> GIV_LOADING.setVisibility(View.GONE));
-                                    Toast.makeText(mContext, "Error Received! Please try again.", Toast.LENGTH_SHORT).show();
+                                    handler.post(() -> {
+                                        GIV_LOADING.setVisibility(View.GONE);
+                                        Toast.makeText(mContext, "Error Received! Please try again.", Toast.LENGTH_SHORT).show();
+
+                                    });
                                 }
                                 // Log.d(TAG, String.format("onResponse: API RESPONSE %s", data));
                             }
@@ -1268,8 +1363,10 @@ public class MusicMoviesBookFragment extends Fragment implements ResultMMBRecycl
                 } catch (Exception e) {
                     e.printStackTrace();
                     Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(() -> GIV_LOADING.setVisibility(View.GONE));
-                    Toast.makeText(mContext, "Error Received! Please try again.", Toast.LENGTH_SHORT).show();
+                    handler.post(() -> {
+                        GIV_LOADING.setVisibility(View.GONE);
+                        Toast.makeText(mContext, "Error Received! Please try again.", Toast.LENGTH_SHORT).show();
+                    });
                 }
                 // Log.d(TAG, String.format("onResponse: API RESPONSE %s", data));
             }

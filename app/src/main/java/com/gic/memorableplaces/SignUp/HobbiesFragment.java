@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -64,10 +63,13 @@ public class HobbiesFragment extends Fragment {
     private boolean isLocked = false, isSwitched = false, isSameDetail = false, isDeleteShown = false;
 
     private ArrayList<String> alsSelectedList, alsMatchSelectedList, alsHobbies;
-    private ArrayList<Bitmap> albSelectedBitmap, albMatchBitmap;
+    private ArrayList<GlideUrl> albSelectedBitmap, albMatchBitmap;
     private Runnable runnable;
 
-    private ImageView IV_PRIVACY, IV_TICK, IV_BOX, IV_ADD_CUSTOM, IV_BG_H;
+    private ImageView IV_PRIVACY;
+    private ImageView IV_TICK;
+    private ImageView IV_BOX;
+    private ImageView IV_ADD_CUSTOM;
     private MotionLayout ML, ML_1, ML_2, ML_3, ML_4, ML_5;
 
     private GifImageView IV_1, IV_2, IV_3, IV_4, IV_5;
@@ -81,6 +83,8 @@ public class HobbiesFragment extends Fragment {
         mContext = getActivity();
         albMatchBitmap = new ArrayList<>(5);
         albSelectedBitmap = new ArrayList<>(5);
+        alsSelectedList = new ArrayList<>(5);
+        alsMatchSelectedList = new ArrayList<>(5);
         alsHobbies = new ArrayList<>();
 
 //        alsSelectedList.add(0, "N/A");
@@ -90,7 +94,7 @@ public class HobbiesFragment extends Fragment {
 //        Log.d(TAG, "onCreateView: ml: " +  view.findViewById(R.id.ML_MAIN_H));
 //        ML_HOBBIES_2.transitionToEnd();
         IV_PRIVACY = view.findViewById(R.id.IV_PRIVACY_LOCK_H);
-        IV_BG_H = view.findViewById(R.id.IV_BG_H);
+        ImageView IV_BG_H = view.findViewById(R.id.IV_BG_H);
 
         IV_1 = view.findViewById(R.id.IV_1_H);
         IV_2 = view.findViewById(R.id.IV_2_H);
@@ -111,8 +115,8 @@ public class HobbiesFragment extends Fragment {
         IV_ADD_CUSTOM = view.findViewById(R.id.IV_ADD_CUSTOM_H);
 
         if (getArguments() != null) {
-            alsSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_hobbies));
-            alsMatchSelectedList = getArguments().getStringArrayList(mContext.getString(R.string.field_match_hobbies));
+            alsSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_hobbies)));
+            alsMatchSelectedList.addAll(getArguments().getStringArrayList(mContext.getString(R.string.field_match_hobbies))) ;
 
             isLocked = getArguments().getBoolean(mContext.getString(R.string.field_is_private));
         }
@@ -120,8 +124,8 @@ public class HobbiesFragment extends Fragment {
         Log.d(TAG, "SetBackButton: alsSelectedList: " + alsSelectedList);
         Log.d(TAG, "SetBackButton: alsMatchSelectList: " + alsMatchSelectedList);
         for (int i = 0; i < 5; i++) {
-            albSelectedBitmap.add(null);
-            albMatchBitmap.add(null);
+            albSelectedBitmap.add(new GlideUrl("N/A"));
+            albMatchBitmap.add(new GlideUrl("N/A"));
         }
         for (int i = alsSelectedList.size(); i < 5; i++) {
             alsSelectedList.add("N/A");
@@ -371,7 +375,6 @@ public class HobbiesFragment extends Fragment {
             Toast.makeText(mContext, "You have already chosen this Hobby!", Toast.LENGTH_SHORT).show();
         } else {
             if (als.contains("N/A")) {
-                als.add(selection);
                 if (!isDeleteShown) {
                     final Dialog dialog = new Dialog(mContext);
                     dialog.setContentView(R.layout.dialog_selected_year);
@@ -473,39 +476,53 @@ public class HobbiesFragment extends Fragment {
                 IV_TICK.setVisibility(View.VISIBLE);
                 isSameDetail = true;
                 alsMatchSelectedList.clear();
-                for (int i = 0; i < 5; i++) {
-                    alsMatchSelectedList.set(i, alsSelectedList.get(i));
-                    albMatchBitmap.set(i, albSelectedBitmap.get(i));
+                albMatchBitmap.clear();
+                Log.d(TAG, "SameDetailBox: albSelectedBitmap: " + albSelectedBitmap);
+                for (int i = 0; i < alsSelectedList.size(); i++) {
+                    alsMatchSelectedList.add(alsSelectedList.get(i));
+                    albMatchBitmap.add(albSelectedBitmap.get(i));
                 }
             }
-
-            if (!alsSelectedList.get(0).equals("N/A")) {
-                TV_1.setText(alsSelectedList.get(0));
-                IV_1.setImageBitmap(albMatchBitmap.get(0));
+            Log.d(TAG, "SameDetailBox: albMatchBitmap: " + albMatchBitmap);
+            Log.d(TAG, "SameDetailBox: albSelectedBitmap: " + albSelectedBitmap);
+            if (!alsMatchSelectedList.get(0).equals("N/A")) {
+                TV_1.setText(alsMatchSelectedList.get(0));
+                Glide.with(mContext)
+                        .load(albMatchBitmap.get(0))
+                        .into(IV_1);
                 ML_1.setTransition(R.id.TRANS_1_H);
                 ML_1.transitionToEnd();
             }
-            if (!alsSelectedList.get(1).equals("N/A")) {
-                TV_2.setText(alsSelectedList.get(1));
-                IV_2.setImageBitmap(albMatchBitmap.get(1));
+            if (!alsMatchSelectedList.get(1).equals("N/A")) {
+                TV_2.setText(alsMatchSelectedList.get(1));
+                TV_1.setText(alsMatchSelectedList.get(0));
+                Glide.with(mContext)
+                        .load(albMatchBitmap.get(1))
+                        .into(IV_2);
                 ML_2.setTransition(R.id.TRANS_2_H);
                 ML_2.transitionToEnd();
             }
-            if (!alsSelectedList.get(2).equals("N/A")) {
-                TV_3.setText(alsSelectedList.get(2));
-                IV_3.setImageBitmap(albMatchBitmap.get(2));
+            if (!alsMatchSelectedList.get(2).equals("N/A")) {
+                TV_3.setText(alsMatchSelectedList.get(2));
+                Glide.with(mContext)
+                        .load(albMatchBitmap.get(2))
+                        .into(IV_3);
                 ML_3.setTransition(R.id.TRANS_3_H);
                 ML_3.transitionToEnd();
             }
-            if (!alsSelectedList.get(3).equals("N/A")) {
-                TV_4.setText(alsSelectedList.get(3));
-                IV_4.setImageBitmap(albMatchBitmap.get(3));
+            if (!alsMatchSelectedList.get(3).equals("N/A")) {
+                TV_4.setText(alsMatchSelectedList.get(3));
+                Glide.with(mContext)
+                        .load(albMatchBitmap.get(3))
+                        .into(IV_4);
                 ML_4.setTransition(R.id.TRANS_4_H);
                 ML_4.transitionToEnd();
             }
-            if (!alsSelectedList.get(4).equals("N/A")) {
-                TV_5.setText(alsSelectedList.get(4));
-                IV_5.setImageBitmap(albMatchBitmap.get(4));
+            if (!alsMatchSelectedList.get(4).equals("N/A")) {
+                TV_5.setText(alsMatchSelectedList.get(4));
+                Glide.with(mContext)
+                        .load(albMatchBitmap.get(4))
+                        .into(IV_5);
                 ML_5.setTransition(R.id.TRANS_5_H);
                 ML_5.transitionToEnd();
             }
@@ -517,6 +534,7 @@ public class HobbiesFragment extends Fragment {
 
     private void SwitchInput(View view) {
         ImageView IV_SWITCH_INPUT = view.findViewById(R.id.IV_SWITCH_H);
+        View V_WHITE_BLUR = view.findViewById(R.id.V_WHITE_BLUR);
         TextView TV_NOTICE = view.findViewById(R.id.TV_SWITCH_NOTICE);
         TextView TV_SAME_DETAIL = view.findViewById(R.id.TV_SWITCH_SAME_DETAIL);
         IV_SWITCH_INPUT.setOnClickListener(v -> {
@@ -533,8 +551,8 @@ public class HobbiesFragment extends Fragment {
             ML_5.transitionToStart();
             if (!isSwitched) {
                 boolean temp = false;
-                for (Bitmap bitmap : albMatchBitmap) {
-                    if (bitmap != null) {
+                for (GlideUrl glideUrl : albMatchBitmap) {
+                    if (!glideUrl.toString().equals("N/A")) {
                         temp = true;
                         break;
                     }
@@ -577,37 +595,48 @@ public class HobbiesFragment extends Fragment {
                 } else {
                     if (!alsMatchSelectedList.get(0).equals("N/A")) {
                         TV_1.setText(alsMatchSelectedList.get(0));
-                        IV_1.setImageBitmap(albMatchBitmap.get(0));
+                        Glide.with(mContext)
+                                .load(albMatchBitmap.get(0))
+                                .into(IV_1);
                         ML_1.setTransition(R.id.TRANS_1_H);
                         ML_1.transitionToEnd();
                     }
                     if (!alsMatchSelectedList.get(1).equals("N/A")) {
                         TV_2.setText(alsMatchSelectedList.get(1));
-                        IV_2.setImageBitmap(albMatchBitmap.get(1));
+                        Glide.with(mContext)
+                                .load(albMatchBitmap.get(1))
+                                .into(IV_2);
                         ML_2.setTransition(R.id.TRANS_2_H);
                         ML_2.transitionToEnd();
                     }
                     if (!alsMatchSelectedList.get(2).equals("N/A")) {
                         TV_3.setText(alsMatchSelectedList.get(2));
-                        IV_3.setImageBitmap(albMatchBitmap.get(2));
+                        Glide.with(mContext)
+                                .load(albMatchBitmap.get(2))
+                                .into(IV_3);
                         ML_3.setTransition(R.id.TRANS_3_H);
                         ML_3.transitionToEnd();
                     }
                     if (!alsMatchSelectedList.get(3).equals("N/A")) {
                         TV_4.setText(alsMatchSelectedList.get(3));
-                        IV_4.setImageBitmap(albMatchBitmap.get(3));
+                        Glide.with(mContext)
+                                .load(albMatchBitmap.get(3))
+                                .into(IV_4);
                         ML_4.setTransition(R.id.TRANS_4_H);
                         ML_4.transitionToEnd();
                     }
                     if (!alsMatchSelectedList.get(4).equals("N/A")) {
                         TV_5.setText(alsMatchSelectedList.get(4));
-                        IV_5.setImageBitmap(albMatchBitmap.get(4));
+                        Glide.with(mContext)
+                                .load(albMatchBitmap.get(4))
+                                .into(IV_5);
                         ML_5.setTransition(R.id.TRANS_5_H);
                         ML_5.transitionToEnd();
                     }
                 }
 
                 ML.setBackgroundColor(Color.parseColor("#212121"));
+                V_WHITE_BLUR.setBackgroundResource(R.drawable.gradient_black);
                 ML.setTransition(R.id.TRANS_HOBBIES_MAIN);
                 ML.transitionToEnd();
                 ChangeTheme(R.style.OtherDetail, IV_PRIVACY);
@@ -625,6 +654,7 @@ public class HobbiesFragment extends Fragment {
 
             } else {
                 ML.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                V_WHITE_BLUR.setBackgroundResource(R.drawable.gradient_white);
                 ML.setTransition(R.id.TRANS_HOBBIES_MAIN);
                 ML.transitionToStart();
                 ChangeTheme(R.style.MyDetail, IV_PRIVACY);
@@ -637,31 +667,41 @@ public class HobbiesFragment extends Fragment {
 
                 if (!alsSelectedList.get(0).equals("N/A")) {
                     TV_1.setText(alsSelectedList.get(0));
-                    IV_1.setImageBitmap(albSelectedBitmap.get(0));
+                    Glide.with(mContext)
+                            .load(albMatchBitmap.get(0))
+                            .into(IV_1);
                     ML_1.setTransition(R.id.TRANS_1_H);
                     ML_1.transitionToEnd();
                 }
                 if (!alsSelectedList.get(1).equals("N/A")) {
                     TV_2.setText(alsSelectedList.get(1));
-                    IV_2.setImageBitmap(albSelectedBitmap.get(1));
+                    Glide.with(mContext)
+                            .load(albMatchBitmap.get(1))
+                            .into(IV_2);
                     ML_2.setTransition(R.id.TRANS_2_H);
                     ML_2.transitionToEnd();
                 }
                 if (!alsSelectedList.get(2).equals("N/A")) {
                     TV_3.setText(alsSelectedList.get(2));
-                    IV_3.setImageBitmap(albSelectedBitmap.get(2));
+                    Glide.with(mContext)
+                            .load(albMatchBitmap.get(2))
+                            .into(IV_3);
                     ML_3.setTransition(R.id.TRANS_3_H);
                     ML_3.transitionToEnd();
                 }
                 if (!alsSelectedList.get(3).equals("N/A")) {
                     TV_4.setText(alsSelectedList.get(3));
-                    IV_4.setImageBitmap(albSelectedBitmap.get(3));
+                    Glide.with(mContext)
+                            .load(albMatchBitmap.get(3))
+                            .into(IV_4);
                     ML_4.setTransition(R.id.TRANS_4_H);
                     ML_4.transitionToEnd();
                 }
                 if (!alsSelectedList.get(4).equals("N/A")) {
                     TV_5.setText(alsSelectedList.get(4));
-                    IV_5.setImageBitmap(albSelectedBitmap.get(4));
+                    Glide.with(mContext)
+                            .load(albMatchBitmap.get(4))
+                            .into(IV_5);
                     ML_5.setTransition(R.id.TRANS_5_H);
                     ML_5.transitionToEnd();
                 }
@@ -891,9 +931,9 @@ public class HobbiesFragment extends Fragment {
                                 .into(IV);
 
                         if (isSwitched) {
-                            albMatchBitmap.set(pos, IV.getDrawingCache());
+                            albMatchBitmap.set(pos, glideUrl);
                         } else {
-                            albSelectedBitmap.set(pos, IV.getDrawingCache());
+                            albSelectedBitmap.set(pos, glideUrl);
                         }
 
 

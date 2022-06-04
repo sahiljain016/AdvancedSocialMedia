@@ -45,7 +45,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -2311,268 +2310,268 @@ public class CardInformationFragment extends Fragment {
     }
 
     private void SetGender() {
-        bGender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: shaked");
-                rlGender.startAnimation(myAnim);
-                AlertGender.setVisibility(View.INVISIBLE);
-                InflateDialog(R.layout.dialog_layout_gender);
-                Alertdialog.setCanceledOnTouchOutside(false);
-                Alertdialog.setCancelable(false);
-                //INITIALIZING THE WIDGETS INSIDE THE DIALOG
-                final CardView cv_Male = vDialog.findViewById(R.id.CardView_Male);
-                final CardView cv_Female = vDialog.findViewById(R.id.CardView_Female);
-                final CardView cv_other = vDialog.findViewById(R.id.CardView_Other);
-                final EditText TypeGender = vDialog.findViewById(R.id.TypeGender);
-                final EditText TypePronouns = vDialog.findViewById(R.id.TypePronouns);
-                final ImageView Back = vDialog.findViewById(R.id.BackButton);
-                final ImageView Set_Details = vDialog.findViewById(R.id.close_dialog);
-                final ImageView MAKE_PRIVATE = vDialog.findViewById(R.id.GENDER_MAKE_PRIVATE_BUTTON);
-                final AutofitTextView NotShareGender = vDialog.findViewById(R.id.PreferNotToSay);
-
-                PrivacyDialog(MAKE_PRIVATE, mContext.getString(R.string.field_gender));
-                if (!valueOfFields.get(mContext.getString(R.string.field_pronouns)).equals("N/A"))
-                    TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
-                if (!valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_no_gender)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_male)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_female)))
-                    TypeGender.setText(valueOfFields.get(mContext.getString(R.string.field_gender)));
-
-                Back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (cv_other.getVisibility() == View.VISIBLE) {
-                            cv_Male.animate().alpha(1).setDuration(1500);
-                            cv_Female.animate().alpha(1).setDuration(1500);
-                            RelativeLayout.LayoutParams layoutParams =
-                                    (RelativeLayout.LayoutParams) cv_other.getLayoutParams();
-                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-
-                            cv_other.setLayoutParams(layoutParams);
-                            cv_Female.setVisibility(View.VISIBLE);
-                            cv_Male.setVisibility(View.VISIBLE);
-                            TypeGender.setVisibility(View.GONE);
-                            Back.setVisibility(View.GONE);
-                            //   Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
-                            TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
-                            isClickedGender = false;
-                        } else if (cv_Male.getVisibility() == View.VISIBLE) {
-                            RelativeLayout.LayoutParams layoutParams =
-                                    (RelativeLayout.LayoutParams) cv_Male.getLayoutParams();
-                            layoutParams.removeRule(RelativeLayout.CENTER_IN_PARENT);
-                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE);
-                            cv_Male.setLayoutParams(layoutParams);
-                            cv_other.animate().alpha(1).setDuration(1500);
-                            cv_Female.animate().alpha(1).setDuration(1500);
-                            cv_Female.setVisibility(View.VISIBLE);
-                            TypeGender.setVisibility(View.GONE);
-                            cv_other.setVisibility(View.VISIBLE);
-                            Back.setVisibility(View.GONE);
-                            //  Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
-                            TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
-                            isClickedGender = false;
-                        } else if (cv_Female.getVisibility() == View.VISIBLE) {
-                            RelativeLayout.LayoutParams layoutParams =
-                                    (RelativeLayout.LayoutParams) cv_Female.getLayoutParams();
-                            layoutParams.removeRule(RelativeLayout.CENTER_IN_PARENT);
-                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
-                            cv_Female.setLayoutParams(layoutParams);
-                            cv_other.animate().alpha(1).setDuration(1500);
-                            cv_Male.animate().alpha(1).setDuration(1500);
-                            cv_Male.setVisibility(View.VISIBLE);
-                            TypeGender.setVisibility(View.GONE);
-                            cv_other.setVisibility(View.VISIBLE);
-                            Back.setVisibility(View.GONE);
-                            // Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
-                            TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
-                            isClickedGender = false;
-                        }
-//                        TypePronouns.setVisibility(GONE);
-//                        TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_out));
-                    }
-                });
-
-                Set_Details.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String Pronouns = TypePronouns.getText().toString().replace("/", "\\");
-                        if (!TextUtils.isEmpty(TypeGender.getText().toString()) && !TypeGender.getText().toString().equals("N/A")) {
-                            SetDetailForFilter(mContext.getString(R.string.field_gender), TypeGender.getText().toString().toLowerCase(), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
-                            SetFieldInDatabase(TypeGender.getText().toString(), mContext.getString(R.string.field_gender));
-                        }
-
-                        if (!TextUtils.isEmpty(TypePronouns.getText().toString())) {
-                            SetFieldInDatabase(TypePronouns.getText().toString(), mContext.getString(R.string.field_pronouns));
-                            Log.d(TAG, "onClick: Pronouns " + Pronouns);
-                            SetDetailForFilter(mContext.getString(R.string.field_pronouns), Pronouns, valueOfFields.get(mContext.getString(R.string.field_pronouns)), statusOfFields.get(mContext.getString(R.string.field_pronouns)));
-                        } else {
-                            SetFieldInDatabase("N/A", mContext.getString(R.string.field_pronouns));
-                            SetDetailForFilter(mContext.getString(R.string.field_pronouns), "", "N/A", mContext.getString(R.string.field_private));
-
-                        }
-
-                        CheckStatus(mContext.getString(R.string.field_gender), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
-                        CheckStatus(mContext.getString(R.string.field_pronouns), Pronouns, statusOfFields.get(mContext.getString(R.string.field_pronouns)));
-
-                        isClickedGender = false;
-                        Alertdialog.dismiss();
-                    }
-                });
-                NotShareGender.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myRef.child(mContext.getString(R.string.dbname_user_card))
-                                .child(mAuth.getCurrentUser().getUid())
-                                .child(mContext.getString(R.string.field))
-                                .child(mContext.getString(R.string.field_gender))
-                                .setValue(mContext.getString(R.string.field_no_gender));
-                        Alertdialog.dismiss();
-
-                    }
-                });
-                //  TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_out));
-                cv_Male.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (!isClickedGender) {
-                            SetFieldInDatabase(mContext.getString(R.string.field_male), mContext.getString(R.string.field_gender));
-                            SetDetailForFilter(mContext.getString(R.string.field_gender), mContext.getString(R.string.field_male), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
-
-                            cv_other.animate().alpha(0).setDuration(1500);
-                            cv_Female.animate().alpha(0).setDuration(1500);
-                            //final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
-                            final android.os.Handler handler = new Handler(Looper.getMainLooper());
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    cv_other.setVisibility(View.GONE);
-                                    cv_Female.setVisibility(View.GONE);
-                                    RelativeLayout.LayoutParams layoutParams =
-                                            (RelativeLayout.LayoutParams) cv_Male.getLayoutParams();
-                                    layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_START);
-                                    layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-                                    cv_Male.setLayoutParams(layoutParams);
-                                    RelativeLayout.LayoutParams layoutParamsBack =
-                                            (RelativeLayout.LayoutParams) Back.getLayoutParams();
-                                    layoutParamsBack.removeRule(RelativeLayout.ALIGN_BOTTOM);
-                                    layoutParamsBack.removeRule(RelativeLayout.START_OF);
-                                    layoutParamsBack.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-                                    layoutParamsBack.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-                                    Back.setLayoutParams(layoutParamsBack);
-                                    Back.setVisibility(View.VISIBLE);
-                                    //TypeGender.setText("Male");
+//        bGender.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "onClick: shaked");
+//                rlGender.startAnimation(myAnim);
+//                AlertGender.setVisibility(View.INVISIBLE);
+//                InflateDialog(R.layout.layout_auto_desp);
+//                Alertdialog.setCanceledOnTouchOutside(false);
+//                Alertdialog.setCancelable(false);
+//                //INITIALIZING THE WIDGETS INSIDE THE DIALOG
+////                final CardView cv_Male = vDialog.findViewById(R.id.CardView_Male);
+////                final CardView cv_Female = vDialog.findViewById(R.id.CardView_Female);
+////                final CardView cv_other = vDialog.findViewById(R.id.CardView_Other);
+////                final EditText TypeGender = vDialog.findViewById(R.id.TypeGender);
+////                final EditText TypePronouns = vDialog.findViewById(R.id.TypePronouns);
+////                final ImageView Back = vDialog.findViewById(R.id.BackButton);
+////                final ImageView Set_Details = vDialog.findViewById(R.id.close_dialog);
+////                final ImageView MAKE_PRIVATE = vDialog.findViewById(R.id.GENDER_MAKE_PRIVATE_BUTTON);
+////                final AutofitTextView NotShareGender = vDialog.findViewById(R.id.PreferNotToSay);
+//
+//                PrivacyDialog(MAKE_PRIVATE, mContext.getString(R.string.field_gender));
+//                if (!valueOfFields.get(mContext.getString(R.string.field_pronouns)).equals("N/A"))
+//                    TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
+//                if (!valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_no_gender)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_male)) && !valueOfFields.get(mContext.getString(R.string.field_gender)).equals(mContext.getString(R.string.field_female)))
+//                    TypeGender.setText(valueOfFields.get(mContext.getString(R.string.field_gender)));
+//
+//                Back.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (cv_other.getVisibility() == View.VISIBLE) {
+//                            cv_Male.animate().alpha(1).setDuration(1500);
+//                            cv_Female.animate().alpha(1).setDuration(1500);
+//                            RelativeLayout.LayoutParams layoutParams =
+//                                    (RelativeLayout.LayoutParams) cv_other.getLayoutParams();
+//                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+//
+//                            cv_other.setLayoutParams(layoutParams);
+//                            cv_Female.setVisibility(View.VISIBLE);
+//                            cv_Male.setVisibility(View.VISIBLE);
+//                            TypeGender.setVisibility(View.GONE);
+//                            Back.setVisibility(View.GONE);
+//                            //   Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
+//                            TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
+//                            isClickedGender = false;
+//                        } else if (cv_Male.getVisibility() == View.VISIBLE) {
+//                            RelativeLayout.LayoutParams layoutParams =
+//                                    (RelativeLayout.LayoutParams) cv_Male.getLayoutParams();
+//                            layoutParams.removeRule(RelativeLayout.CENTER_IN_PARENT);
+//                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE);
+//                            cv_Male.setLayoutParams(layoutParams);
+//                            cv_other.animate().alpha(1).setDuration(1500);
+//                            cv_Female.animate().alpha(1).setDuration(1500);
+//                            cv_Female.setVisibility(View.VISIBLE);
+//                            TypeGender.setVisibility(View.GONE);
+//                            cv_other.setVisibility(View.VISIBLE);
+//                            Back.setVisibility(View.GONE);
+//                            //  Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
+//                            TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
+//                            isClickedGender = false;
+//                        } else if (cv_Female.getVisibility() == View.VISIBLE) {
+//                            RelativeLayout.LayoutParams layoutParams =
+//                                    (RelativeLayout.LayoutParams) cv_Female.getLayoutParams();
+//                            layoutParams.removeRule(RelativeLayout.CENTER_IN_PARENT);
+//                            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
+//                            cv_Female.setLayoutParams(layoutParams);
+//                            cv_other.animate().alpha(1).setDuration(1500);
+//                            cv_Male.animate().alpha(1).setDuration(1500);
+//                            cv_Male.setVisibility(View.VISIBLE);
+//                            TypeGender.setVisibility(View.GONE);
+//                            cv_other.setVisibility(View.VISIBLE);
+//                            Back.setVisibility(View.GONE);
+//                            // Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
+//                            TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
+//                            isClickedGender = false;
+//                        }
+////                        TypePronouns.setVisibility(GONE);
+////                        TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_out));
+//                    }
+//                });
+//
+//                Set_Details.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        String Pronouns = TypePronouns.getText().toString().replace("/", "\\");
+//                        if (!TextUtils.isEmpty(TypeGender.getText().toString()) && !TypeGender.getText().toString().equals("N/A")) {
+//                            SetDetailForFilter(mContext.getString(R.string.field_gender), TypeGender.getText().toString().toLowerCase(), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
+//                            SetFieldInDatabase(TypeGender.getText().toString(), mContext.getString(R.string.field_gender));
+//                        }
+//
+//                        if (!TextUtils.isEmpty(TypePronouns.getText().toString())) {
+//                            SetFieldInDatabase(TypePronouns.getText().toString(), mContext.getString(R.string.field_pronouns));
+//                            Log.d(TAG, "onClick: Pronouns " + Pronouns);
+//                            SetDetailForFilter(mContext.getString(R.string.field_pronouns), Pronouns, valueOfFields.get(mContext.getString(R.string.field_pronouns)), statusOfFields.get(mContext.getString(R.string.field_pronouns)));
+//                        } else {
+//                            SetFieldInDatabase("N/A", mContext.getString(R.string.field_pronouns));
+//                            SetDetailForFilter(mContext.getString(R.string.field_pronouns), "", "N/A", mContext.getString(R.string.field_private));
+//
+//                        }
+//
+//                        CheckStatus(mContext.getString(R.string.field_gender), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
+//                        CheckStatus(mContext.getString(R.string.field_pronouns), Pronouns, statusOfFields.get(mContext.getString(R.string.field_pronouns)));
+//
+//                        isClickedGender = false;
+//                        Alertdialog.dismiss();
+//                    }
+//                });
+//                NotShareGender.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        myRef.child(mContext.getString(R.string.dbname_user_card))
+//                                .child(mAuth.getCurrentUser().getUid())
+//                                .child(mContext.getString(R.string.field))
+//                                .child(mContext.getString(R.string.field_gender))
+//                                .setValue(mContext.getString(R.string.field_no_gender));
+//                        Alertdialog.dismiss();
+//
+//                    }
+//                });
+//                //  TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_out));
+//                cv_Male.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        if (!isClickedGender) {
+//                            SetFieldInDatabase(mContext.getString(R.string.field_male), mContext.getString(R.string.field_gender));
+//                            SetDetailForFilter(mContext.getString(R.string.field_gender), mContext.getString(R.string.field_male), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
+//
+//                            cv_other.animate().alpha(0).setDuration(1500);
+//                            cv_Female.animate().alpha(0).setDuration(1500);
+//                            //final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
+//                            final android.os.Handler handler = new Handler(Looper.getMainLooper());
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    cv_other.setVisibility(View.GONE);
+//                                    cv_Female.setVisibility(View.GONE);
+//                                    RelativeLayout.LayoutParams layoutParams =
+//                                            (RelativeLayout.LayoutParams) cv_Male.getLayoutParams();
+//                                    layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_START);
+//                                    layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+//                                    cv_Male.setLayoutParams(layoutParams);
+//                                    RelativeLayout.LayoutParams layoutParamsBack =
+//                                            (RelativeLayout.LayoutParams) Back.getLayoutParams();
+//                                    layoutParamsBack.removeRule(RelativeLayout.ALIGN_BOTTOM);
+//                                    layoutParamsBack.removeRule(RelativeLayout.START_OF);
+//                                    layoutParamsBack.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+//                                    layoutParamsBack.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+//                                    Back.setLayoutParams(layoutParamsBack);
+//                                    Back.setVisibility(View.VISIBLE);
+//                                    //TypeGender.setText("Male");
+////                                    TypeGender.setVisibility(View.VISIBLE);
+////                                    TypeGender.startAnimation(animation);
+//                                    Snackbar.make(vDialog,
+//                                            "Your gender has been set to Male!",
+//                                            Snackbar.LENGTH_SHORT).show();
+//
+//                                }
+//                            }, 1500);
+//
+////                            TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
+////                            TypePronouns.setVisibility(View.VISIBLE);
+////                            TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_in));
+//
+//
+//                            isClickedGender = true;
+//                        }
+//                    }
+//                });
+//                cv_Female.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        if (!isClickedGender) {
+//                            SetFieldInDatabase(mContext.getString(R.string.field_female), mContext.getString(R.string.field_gender));
+//                            SetDetailForFilter(mContext.getString(R.string.field_gender), mContext.getString(R.string.field_female), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
+//
+//                            cv_other.animate().alpha(0).setDuration(1500);
+//                            cv_Male.animate().alpha(0).setDuration(1500);
+//                            //final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
+//                            final android.os.Handler handler = new Handler(Looper.getMainLooper());
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    cv_other.setVisibility(View.GONE);
+//                                    cv_Male.setVisibility(View.GONE);
+//                                    RelativeLayout.LayoutParams layoutParams =
+//                                            (RelativeLayout.LayoutParams) cv_Female.getLayoutParams();
+//                                    layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_END);
+//                                    layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+//                                    cv_Female.setLayoutParams(layoutParams);
+//                                    RelativeLayout.LayoutParams layoutParamsBack =
+//                                            (RelativeLayout.LayoutParams) Back.getLayoutParams();
+//                                    layoutParamsBack.removeRule(RelativeLayout.ALIGN_BOTTOM);
+//                                    layoutParamsBack.removeRule(RelativeLayout.START_OF);
+//                                    layoutParamsBack.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+//                                    layoutParamsBack.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+//                                    Back.setLayoutParams(layoutParamsBack);
+//                                    Back.setVisibility(View.VISIBLE);
+//                                    // TypeGender.setText("Female");
+//                                    Snackbar.make(vDialog,
+//                                            "Your gender has been set to Female!",
+//                                            Snackbar.LENGTH_SHORT).show();
+//
+//                                }
+//                            }, 1500);
+//
+////                            TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
+////                            TypePronouns.setVisibility(View.VISIBLE);
+////                            TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_in));
+//
+//                            isClickedGender = true;
+//                        }
+//                    }
+//                });
+//
+////                Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
+//                TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
+//
+//                cv_other.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (!isClickedGender) {
+//
+//                            cv_Male.animate().alpha(0).setDuration(1500);
+//                            cv_Female.animate().alpha(0).setDuration(1500);
+//                            //  final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
+//                            final android.os.Handler handler = new Handler(Looper.getMainLooper());
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    cv_Male.setVisibility(View.GONE);
+//                                    cv_Female.setVisibility(View.GONE);
+//                                    RelativeLayout.LayoutParams layoutParams =
+//                                            (RelativeLayout.LayoutParams) cv_other.getLayoutParams();
+//                                    layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//                                    cv_other.setLayoutParams(layoutParams);
+//                                    RelativeLayout.LayoutParams layoutParamsBack =
+//                                            (RelativeLayout.LayoutParams) Back.getLayoutParams();
+//                                    layoutParamsBack.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+//                                    layoutParamsBack.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//                                    layoutParamsBack.addRule(RelativeLayout.ALIGN_BOTTOM, R.id.TypeGender);
+//                                    layoutParamsBack.addRule(RelativeLayout.START_OF, R.id.TypeGender);
+//                                    Back.setLayoutParams(layoutParamsBack);
+//                                    Back.setVisibility(View.VISIBLE);
+////                                    TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
+////                                    TypePronouns.setVisibility(View.VISIBLE);
+////                                    TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_in));
+//
+//                                    //TypeGender.setText(valueOfFields.get(mContext.getString(R.string.field_gender)));
 //                                    TypeGender.setVisibility(View.VISIBLE);
-//                                    TypeGender.startAnimation(animation);
-                                    Snackbar.make(vDialog,
-                                            "Your gender has been set to Male!",
-                                            Snackbar.LENGTH_SHORT).show();
-
-                                }
-                            }, 1500);
-
-//                            TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
-//                            TypePronouns.setVisibility(View.VISIBLE);
-//                            TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_in));
-
-
-                            isClickedGender = true;
-                        }
-                    }
-                });
-                cv_Female.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (!isClickedGender) {
-                            SetFieldInDatabase(mContext.getString(R.string.field_female), mContext.getString(R.string.field_gender));
-                            SetDetailForFilter(mContext.getString(R.string.field_gender), mContext.getString(R.string.field_female), valueOfFields.get(mContext.getString(R.string.field_gender)), statusOfFields.get(mContext.getString(R.string.field_gender)));
-
-                            cv_other.animate().alpha(0).setDuration(1500);
-                            cv_Male.animate().alpha(0).setDuration(1500);
-                            //final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
-                            final android.os.Handler handler = new Handler(Looper.getMainLooper());
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    cv_other.setVisibility(View.GONE);
-                                    cv_Male.setVisibility(View.GONE);
-                                    RelativeLayout.LayoutParams layoutParams =
-                                            (RelativeLayout.LayoutParams) cv_Female.getLayoutParams();
-                                    layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_END);
-                                    layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-                                    cv_Female.setLayoutParams(layoutParams);
-                                    RelativeLayout.LayoutParams layoutParamsBack =
-                                            (RelativeLayout.LayoutParams) Back.getLayoutParams();
-                                    layoutParamsBack.removeRule(RelativeLayout.ALIGN_BOTTOM);
-                                    layoutParamsBack.removeRule(RelativeLayout.START_OF);
-                                    layoutParamsBack.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-                                    layoutParamsBack.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-                                    Back.setLayoutParams(layoutParamsBack);
-                                    Back.setVisibility(View.VISIBLE);
-                                    // TypeGender.setText("Female");
-                                    Snackbar.make(vDialog,
-                                            "Your gender has been set to Female!",
-                                            Snackbar.LENGTH_SHORT).show();
-
-                                }
-                            }, 1500);
-
-//                            TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
-//                            TypePronouns.setVisibility(View.VISIBLE);
-//                            TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_in));
-
-                            isClickedGender = true;
-                        }
-                    }
-                });
-
-//                Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out);
-                TypeGender.startAnimation(ReturnAnimation(R.anim.slide_out));
-
-                cv_other.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!isClickedGender) {
-
-                            cv_Male.animate().alpha(0).setDuration(1500);
-                            cv_Female.animate().alpha(0).setDuration(1500);
-                            //  final Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
-                            final android.os.Handler handler = new Handler(Looper.getMainLooper());
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    cv_Male.setVisibility(View.GONE);
-                                    cv_Female.setVisibility(View.GONE);
-                                    RelativeLayout.LayoutParams layoutParams =
-                                            (RelativeLayout.LayoutParams) cv_other.getLayoutParams();
-                                    layoutParams.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                                    cv_other.setLayoutParams(layoutParams);
-                                    RelativeLayout.LayoutParams layoutParamsBack =
-                                            (RelativeLayout.LayoutParams) Back.getLayoutParams();
-                                    layoutParamsBack.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-                                    layoutParamsBack.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                                    layoutParamsBack.addRule(RelativeLayout.ALIGN_BOTTOM, R.id.TypeGender);
-                                    layoutParamsBack.addRule(RelativeLayout.START_OF, R.id.TypeGender);
-                                    Back.setLayoutParams(layoutParamsBack);
-                                    Back.setVisibility(View.VISIBLE);
-//                                    TypePronouns.setText(valueOfFields.get(mContext.getString(R.string.field_pronouns)));
-//                                    TypePronouns.setVisibility(View.VISIBLE);
-//                                    TypePronouns.startAnimation(ReturnAnimation(R.anim.slide_in));
-
-                                    //TypeGender.setText(valueOfFields.get(mContext.getString(R.string.field_gender)));
-                                    TypeGender.setVisibility(View.VISIBLE);
-                                    TypeGender.startAnimation(ReturnAnimation(R.anim.slide_in));
-//                                TypeGender.setVisibility(View.VISIBLE);
-//                                TypeGender.startAnimation(animation);
-
-                                }
-                            }, 1500);
-                            isClickedGender = true;
-                        }
-                    }
-                });
-            }
-        });
+//                                    TypeGender.startAnimation(ReturnAnimation(R.anim.slide_in));
+////                                TypeGender.setVisibility(View.VISIBLE);
+////                                TypeGender.startAnimation(animation);
+//
+//                                }
+//                            }, 1500);
+//                            isClickedGender = true;
+//                        }
+//                    }
+//                });
+//            }
+//        });
     }
 
     private void PrivacyDialog(View Private, final String Field) {
@@ -2625,12 +2624,12 @@ public class CardInformationFragment extends Fragment {
                 rlAge.startAnimation(myAnim);
                 AlertAge.setVisibility(View.INVISIBLE);
                 //INFLATING THE VIEW INSIDE THE DIALOG
-                InflateDialog(R.layout.dialog_layout_age);
+                InflateDialog(R.layout.dialog_prov_loc);
                 //INITIALIZING THE WIDGETS INSIDE THE DIALOG
-                final DatePicker datePicker = vDialog.findViewById(R.id.datePicker);
-                final TextView BirthDate = vDialog.findViewById(R.id.TrackName);
+                final DatePicker datePicker = vDialog.findViewById(R.id.fire_grid);
+                final TextView BirthDate = vDialog.findViewById(R.id.fragment_container_view_tag);
                 final Button setDetails = vDialog.findViewById(R.id.close_dialog);
-                final EditText Age = vDialog.findViewById(R.id.TypeMusicName);
+                final EditText Age = vDialog.findViewById(R.id.games_button);
 
                 FieldList.add(mContext.getString(R.string.field_age));
                 FieldList.add(mContext.getString(R.string.field_birth_date));

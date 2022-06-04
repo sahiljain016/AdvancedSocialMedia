@@ -48,6 +48,40 @@
             <!--                app:layout_constraintBottom_toTopOf="@id/SV_SOCIETY" />-->
 
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/TV_DESP_SIC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E6000000"
+                    android:fadeScrollbars="true"
+                    android:isScrollContainer="true"
+                    android:nestedScrollingEnabled="true"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_50sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+            </ScrollView>
+
+            <ImageView
+                android:id="@+id/IV_DESP_SIC"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_question_mark_bubble"
+                android:tag="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/CL_ADD_SOCIETY"
                 android:layout_width="wrap_content"
@@ -84,40 +118,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/TV_DESP_SIC"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#E6000000"
-                    android:fadeScrollbars="true"
-                    android:isScrollContainer="true"
-                    android:nestedScrollingEnabled="true"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_50sdp"
-                    android:paddingEnd="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:scrollbars="vertical"
-                    android:scrollHorizontally="false"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
-            </ScrollView>
-
-            <ImageView
-                android:id="@+id/IV_DESP_SIC"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/ic_question_mark_bubble"
-                android:tag="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

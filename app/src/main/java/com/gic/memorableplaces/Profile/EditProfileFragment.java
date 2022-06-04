@@ -225,10 +225,7 @@ private EditText ConfirmPasswordETDialog;
            dialog.setTargetFragment(EditProfileFragment.this,1);
                 }
        // Case 4 : if user changes their UID number
-       if(!(mAllUserSettings.getUser().getCollege_uid() == UID)){
-           //Change the user's UID
-           CheckIfCollegeUIDexists(UID);
-       }
+
        //Case 5 : if user changes their display name
        if(!mAllUserSettings.getUserAccountSettings().getDisplay_name().equals(displayName)){
          //Change the user's display name
@@ -238,7 +235,7 @@ private EditText ConfirmPasswordETDialog;
            //Change the user's website
            mFirebaseMethods.UpdateUserAccountSettings(null,website,null,null,null);
        }
-       if(!mAllUserSettings.getUserAccountSettings().getCard_bio().equals(description)){
+       if(!mAllUserSettings.getUser().getAuto_desp().equals(description)){
            //Change the user's description
            mFirebaseMethods.UpdateUserAccountSettings(null,null,description,null,null);
        }
@@ -346,7 +343,7 @@ private EditText ConfirmPasswordETDialog;
                 }
                 for(DataSnapshot SingleSnapshot : snapshot.getChildren()){
                     if(SingleSnapshot.exists()){
-                        Log.d(TAG, "CheckIfPhoneNumberExists: Found A Match " + Objects.requireNonNull(SingleSnapshot.getValue(User.class)).getCollege_uid());
+                        //Log.d(TAG, "CheckIfPhoneNumberExists: Found A Match " + Objects.requireNonNull(SingleSnapshot.getValue(User.class)).getCollege_uid());
                         mUID.setError("This UID is already linked.");
                     }
                 }
@@ -373,10 +370,10 @@ private EditText ConfirmPasswordETDialog;
         mFullName.setText(settings.getDisplay_name());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());
-        mDescription.setText(settings.getCard_bio());
+        mDescription.setText(allUserSettings.getUser().getAuto_desp());
         mEmail.setText(allUserSettings.getUser().getEmail());
         mPhone.setText(String.valueOf(allUserSettings.getUser().getPhone_number()));
-        mUID.setText(String.valueOf(allUserSettings.getUser().getCollege_uid()));
+       // mUID.setText(String.valueOf(allUserSettings.getUser().getCollege_uid()));
         mCourse.setText(allUserSettings.getUser().getCourse());
         mGender.setText(allUserSettings.getUser().getGender());
 

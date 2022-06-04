@@ -31,17 +31,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
+        android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA"/>
-        <activity
-            android:name="com.gic.memorableplaces.SignUp.DreamDestinationFragment"
-            android:label="leku_title_activity_location_picker"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:value="AIzaSyBbjbvTigldYL0mSEX9KuyI7Y4T5TYTayA" />
+
+
         <activity android:name="com.gic.memorableplaces.Profile.TimelineActivity" />
         <activity
             android:name="com.gic.memorableplaces.Share.ShareActivity"
@@ -49,7 +44,9 @@
         <activity android:name="com.gic.memorableplaces.Search.SearchActivity" />
         <activity android:name="com.gic.memorableplaces.Profile.ViewProfileActivity" />
         <activity android:name="com.gic.memorableplaces.LogIn.LogInActivity" />
-        <activity android:name="com.gic.memorableplaces.SignUp.SignUpActivity" />
+        <activity
+            android:name="com.gic.memorableplaces.SignUp.SignUpActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.gic.memorableplaces.Profile.ViewPostActivity" />
         <activity android:name="com.gic.memorableplaces.Profile.CommentsActivity" />
         <activity android:name="com.gic.memorableplaces.FilterFriends.FriendsFilterActivity" />
@@ -71,7 +68,8 @@
         <activity
             android:name="com.gic.memorableplaces.Home.NavigatingActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

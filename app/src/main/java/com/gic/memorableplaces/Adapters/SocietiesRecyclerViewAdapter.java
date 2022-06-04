@@ -25,7 +25,7 @@ public class SocietiesRecyclerViewAdapter extends RecyclerView.Adapter<Societies
     private ArrayList<String> als, alsSelectedList;
     private Context mContext;
 
-    private OnSocietyClicked MyOnSocietyClicked;
+    private final OnSocietyClicked MyOnSocietyClicked;
 
 
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder {
@@ -169,7 +169,7 @@ public class SocietiesRecyclerViewAdapter extends RecyclerView.Adapter<Societies
             }
         });
 
-        holder.CL_ADD_SOCIETY.setOnClickListener(v -> MyOnSocietyClicked.onItemClick(pos, color, holder.IV_ADD_SOCIETY, holder.TV_SOCIETY, holder.CL_ADD_SOCIETY));
+        holder.IV_ADD_SOCIETY.setOnClickListener(v -> MyOnSocietyClicked.onItemClick(pos, color, holder.IV_ADD_SOCIETY, holder.TV_SOCIETY, holder.CL_ADD_SOCIETY));
     }
 
     @Override

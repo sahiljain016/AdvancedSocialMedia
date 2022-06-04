@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/gradient_yellow" />
+                android:background="@drawable/gradient_light_blue_green" />
 
             <me.grantland.widget.AutofitTextView
                 android:id="@+id/ATV_TITLE_NOTIFCATION_MESSAGES"

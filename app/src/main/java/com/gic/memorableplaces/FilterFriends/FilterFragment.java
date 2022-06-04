@@ -204,7 +204,7 @@ public class FilterFragment extends Fragment implements FiltersRecyclerViewAdapt
                 if (!isUltraFilterOn) {
                     ChangeFilterType.setVisibility(View.VISIBLE);
                     isUltraFilterOn = true;
-                    CL_MAIN.setBackgroundResource(R.drawable.gradient_yellow);
+                    CL_MAIN.setBackgroundResource(R.drawable.gradient_light_blue_green);
                     hmFinal.clear();
                     alsFieldsFiltered.clear();
                     alsFilterName.clear();

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +24,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView;
+import com.gic.memorableplaces.CustomLibs.CardStack.SwipeableLayoutManager;
 import com.gic.memorableplaces.DataModels.FFUserDetails;
+import com.gic.memorableplaces.DataModels.MatchFilterDetails;
+import com.gic.memorableplaces.DataModels.User;
 import com.gic.memorableplaces.FilterFriends.DataDisplayFragment;
 import com.gic.memorableplaces.FilterFriends.FriendsFilterActivity;
 import com.gic.memorableplaces.FilterFriends.UserDetailsFragment;
-import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView;
-import com.gic.memorableplaces.CustomLibs.CardStack.SwipeableLayoutManager;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.gic.memorableplaces.utils.GlideImageLoader;
@@ -55,24 +58,31 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
     private static final String TAG = "FindFriendsRecyclerViewAdapter";
 
     //Variables
-    private final LinkedHashMap<String, ArrayList<String>> mImagesHashMap;
-    private final LinkedHashMap<String, LinkedHashMap<String, String>> hmDetailsFinal;
+
+    private final LinkedHashMap<String, User> hmDetailsFinal;
     private final HashMap<String, HashMap<String, ArrayList<String>>> hmFinal;
     private final ArrayList<String> mUIDList;
     private final OnMoreFilterClickListener MyOnMoreFilterClickListener;
+
     private final boolean isRandom;
     private final String sUsername, sProfileLink, sMyName;
     private final Context mContext;
     private final Activity mActivity;
+
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
+
+    private MatchFilterDetails mfd;
+
     private View vDialog;
     private AlertDialog MessageDialog;
     private LayoutInflater inflaterDialog;
     private AlertDialog.Builder builder;
+
     private SwipeableLayoutManager SLM;
     UserImageFFRecyclerViewAdapter mUserImageAdapter;
     RecyclerView.LayoutManager mFilterLayoutManager;
+
     ArrayList<String> alsFiltersList = new ArrayList<>();
     ArrayList<String> alsFilterType1 = new ArrayList<>();
     ArrayList<String> alsFilterType2 = new ArrayList<>();
@@ -81,7 +91,7 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
     public static class MainFeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         OnMoreFilterClickListener mOnMoreFilterClickListener;
-        public TextView ATV_USERNAME, ATV_FULLNAME/*, tDescription*/;
+        public TextView ATV_DESP, ATV_FULLNAME, ATV_GENDER/*, tDescription*/;
 
         /*public ShineButton SB_FOLLOW;*/
 //        public RecyclerView mRecyclerView;
@@ -103,8 +113,9 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
             mOnMoreFilterClickListener = OnMoreFilterClickListener;
 //            mRecyclerView = itemView.findViewById(R.id.RV_USER_IMAGES);
             ATV_FULLNAME = itemView.findViewById(R.id.ATV_FULLNAME);
+            ATV_GENDER = itemView.findViewById(R.id.ATV_GENDER);
 //            BL_DETAILS = itemView.findViewById(R.id.BL_DETAILS);
-            ATV_USERNAME = itemView.findViewById(R.id.ATV_USERNAME_FFR);
+            ATV_DESP = itemView.findViewById(R.id.ATV_DESP_FFR);
             IV_OPTIONS = itemView.findViewById(R.id.IV_OPEN_OPTIONS);
             ML_FF = itemView.findViewById(R.id.ML_FF);
             IV_DETAIL_ARROW = itemView.findViewById(R.id.IV_TOP_SLIDER);
@@ -147,19 +158,19 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
         void onItemClick(int position);
     }
 
-    public FindFriendsRecyclerViewAdapter(ArrayList<String> UIDList, LinkedHashMap<String, ArrayList<String>> ImagesHashMap,
-                                          LinkedHashMap<String, LinkedHashMap<String, String>> DetailsFinal,
+    public FindFriendsRecyclerViewAdapter(ArrayList<String> UIDList, MatchFilterDetails mfd,
+                                          LinkedHashMap<String, User> DetailsFinal,
                                           HashMap<String, HashMap<String, ArrayList<String>>> Final, Activity activity,
                                           Context context, SwipeableLayoutManager swipeableLayoutManager, String ProfileLink, String Username, String name, boolean bIsRandom, OnMoreFilterClickListener onMoreFilterClickListener) {
 
         mUIDList = UIDList;
         hmFinal = Final;
         hmDetailsFinal = DetailsFinal;
-        mImagesHashMap = ImagesHashMap;
         isRandom = bIsRandom;
         sProfileLink = ProfileLink;
         SLM = swipeableLayoutManager;
         sUsername = Username;
+        this.mfd = mfd;
         sMyName = name;
         mActivity = activity;
         mContext = context;
@@ -211,34 +222,45 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
     public void onBindViewHolder(@NonNull final MainFeedViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.setIsRecyclable(false);
+        int pos = holder.getBindingAdapterPosition();
         //mImagesList.clear();
-        GlideImageLoader.loadImageWithOutTransition(mContext, mImagesHashMap.get(mUIDList.get(position)).get(0), holder.IV_MAIN);
+        User user;
+        if (hmDetailsFinal.get(mUIDList.get(pos)) != null) {
+            user = hmDetailsFinal.get(mUIDList.get(pos));
+        } else {
+            user = new User();
+        }
+
+        GlideImageLoader.loadImageWithOutTransition(mContext, user.getProfile_photo(), holder.IV_MAIN);
         Typeface title = Typeface.createFromAsset(mContext.getAssets(), "fonts/convergence.ttf");
-        holder.ATV_USERNAME.setTypeface(title, Typeface.NORMAL);
+        Typeface cap = Typeface.createFromAsset(mContext.getAssets(), "fonts/Capriola.ttf");
+        holder.ATV_DESP.setTypeface(cap, Typeface.NORMAL);
         holder.ATV_FULLNAME.setTypeface(title, Typeface.NORMAL);
+        holder.ATV_GENDER.setTypeface(title, Typeface.NORMAL);
         //holder.MoreFilters.setFocusable(false);
         //InitiateOptionsSequence(holder, true);
         Log.d(TAG, String.format("onBindViewHolder: mUIDList: %s", mUIDList));
-        if (!hmFinal.isEmpty()) {
-            Log.d(TAG, "onBindViewHolder: position " + position);
-            Log.d(TAG, "onBindViewHolder: UID: " + mUIDList.get(position));
-            // Log.d(TAG, "onBindViewHolder: HashMap for UID: " + hmFinal.get(mUIDList.get(position)));
-            //Log.d(TAG, "onBindViewHolder: HashMap size: " + hmFinal.get(mUIDList.get(position)).size());
-            if (hmFinal.get(mUIDList.get(position)).size() == 1) {
-                if (!hmFinal.get(mUIDList.get(position)).containsKey(mContext.getString(R.string.field_age))) {
-                    //   holder.MoreFilters.setVisibility(View.VISIBLE);
-                    //  holder.MoreFilters.setText("+" + (hmFinal.get(mUIDList.get(position)).size() - 0) + " Filters");
-                }
-            } else {
-                if (!hmFinal.get(mUIDList.get(position)).containsKey(mContext.getString(R.string.field_age))) {
-                    //  holder.MoreFilters.setVisibility(View.VISIBLE);
-                    //  holder.MoreFilters.setText("+" + (hmFinal.get(mUIDList.get(position)).size() - 0) + " Filters");
-                } else {
-                    //holder.MoreFilters.setVisibility(View.VISIBLE);
-                    // holder.MoreFilters.setText("+" + (hmFinal.get(mUIDList.get(position)).size() - 1) + " Filters");
-                }
-            }
-        }
+        Log.d(TAG, String.format("onBindViewHolder: user: %s", user));
+//        if (!hmFinal.isEmpty()) {
+//            Log.d(TAG, "onBindViewHolder: position " + position);
+//            Log.d(TAG, "onBindViewHolder: UID: " + mUIDList.get(position));
+//            // Log.d(TAG, "onBindViewHolder: HashMap for UID: " + hmFinal.get(mUIDList.get(position)));
+//            //Log.d(TAG, "onBindViewHolder: HashMap size: " + hmFinal.get(mUIDList.get(position)).size());
+//            if (hmFinal.get(mUIDList.get(position)).size() == 1) {
+//                if (!hmFinal.get(mUIDList.get(position)).containsKey(mContext.getString(R.string.field_age))) {
+//                    //   holder.MoreFilters.setVisibility(View.VISIBLE);
+//                    //  holder.MoreFilters.setText("+" + (hmFinal.get(mUIDList.get(position)).size() - 0) + " Filters");
+//                }
+//            } else {
+//                if (!hmFinal.get(mUIDList.get(position)).containsKey(mContext.getString(R.string.field_age))) {
+//                    //  holder.MoreFilters.setVisibility(View.VISIBLE);
+//                    //  holder.MoreFilters.setText("+" + (hmFinal.get(mUIDList.get(position)).size() - 0) + " Filters");
+//                } else {
+//                    //holder.MoreFilters.setVisibility(View.VISIBLE);
+//                    // holder.MoreFilters.setText("+" + (hmFinal.get(mUIDList.get(position)).size() - 1) + " Filters");
+//                }
+//            }
+//        }
 
         //CheckIfFollower(position, holder);
 
@@ -303,24 +325,17 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
 //        });
         holder.CV_MAIN_FF.setOnClickListener(v -> {
 
-//            holder.ATV_FULLNAME.animate().alpha(0).setDuration(1000);
-//            holder.ATV_USERNAME.animate().alpha(0).setDuration(1000);
-
-
-//            Handler handler = new Handler(Looper.getMainLooper());
-//            handler.postDelayed(() -> {
-
 
             Bundle bundle = new Bundle();
             FFUserDetails ffUserDetails = new FFUserDetails();
 
-            ffUserDetails.setAlsImagesList(mImagesHashMap.get(mUIDList.get(position)));
-            ffUserDetails.setFullName(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_display_name))
+            ffUserDetails.setAlsImagesList(user.getPhotos_list());
+            ffUserDetails.setTargetDisplayName(user.getDisplay_name()
                     + ", "
-                    + hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_age)));
-            ffUserDetails.setDesp(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_card_bio)));
-            ffUserDetails.setTargetUID(mUIDList.get(position));
-            ffUserDetails.setTargetUsername(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)));
+                    + hmDetailsFinal.get(user.getAge()));
+            ffUserDetails.setDesp(user.getAuto_desp());
+            ffUserDetails.setTargetUID(mUIDList.get(pos));
+            ffUserDetails.setTargetUsername(user.getUsername());
             ffUserDetails.setMyUsername(sUsername);
             ffUserDetails.setMyProfilePic(sProfileLink);
             if (!hmFinal.isEmpty()) {
@@ -469,59 +484,16 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
 
                 }
             });
-
-
-//                handler.postDelayed(() -> {
-//                    holder.ATV_FULLNAME.animate().alpha(1).setDuration(100).start();
-//                    holder.ATV_USERNAME.animate().alpha(1).setDuration(100).start();
-//                }, 500);
-//            }, 1100);
-
         });
-//        holder.IV_DETAIL_ARROW.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                Log.d(TAG, "onTouch: event: " +event.getAction());
-//                if(event.getAction() == MotionEvent.ACTION_DOWN){
-//                    v.getParent().requestDisallowInterceptTouchEvent(true);
-//                    v.onTouchEvent(event);
-//                }
-//                if(event.getAction() == MotionEvent.ACTION_MOVE){
-//                    Log.d(TAG, "onTouch: moving");
-//                    if()
-//                    holder.ML_FF_OUTER.getTransition(R.id.SwipeTrans).stsetAutoTransition(MotionScene.Transition.AUTO_ANIMATE_TO_END);
-//                }
-//                return true;
-//            }
-//        });
 
-//        holder.IV_DETAIL_ARROW.setOnClickListener(v -> {
-////            holder.CV_MAIN_FF.animate().alpha(0).setDuration(1000).start();
-//
-//            Fragment fragment = new UserDetailsFragment();
-//            String FragmentName = "UserDetailsFragment";
-//            Bundle bundle = new Bundle();
-//
-//            bundle.putStringArrayList(mContext.getString(R.string.field_images_list_ff), mImagesHashMap.get(mUIDList.get(0)));
-//            bundle.putString(mContext.getString(R.string.field_display_name), hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_display_name))
-//                    + ", "
-//                    + hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_age)));
-//            bundle.putString(mContext.getString(R.string.field_card_bio), hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_card_bio)));
-//            bundle.putString(mContext.getString(R.string.field_user_id), mUIDList.get(position));
-//            GetFilters(mUIDList.get(position), bundle);
-//
-//            //            Log.d(TAG, "onClick: UID TO TRANSFER: " + mUIDList.get(position));
-////            bundle.putString(mContext.getString(R.string.field_user_id), mUIDList.get(position));
-
-//
-//        });
         holder.IV_CARD.setOnClickListener(v -> {
             Fragment fragment = new DataDisplayFragment();
             String FragmentName = "Data_Display_Fragment";
             Bundle bundle = new Bundle();
             Log.d(TAG, "onClick: UID TO TRANSFER: " + mUIDList.get(position));
             bundle.putString(mContext.getString(R.string.field_user_id), mUIDList.get(position));
+            bundle.putString(mContext.getString(R.string.field_auto_desp), user.getAuto_desp());
+            bundle.putSerializable(mContext.getString(R.string.field_filter), mfd);
             fragment.setArguments(bundle);
             FragmentTransaction transaction = ((FriendsFilterActivity) mActivity).getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.FrameLayoutFilters, Objects.requireNonNull(fragment));
@@ -542,9 +514,9 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
             GifImageView MessageGif = vDialog.findViewById(R.id.Message_sent_gif);
             ArrayList<String> Messages = new ArrayList<>();
             Messages.add("Hello this is sahil jain, how are you doing? yum yum yum!");
-            DespAndQARecyclerViewAdapter mResultAdapter = new DespAndQARecyclerViewAdapter(Messages, mContext, true,
-                    mUIDList.get(position), sProfileLink, mImagesHashMap.get(mUIDList.get(position)).get(0), sUsername,
-                    hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)), rResults,
+            DespAndQARecyclerViewAdapter mResultAdapter = new DespAndQARecyclerViewAdapter(Messages, null,mContext, true,
+                    mUIDList.get(position), sProfileLink, user.getProfile_photo(), sUsername,
+                    user.getUsername(), rResults,
                     MessageDialog, MessageGif);
             rResults.setItemAnimator(new DefaultItemAnimator());
             rResults.setAdapter(mResultAdapter);
@@ -644,24 +616,24 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
 
                     if (!hmFinal.isEmpty()) {
                         mFirebaseMethods.addFollowOrMessageToFilterList(mUIDList.get(position),
-                                hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username))
+                                user.getUsername()
                                 , hmFinal.get(mUIDList.get(position)).keySet().toString(), sUsername, sProfileLink
-                                , mImagesHashMap.get(mUIDList.get(position)).get(0), "",
+                                , user.getProfile_photo(), "",
                                 mContext.getString(R.string.field_follow_list_for_notifications), mContext.getString(R.string.field_filters_matched));
                     } else {
                         mFirebaseMethods.addFollowOrMessageToFilterList(mUIDList.get(position),
-                                hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username))
+                                user.getUsername()
                                 , mContext.getString(R.string.field_random_match), sUsername, sProfileLink
-                                , mImagesHashMap.get(mUIDList.get(position)).get(0), "",
+                                , user.getProfile_photo(), "",
                                 mContext.getString(R.string.field_follow_list_for_notifications), mContext.getString(R.string.field_filters_matched));
 
                     }
 
-                    message = "You Followed " + hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)) + "!";
+                    message = "You Followed " + user.getDisplay_name() + "!";
                 } else {
                     holder.IV_FOLLOW.setTag("Not Followed");
                     holder.IV_FOLLOW.setImageResource(R.drawable.ic_follow_bubble);
-                    message = "You UnFollowed " + hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)) + "!";
+                    message = "You UnFollowed " + user.getDisplay_name() + "!";
                     mFirebaseMethods.removeFollowerAndFollowing(mUIDList.get(position));
                     mFirebaseMethods.DeleteFollowFromFilterList(mUIDList.get(position));
                 }
@@ -669,38 +641,36 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
                 MiscTools.InflateBalloonTooltip(mContext, message, 0, v);
 
 
+            }
+        });
 
 
-
-    }
-});
-
-
-        if(hmDetailsFinal.size()>position){
-        //Log.d(TAG, String.format("onBindViewHolder: mDescriptionList : %s Current Description: %s Current Position: %d", mDescriptionList, mDescriptionList.get(position), position));
+        if (hmDetailsFinal.size() > position) {
+            //Log.d(TAG, String.format("onBindViewHolder: mDescriptionList : %s Current Description: %s Current Position: %d", mDescriptionList, mDescriptionList.get(position), position));
             /*holder.tDescription.setText(Html.fromHtml(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_card_bio))
                     , Html.FROM_HTML_MODE_LEGACY));*/
 
-        // Log.d(TAG, String.format("onBindViewHolder: mUserNameList : %s Current user name: %s Current Position: %d", mUserNameList, mUserNameList.get(position), position));
+            // Log.d(TAG, String.format("onBindViewHolder: mUserNameList : %s Current user name: %s Current Position: %d", mUserNameList, mUserNameList.get(position), position));
 //            holder.tUsername.setText(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)));
 
 
-        //Log.d(TAG, String.format("onBindViewHolder: mUserNameList : %s Current user name: %s Current Position: %d", mUserNameList, mUserNameList.get(position), position));
-        /*holder.tvFollowers.setText(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_followers)));
-         */
+            //Log.d(TAG, String.format("onBindViewHolder: mUserNameList : %s Current user name: %s Current Position: %d", mUserNameList, mUserNameList.get(position), position));
+            /*holder.tvFollowers.setText(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_followers)));
+             */
 
-        //  Log.d(TAG, String.format("onBindViewHolder: mUserNameList : %s Current user name: %s Current Position: %d", mUserNameList, mUserNameList.get(position), position));
+            //  Log.d(TAG, String.format("onBindViewHolder: mUserNameList : %s Current user name: %s Current Position: %d", mUserNameList, mUserNameList.get(position), position));
 /*
             holder.tvFollowing.setText(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_following)));
 */
 
-        //  Log.d(TAG, String.format("onBindViewHolder: mFullNameList : %s Current full name: %s Current Position: %d", mFullNameList, mFullNameList.get(position), position));
-        //  Log.d(TAG, String.format("onBindViewHolder: mAgeList : %s Current age: %s Current Position: %d", mAgeList, mAgeList.get(position), position));
+            //  Log.d(TAG, String.format("onBindViewHolder: mFullNameList : %s Current full name: %s Current Position: %d", mFullNameList, mFullNameList.get(position), position));
+            //  Log.d(TAG, String.format("onBindViewHolder: mAgeList : %s Current age: %s Current Position: %d", mAgeList, mAgeList.get(position), position));
 
-        holder.ATV_FULLNAME.setText(String.format("%s, %s",hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_display_name)),
-        hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_age))));
+            holder.ATV_FULLNAME.setText(String.format("%s, %s", user.getDisplay_name(),
+                    user.getAge()));
 
-        holder.ATV_USERNAME.setText(hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)));
+            holder.ATV_DESP.setText(Html.fromHtml(user.getAuto_desp(), Html.FROM_HTML_MODE_LEGACY));
+            holder.ATV_GENDER.setText(Html.fromHtml(user.getGender(), Html.FROM_HTML_MODE_LEGACY));
 //            if (!hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_card_bg_color)).equals("N/A")) {
 //                //   Log.d(TAG, String.format("onBindViewHolder: mCardBGList : %s Current card bg: %s Current Position: %d", mCardBGList, mCardBGList.get(position), position));
 //
@@ -716,10 +686,10 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
 //                holder.mRecyclerView.setBackground(gd);
 //            }
 
-        //holder.IV_COLLEGE_YEAR_BADGE.setImageResource(R.drawable.ic_badge);
+            //holder.IV_COLLEGE_YEAR_BADGE.setImageResource(R.drawable.ic_badge);
 
-        // GlideImageLoader.loadImageWithOutTransition(mContext, mImagesHashMap.get(mUIDList.get(position)).get(0), holder.IV_BG);
-        //Blurry.with(mContext).capture(holder.IV_BACKGROUND).into(holder.IV_BACKGROUND);
+            // GlideImageLoader.loadImageWithOutTransition(mContext, mImagesHashMap.get(mUIDList.get(position)).get(0), holder.IV_BG);
+            //Blurry.with(mContext).capture(holder.IV_BACKGROUND).into(holder.IV_BACKGROUND);
 //            Log.d(TAG, String.format("onBindViewHolder: mImagesHashMap : %s Current image hm: %s Current Position: %d", mImagesHashMap, mImagesHashMap.get(mUIDList.get(position)), position));
 //
 //            mFilterLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
@@ -758,41 +728,40 @@ public class FindFriendsRecyclerViewAdapter extends RecyclerView.Adapter<FindFri
 
 
         }
-        }
+    }
 
-public void removeItemFromTop(){
+    public void removeItemFromTop() {
         hmDetailsFinal.remove(mUIDList.get(0));
-        mImagesHashMap.remove(mUIDList.get(0));
         mUIDList.remove(0);
         notifyDataSetChanged();
-        }
+    }
 
 
-@Override
-public int getItemCount(){
+    @Override
+    public int getItemCount() {
         return mUIDList.size();
-        }
+    }
 
-        String getItem(int id){
+    String getItem(int id) {
         return mUIDList.get(id);
-        }
+    }
 
-@Override
-public long getItemId(int position){
+    @Override
+    public long getItemId(int position) {
         return position;
-        }
+    }
 
-@Override
-public int getItemViewType(int position){
+    @Override
+    public int getItemViewType(int position) {
         return position;
-        }
+    }
 
-private void GetFilters(String TargetUserUID,Bundle bundle){
+    private void GetFilters(String TargetUserUID, Bundle bundle) {
 
 
-        }
+    }
 
-//    private void InitiateOptionsSequence(MainFeedViewHolder holder, boolean isSingle) {
+    //    private void InitiateOptionsSequence(MainFeedViewHolder holder, boolean isSingle) {
 //
 //        if (isSingle) {
 //            FriendsFilterActivity.SetSpotlightConfig("#FDD835", "#ffffff", "#FDD835");
@@ -821,13 +790,13 @@ private void GetFilters(String TargetUserUID,Bundle bundle){
 //                Math.min(b, 255));
 //    }
 //
-private void CheckIfFollower(int position,final MainFeedViewHolder holder){
+    private void CheckIfFollower(int position, final MainFeedViewHolder holder) {
 
 
 //
 //
 //    }
 
-        }
-        }
+    }
+}
 

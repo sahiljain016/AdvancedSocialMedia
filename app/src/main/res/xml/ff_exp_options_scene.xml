@@ -28,6 +28,9 @@
             motion:layout_constraintTop_toTopOf="parent">
             <CustomAttribute motion:attributeName="CardBackgroundColor"
                 motion:customColorValue="#E6FFFFFF"/>
+            <CustomAttribute
+                motion:attributeName="Radius"
+                motion:customFloatValue="80" />
         </Constraint>
 
     </ConstraintSet>
@@ -48,6 +51,9 @@
             motion:layout_constraintTop_toTopOf="parent">
             <CustomAttribute motion:attributeName="CardBackgroundColor"
                 motion:customColorValue="#FFFFFF"/>
+            <CustomAttribute
+                motion:attributeName="Radius"
+                motion:customFloatValue="100" />
         </Constraint>
 
     </ConstraintSet>

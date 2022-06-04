@@ -2,69 +2,107 @@ package com.gic.memorableplaces.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.constraintlayout.utils.widget.ImageFilterButton;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.gic.memorableplaces.DataModels.FilterDetails;
+import com.gic.memorableplaces.DataModels.FilterPrivacyDetails;
+import com.gic.memorableplaces.DataModels.MatchFilterDetails;
 import com.gic.memorableplaces.FilterFriends.FriendsFilterActivity;
 import com.gic.memorableplaces.LogIn.LogInActivity;
 import com.gic.memorableplaces.Messages.NewMessageActivity;
 import com.gic.memorableplaces.Profile.ProfileFragment;
 import com.gic.memorableplaces.R;
+import com.gic.memorableplaces.RoomsDatabases.FilterDetailsDatabase;
 import com.gic.memorableplaces.Share.ShareActivity;
+import com.gic.memorableplaces.SignUp.QuestionsFragment;
+import com.gic.memorableplaces.interfaces.FilterDetailsDao;
+import com.gic.memorableplaces.interfaces.FilterPrivacyDao;
+import com.gic.memorableplaces.interfaces.MatchFilterDetailsDao;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
+import pl.droidsonroids.gif.GifImageView;
 
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "Home Activity";
-    //    private static final int Activity_num = 0;
     private int MENU_POS_SAVE;
-    // private int IMAGE_CONFIG = 0;
     private final Context mContext = HomeActivity.this;
     //FIREBASE
+    private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private FilterDetails fdMyDetails;
+    private MatchFilterDetails mfdMatchDetails, mfdFilledDetails;
+    private FilterPrivacyDetails fpdDetails;
+
     //Bottom Navigation
     BottomNavigationView bottomNavigationView;
+    private ImageFilterButton IFB_USER, IFB_QUESTION, IFB_FRIENDS, IFB_MESSAGES;
+    private View V_LOADING_COVER;
+    private GifImageView GIV_LOADING;
+    private TextView TV_LOADING;
     public static CoordinatorLayout CL_BOTTOM_NAV;
     //TabFlashyAnimator flashyAnimator;
     private ImageView IV_BLUR;
-    //private List<FluidBottomNavigationItem> NavigationList;
-
     private FragmentTransaction transaction;
-
     //Lists
     private ArrayList<Integer> ColoursList;
     private ArrayList<Integer> DrawableIconList;
     private ArrayList<String> TitleStringList;
+    private String current = "", sUID;
+    private Handler handler;
+    boolean MyDetails = true, PrivacyDetails = true, MatchDetails = true;
+
+    private ExecutorService databaseWriteExecutor;
+    private FilterDetailsDatabase FD_DETAILS;
+    private FilterDetailsDao FD_Dao;
+    private MatchFilterDetailsDao MFD_Dao;
+    private FilterPrivacyDao FP_Dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        myRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        sUID = mAuth.getCurrentUser().getUid();
 
+        handler = new Handler(Looper.getMainLooper());
         ColoursList = new ArrayList<>();
         DrawableIconList = new ArrayList<>();
         TitleStringList = new ArrayList<>();
@@ -109,48 +147,19 @@ public class HomeActivity extends AppCompatActivity {
         //Menu menu;
         //MenuItem menuItem;
         AnimatedBottomBar bottomNavigation = findViewById(R.id.BottomNav);
+        IFB_FRIENDS = findViewById(R.id.IFB_FRIENDS_MBN);
+        IFB_MESSAGES = findViewById(R.id.IFB_MESSAGES_MBN);
+        IFB_USER = findViewById(R.id.IFB_USER_MBN);
+        IFB_QUESTION = findViewById(R.id.IFB_HOME_MBN);
+        V_LOADING_COVER = findViewById(R.id.V_LOADING_COVER_HOME);
+        GIV_LOADING = findViewById(R.id.GIV_LOADING_HOME);
+        TV_LOADING = findViewById(R.id.TV_LOADING_HOME);
         IV_BLUR = findViewById(R.id.IV_BLUR);
+        MotionLayout ML = findViewById(R.id.CL_MBN);
+        View V_INDICATOR = findViewById(R.id.V_BOTTOM_INDICATOR_MBN);
 
-//        IV_BLUR.post(() -> Blurry.with(mContext).capture(findViewById(R.id.Frame_layout_main)).into(IV_BLUR));
 
-
-        // NavigationList.add(new FluidBottomNavigationItem(
-//                "Home Page",
-//                ContextCompat.getDrawable(this, R.drawable.ic_social_feed)));
-//
-////        NavigationList.add(new FluidBottomNavigationItem(
-////                "Search Users",
-////                ContextCompat.getDrawable(this, R.drawable.ic_search)));
-////        NavigationList.add(new FluidBottomNavigationItem(
-////                "My Chats",
-////                ContextCompat.getDrawable(this, R.drawable.ic_menu_chat)));
-//        NavigationList.add(new FluidBottomNavigationItem(
-//                "Share Posts",
-//                ContextCompat.getDrawable(this, R.drawable.ic_share_posts)));
-//        NavigationList.add(new FluidBottomNavigationItem(
-//                "Student Dashboard",
-//                ContextCompat.getDrawable(this, R.drawable.ic_student_dashbaord)));
-//        NavigationList.add(new FluidBottomNavigationItem(
-//                "Friends Filter",
-//                ContextCompat.getDrawable(this, R.drawable.ic_find_friends)));
-//        NavigationList.add(new FluidBottomNavigationItem(
-//                "My Profile",
-//                ContextCompat.getDrawable(this, R.drawable.ic_default_user)));
-//bottomNavigation.ad
-//        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_social_feed));
-//        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_student_dashbaord));
-//        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_share_posts));
-//        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_find_friends));
-//        bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_default_user));
         Log.d(TAG, "onCreate: HomeAct");
-
-//        ColoursList.add(Color.parseColor("#D81B60"));
-//        ColoursList.add(Color.parseColor("#F4511E"));
-//        ColoursList.add(Color.parseColor("#1E88E5"));
-//        ColoursList.add(Color.parseColor("#64E535"));
-//        ColoursList.add(Color.parseColor("#FDD835"));
-//        ColoursList.add(Color.parseColor("#03DAC5"));
-//        ColoursList.add(Color.parseColor("#8E24AA"));
 
 
         DrawableIconList.add(R.drawable.ic_social_feed);
@@ -179,6 +188,45 @@ public class HomeActivity extends AppCompatActivity {
 //        SetUpViewPager();
         // FIREBASE AUTHENTICATION
         //INITIALIZING FRAGMENTS CLASSSES
+
+        FD_DETAILS = FilterDetailsDatabase.getDatabase(mContext);
+        FD_Dao = FD_DETAILS.filterDetailsDao();
+        MFD_Dao = FD_DETAILS.matchFilterDetailsDao();
+        FP_Dao = FD_DETAILS.filterPrivacyDao();
+        databaseWriteExecutor = FD_DETAILS.databaseWriteExecutor;
+        fdMyDetails = new FilterDetails();
+        mfdFilledDetails = new MatchFilterDetails();
+        mfdMatchDetails = new MatchFilterDetails();
+        fpdDetails = new FilterPrivacyDetails();
+
+        databaseWriteExecutor.execute(() -> {
+            Log.d(TAG, "onCreateView: GetAllFilterDetails: " + FD_Dao.GetAllFilterDetails().size());
+            Log.d(TAG, "onCreateView: GetAllMatchFilterDetails: " + MFD_Dao.GetAllMatchFilterDetails().size());
+            Log.d(TAG, "onCreateView: GetAllPrivacyDetails: " + FP_Dao.GetAllPrivacyDetails().size());
+            if (FD_Dao.GetAllFilterDetails().size() == 0) {
+                MyDetails = false;
+            }
+            if (MFD_Dao.GetAllMatchFilterDetails().size() == 0) {
+                MatchDetails = false;
+            }
+            if (FP_Dao.GetAllPrivacyDetails().size() == 0) {
+                PrivacyDetails = false;
+            }
+
+            if (!MyDetails) {
+                GetMyDetailsFromFirebase();
+                SwitchLoadingViews();
+            } else if (!MatchDetails) {
+                GetMatchDetailsFromFirebase();
+                SwitchLoadingViews();
+            } else if (!PrivacyDetails) {
+                GetPrivacyDetailsFromFirebase();
+                SwitchLoadingViews();
+            }
+
+
+        });
+
         //Fragment Classes & Others
         SocialFeedFragment fragmentH = new SocialFeedFragment();
         FragmentControl(fragmentH, getString(R.string.social_feed_fragment));
@@ -189,32 +237,65 @@ public class HomeActivity extends AppCompatActivity {
 //        transaction.commit();
         Log.d(TAG, String.format("onCreate: ColoursList %s", ColoursList));
         setupFirebaseAuth();
-        //MenuHighlight();
-        //enableNavigation(bottomNavigationView);
-        //TextOutsideCircleButton.Builder builder = null;
-        // BottomBoomMenu.setRippleEffect(true);
-        // BottomBoomMenu.setBackgroundEffect(true);
-        // BottomBoomMenu.setShadowColor(Color.WHITE);
-        //  for (int i = 0; i < BottomBoomMenu.getPiecePlaceEnum().pieceNumber(); i++) {
-//            builder = new TextOutsideCircleButton.Builder()
-//                    .pieceColor(ColoursList.get(i))
-//                    .rippleEffect(true)
-//                    .shadowColor(ColoursList.get(i))
-//                    .textSize(14)
-//                    .shadowCornerRadius(Util.dp2px(16))
-//                    .normalColor(ColoursList.get(i))
-//                    .normalImageRes(DrawableIconList.get(i))
-//                    .normalText(TitleStringList.get(i))
-//                    .listener(new OnBMClickListener() {
-//                       // @Override
-//                        //public void onBoomButtonClick(int index) {
-//                            Log.d(TAG, "onBoomButtonClick: index " + index);
+
+        current = "home";
+
+        IFB_QUESTION.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: current: " + current);
+                if (current.equals("friends")) {
+                    ML.setTransition(R.id.TRANS_HOME_TO_FRIENDS);
+                    ML.transitionToStart();
+                    current = "home";
+                    V_INDICATOR.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#A3A3A3")));
+                }
+            }
+        });
+        IFB_USER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                QuestionsFragment fragment = new QuestionsFragment();
+                FragmentTransaction Transaction = getSupportFragmentManager().beginTransaction();
+                Transaction.replace(R.id.Frame_layout_main, fragment);
+                Transaction.addToBackStack(mContext.getString(R.string.get_started_fragment));
+                Transaction.commit();
+//                Fragment fragment;
+//                String fragmentName;
+//                fragment = new ProfileFragment();
+//                fragmentName = getString(R.string.profile_fragment);
+//                transaction = HomeActivity.this.getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.Frame_layout_main, Objects.requireNonNull(fragment));
+//                transaction.addToBackStack(fragmentName);
+//                transaction.commit();
+            }
+        });
+        IFB_MESSAGES.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(HomeActivity.this, NewMessageActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
+        IFB_FRIENDS.setOnClickListener(v -> {
+            Log.d(TAG, "onClick: current: " + current);
+            if (current.equals("home")) {
+                ML.setTransition(R.id.TRANS_HOME_TO_FRIENDS);
+                ML.transitionToEnd();
+                current = "friends";
+                V_INDICATOR.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#A3A3A3")));
+            }
+            Intent ffIntent = new Intent(HomeActivity.this, FriendsFilterActivity.class);
+            startActivity(ffIntent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        });
 
 
         bottomNavigation.setOnTabSelectListener(new AnimatedBottomBar.OnTabSelectListener() {
             @Override
             public void onTabSelected(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NotNull AnimatedBottomBar.Tab tab1) {
-
 
                 Fragment fragment = null;
                 String fragmentName = null;
@@ -285,6 +366,477 @@ public class HomeActivity extends AppCompatActivity {
         // BottomBoomMenu.addBuilder(builder);
         // }
 
+    }
+
+    private void SwitchLoadingViews() {
+
+        handler.post(() -> {
+            if (GIV_LOADING.getTag().equals("visible")) {
+                GIV_LOADING.setVisibility(View.GONE);
+                TV_LOADING.setVisibility(View.GONE);
+                TV_LOADING.setVisibility(View.GONE);
+                GIV_LOADING.setTag("gone");
+            } else {
+                GIV_LOADING.setVisibility(View.VISIBLE);
+                TV_LOADING.setVisibility(View.VISIBLE);
+                TV_LOADING.setVisibility(View.VISIBLE);
+                GIV_LOADING.setTag("visible");
+            }
+        });
+    }
+
+    ;
+
+    private void GetMyDetailsFromFirebase() {
+        Query query = myRef.child(mContext.getString(R.string.dbname_user_card))
+                .child(mAuth.getCurrentUser().getUid())
+                .child(mContext.getString(R.string.field));
+
+        ValueEventListener VEL_FILTER_DETAILS = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    fdMyDetails.setType(mContext.getString(R.string.field_my_details));
+                    mfdFilledDetails.setType(mContext.getString(R.string.field_visited_status));
+                    mfdFilledDetails.SetAllDefault("none");
+                    fdMyDetails.SetAllDefault(mContext.getString(R.string.not_available));
+
+                    Log.d(TAG, String.format("onDataChange: My snapshot: %s", snapshot));
+                    if (snapshot.hasChild(mContext.getString(R.string.field_age))) {
+                        fdMyDetails.setAge((Long) snapshot.child(mContext.getString(R.string.field_age)).getValue());
+                        if (fdMyDetails.getAge() == 0L) {
+                            mfdFilledDetails.setMatch_age_range(mContext.getString(R.string.field_red));
+                        } else {
+
+                            mfdFilledDetails.setMatch_age_range(mContext.getString(R.string.field_green));
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_birth_date))) {
+                        fdMyDetails.setBirthdate(String.valueOf(snapshot.child(mContext.getString(R.string.field_birth_date)).getValue()));
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_books))) {
+                        ArrayList<String> books = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_books)).getChildren()) {
+                            books.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setBooks(books);
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (books.size() == 1 && books.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_books(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_college_year))) {
+                        fdMyDetails.setCollege_year(String.valueOf(snapshot.child(mContext.getString(R.string.field_college_year)).getValue()));
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (fdMyDetails.getCollege_year().equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_college_year(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_gender))) {
+                        fdMyDetails.setGender(String.valueOf(snapshot.child(mContext.getString(R.string.field_gender)).getValue()));
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (fdMyDetails.getGender().equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_gender(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_general_details))) {
+                        ArrayList<String> general_details = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_general_details)).getChildren()) {
+                            general_details.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setGeneral_details(general_details);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (general_details.size() == 1 && general_details.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_general_details(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_pronouns))) {
+                        fdMyDetails.setPronouns(String.valueOf(snapshot.child(mContext.getString(R.string.field_pronouns)).getValue()));
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_hobbies))) {
+                        ArrayList<String> hobbies = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_hobbies)).getChildren()) {
+                            hobbies.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setHobbies(hobbies);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (hobbies.size() == 1 && hobbies.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_hobbies(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_movie))) {
+                        ArrayList<String> movie = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_movie)).getChildren()) {
+                            movie.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setMovies(movie);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (movie.size() == 1 && movie.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_movie(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_music))) {
+                        ArrayList<String> music = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_music)).getChildren()) {
+                            music.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setMusic(music);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (music.size() == 1 && music.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_music(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_society_in_college))) {
+                        ArrayList<String> soceties = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_society_in_college)).getChildren()) {
+                            soceties.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setSociety_in_college(soceties);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (soceties.size() == 1 && soceties.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_society_in_college(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_titles_posts))) {
+                        ArrayList<String> titles = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_titles_posts)).getChildren()) {
+                            titles.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setTitles_posts(titles);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (titles.size() == 1 && titles.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_titles_posts(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_video_games))) {
+                        ArrayList<String> video_games = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_video_games)).getChildren()) {
+                            video_games.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setVideo_games(video_games);
+
+                        ArrayList<String> tickType = new ArrayList<>(1);
+                        if (video_games.size() == 1 && video_games.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType.add(mContext.getString(R.string.field_red));
+                        } else {
+                            tickType.add(mContext.getString(R.string.field_green));
+                        }
+                        mfdFilledDetails.setMatch_video_games(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_my_loc))) {
+
+                        fdMyDetails.setMy_loc(String.valueOf(snapshot.child(mContext.getString(R.string.field_my_loc)).getValue()));
+
+                        String tickType = "";
+                        if (fdMyDetails.getMy_loc().equals(mContext.getString(R.string.not_available))) {
+                            tickType = mContext.getString(R.string.field_red);
+                        } else {
+                            tickType = mContext.getString(R.string.field_green);
+                        }
+                        mfdFilledDetails.setMatch_loc(tickType);
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_my_dd))) {
+                        ArrayList<String> my_dd = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_my_dd)).getChildren()) {
+                            my_dd.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        fdMyDetails.setMy_dd(my_dd);
+
+                        String tickType = "";
+                        if (my_dd.size() == 1 && my_dd.get(0).equals(mContext.getString(R.string.not_available))) {
+                            tickType = mContext.getString(R.string.field_red);
+                        } else {
+                            tickType = mContext.getString(R.string.field_green);
+                        }
+                        mfdFilledDetails.setMatch_loc(tickType);
+                    }
+
+                    Log.d(TAG, String.format("onDataChange: fdMyDetails: %s", fdMyDetails));
+
+                    databaseWriteExecutor.execute(() -> {
+                        FD_Dao.InsertNewDetail(fdMyDetails);
+                        if (!MatchDetails) {
+                            GetMatchDetailsFromFirebase();
+                        } else {
+                            SwitchLoadingViews();
+                        }
+                    });
+                } else {
+                    SwitchLoadingViews();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(VEL_FILTER_DETAILS);
+    }
+
+    private void GetMatchDetailsFromFirebase() {
+        Query query = myRef.child(mContext.getString(R.string.dbname_user_card))
+                .child(mAuth.getCurrentUser().getUid())
+                .child(mContext.getString(R.string.field_match_details));
+
+        ValueEventListener VEL_MATCH_DETAILS = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    mfdMatchDetails.setType(mContext.getString(R.string.field_match_details));
+                    mfdMatchDetails.SetAllDefault(mContext.getString(R.string.not_available));
+
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_age_range))) {
+                        mfdMatchDetails.setMatch_age_range(String.valueOf(snapshot.child(mContext.getString(R.string.field_match_age_range)).getValue()));
+                        if (mfdFilledDetails.getMatch_age_range().equals(mContext.getString(R.string.field_green))) {
+                            if (mfdFilledDetails.getMatch_age_range().equals(mContext.getString(R.string.not_available))) {
+                                mfdFilledDetails.setMatch_age_range(mContext.getString(R.string.field_red));
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_general_details))) {
+                        ArrayList<String> general_details = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_general_details)).getChildren()) {
+                            general_details.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_general_details(general_details);
+
+                        if (mfdFilledDetails.getMatch_general_details().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (general_details.size() == 1 && general_details.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_general_details(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_books))) {
+                        ArrayList<String> books = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_books)).getChildren()) {
+                            books.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_books(books);
+
+                        if (mfdFilledDetails.getMatch_books().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (books.size() == 1 && books.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_books(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_college_year))) {
+                        ArrayList<String> college_year = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_college_year)).getChildren()) {
+                            college_year.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_college_year(college_year);
+
+                        if (mfdFilledDetails.getMatch_college_year().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (college_year.size() == 1 && college_year.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_college_year(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_hobbies))) {
+                        ArrayList<String> hobbies = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_hobbies)).getChildren()) {
+                            hobbies.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_hobbies(hobbies);
+
+                        if (mfdFilledDetails.getMatch_hobbies().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (hobbies.size() == 1 && hobbies.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_hobbies(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_gender))) {
+                        ArrayList<String> gender = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_gender)).getChildren()) {
+                            gender.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_gender(gender);
+
+                        if (mfdFilledDetails.getMatch_gender().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (gender.size() == 1 && gender.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_gender(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_movie))) {
+                        ArrayList<String> movie = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_movie)).getChildren()) {
+                            movie.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_movie(movie);
+
+                        if (mfdFilledDetails.getMatch_movie().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (movie.size() == 1 && movie.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_movie(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_music))) {
+                        ArrayList<String> music = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_music)).getChildren()) {
+                            music.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_music(music);
+
+                        if (mfdFilledDetails.getMatch_music().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (music.size() == 1 && music.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_music(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_society_in_college))) {
+                        ArrayList<String> society = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_society_in_college)).getChildren()) {
+                            society.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_society_in_college(society);
+
+                        if (mfdFilledDetails.getMatch_society_in_college().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (society.size() == 1 && society.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_society_in_college(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_video_games))) {
+                        ArrayList<String> video_games = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_video_games)).getChildren()) {
+                            video_games.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_video_games(video_games);
+
+                        if (mfdFilledDetails.getMatch_video_games().get(0).equals(mContext.getString(R.string.field_green))) {
+                            ArrayList<String> tickType = new ArrayList<>(1);
+                            if (video_games.size() == 1 && video_games.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType.add(mContext.getString(R.string.field_red));
+                                mfdFilledDetails.setMatch_video_games(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_dd))) {
+                        ArrayList<String> match_dd = new ArrayList<>(5);
+                        for (DataSnapshot dataSnapshot : snapshot.child(mContext.getString(R.string.field_match_dd)).getChildren()) {
+                            match_dd.add(String.valueOf(dataSnapshot.getValue()));
+                        }
+                        mfdMatchDetails.setMatch_dd(match_dd);
+
+                        if (mfdFilledDetails.getMatch_loc().equals(mContext.getString(R.string.field_green))) {
+                            String tickType = "";
+                            if (match_dd.size() == 1 && match_dd.get(0).equals(mContext.getString(R.string.not_available))) {
+                                tickType = mContext.getString(R.string.field_red);
+                                mfdFilledDetails.setMatch_loc(tickType);
+                            }
+                        }
+                    }
+                    if (snapshot.hasChild(mContext.getString(R.string.field_match_loc))) {
+                        mfdMatchDetails.setMatch_loc(String.valueOf(snapshot.child(mContext.getString(R.string.field_match_loc)).getValue()));
+                        if (mfdFilledDetails.getMatch_loc().equals(mContext.getString(R.string.field_green))) {
+                            String tickType = "";
+                            if (mfdMatchDetails.getMatch_loc().equals(mContext.getString(R.string.not_available))) {
+                                tickType = mContext.getString(R.string.field_red);
+                                mfdFilledDetails.setMatch_loc(tickType);
+                            }
+                        }
+                    }
+
+                    databaseWriteExecutor.execute(() -> {
+                        MFD_Dao.InsertNewDetail(mfdMatchDetails);
+                        MFD_Dao.InsertNewDetail(mfdFilledDetails);
+                        if (!PrivacyDetails) {
+                            GetPrivacyDetailsFromFirebase();
+                        } else {
+                            SwitchLoadingViews();
+                        }
+                    });
+                } else {
+                    SwitchLoadingViews();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(VEL_MATCH_DETAILS);
+    }
+
+    private void GetPrivacyDetailsFromFirebase() {
+        Query query = myRef.child(mContext.getString(R.string.dbname_user_card))
+                .child(mAuth.getCurrentUser().getUid())
+                .child(mContext.getString(R.string.field_is_private));
+
+        ValueEventListener VEL_PRIVACY_DETAILS = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    fpdDetails = snapshot.getValue(FilterPrivacyDetails.class);
+                    databaseWriteExecutor.execute(() -> {
+                        FP_Dao.InsertPrivacyDetails(fpdDetails);
+
+                        SwitchLoadingViews();
+
+                    });
+                } else {
+                    SwitchLoadingViews();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(VEL_PRIVACY_DETAILS);
     }
 
     @Override

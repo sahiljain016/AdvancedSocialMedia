@@ -1,29 +1,39 @@
 package com.gic.memorableplaces.DataModels;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.PrimaryKey;
+
 public class UserAccountSettings {
 
-    private String card_bio;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "username")
+    private String username;
+    @ColumnInfo(name = "display_name")
     private String display_name;
+    @ColumnInfo(name = "following")
     private long following;
-    private long friendly_xavierites;
+    @ColumnInfo(name = "followers")
+    private long followers;
+    @ColumnInfo(name = "posts")
     private long posts;
     private String uid;
+    @ColumnInfo(name = "course")
     private String course;
     private String profile_photo;
-    private String username;
     private String website;
 
-    public UserAccountSettings(){
+    public UserAccountSettings() {
 
 
     }
 
-    public UserAccountSettings(String card_bio, String display_name, long following, long friendly_xavierites,
-                               long posts, String uid, String profile_photo, String username, String website, String course) {
-        this.card_bio = card_bio;
+    public UserAccountSettings(String display_name, long following, long followers,
+                               long posts, String uid, String profile_photo, @NonNull String username, String website, String course) {
         this.display_name = display_name;
         this.following = following;
-        this.friendly_xavierites = friendly_xavierites;
+        this.followers = followers;
         this.posts = posts;
         this.uid = uid;
         this.course = course;
@@ -32,17 +42,11 @@ public class UserAccountSettings {
         this.website = website;
     }
 
-    public String getCard_bio() {
-        return card_bio;
-    }
-
-    public void setCard_bio(String card_bio) {
-        this.card_bio = card_bio;
-    }
 
     public String getDisplay_name() {
         return display_name;
     }
+
 
     public void setDisplay_name(String display_name) {
         this.display_name = display_name;
@@ -56,12 +60,12 @@ public class UserAccountSettings {
         this.following = following;
     }
 
-    public long getFriendly_xavierites() {
-        return friendly_xavierites;
+    public long getFollowers() {
+        return followers;
     }
 
-    public void setFriendly_xavierites(long friendly_xavierites) {
-        this.friendly_xavierites = friendly_xavierites;
+    public void setFollowers(long followers) {
+        this.followers = followers;
     }
 
     public long getPosts() {
@@ -88,6 +92,7 @@ public class UserAccountSettings {
         this.profile_photo = profile_photo;
     }
 
+
     public String getUsername() {
         return username;
     }
@@ -112,13 +117,13 @@ public class UserAccountSettings {
         this.course = course;
     }
 
+
     @Override
     public String toString() {
         return "UserAccountSettings{" +
-                "description='" + card_bio + '\'' +
                 ", display_name='" + display_name + '\'' +
                 ", following=" + following +
-                ", friendly_xavierites=" + friendly_xavierites +
+                ", friendly_xavierites=" + followers +
                 ", posts=" + posts +
                 ", uid='" + uid + '\'' +
                 ", profile_photo='" + profile_photo + '\'' +

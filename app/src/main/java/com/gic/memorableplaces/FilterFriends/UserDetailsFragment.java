@@ -4,12 +4,14 @@ import static android.view.View.VISIBLE;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,8 +34,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 
 import com.gic.memorableplaces.Adapters.DespAndQARecyclerViewAdapter;
-import com.gic.memorableplaces.DataModels.FFUserDetails;
 import com.gic.memorableplaces.CustomLibs.AnimatedRecyclerView.AnimatedRecyclerView;
+import com.gic.memorableplaces.DataModels.FFUserDetails;
+import com.gic.memorableplaces.DataModels.FilterDetails;
+import com.gic.memorableplaces.DataModels.FilterPrivacyDetails;
+import com.gic.memorableplaces.DataModels.MatchFilterDetails;
 import com.gic.memorableplaces.R;
 import com.gic.memorableplaces.utils.FirebaseMethods;
 import com.gic.memorableplaces.utils.GlideImageLoader;
@@ -41,6 +46,7 @@ import com.gic.memorableplaces.utils.MiscTools;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -55,12 +61,16 @@ public class UserDetailsFragment extends Fragment {
     private Context mContext;
     private Handler handler;
     private View view;
+    private String UserUID;
     private Thread thread1, thread2;
     private final Object lock = new Object();
     private View vDialog;
     private AlertDialog MessageDialog;
     private LayoutInflater inflaterDialog;
     private AlertDialog.Builder builder;
+
+    private ArrayList<ArrayList<String>> alsAllDetails;
+    private ArrayList<String> alsDetails;
 
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
@@ -71,9 +81,9 @@ public class UserDetailsFragment extends Fragment {
 
     private ImageView IV_BACK, IV_DOT_1, IV_DOT_2, IV_DOT_3, IV_DOT_4, IV_DOT_5, IV_BLUR_TOP, IV_LEFT_HUMAN, IV_RIGHT_HUMAN, IV_FOLLOW;
     private CardView CV_CARD, CV_LIKE, CV_HI, CV_MATCH_FF_EXP, CV_TAB_1, CV_TAB_2, CV_TAB_3, CV_IMG_2;
-    private AutofitTextView ATV_FULLNAME, ATV_COMMON_LINE, ATV_PREVIEW, ATV_PERCENTAGE, ATV_RIGHT_HUMAN, ATV_LEFT_HUMAN;
+    private AutofitTextView ATV_FULLNAME, ATV_GENDER, ATV_COMMON_LINE, ATV_PREVIEW, ATV_PERCENTAGE, ATV_RIGHT_HUMAN, ATV_LEFT_HUMAN;
     private RoundedImageView RIV_IMG_1, RIV_IMG_2, RIV_IMG_3, RIV_IMG_4, RIV_IMG_5,
-            RIV_IMG_1_O, RIV_IMG_2_O, RIV_IMG_3_O, RIV_IMG_4_O, RIV_IMG_5_O, IV_IMAGES;
+            RIV_IMG_1_O, RIV_IMG_2_O, RIV_IMG_3_O, RIV_IMG_4_O, RIV_IMG_5_O, RIV_IMAGES;
     private ProgressBar PB_MATCH_PROGRESS;
     private TextView TV_FILTER_1, TV_FILTER_2, TV_FILTER_3, TV_FILTER_4, TV_FILTER_5, TV_FILTER_6;
     private ImageView IV_FILTER_1, IV_FILTER_2, IV_FILTER_3, IV_FILTER_4, IV_FILTER_5, IV_FILTER_6;
@@ -87,6 +97,10 @@ public class UserDetailsFragment extends Fragment {
 //    private BlurLayout BL_BG;
 
     private FFUserDetails ffUserDetails;
+    private FilterDetails filterDetails;
+    private FilterPrivacyDetails filterPrivacyDetails;
+    private MatchFilterDetails mfd;
+    private SharedPreferences.Editor prefsEditor;
 
 
     @Nullable
@@ -100,8 +114,21 @@ public class UserDetailsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         builder = new AlertDialog.Builder(mContext);
         MessageDialog = builder.create();
+        UserUID = mAuth.getCurrentUser().getUid();
 
-        IV_IMAGES = view.findViewById(R.id.IV_USER_IMAGES_FF);
+        alsAllDetails = new ArrayList<>();
+        alsDetails = new ArrayList<>();
+
+        filterDetails = new FilterDetails();
+        filterDetails.SetAllDefault("N/A");
+        for (int i = 0; i < 12; i++) {
+            ArrayList<String> alsTemp = new ArrayList<>(1);
+            alsTemp.add(mContext.getString(R.string.not_available));
+            alsAllDetails.add(alsTemp);
+        }
+
+
+        RIV_IMAGES = view.findViewById(R.id.RIV_USER_IMAGES_FF_EXP);
         IV_BACK = view.findViewById(R.id.IV_BACK_exp);
         IV_DOT_1 = view.findViewById(R.id.IV_DOT_1_FF);
         IV_DOT_2 = view.findViewById(R.id.IV_DOT_2_FF);
@@ -119,7 +146,6 @@ public class UserDetailsFragment extends Fragment {
         CV_TAB_2 = view.findViewById(R.id.CV_CONNECTED_PEOPLE);
         CV_TAB_3 = view.findViewById(R.id.CV_OPTIONS_FF_EXP);
 
-
         ML_BOTTOM_INDICATOR = view.findViewById(R.id.ML_BOTTOM_INDICATORS_FF_EXP);
         VS_SET_1 = view.findViewById(R.id.VS_FF_EXP_SET_1);
         VS_SET_2 = view.findViewById(R.id.VS_FF_EXP_SET_2);
@@ -133,9 +159,10 @@ public class UserDetailsFragment extends Fragment {
 //        CV_LIKE = view.findViewById(R.id.CV_LIKE_EXP);
 //        CV_HI = view.findViewById(R.id.CV_SEND_HI_EXP);
         //CV_MATCH_FF_EXP = view.findViewById(R.id.CV_MATCH_FF_EXP);
-      //  IV_SWITCH_IMAGE = view.findViewById(R.id.IV_MATCH_FF_EXP);
+        //  IV_SWITCH_IMAGE = view.findViewById(R.id.IV_MATCH_FF_EXP);
 
         ATV_PREVIEW = view.findViewById(R.id.ATV_PREVIEW_TEXT);
+
 
 //
 //        RL_FILTER_1 = view.findViewById(R.id.RL_FILTER_1);
@@ -149,12 +176,7 @@ public class UserDetailsFragment extends Fragment {
 //         new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-//                // DO your work here
-//                // get the data
-//                VS_CENTER_LAYOUT.setLayoutResource(R.layout.layout_ff_exp_set1);
-//                    requireActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
+//                // DO your work hGe
 //                            // update UI
 //                            long TimeBefore = System.currentTimeMillis();
 //                            VS_CENTER_LAYOUT.inflate();
@@ -164,6 +186,21 @@ public class UserDetailsFragment extends Fragment {
 //                    });}
 //            }).start();
         handler = new Handler(Looper.getMainLooper());
+
+        if (getArguments() != null) {
+            try {
+                ffUserDetails = new FFUserDetails();
+                ffUserDetails = (FFUserDetails) getArguments().getSerializable(mContext.getString(R.string.ff_user_details));
+                mfd = (MatchFilterDetails) getArguments().getSerializable(mContext.getString(R.string.field_filter));
+                GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), RIV_IMAGES);
+            } catch (Exception ignored) {
+
+            }
+        }
+
+        // GlideImageLoader.loadImageWithOutTransition(mContext,ffUserDetails.getAlsImagesList().get(0),IV_IMAGES);
+
+
 //        final boolean isThreadRunning = false;
         VS_SET_1.setLayoutResource(R.layout.layout_ff_exp_set1);
         VS_SET_1.inflate();
@@ -185,61 +222,48 @@ public class UserDetailsFragment extends Fragment {
 //        thread1.start();
         // thread2.start();
 
-        if (getArguments() != null) {
-            try {
-                ffUserDetails = new FFUserDetails();
-                ffUserDetails = (FFUserDetails) getArguments().getSerializable(mContext.getString(R.string.ff_user_details));
-                GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), IV_IMAGES);
-            } catch (Exception ignored) {
-
-            }
-        }
-
 
         Log.d(TAG, "onCreateView: DESP: " + ffUserDetails.getDesp());
         ML_TAB_1.transitionToEnd();
         ML_BOTTOM_INDICATOR.getTransition(R.id.TRANS_BI_FF_EXP_1);
 
-        CV_TAB_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: TAB 1 Cliked");
-                CurrentLayout = R.layout.layout_ff_exp_set1;
+        CV_TAB_1.setOnClickListener(v -> {
+            Log.d(TAG, "onClick: TAB 1 Cliked");
+            CurrentLayout = R.layout.layout_ff_exp_set1;
 
-                if (iCurrentTab != 1) {
-                    // RL_VIEW_STUB_PARENT.animate().alpha(0).setDuration(500).start();
-                    // VS_SET_1.animate().alpha(0).setDuration(500).start();
+            if (iCurrentTab != 1) {
+                // RL_VIEW_STUB_PARENT.animate().alpha(0).setDuration(500).start();
+                // VS_SET_1.animate().alpha(0).setDuration(500).start();
 
-                    handler.postDelayed(() -> {
+                handler.postDelayed(() -> {
 //                        VS_SET_1.setVisibility(View.VISIBLE);
 //                        VS_SET_2.setVisibility(View.GONE);
 //                        VS_SET_3.setVisibility(View.GONE);
-                        //RL_VIEW_STUB_PARENT.removeAllViewsInLayout();
-                        iCurrentTab = 1;
+                    //RL_VIEW_STUB_PARENT.removeAllViewsInLayout();
+                    iCurrentTab = 1;
 
-                        //  thread1.run();
+                    //  thread1.run();
 
-                        VS_SET_1.setVisibility(VISIBLE);
-                        VS_SET_2.setVisibility(View.GONE);
-                        VS_SET_3.setVisibility(View.GONE);
+                    VS_SET_1.setVisibility(VISIBLE);
+                    VS_SET_2.setVisibility(View.GONE);
+                    VS_SET_3.setVisibility(View.GONE);
 
 
-                    }, 500);
-                }
-                //pauseThread();
-                ML_TAB_2.transitionToStart();
-                ML_TAB_3.transitionToStart();
-                ML_TAB_1.transitionToEnd();
-
-                if (RL_VIEW_STUB_PARENT.getTag().equals("2")) {
-                    ML_BOTTOM_INDICATOR.setTransition(R.id.TRANS_BI_FF_EXP_2_1);
-                    ML_BOTTOM_INDICATOR.transitionToEnd();
-                } else if (RL_VIEW_STUB_PARENT.getTag().equals("3")) {
-                    ML_BOTTOM_INDICATOR.setTransition(R.id.TRANS_BI_FF_EXP_3_1);
-                    ML_BOTTOM_INDICATOR.transitionToEnd();
-                }
-                RL_VIEW_STUB_PARENT.setTag("1");
+                }, 500);
             }
+            //pauseThread();
+            ML_TAB_2.transitionToStart();
+            ML_TAB_3.transitionToStart();
+            ML_TAB_1.transitionToEnd();
+
+            if (RL_VIEW_STUB_PARENT.getTag().equals("2")) {
+                ML_BOTTOM_INDICATOR.setTransition(R.id.TRANS_BI_FF_EXP_2_1);
+                ML_BOTTOM_INDICATOR.transitionToEnd();
+            } else if (RL_VIEW_STUB_PARENT.getTag().equals("3")) {
+                ML_BOTTOM_INDICATOR.setTransition(R.id.TRANS_BI_FF_EXP_3_1);
+                ML_BOTTOM_INDICATOR.transitionToEnd();
+            }
+            RL_VIEW_STUB_PARENT.setTag("1");
         });
 
         CV_TAB_2.setOnClickListener(v -> {
@@ -340,16 +364,16 @@ public class UserDetailsFragment extends Fragment {
             @Override
             public void onTransitionStarted(MotionLayout motionLayout, int i, int i1) {
 //                Log.d(TAG, "onTransitionStarted: prog1: " + motionLayout.getProgress());
-                IV_IMAGES.animate().alpha(0).setDuration(200).setStartDelay(700).start();
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), IV_IMAGES);
-                        IV_IMAGES.animate().alpha(1).setDuration(100).start();
-
-                    }
-                }, 900);
+//                IV_IMAGES.animate().alpha(0).setDuration(200).setStartDelay(700).start();
+//
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), IV_IMAGES);
+//                        IV_IMAGES.animate().alpha(1).setDuration(100).start();
+//
+//                    }
+//                }, 900);
 
 
             }
@@ -460,11 +484,14 @@ public class UserDetailsFragment extends Fragment {
                 RIV_IMG_5_O = view.findViewById(R.id.RIV_IMG_OUTER_5);
                 TV_DESP = view.findViewById(R.id.TV_DESP_FF_EXP);
                 ATV_FULLNAME = view.findViewById(R.id.ATV_FULLNAME_EXP);
+                ATV_GENDER = view.findViewById(R.id.ATV_GENDER_EXP);
 
                 SetTypeFace("fonts/Capriola.ttf", ATV_FULLNAME);
+                SetTypeFace("fonts/Capriola.ttf", ATV_GENDER);
 
-                ATV_FULLNAME.setText(ffUserDetails.getFullName());
-                TV_DESP.setText(ffUserDetails.getDesp());
+                ATV_FULLNAME.setText(ffUserDetails.getTargetDisplayName());
+                ATV_GENDER.setText(ffUserDetails.getTargetGender());
+                TV_DESP.setText(Html.fromHtml(ffUserDetails.getDesp(), Html.FROM_HTML_MODE_LEGACY));
 
                 handler.post(new Runnable() {
                     @Override
@@ -504,7 +531,7 @@ public class UserDetailsFragment extends Fragment {
                     V_BG_RIGHT_HUMAN.setBackgroundResource(R.drawable.rounded_rect_green_ff);
                     V_BG_LEFT_HUMAN.setBackgroundResource(R.drawable.rounded_rect_green_ff);
                 }
-                ATV_LEFT_HUMAN.setText(ffUserDetails.getFullName().substring(0, ffUserDetails.getFullName().indexOf(" ")));
+                ATV_LEFT_HUMAN.setText(ffUserDetails.getTargetDisplayName().substring(0, ffUserDetails.getTargetDisplayName().indexOf(" ")));
                 ATV_RIGHT_HUMAN.setText(ffUserDetails.getMyName().substring(0, ffUserDetails.getMyName().indexOf(" ")));
                 isSecondTab = false;
 
@@ -604,7 +631,7 @@ public class UserDetailsFragment extends Fragment {
                             }
                         };
 
-                        mFirebaseMethods.CheckIfFollowing(ffUserDetails.getTargetUID(), ExistsRunnable, DoesNotExistsRunnable,MainRunnable);
+                        mFirebaseMethods.CheckIfFollowing(ffUserDetails.getTargetUID(), ExistsRunnable, DoesNotExistsRunnable, MainRunnable);
 
                     }
                 });
@@ -624,7 +651,7 @@ public class UserDetailsFragment extends Fragment {
                         GifImageView MessageGif = vDialog.findViewById(R.id.Message_sent_gif);
                         ArrayList<String> Messages = new ArrayList<>();
                         Messages.add("Hello this is sahil jain, how are you doing? yum yum yum!");
-                        DespAndQARecyclerViewAdapter mResultAdapter = new DespAndQARecyclerViewAdapter(Messages, mContext, true,
+                        DespAndQARecyclerViewAdapter mResultAdapter = new DespAndQARecyclerViewAdapter(Messages, null, mContext, true,
                                 ffUserDetails.getTargetUID(), ffUserDetails.getMyProfilePic(), ffUserDetails.getAlsImagesList().get(0), ffUserDetails.getMyUsername(),
                                 ffUserDetails.getTargetUsername(), rResults,
                                 MessageDialog, MessageGif);
@@ -692,33 +719,33 @@ public class UserDetailsFragment extends Fragment {
             RIV_IMG_1.setVisibility(VISIBLE);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), RIV_IMG_1);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), RIV_IMG_1_O);
-            RIV_IMG_1.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), IV_IMAGES));
+            RIV_IMG_1.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(0), RIV_IMAGES));
         }
         if (!TextUtils.isEmpty(IMG2)) {
             RIV_IMG_2.setVisibility(VISIBLE);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(1), RIV_IMG_2);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(1), RIV_IMG_2_O);
-            RIV_IMG_2.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(1), IV_IMAGES));
+            RIV_IMG_2.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(1), RIV_IMAGES));
         }
         if (!TextUtils.isEmpty(IMG3)) {
             RIV_IMG_3.setVisibility(VISIBLE);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(2), RIV_IMG_3);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(2), RIV_IMG_3_O);
-            RIV_IMG_3.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(2), IV_IMAGES));
+            RIV_IMG_3.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(2), RIV_IMAGES));
 
         }
         if (!TextUtils.isEmpty(IMG4)) {
             RIV_IMG_4.setVisibility(VISIBLE);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(3), RIV_IMG_4);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(3), RIV_IMG_4_O);
-            RIV_IMG_4.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(3), IV_IMAGES));
+            RIV_IMG_4.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(3), RIV_IMAGES));
 
         }
         if (!TextUtils.isEmpty(IMG5)) {
             RIV_IMG_5.setVisibility(VISIBLE);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(4), RIV_IMG_5);
             GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(4), RIV_IMG_5_O);
-            RIV_IMG_5.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(4), IV_IMAGES));
+            RIV_IMG_5.setOnClickListener(v -> GlideImageLoader.loadImageWithOutTransition(mContext, ffUserDetails.getAlsImagesList().get(4), RIV_IMAGES));
 
         }
 
@@ -728,64 +755,232 @@ public class UserDetailsFragment extends Fragment {
     private void SetFilters() {
         int SimilarityCount = 0;
 
+
+        filterPrivacyDetails = new FilterPrivacyDetails();
+        Runnable rFinal;
+        SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.app_name), Context.MODE_PRIVATE);
+        Log.d(TAG, "SetFilters: UserUID: " + UserUID);
+        Log.d(TAG, "SetFilters: contains: " + sharedPref.contains(UserUID + " FD"));
+        if (sharedPref.contains(UserUID + " FD")) {
+            Gson gson = new Gson();
+            String sfd = sharedPref.getString(UserUID + " FD", "");
+            String sfpd = sharedPref.getString(UserUID + " FP", "");
+            filterDetails = gson.fromJson(sfd, FilterDetails.class);
+            filterPrivacyDetails = gson.fromJson(sfpd, FilterPrivacyDetails.class);
+
+            MiscTools miscTools = new MiscTools(true, mContext);
+            ffUserDetails.setAlsTargetFilterList(miscTools.Get6Filters(filterDetails, filterPrivacyDetails));
+            Log.d(TAG, "SetFilters: als Target Filter List: " + ffUserDetails.getAlsTargetFilterList());
+            RL_FILTER_1.setVisibility(VISIBLE);
+            TV_FILTER_1.setText(ffUserDetails.getAlsTargetFilterList().get(0));
+            IV_FILTER_1.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(1)));
+
+            int minAge = Integer.parseInt(mfd.getMatch_age_range().substring(0, mfd.getMatch_age_range().indexOf("-")));
+            int maxAge = Integer.parseInt(mfd.getMatch_age_range().substring(mfd.getMatch_age_range().indexOf("-") + 1));
+
+            if (minAge < Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(0)) || maxAge > Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(0))) {
+                    RL_FILTER_1.setBackgroundResource(R.drawable.background_gradient_pink_red);
+            }
+
+            RL_FILTER_2.setVisibility(VISIBLE);
+            TV_FILTER_2.setText(ffUserDetails.getAlsTargetFilterList().get(2));
+            IV_FILTER_2.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(3)));
+
+            if (mfd.getMatch_gender().contains(ffUserDetails.getAlsTargetFilterList().get(2))) {
+                RL_FILTER_2.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+            }
+
+            RL_FILTER_3.setVisibility(VISIBLE);
+            TV_FILTER_3.setText(ffUserDetails.getAlsTargetFilterList().get(4));
+            IV_FILTER_3.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(5)));
+
+            if (mfd.getMatch_college_year().contains(ffUserDetails.getAlsTargetFilterList().get(4))) {
+                RL_FILTER_3.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+            }
+
+            if (ffUserDetails.getAlsTargetFilterList().size() > 3) {
+                if (mfd.getMatch_general_details().size() > 1) {
+                    RL_FILTER_4.setVisibility(VISIBLE);
+                    TV_FILTER_4.setText(ffUserDetails.getAlsTargetFilterList().get(6));
+                    IV_FILTER_4.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                    if (mfd.getMatch_general_details().get(6).contains(ffUserDetails.getAlsTargetFilterList().get(6))) {
+                        RL_FILTER_4.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                    }
+
+                    RL_FILTER_5.setVisibility(VISIBLE);
+                    TV_FILTER_5.setText("Drinking: " + ffUserDetails.getAlsTargetFilterList().get(8));
+                    IV_FILTER_5.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                    if (mfd.getMatch_general_details().get(3).contains(ffUserDetails.getAlsTargetFilterList().get(8))) {
+                        RL_FILTER_5.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                    }
+
+                    RL_FILTER_6.setVisibility(VISIBLE);
+                    TV_FILTER_6.setText("Smoking: " + ffUserDetails.getAlsTargetFilterList().get(9));
+                    IV_FILTER_6.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                    if (mfd.getMatch_general_details().get(4).contains(ffUserDetails.getAlsTargetFilterList().get(9))) {
+                        RL_FILTER_5.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                    }
+                }else{
+                    RL_FILTER_4.setVisibility(VISIBLE);
+                    TV_FILTER_4.setText(ffUserDetails.getAlsTargetFilterList().get(6));
+                    IV_FILTER_4.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+                    RL_FILTER_5.setVisibility(VISIBLE);
+                    TV_FILTER_5.setText("Drinking: " + ffUserDetails.getAlsTargetFilterList().get(8));
+                    IV_FILTER_5.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+                    RL_FILTER_6.setVisibility(VISIBLE);
+                    TV_FILTER_6.setText("Smoking: " + ffUserDetails.getAlsTargetFilterList().get(9));
+                    IV_FILTER_6.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                }
+            }
+
+        } else {
+            rFinal = () -> {
+                Gson gson = new Gson();
+                prefsEditor = sharedPref.edit();
+                String sFilterDetails = gson.toJson(filterDetails);
+                String sFilterPrivacy = gson.toJson(filterDetails);
+                String sAllDetails = gson.toJson(alsAllDetails);
+                prefsEditor.putString(UserUID + " FD", sFilterDetails);
+                prefsEditor.putString(UserUID + " FP", sFilterPrivacy);
+                prefsEditor.putString(UserUID + " AD", sAllDetails);
+                prefsEditor.apply();
+                MiscTools miscTools = new MiscTools(true, mContext);
+                ffUserDetails.setAlsTargetFilterList(miscTools.Get6Filters(filterDetails, filterPrivacyDetails));
+
+                RL_FILTER_1.setVisibility(VISIBLE);
+                TV_FILTER_1.setText(ffUserDetails.getAlsTargetFilterList().get(0));
+                IV_FILTER_1.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(1)));
+
+                int minAge = Integer.parseInt(mfd.getMatch_age_range().substring(0, mfd.getMatch_age_range().indexOf("-")));
+                int maxAge = Integer.parseInt(mfd.getMatch_age_range().substring(mfd.getMatch_age_range().indexOf("-") + 1));
+
+                if (minAge < Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(0)) || maxAge > Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(0))) {
+                    RL_FILTER_1.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                }
+
+                RL_FILTER_2.setVisibility(VISIBLE);
+                TV_FILTER_2.setText(ffUserDetails.getAlsTargetFilterList().get(2));
+                IV_FILTER_2.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(3)));
+
+                if (mfd.getMatch_gender().contains(ffUserDetails.getAlsTargetFilterList().get(2))) {
+                    RL_FILTER_2.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                }
+
+                RL_FILTER_3.setVisibility(VISIBLE);
+                TV_FILTER_3.setText(ffUserDetails.getAlsTargetFilterList().get(4));
+                IV_FILTER_3.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(5)));
+
+                if (mfd.getMatch_college_year().contains(ffUserDetails.getAlsTargetFilterList().get(4))) {
+                    RL_FILTER_3.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                }
+
+                if (ffUserDetails.getAlsTargetFilterList().size() > 3) {
+                    if (mfd.getMatch_general_details().size() > 1) {
+                        RL_FILTER_4.setVisibility(VISIBLE);
+                        TV_FILTER_4.setText(ffUserDetails.getAlsTargetFilterList().get(6));
+                        IV_FILTER_4.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                        if (mfd.getMatch_general_details().get(6).contains(ffUserDetails.getAlsTargetFilterList().get(6))) {
+                            RL_FILTER_4.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                        }
+
+                        RL_FILTER_5.setVisibility(VISIBLE);
+                        TV_FILTER_5.setText("Drinking: " + ffUserDetails.getAlsTargetFilterList().get(8));
+                        IV_FILTER_5.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                        if (mfd.getMatch_general_details().get(3).contains(ffUserDetails.getAlsTargetFilterList().get(8))) {
+                            RL_FILTER_5.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                        }
+
+                        RL_FILTER_6.setVisibility(VISIBLE);
+                        TV_FILTER_6.setText("Smoking: " + ffUserDetails.getAlsTargetFilterList().get(9));
+                        IV_FILTER_6.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                        if (mfd.getMatch_general_details().get(4).contains(ffUserDetails.getAlsTargetFilterList().get(9))) {
+                            RL_FILTER_5.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+                        }
+                    }else{
+                        RL_FILTER_4.setVisibility(VISIBLE);
+                        TV_FILTER_4.setText(ffUserDetails.getAlsTargetFilterList().get(6));
+                        IV_FILTER_4.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+                        RL_FILTER_5.setVisibility(VISIBLE);
+                        TV_FILTER_5.setText("Drinking: " + ffUserDetails.getAlsTargetFilterList().get(8));
+                        IV_FILTER_5.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+                        RL_FILTER_6.setVisibility(VISIBLE);
+                        TV_FILTER_6.setText("Smoking: " + ffUserDetails.getAlsTargetFilterList().get(9));
+                        IV_FILTER_6.setImageResource(Integer.parseInt(ffUserDetails.getAlsTargetFilterList().get(7)));
+
+                    }
+                }
+                //MiscTools.ToggleLoadingScreen(CL_LOADING);
+            };
+            MiscTools miscTools = new MiscTools(myRef, mAuth, mContext, filterPrivacyDetails, filterDetails, mfd, alsDetails, alsAllDetails, rFinal);
+            miscTools.GetCardDetails(UserUID);
+        }
+        Log.d(TAG, "SetFilters: filterDetails: " + filterDetails);
+        Log.d(TAG, "SetFilters: filterPrivacyDetails: " + filterPrivacyDetails);
         Log.d(TAG, "SetFilters: AlsTargetFilterList " + ffUserDetails.getAlsTargetFilterList());
         Log.d(TAG, "SetFilters: AliIconList " + ffUserDetails.getAliIconList());
         Log.d(TAG, "SetFilters: AlsMyFilter " + ffUserDetails.getAlsMyFilterList());
 
-        if (ffUserDetails.getAlsTargetFilterList().size() >= 1) {
-            RL_FILTER_1.setVisibility(VISIBLE);
-            TV_FILTER_1.setText(ffUserDetails.getAlsTargetFilterList().get(0));
-            IV_FILTER_1.setImageResource(ffUserDetails.getAliIconList().get(0));
-            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(0))) {
-                SimilarityCount++;
-                RL_FILTER_1.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
-            }
-        }
-        if (ffUserDetails.getAlsTargetFilterList().size() >= 2) {
-            RL_FILTER_2.setVisibility(VISIBLE);
-            TV_FILTER_2.setText(ffUserDetails.getAlsTargetFilterList().get(1));
-            IV_FILTER_2.setImageResource(ffUserDetails.getAliIconList().get(1));
-            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(1))) {
-                SimilarityCount++;
-                RL_FILTER_2.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
-            }
-        }
-        if (ffUserDetails.getAlsTargetFilterList().size() >= 3) {
-            RL_FILTER_3.setVisibility(VISIBLE);
-            TV_FILTER_3.setText(ffUserDetails.getAlsTargetFilterList().get(2));
-            IV_FILTER_3.setImageResource(ffUserDetails.getAliIconList().get(2));
-            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(2))) {
-                SimilarityCount++;
-                RL_FILTER_3.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
-            }
-        }
-        if (ffUserDetails.getAlsTargetFilterList().size() >= 4) {
-            RL_FILTER_4.setVisibility(VISIBLE);
-            TV_FILTER_4.setText(ffUserDetails.getAlsTargetFilterList().get(3));
-            IV_FILTER_4.setImageResource(ffUserDetails.getAliIconList().get(3));
-            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(3))) {
-                SimilarityCount++;
-                RL_FILTER_4.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
-            }
-        }
-        if (ffUserDetails.getAlsTargetFilterList().size() >= 5) {
-            RL_FILTER_5.setVisibility(VISIBLE);
-            TV_FILTER_5.setText(ffUserDetails.getAlsTargetFilterList().get(4));
-            IV_FILTER_5.setImageResource(ffUserDetails.getAliIconList().get(4));
-            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(4))) {
-                SimilarityCount++;
-                RL_FILTER_5.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
-            }
-        }
-        if (ffUserDetails.getAlsTargetFilterList().size() >= 6) {
-            RL_FILTER_6.setVisibility(VISIBLE);
-            TV_FILTER_6.setText(ffUserDetails.getAlsTargetFilterList().get(5));
-            IV_FILTER_6.setImageResource(ffUserDetails.getAliIconList().get(5));
-            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(5))) {
-                SimilarityCount++;
-                RL_FILTER_6.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
-            }
-        }
+//        if (ffUserDetails.getAlsTargetFilterList().size() >= 1) {
+//            RL_FILTER_1.setVisibility(VISIBLE);
+//            TV_FILTER_1.setText(ffUserDetails.getAlsTargetFilterList().get(0));
+//            IV_FILTER_1.setImageResource(ffUserDetails.getAliIconList().get(0));
+//            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(0))) {
+//                SimilarityCount++;
+//                RL_FILTER_1.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+//            }
+//        }
+//        if (ffUserDetails.getAlsTargetFilterList().size() >= 2) {
+//            RL_FILTER_2.setVisibility(VISIBLE);
+//            TV_FILTER_2.setText(ffUserDetails.getAlsTargetFilterList().get(1));
+//            IV_FILTER_2.setImageResource(ffUserDetails.getAliIconList().get(1));
+//            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(1))) {
+//                SimilarityCount++;
+//                RL_FILTER_2.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+//            }
+//        }
+//        if (ffUserDetails.getAlsTargetFilterList().size() >= 3) {
+//            RL_FILTER_3.setVisibility(VISIBLE);
+//            TV_FILTER_3.setText(ffUserDetails.getAlsTargetFilterList().get(2));
+//            IV_FILTER_3.setImageResource(ffUserDetails.getAliIconList().get(2));
+//            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(2))) {
+//                SimilarityCount++;
+//                RL_FILTER_3.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+//            }
+//        }
+//        if (ffUserDetails.getAlsTargetFilterList().size() >= 4) {
+//            RL_FILTER_4.setVisibility(VISIBLE);
+//            TV_FILTER_4.setText(ffUserDetails.getAlsTargetFilterList().get(3));
+//            IV_FILTER_4.setImageResource(ffUserDetails.getAliIconList().get(3));
+//            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(3))) {
+//                SimilarityCount++;
+//                RL_FILTER_4.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+//            }
+//        }
+//        if (ffUserDetails.getAlsTargetFilterList().size() >= 5) {
+//            RL_FILTER_5.setVisibility(VISIBLE);
+//            TV_FILTER_5.setText(ffUserDetails.getAlsTargetFilterList().get(4));
+//            IV_FILTER_5.setImageResource(ffUserDetails.getAliIconList().get(4));
+//            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(4))) {
+//                SimilarityCount++;
+//                RL_FILTER_5.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+//            }
+//        }
+//        if (ffUserDetails.getAlsTargetFilterList().size() >= 6) {
+//            RL_FILTER_6.setVisibility(VISIBLE);
+//            TV_FILTER_6.setText(ffUserDetails.getAlsTargetFilterList().get(5));
+//            IV_FILTER_6.setImageResource(ffUserDetails.getAliIconList().get(5));
+//            if (ffUserDetails.getAlsMyFilterList().contains(ffUserDetails.getAlsTargetFilterList().get(5))) {
+//                SimilarityCount++;
+//                RL_FILTER_6.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.matched_filter_colour));
+//            }
+//        }
 
 //        if (SimilarityCount == 0)
 //            ATV_COMMON_LINE.setText("None of these filters match! Let's keep looking.");
