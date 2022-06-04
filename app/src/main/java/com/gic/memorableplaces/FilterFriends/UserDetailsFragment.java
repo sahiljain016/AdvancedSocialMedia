@@ -401,7 +401,7 @@ public class UserDetailsFragment extends Fragment {
 
 
         IV_BACK.setOnClickListener(v -> {
-            requireFragmentManager().beginTransaction().remove(UserDetailsFragment.this).commit();
+            getFragmentManager().beginTransaction().remove(UserDetailsFragment.this).commit();
         });
 //
 //        Typeface title = Typeface.createFromAsset(mContext.getAssets(), "fonts/Capriola.ttf");
@@ -563,103 +563,86 @@ public class UserDetailsFragment extends Fragment {
                 IV_FILTER_5 = view.findViewById(R.id.IV_FILTER_ICON_5);
                 IV_FILTER_6 = view.findViewById(R.id.IV_FILTER_ICON_6);
                 // ML_SET_3.transitionToEnd();
+
                 SetFilters();
-                CV_CARD.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Fragment fragment = new DataDisplayFragment();
-                        String FragmentName = "Data_Display_Fragment";
-                        Bundle bundle = new Bundle();
-                        bundle.putString(mContext.getString(R.string.field_user_id), ffUserDetails.getTargetUID());
-                        fragment.setArguments(bundle);
-                        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.FrameLayoutFilters, Objects.requireNonNull(fragment));
-                        transaction.addToBackStack(FragmentName);
-                        transaction.commit();
-                    }
+                CV_CARD.setOnClickListener(v -> {
+                    DataDisplayFragment fragment = new DataDisplayFragment();
+                    String FragmentName = "Data_Display_Fragment";
+                    Bundle bundle = new Bundle();
+                    bundle.putString(mContext.getString(R.string.field_user_id), ffUserDetails.getTargetUID());
+                    fragment.setArguments(bundle);
+                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.FrameLayoutFilters, Objects.requireNonNull(fragment));
+                    transaction.addToBackStack(FragmentName);
+                    transaction.commit();
                 });
-                IV_FOLLOW.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                IV_FOLLOW.setOnClickListener(v -> {
 
-                        FirebaseMethods mFirebaseMethods = new FirebaseMethods(mContext);
-                        Runnable ExistsRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                IV_FOLLOW.setTag("Followed");
-                                IV_FOLLOW.setImageResource(R.drawable.ic_followed_without_bubble);
-                            }
-                        };
-                        Runnable DoesNotExistsRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                IV_FOLLOW.setTag("Not Followed");
-                                IV_FOLLOW.setImageResource(R.drawable.ic_follow_without_bubble);
-                            }
-                        };
+                    FirebaseMethods mFirebaseMethods = new FirebaseMethods(mContext);
+                    Runnable ExistsRunnable = () -> {
+                        IV_FOLLOW.setTag("Followed");
+                        IV_FOLLOW.setImageResource(R.drawable.ic_followed_without_bubble);
+                    };
+                    Runnable DoesNotExistsRunnable = () -> {
+                        IV_FOLLOW.setTag("Not Followed");
+                        IV_FOLLOW.setImageResource(R.drawable.ic_follow_without_bubble);
+                    };
 
-                        Runnable MainRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                String message;
-                                if (IV_FOLLOW.getTag().toString().equals("Not Followed")) {
-                                    IV_FOLLOW.setTag("Followed");
-                                    IV_FOLLOW.setImageResource(R.drawable.ic_followed_without_bubble);
+                    Runnable MainRunnable = () -> {
+                        String message;
+                        if (IV_FOLLOW.getTag().toString().equals("Not Followed")) {
+                            IV_FOLLOW.setTag("Followed");
+                            IV_FOLLOW.setImageResource(R.drawable.ic_followed_without_bubble);
 
 
-                                    mFirebaseMethods.addNewFollowerAndFollowing(ffUserDetails.getTargetUID());
-                                    // Log.d(TAG, "onBindViewHolder: username: " + hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)));
+                            mFirebaseMethods.addNewFollowerAndFollowing(ffUserDetails.getTargetUID());
+                            // Log.d(TAG, "onBindViewHolder: username: " + hmDetailsFinal.get(mUIDList.get(position)).get(mContext.getString(R.string.field_username)));
 
 
-                                    mFirebaseMethods.addFollowOrMessageToFilterList(ffUserDetails.getTargetUID(),
-                                            ffUserDetails.getTargetUsername()
-                                            , ffUserDetails.getFiltersMatched(), ffUserDetails.getMyUsername(), ffUserDetails.getMyProfilePic()
-                                            , ffUserDetails.getAlsImagesList().get(0), "",
-                                            mContext.getString(R.string.field_follow_list_for_notifications), mContext.getString(R.string.field_filters_matched));
+                            mFirebaseMethods.addFollowOrMessageToFilterList(ffUserDetails.getTargetUID(),
+                                    ffUserDetails.getTargetUsername()
+                                    , ffUserDetails.getFiltersMatched(), ffUserDetails.getMyUsername(), ffUserDetails.getMyProfilePic()
+                                    , ffUserDetails.getAlsImagesList().get(0), "",
+                                    mContext.getString(R.string.field_follow_list_for_notifications), mContext.getString(R.string.field_filters_matched));
 
 
-                                    message = "You Followed " + ffUserDetails.getTargetUsername() + "!";
-                                } else {
-                                    IV_FOLLOW.setTag("Not Followed");
-                                    IV_FOLLOW.setImageResource(R.drawable.ic_follow_without_bubble);
-                                    message = "You UnFollowed " + ffUserDetails.getTargetUsername() + "!";
-                                    mFirebaseMethods.removeFollowerAndFollowing(ffUserDetails.getTargetUID());
-                                    mFirebaseMethods.DeleteFollowFromFilterList(ffUserDetails.getTargetUID());
-                                }
+                            message = "You Followed " + ffUserDetails.getTargetUsername() + "!";
+                        } else {
+                            IV_FOLLOW.setTag("Not Followed");
+                            IV_FOLLOW.setImageResource(R.drawable.ic_follow_without_bubble);
+                            message = "You UnFollowed " + ffUserDetails.getTargetUsername() + "!";
+                            mFirebaseMethods.removeFollowerAndFollowing(ffUserDetails.getTargetUID());
+                            mFirebaseMethods.DeleteFollowFromFilterList(ffUserDetails.getTargetUID());
+                        }
 
-                                MiscTools.InflateBalloonTooltip(mContext, message, 0, v);
-                            }
-                        };
+                        MiscTools.InflateBalloonTooltip(mContext, message, 0, v);
+                    };
 
-                        mFirebaseMethods.CheckIfFollowing(ffUserDetails.getTargetUID(), ExistsRunnable, DoesNotExistsRunnable, MainRunnable);
+                    mFirebaseMethods.CheckIfFollowing(ffUserDetails.getTargetUID(), ExistsRunnable, DoesNotExistsRunnable, MainRunnable);
 
-                    }
                 });
 
-                CV_HI.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        inflaterDialog = requireActivity().getLayoutInflater();
-                        vDialog = inflaterDialog.inflate(R.layout.dialog_age_filter_search, null);
-                        builder.setView(vDialog);
-                        MessageDialog = builder.create();
-                        MessageDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                        MessageDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        MessageDialog.show();
+                CV_HI.setOnClickListener(v -> {
+                    inflaterDialog = getActivity().getLayoutInflater();
+                    vDialog = inflaterDialog.inflate(R.layout.dialog_age_filter_search, null);
+                    builder.setView(vDialog);
+                    MessageDialog = builder.create();
+                    MessageDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    MessageDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    MessageDialog.show();
 
-                        AnimatedRecyclerView rResults = vDialog.findViewById(R.id.ARV_MESSAGES);
-                        GifImageView MessageGif = vDialog.findViewById(R.id.Message_sent_gif);
-                        ArrayList<String> Messages = new ArrayList<>();
-                        Messages.add("Hello this is sahil jain, how are you doing? yum yum yum!");
-                        DespAndQARecyclerViewAdapter mResultAdapter = new DespAndQARecyclerViewAdapter(Messages, null, mContext, true,
-                                ffUserDetails.getTargetUID(), ffUserDetails.getMyProfilePic(), ffUserDetails.getAlsImagesList().get(0), ffUserDetails.getMyUsername(),
-                                ffUserDetails.getTargetUsername(), rResults,
-                                MessageDialog, MessageGif);
-                        rResults.setItemAnimator(new DefaultItemAnimator());
-                        rResults.setAdapter(mResultAdapter);
-                        mResultAdapter.notifyDataSetChanged();
-                        rResults.scheduleLayoutAnimation();
-                    }
+                    AnimatedRecyclerView rResults = vDialog.findViewById(R.id.ARV_MESSAGES);
+                    GifImageView MessageGif = vDialog.findViewById(R.id.Message_sent_gif);
+                    ArrayList<String> Messages = new ArrayList<>();
+                    Messages.add("Hello this is sahil jain, how are you doing? yum yum yum!");
+                    DespAndQARecyclerViewAdapter mResultAdapter = new DespAndQARecyclerViewAdapter(Messages, null, mContext, true,
+                            ffUserDetails.getTargetUID(), ffUserDetails.getMyProfilePic(), ffUserDetails.getAlsImagesList().get(0), ffUserDetails.getMyUsername(),
+                            ffUserDetails.getTargetUsername(), rResults,
+                            MessageDialog, MessageGif);
+                    rResults.setItemAnimator(new DefaultItemAnimator());
+                    rResults.setAdapter(mResultAdapter);
+                    mResultAdapter.notifyDataSetChanged();
+                    rResults.scheduleLayoutAnimation();
                 });
                 isThirdTab = false;
                 //}

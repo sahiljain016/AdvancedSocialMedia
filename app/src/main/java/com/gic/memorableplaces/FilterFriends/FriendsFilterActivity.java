@@ -600,7 +600,7 @@ public class FriendsFilterActivity extends AppCompatActivity implements FindFrie
                                                                             String FragmentName = "UserDetailsFragment";
                                                                             fragment.setArguments(bundle);
                                                                             FragmentTransaction transaction = ((FriendsFilterActivity) mActivity).getSupportFragmentManager().beginTransaction();
-                                                                            transaction.replace(R.id.FrameLayoutFilters, Objects.requireNonNull(fragment));
+                                                                            transaction.replace(R.id.FrameLayoutFilters, fragment);
                                                                             transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
                                                                             transaction.addToBackStack(FragmentName);
                                                                             transaction.commit();
